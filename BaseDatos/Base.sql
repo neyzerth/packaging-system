@@ -18,12 +18,12 @@ CREATE TABLE usuario (
     apellidoPa VARCHAR(30) NOT NULL,
     apellidoMa VARCHAR(30),
     fecNac DATE,
-    telefono VARCHAR(15),
-    email VARCHAR(30),
     direccion VARCHAR(100),
     calle VARCHAR(50),
     colonia VARCHAR(50),
     cp INT,
+    telefono VARCHAR(15),
+    email VARCHAR(30),
     activo BOOLEAN DEFAULT TRUE,
 
     tipo_usuario_id INT,
@@ -39,7 +39,7 @@ CREATE TABLE caja (
     alto DECIMAL(10, 2),
     ancho DECIMAL(10, 2),
     largo DECIMAL(10, 2),
-    volumen DECIMAL(10, 2) GENERATED ALWAYS AS (alto * ancho * largo), --Investigar bien como funciona esto
+    volumen DECIMAL(10, 2) GENERATED ALWAYS AS (alto * ancho * largo), --Investigar bien como funciona esto creo que sera mejor hacer Trigger
     peso DECIMAL(10, 2)
 );
 
