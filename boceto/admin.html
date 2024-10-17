@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/admin.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+
+        <aside>
+            <nav>
+                <ul class="menu">
+                    <li class="menu-item active">
+                        <a href="" class="menu-link">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path
+                                    d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z" />
+                            </svg>
+                            Registro
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="" class="menu-link">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path
+                                    d="M448 80l0 48c0 44.2-100.3 80-224 80S0 172.2 0 128L0 80C0 35.8 100.3 0 224 0S448 35.8 448 80zM393.2 214.7c20.8-7.4 39.9-16.9 54.8-28.6L448 288c0 44.2-100.3 80-224 80S0 332.2 0 288L0 186.1c14.9 11.8 34 21.2 54.8 28.6C99.7 230.7 159.5 240 224 240s124.3-9.3 169.2-25.3zM0 346.1c14.9 11.8 34 21.2 54.8 28.6C99.7 390.7 159.5 400 224 400s124.3-9.3 169.2-25.3c20.8-7.4 39.9-16.9 54.8-28.6l0 85.9c0 44.2-100.3 80-224 80S0 476.2 0 432l0-85.9z" />
+                            </svg>
+                            Empleados
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="Inicio de sección.html" class="menu-link">
+                            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
+                            </svg>
+                            Cerrar Sección
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <form>
+            <section class="access-credentials-form">
+                <fieldset class="form-column">
+                    <legend>Credenciales de Acceso</legend>
+
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required placeholder="Ingresa nombre de usuario">
+
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required placeholder="Ingresa contraseña">
+
+                    <label for="confirm-password">Confirma contraseña</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required
+                        placeholder="Confirmar contraseña">
+                </fieldset>
+
+                <fieldset class="form-column">
+                    <legend>Información de la Cuenta</legend>
+
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="Ingresa correo electrónico">
+
+                    <label for="email">Confirma correo electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="Confirmar correo electrónico">
+
+                    <label for="phone">Número de teléfono</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Ingresa número de teléfono">
+                </fieldset>
+            </section>
+
+            <section class="personal-info-form">
+                <fieldset class="form-column">
+                    <legend>Información Personal</legend>
+
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" required placeholder="Ingresa nombre">
+
+                    <label for="paternal-surname">Apellido paterno</label>
+                    <input type="text" id="paternal-surname" name="paternal-surname" required
+                        placeholder="Ingresa apellido paterno">
+
+                    <label for="maternal-surname">Apellido materno</label>
+                    <input type="text" id="maternal-surname" name="maternal-surname" required
+                        placeholder="Ingresa apellido materno">
+
+                    <label for="birthdate">Fecha de nacimiento</label>
+                    <input type="date" id="birthdate" name="birthdate" required
+                        placeholder="Ingresa fecha de nacimiento">
+
+                    <label for="employee-type">Tipo de empleado</label>
+                    <select id="employee-type" name="employee-type" required>
+                        <option disabled selected>Seleccionar tipo de empleado</option>
+                        <option value="Empleado">Empleado</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                </fieldset>
+
+                <fieldset class="form-column">
+                    <legend>Dirección</legend>
+
+                    <label for="street">Calle</label>
+                    <input type="text" id="street" name="street" required placeholder="Ingresa calle">
+
+                    <label for="neighborhood">Colonia</label>
+                    <input type="text" id="neighborhood" name="neighborhood" required placeholder="Ingresa colonia">
+
+                    <label for="postal-code">Código postal</label>
+                    <input type="text" id="postal-code" name="postal-code" required placeholder="Ingresa código postal">
+
+                    <label for="exterior-number">Número exterior</label>
+                    <input type="text" id="exterior-number" name="exterior-number" required
+                        placeholder="Ingresa número exterior">
+
+                    <label>Realizar Registro</label>
+                    <div class="form-actions">
+
+                        <button type="button" class="cancel-button">Cancelar Registro</button>
+                        <button type="submit" class="register-button">Registrar</button>
+                    </div>
+                </fieldset>
+            </section>
+        </form>
+
+    </main>
+</body>
+
+</html>

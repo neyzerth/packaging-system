@@ -1,0 +1,139 @@
+:root {
+    --background-light: #2c2f33;
+    --background-dark: #23272a;
+    --text-light: #F2F2F2;
+    --text-gray: #B8BBBF;
+    --text-dark: #686B73;
+    --blue-medium: #5C73F2;
+    --blue-dark: #495ABF;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-dark);
+    font-family: sans-serif;
+    color: var(--text-light);
+    cursor: default;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    background-color: var(--background-light);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    width: 800px;
+    height: 270px;
+    padding: 40px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-section,
+.login-form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    margin-top: 10px;
+    align-items: end;
+}
+
+
+img {
+    background-color: var(--background-dark);
+    border-radius: 50%;
+    padding: 10%;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+}
+
+img:hover {
+    background-color: var(--blue-medium);
+    transform: scale(1.05);
+}
+
+fieldset {
+    flex: 1;
+    border: none;
+    padding: 20px;
+}
+
+legend {
+    font-size: 20px;
+    text-align: center;
+}
+
+p {
+    font-size: 14px;
+    color: var(--text-gray);
+    margin-bottom: 0;
+    text-align: center;
+}
+
+input {
+    background-color: var(--background-dark);
+    color: var(--text-gray);
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+input:hover {
+    transform: scale(1.05);
+}
+
+input:focus {
+    outline: 2px solid var(--blue-medium);
+    color: var(--text-gray);
+    transform: scale(1.05);
+}
+
+input::placeholder {
+    color: var(--text-dark);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--blue-medium);
+    color: var(--text-light);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: var(--blue-dark);
+    transform: scale(1.05);
+}
+
+.swapped {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.swapped-right {
+    transform: translateX(-100%);
+    opacity: 0;
+}

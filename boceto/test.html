@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/test.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <aside id="sidebar" class="collapsed">
+        <div class="list">
+            <button id="toggleButton" class="toggle-sidebar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                </svg>
+            </button>
+        </div>
+
+        <div>
+            <a href="test.html" class="user">
+                <img src="src/img/user.svg" alt="Imagen de usuario" class="icon-user">
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="active">
+                    <a href="#" class="links">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path
+                                d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4" />
+                        </svg>
+                        <span class="link-text">Registro</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="00.html" class="links">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                            <path
+                                d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223" />
+                            <path
+                                d="M2 6.161V7c0 1.007.875 1.755 1.904 2.223C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777C13.125 8.755 14 8.007 14 7v-.839c-.457.432-1.004.751-1.49.972C11.278 7.693 9.682 8 8 8s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                            <path
+                                d="M2 9.161V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13s3.022-.289 4.096-.777C13.125 11.755 14 11.007 14 10v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                            <path
+                                d="M2 12.161V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                        </svg>
+                        <span class="link-text">Empleados</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="logout">
+            <a href="login.html" class="links">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                    <path
+                        d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15zM11 2h.5a.5.5 0 0 1 .5.5V15h-1zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1" />
+                </svg>
+                <span class="link-text">Cerrar Sección</span>
+            </a>
+        </div>
+    </aside>
+
+    <main>
+        <form action="">
+            <div class="access-credentials-form">
+                <fieldset>
+                    <legend>Credenciales de acceso</legend>
+
+                    <label for="">Usuario</label>
+                    <input type="text" placeholder="Ingresa el usuario">
+
+                    <label for="">Contraseña</label>
+                    <input type="text" placeholder="Ingresa la contraseña">
+
+                    <label for="">Confirma la contraseña</label>
+                    <input type="text" placeholder="Ingresala nuevamente">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Información de la cuenta</legend>
+
+                    <label for="">Correo electrónico</label>
+                    <input type="text" placeholder="Ingresa el correo electrónico">
+
+                    <label for="">Confirma el correo electrónico</label>
+                    <input type="text" placeholder="Ingresalo nuevamente">
+
+                    <label for="">Número de teléfono</label>
+                    <input type="text" placeholder="Ingresa el número de telefono">
+                </fieldset>
+            </div>
+
+            <div class="personal-info-form">
+                <fieldset>
+                    <legend>Información personal</legend>
+
+                    <label for="">Nombre</label>
+                    <input type="text" placeholder="Ingresa nombre">
+
+                    <label for="">Apellido paterno</label>
+                    <input type="text" placeholder="Ingresa apellido paterno">
+
+                    <label for="">Apeliido materno</label>
+                    <input type="text" placeholder="Ingresa apellido paterno">
+
+                    <label for="">Fecha de nacimiento</label>
+                    <input type="date" id="birthdate">
+
+                    <label for="">Tipo de personal</label>
+                    <select name="" id="options">
+                        <option value="Empleado">Empleado</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Dirección</legend>
+
+                    <label for="">Calle</label>
+                    <input type="text" placeholder="Ingresa la calle">
+
+                    <label for="">Colonia</label>
+                    <input type="text" placeholder="Ingresa la colonia">
+
+                    <label for="">Código postal</label>
+                    <input type="text" placeholder="Ingresa el código postal">
+
+                    <label for="">Número exterior</label>
+                    <input type="text" placeholder="Ingresa el número exterior">
+
+                    <div class="form-actions">
+
+                        <button type="button" class="cancel-button">Cancelar Registro</button>
+                        <button type="submit" class="register-button">Registrar</button>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </main>
+    <script>
+        const birthdateInput = document.getElementById('birthdate');
+        const selectElement = document.getElementById('options');
+
+        birthdateInput.addEventListener('input', function () {
+            if (this.value) {
+                this.classList.add('filled');
+            } else {
+                this.classList.remove('filled');
+            }
+        });
+
+        selectElement.addEventListener('change', function () {
+            if (this.value) {
+                this.classList.add('filled');
+            } else {
+                this.classList.remove('filled');
+            }
+        });
+
+        document.getElementById('toggleButton').addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
+</body>
+
+</html>

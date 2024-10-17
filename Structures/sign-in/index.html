@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sign-in.css">
+    <title>Inicio de sección</title>
+</head>
+
+<body>
+    <main>
+        <section>
+
+            <div class="user-section" id="leftDiv">
+                <a href="#" id="link">
+                    <img src="padlock-unlocked.svg" alt="Imagen de usuario" id="toggleImage">
+                </a>
+                <strong id="toggleText">¿Has olvidado la contraseña?</strong>
+                <p id="paragraph">Selecciona el icono para solicitar instrucciones.</p>
+            </div>
+
+            <div class="login-form" id="rightDiv">
+                <form action="test.html">
+                    <fieldset>
+                        <legend>
+                            <strong>¡Hola de nuevo!</strong>
+                            <p>¡Nos alegramos de volver a verte!</p>
+                        </legend>
+
+                        <input type="text" id="username" name="username" autocomplete="off" required
+                            placeholder="Usuario">
+
+                        <input type="password" id="password" name="password" required placeholder="Contraseña">
+
+                        <button type="submit">Inicar sesión</button>
+                    </fieldset>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="sign-in.js"></script>
+</body>
+
+</html>
