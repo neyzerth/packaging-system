@@ -3,7 +3,8 @@
 
 -- TABLA TIPO USUARIO
 CREATE TABLE tipo_usuario (
-    num INT AUTO_INCREMENT PRIMARY KEY,
+    codigo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(50) NOT NULL
 );
 
@@ -26,10 +27,10 @@ CREATE TABLE usuario (
     email VARCHAR(30),
     activo BOOLEAN DEFAULT TRUE,
 
-    tipo_usuario_id INT,
-    supervisor_id INT,
-    CONSTRAINT fk_tipo_usuario FOREIGN KEY (tipo_usuario_id) REFERENCES tipo_usuario(num),
-    CONSTRAINT fk_supervisor_usuario FOREIGN KEY (supervisor_id) REFERENCES usuario(num) 
+    tipo_usuario INT,
+    supervisor INT,
+    CONSTRAINT fk_tipo_usuario FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario(num),
+    CONSTRAINT fk_supervisor_usuario FOREIGN KEY (supervisor) REFERENCES usuario(num) 
 );
 
 
@@ -47,8 +48,8 @@ CREATE TABLE caja (
 CREATE TABLE zona (
     clave INT AUTO_INCREMENT PRIMARY KEY,
     area VARCHAR(50) NOT NULL UNIQUE, --Opinion de UNIQUE
-    capacidad_total int,
-    capacidad_disponible int
+    capacidad_disponible int,
+    capacidad_total int
 );
 
 --tabla salida
