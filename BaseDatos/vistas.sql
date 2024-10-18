@@ -1,5 +1,6 @@
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
+--En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
 
 --Vistas de Usuario
 CREATE VIEW user_info AS
