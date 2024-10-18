@@ -6,6 +6,7 @@ CREATE TABLE user_type (
 );
 
 -- TABLE USER
+--duda con los apellidos
 CREATE TABLE user (
     num INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL UNIQUE, 
@@ -45,7 +46,7 @@ CREATE TABLE zone (
 );
 
 -- TABLE OUTPUT
-CREATE TABLE output (
+CREATE TABLE outbound (
     num INT AUTO_INCREMENT PRIMARY KEY,
     date DATE,
     exit_quantity INT
@@ -74,10 +75,10 @@ CREATE TABLE packaging (
     length DECIMAL(10, 2),
     package_quantity INT,
     zone VARCHAR(5),
-    output INT,
+    outbound INT,
     tag int,
     CONSTRAINT fk_zone_packaging FOREIGN KEY (zone) REFERENCES zone(code),
-    CONSTRAINT fk_output_packaging FOREIGN KEY (output) REFERENCES output(num),
+    CONSTRAINT fk_outbound_packaging FOREIGN KEY (outbound) REFERENCES outbound(num),
     CONSTRAINT fk_tag_packaging FOREIGN KEY (tag) REFERENCES tag(num)
 );
 
@@ -166,6 +167,7 @@ CREATE TABLE incident (
 );
 
 -- TABLE REPORT
+--Duda con las fechas
 CREATE TABLE report (
     folio INT AUTO_INCREMENT PRIMARY KEY,
     start_date DATE NOT NULL,
