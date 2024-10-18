@@ -14,7 +14,7 @@ CREATE TABLE user (
     name VARCHAR(50) NOT NULL,
     first_lastname VARCHAR(30) NOT NULL,
     second_lastname VARCHAR(30),
-    birth_date DATE,
+    date_of_birth DATE,
     neighborhood VARCHAR(50),
     street VARCHAR(50),
     postal_code INT,
