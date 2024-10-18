@@ -27,6 +27,6 @@ CREATE PROCEDURE generate_report(
     IN end_date DATE
 )
 BEGIN
-    SELECT * FROM report
+    SELECT * FROM report --creo que el * no esta bien
     WHERE report_date BETWEEN start_date AND end_date;
 END;
