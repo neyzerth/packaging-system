@@ -189,7 +189,7 @@ CREATE TABLE user_traceability (
 );
 
 -- PACKAGING-MATERIAL
-CREATE TABLE packaging_material (
+CREATE TABLE material_packging (
     packaging VARCHAR(5),
     material INT,
     quantity INT,
