@@ -12,8 +12,8 @@ CREATE TABLE user (
     username VARCHAR(30) NOT NULL UNIQUE, 
     password VARCHAR(20) NOT NULL,
     name VARCHAR(50) NOT NULL,
-    last_name_father VARCHAR(30) NOT NULL,
-    last_name_mother VARCHAR(30),
+    first_lastname VARCHAR(30) NOT NULL,
+    second_lastname VARCHAR(30),
     birth_date DATE,
     neighborhood VARCHAR(50),
     street VARCHAR(50),
@@ -119,7 +119,7 @@ CREATE TABLE packaging_protocol (
     file_name VARCHAR(30)
 );
 
--- TABLE PRODUCT
+-- TABLE PRODUCTy
 CREATE TABLE product (
     num INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,

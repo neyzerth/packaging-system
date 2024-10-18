@@ -13,8 +13,6 @@ FROM information_schema.TRIGGERS
 WHERE TRIGGER_SCHEMA = 'embalaje';
 
 --CHECAR Como Funciona el INSERT OR UPDATE
-drop Trigger calculate_box_volume;
-
 DELIMITER $$
 CREATE TRIGGER calculate_box_volume_insert
 BEFORE INSERT ON box
