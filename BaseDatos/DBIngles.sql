@@ -20,7 +20,7 @@ CREATE TABLE user (
     postal_code INT,
     phone VARCHAR(15),
     email VARCHAR(30),
-    active BOOLEAN DEFAULT TRUE,
+    active BIT DEFAULT TRUE,
     user_type VARCHAR(5),
     supervisor INT,
     CONSTRAINT fk_user_type FOREIGN KEY (user_type) REFERENCES user_type(code),
