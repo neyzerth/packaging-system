@@ -3,7 +3,7 @@
 
 -- TABLA TIPO USUARIO
 CREATE TABLE tipo_usuario (
-    codigo INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(5) AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     descripcion VARCHAR(50) NOT NULL
 );
@@ -19,7 +19,6 @@ CREATE TABLE usuario (
     apellidoPa VARCHAR(30) NOT NULL,
     apellidoMa VARCHAR(30),
     fecNac DATE,
-    direccion VARCHAR(100),
     calle VARCHAR(50),
     colonia VARCHAR(50),
     cp INT,
@@ -27,7 +26,7 @@ CREATE TABLE usuario (
     email VARCHAR(30),
     activo BOOLEAN DEFAULT TRUE,
 
-    tipo_usuario INT,
+    tipo_usuario varchar(5),
     supervisor INT,
     CONSTRAINT fk_tipo_usuario FOREIGN KEY (tipo_usuario) REFERENCES tipo_usuario(num),
     CONSTRAINT fk_supervisor_usuario FOREIGN KEY (supervisor) REFERENCES usuario(num) 
@@ -46,7 +45,7 @@ CREATE TABLE caja (
 
 --tabla zona
 CREATE TABLE zona (
-    clave INT AUTO_INCREMENT PRIMARY KEY,
+    clave VARCHAR(5) AUTO_INCREMENT PRIMARY KEY,
     area VARCHAR(50) NOT NULL UNIQUE, --Opinion de UNIQUE
     capacidad_disponible int,
     capacidad_total int
@@ -59,6 +58,22 @@ CREATE TABLE salida (
     cantidadSalida int
 )
 
+--tabla Tipo etiqueta
+CREATE TABLE tipo_etiqueta (
+    clave VARCHAR(5) AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(50) 
+    );
+
+--tabla Etiqueta
+CREATE TABLE etiqueta (
+    num INT AUTO_INCREMENT PRIMARY KEY,
+    fecha date,
+    codigo_barras int,
+    tipo_etiqueta INT,
+    CONSTRAINT fk_tipo_etiqueta_etiqueta FOREIGN KEY (tipo_etiqueta) REFERENCES tipo_etiqueta(clave)
+);
+
+
 --tabla embalaje
 CREATE TABLE embalaje (
     clave INT AUTO_INCREMENT PRIMARY KEY,
@@ -66,15 +81,17 @@ CREATE TABLE embalaje (
     ancho DECIMAL(10, 2),
     largo DECIMAL(10, 2),
     cantidad_paquetes INT,
-    zona int,
+    zona VARCHAR(5),
     salida int,
+    etiqueta VARCHAR(5),
     CONSTRAINT fk_zona_embalaje FOREIGN KEY (zona) REFERENCES zona(clave),
-    CONSTRAINT fk_salida_embalaje FOREIGN KEY (salida) REFERENCES salida(num)
+    CONSTRAINT fk_salida_embalaje FOREIGN KEY (salida) REFERENCES salida(num),
+    CONSTRAINT fk_etiqueta_embalaje FOREIGN KEY (etiqueta) REFERENCES etiqueta(num)
 );
 
 --TABLA UNIDAD DE MEDIDA
 CREATE TABLE unidad_medida (
-    clave INT AUTO_INCREMENT PRIMARY KEY,
+    clave VARCHAR(5) AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(50),
 );
 
@@ -84,9 +101,10 @@ CREATE TABLE material (
     nombre_material VARCHAR(50) NOT NULL,
     descripcion VARCHAR(255),
     cantidad_disponible int,
-    unidad_medida INT,
+    unidad_medida VARCHAR(5),
     CONSTRAINT fk_unidad_medida FOREIGN KEY (unidad_medida) REFERENCES unidad_medida(clave)
 );
+
 
 --TABLA paquete
 CREATE TABLE paquete (
@@ -96,8 +114,10 @@ CREATE TABLE paquete (
     peso DECIMAL(10, 2),
     embalaje INT,
     caja int,
+    etiqueta int,
     CONSTRAINT fk_embalaje_paquete FOREIGN KEY (embalaje) REFERENCES embalaje(clave),
-    CONSTRAINT fk_caja_paquete FOREIGN KEY (caja) REFERENCES caja(clave)
+    CONSTRAINT fk_caja_paquete FOREIGN KEY (caja) REFERENCES caja(clave),
+    CONSTRAINT fk_etiqueta_paquete FOREIGN KEY (etiqueta) REFERENCES etiqueta(clave)
 );
 
 --TABLA PROCOLO EMBALJE
@@ -116,7 +136,7 @@ CREATE TABLE producto (
     alto DECIMAL(10, 2),
     ancho DECIMAL(10, 2),
     largo DECIMAL(10, 2),
-    paqute int,
+    paquete int,
     protocolo_embalaje int,
     CONSTRAINT fk_paquete_producto FOREIGN KEY (paquete) REFERENCES paquete(num),
     CONSTRAINT fk_protocolo_embalaje_producto FOREIGN KEY (protocolo_embalaje) REFERENCES protocolo_embalaje(num)
@@ -124,7 +144,7 @@ CREATE TABLE producto (
 
 --TABLA Estado par trazabilidad
 CREATE TABLE estado (
-    codigo INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR (5) AUTO_INCREMENT PRIMARY KEY,
     descripcion VARCHAR(50) NOT NULL
 );
 
@@ -133,12 +153,11 @@ CREATE TABLE estado (
 -- TABLA trazabilidad   producto, caja, paquete y embalaje
 CREATE TABLE trazabilidad (
     num INT AUTO_INCREMENT PRIMARY KEY,
-    /* fecha DATE NOT NULL, */
     producto INT, 
     caja INT, 
     paquete INT, 
     embalaje INT, 
-    estado INT,
+    estado VARCHAR(5),
     CONSTRAINT fk_producto_trazabilidad FOREIGN KEY (producto) REFERENCES producto(num),
     CONSTRAINT fk_caja_trazabilidad FOREIGN KEY (caja) REFERENCES caja(num),
     CONSTRAINT fk_paquete_trazabilidad FOREIGN KEY (paquete) REFERENCES paquete(num),
@@ -165,30 +184,12 @@ CREATE TABLE informe (
     folio INT AUTO_INCREMENT PRIMARY KEY,
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
+    fecha_informe DATE,
     productos_empacados INT,  
     observaciones TEXT,
     trazabilidad int,
     CONSTRAINT fk_trazabilidad_informe FOREIGN KEY (trazabilidad) REFERENCES trazabilidad(num)
 );
-
-
-
---tabla Tipo etiqueta
-CREATE TABLE tipo_etiqueta (
-    clave INT AUTO_INCREMENT PRIMARY KEY,
-    descripcion VARCHAR(50) 
-    );
-
---tabla Etiqueta
-CREATE TABLE etiqueta (
-    num INT AUTO_INCREMENT PRIMARY KEY,
-    fecha date,
-    codigo_barras int,
-    tipo_etiqueta INT,
-    CONSTRAINT fk_tipo_etiqueta_etiqueta FOREIGN KEY (tipo_etiqueta) REFERENCES tipo_etiqueta(clave)
-);
-    
-
 
 
 ---TABLAS DE MUCHOS A MUCHOS 
