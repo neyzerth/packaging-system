@@ -33,7 +33,7 @@ CREATE TABLE box (
     height DECIMAL(10, 2),
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
-    volume DECIMAL(10, 2) GENERATED ALWAYS AS (height * width * length), 
+    volume DECIMAL(10, 2), 
     weight DECIMAL(10, 2)
 );
 
@@ -45,20 +45,20 @@ CREATE TABLE zone (
     total_capacity INT
 );
 
--- TABLE OUTPUT
+-- TABLE OUTBOUBD
 CREATE TABLE outbound (
     num INT AUTO_INCREMENT PRIMARY KEY,
     date DATE,
     exit_quantity INT
 );
 
--- TABLE LABEL TYPE
+-- TABLE TAG TYPE
 CREATE TABLE tag_type (
     code VARCHAR(5)  PRIMARY KEY,
     description VARCHAR(50)
 );
 
--- TABLE LABEL
+-- TABLE TAG
 CREATE TABLE tag (
     num INT AUTO_INCREMENT PRIMARY KEY,
     date DATE,
@@ -140,7 +140,7 @@ CREATE TABLE state (
     description VARCHAR(50) NOT NULL
 );
 
--- TABLE TRACEABILITY (product, box, package, packaging)
+-- TABLE TRACEABILITY 
 CREATE TABLE traceability (
     num INT AUTO_INCREMENT PRIMARY KEY,
     product INT,
@@ -192,7 +192,7 @@ CREATE TABLE user_traceability (
 CREATE TABLE packaging_material (
     packaging VARCHAR(5),
     material INT,
-    quantity INT, -- Quantity of material used
+    quantity INT,
     PRIMARY KEY (packaging, material),
     CONSTRAINT fk_packaging_material FOREIGN KEY (packaging) REFERENCES packaging(code),
     CONSTRAINT fk_material_packaging FOREIGN KEY (material) REFERENCES material(num)
