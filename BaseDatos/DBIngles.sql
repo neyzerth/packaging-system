@@ -119,7 +119,7 @@ CREATE TABLE packaging_protocol (
     file_name VARCHAR(30)
 );
 
--- TABLE PRODUCTy
+-- TABLE PRODUCT
 CREATE TABLE product (
     num INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
