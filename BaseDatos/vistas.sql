@@ -1,5 +1,6 @@
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
+--Deberia de agregar un espacio en las campos queue tines _?
 
 --Vistas de Usuario
 CREATE VIEW user_info AS
