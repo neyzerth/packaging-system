@@ -90,7 +90,7 @@ CREATE TABLE unit_of_measure (
 
 -- TABLE MATERIAL
 CREATE TABLE material (
-    num INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(5) PRIMARY KEY,
     material_name VARCHAR(50) NOT NULL,
     description VARCHAR(255),
     available_quantity INT,
@@ -121,7 +121,7 @@ CREATE TABLE packaging_protocol (
 
 -- TABLE PRODUCT
 CREATE TABLE product (
-    num INT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(5) PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(255),
     height DECIMAL(10, 2),
@@ -143,7 +143,7 @@ CREATE TABLE state (
 -- TABLE TRACEABILITY 
 CREATE TABLE traceability (
     num INT AUTO_INCREMENT PRIMARY KEY,
-    product INT,
+    product VARCHAR(5)
     box INT,
     package INT,
     packaging VARCHAR(5),
@@ -191,7 +191,7 @@ CREATE TABLE user_traceability (
 -- PACKAGING-MATERIAL
 CREATE TABLE material_packging (
     packaging VARCHAR(5),
-    material INT,
+    material VARCHAR (5)
     quantity INT,
     PRIMARY KEY (packaging, material),
     CONSTRAINT fk_packaging_material FOREIGN KEY (packaging) REFERENCES packaging(code),
@@ -200,7 +200,7 @@ CREATE TABLE material_packging (
 
 -- MATERIAL-PACKAGE
 CREATE TABLE material_package (
-    material INT,
+    material VARCHAR(5),
     package INT,
     quantity INT,
     PRIMARY KEY (material, package),
