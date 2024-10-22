@@ -4,21 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar</title>
+    <title>Document</title>
     <link rel="stylesheet" href="/!important.css">
     <link rel="stylesheet" href="/!color-palette.css">
-
     <style>
         body {
             background-color: var(--background-dark);
             font-family: sans-serif;
             font-size: 1rem;
-            color: var();
+            color: var(--text-light);
             margin: 0;
         }
 
         main {
-            height: 100vh;
+            height: 100%;
         }
 
         ul {
@@ -59,18 +58,29 @@
             background-color: var(--background-hover);
             fill: var(--icon-dark);
         }
+
+        img,
+        svg {
+            transition: transform 0.2s;
+        }
+
+        .scale {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 
 <body>
+
     <main class="d-flex">
-        <div class="bg-body-light d-flex flex-column" style="width: 4.5rem;">
-            <a href="#" class="d-flex link-body p">
+
+        <div class="bg-body-light d-flex flex-column p-fixed" style="width: 4.5rem; height: 100%;">
+            <a href="../data-logging/manage-profile.html" class="d-flex link-body p">
                 <img class="rounded-circle" src="https://github.com/mdo.png" width="40" height="40">
             </a>
-            <ul class="nav nav-fills mb-auto">
+            <ul class="nav mb-auto">
                 <li>
-                    <a href="#" class="nav-link border-bottom active border-bottom">
+                    <a href="../data-logging/index.html" class="nav-link border-bottom">
                         <svg width="40" height="24" viewBox="0 0 16 16">
                             <path
                                 d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
@@ -78,14 +88,14 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link border-bottom">
+                    <a href="../data-logging/data-logging.html" class="nav-link border-bottom">
                         <svg width="40" height="24" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                         </svg>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link border-bottom">
+                    <a href="#" class="nav-link border-bottom active">
                         <svg width="40" height="24" viewBox="0 0 16 16">
                             <path
                                 d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223" />
@@ -99,7 +109,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link">
+                    <a href="../data-logging/manage-reports.html" class="nav-link">
                         <svg width="40" height="24" viewBox="0 0 16 16">
                             <path
                                 d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1m-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5M5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1m0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1" />
@@ -117,11 +127,23 @@
             </div>
         </div>
     </main>
+    <script>
+        document.querySelectorAll('.nav-link, .link-body').forEach(link => {
+            link.addEventListener('mouseover', () => {
+                link.querySelectorAll('img, svg').forEach(element => {
+                    element.classList.add('scale');
+                });
+            });
+
+            link.addEventListener('mouseout', () => {
+                link.querySelectorAll('img, svg').forEach(element => {
+                    element.classList.remove('scale');
+                });
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>
-<!--
-<a href="#" class="d-flex border-top p">
-    <img class="rounded-circle" src="https://github.com/mdo.png" width="40" height="40">
-</a>
--->
