@@ -64,6 +64,7 @@ CREATE TABLE tag (
     date DATE,
     barcode INT,
     tag_type varchar(5),
+    destination VARCHAR(25),
     CONSTRAINT fk_tag_type_tag FOREIGN KEY (tag_type) REFERENCES tag_type(code)
 );
 
