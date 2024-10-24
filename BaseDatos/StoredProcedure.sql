@@ -2,6 +2,7 @@
         --STORED PROCEDURE
 -----------------------------------
 
+--corregir 
 CREATE PROCEDURE check_zone_capacity (
     IN zone_code VARCHAR(5), 
     IN package_quantity INT, 
@@ -10,7 +11,7 @@ CREATE PROCEDURE check_zone_capacity (
 BEGIN
     DECLARE capacity INT;
     
-    SELECT available_capacity INTO capacity
+    SELECT available_capacity INTO capacity --esto esta mal
     FROM zone
     WHERE code = zone_code;
     
