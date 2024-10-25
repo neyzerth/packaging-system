@@ -85,19 +85,19 @@ VALUES
 
 INSERT INTO packaging_protocol (name, file_name)
 VALUES 
-('Protocol A', 'protocol_a.pdf'),
-('Protocol B', 'protocol_b.pdf'),
-('Protocol C', 'protocol_c.pdf'),
-('Protocol D', 'protocol_d.pdf'),
-('Protocol E', 'protocol_e.pdf');
+('Protocol_Standard', 'protocol_st.pdf'),
+('Protocol_Fragile', 'protocol_fr.pdf'),
+('Protocol_Heavy', 'protocol_h.pdf'),
+('Protocol_Urgent', 'protocol_urg.pdf'),
+('Protocol_Perishable', 'protocol_per.pdf');
 
 INSERT INTO product (code,name, description, height, width, length, weight, package, packaging_protocol)
 VALUES 
-('S10','Product A', 'High-end product', 10.0, 12.0, 15.0, 1.5, 1, 1),
-('P30','Product B', 'Medium-quality product', 8.0, 10.0, 12.0, 1.2, 2, 2),
-('X','Product C', 'Budget product', 5.0, 7.0, 10.0, 0.8, 3, 3),
-('ip15','Product D', 'Luxury product', 15.0, 18.0, 20.0, 2.5, 4, 4),
-('ip16','Product E', 'Standard product', 9.0, 11.0, 14.0, 1.1, 5, 5);
+('S10', 'Samsung S10', 'Medium-quality product', 14.99, 7.04, 0.78, 157, 1, 1),
+('P30', 'Huawei P30', 'Medium-quality product', 14.91, 7.14, 0.76, 165, 2, 2),
+('X', 'iPhone X', 'Budget product', 14.36, 7.09, 0.77, 174, 3, 3),
+('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168, 4, 4),
+('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232, 5, 5); 
 
 INSERT INTO state (code, description)
 VALUES 
