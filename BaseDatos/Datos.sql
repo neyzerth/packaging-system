@@ -107,37 +107,38 @@ VALUES
 ('ST04', 'Out for Delivery'),
 ('ST05', 'Returned');
 
+--ESTO EMPEZO DESDE 6 NO DE 1
 INSERT INTO traceability (product, box, package, packaging, state)
 VALUES 
 ('S10', 1, 1, 'PK001', 'ST01'),
 ('P30', 2, 2, 'PK002', 'ST02'),
 ('X', 3, 3, 'PK003', 'ST03'),
-('ip15', 4, 4, 'PK004', 'ST04'),
-('ip16', 5, 5, 'PK005', 'ST05');
+('S23', 4, 4, 'PK004', 'ST04'),
+('S23', 5, 5, 'PK005', 'ST05');
 
 INSERT INTO incident (date, description, user, traceability)
 VALUES 
-('2024-10-05', 'Package damaged during transport', 3, 1),
-('2024-10-06', 'Late delivery', 4, 2),
-('2024-10-07', 'Wrong item delivered', 5, 3),
-('2024-10-08', 'Missing items in package', 2, 4),
-('2024-10-09', 'Package lost in transit', 1, 5);
+('2024-10-05', 'Package damaged during transport', 3, 6),
+('2024-10-06', 'Late delivery', 4, 7),
+('2024-10-07', 'Wrong item delivered', 5, 8),
+('2024-10-08', 'Missing items in package', 2, 9),
+('2024-10-09', 'Package lost in transit', 1, 10);
 
 INSERT INTO report (start_date, end_date, report_date, packed_products, observations, traceability)
 VALUES 
-('2024-09-01', '2024-09-30', '2024-10-01', 1000, 'No major issues', 1),
-('2024-09-01', '2024-09-30', '2024-10-02', 1200, 'Delayed deliveries', 2),
-('2024-09-01', '2024-09-30', '2024-10-03', 1100, 'Damaged products', 3),
-('2024-09-01', '2024-09-30', '2024-10-04', 1050, 'Excellent performance', 4),
-('2024-09-01', '2024-09-30', '2024-10-05', 1150, 'Returned packages', 5);
+('2024-09-01', '2024-09-30', '2024-10-01', 1000, 'No major issues', 6),
+('2024-09-01', '2024-09-30', '2024-10-02', 1200, 'Delayed deliveries', 7),
+('2024-09-01', '2024-09-30', '2024-10-03', 1100, 'Damaged products', 8),
+('2024-09-01', '2024-09-30', '2024-10-04', 1050, 'Excellent performance', 9),
+('2024-09-01', '2024-09-30', '2024-10-05', 1150, 'Returned packages', 10);
 
 INSERT INTO user_traceability (user, traceability)
 VALUES 
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
+(1, 6),
+(2, 7),
+(3, 8),
+(4, 9),
+(5, );
 
 INSERT INTO material_packging (packaging, material, quantity)
 VALUES 
@@ -149,8 +150,8 @@ VALUES
 
 INSERT INTO material_package (material, package, quantity)
 VALUES 
-(1, 'stl', 30),
-(2, 'pla', 40),
-(3, 'wod', 50),
-(4, 'alm', 60),
-(5, 'glas', 70);
+('stl',1, 30),
+('pla',2, 40),
+('wod',3, 50),
+('alm',4, 60),
+('glas',5, 70);

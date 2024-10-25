@@ -32,3 +32,13 @@ Begin
 END $$
 DELIMITER;
 
+
+INSERT INTO box (height, width, length, weight)
+VALUES 
+(5.5,5.5,5.5, 3.5)
+
+
+uPDATE box
+set height = 10
+where num = 6
+
