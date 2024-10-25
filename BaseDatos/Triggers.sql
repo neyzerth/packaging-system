@@ -13,6 +13,8 @@ FROM information_schema.TRIGGERS
 WHERE TRIGGER_SCHEMA = 'embalaje';
 
 --CHECAR Como Funciona el INSERT OR UPDATE
+
+--Calcular el volumen de la caja en un insert
 DELIMITER $$
 CREATE TRIGGER calculate_box_volume_insert
 BEFORE INSERT ON box
@@ -23,6 +25,7 @@ END $$
 DELIMITER;
 
 
+--Calcular el volumen de la caja en un update
 DELIMITER $$
 CREATE TRIGGER calculate_box_volume_update
 BEFORE UPDATE ON box
@@ -34,8 +37,7 @@ DELIMITER;
 
 
 INSERT INTO box (height, width, length, weight)
-VALUES 
-(5.5,5.5,5.5, 3.5)
+VALUES (5.5,5.5,5.5, 3.5)
 
 
 uPDATE box

@@ -124,6 +124,8 @@ VALUES
 ('2024-10-08', 'Missing items in package', 2, 9),
 ('2024-10-09', 'Package lost in transit', 1, 10);
 
+
+--ESTO EMPEZO DESDE 6 NO DE 1
 INSERT INTO report (start_date, end_date, report_date, packed_products, observations, traceability)
 VALUES 
 ('2024-09-01', '2024-09-30', '2024-10-01', 1000, 'No major issues', 6),
