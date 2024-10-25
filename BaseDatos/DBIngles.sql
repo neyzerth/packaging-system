@@ -1,3 +1,10 @@
+-- Active: 1723058837855@@127.0.0.1@3306@embalaje
+
+drop DATABASE embalaje
+
+create DATABASE embalaje
+
+
 -- TABLE USER TYPE
 CREATE TABLE user_type (
     code VARCHAR(5)  PRIMARY KEY,
@@ -145,12 +152,12 @@ CREATE TABLE state (
 -- TABLE TRACEABILITY 
 CREATE TABLE traceability (
     num INT AUTO_INCREMENT PRIMARY KEY,
-    product VARCHAR(5)
+    product VARCHAR(5),
     box INT,
     package INT,
     packaging VARCHAR(5),
     state VARCHAR(5),
-    CONSTRAINT fk_product_traceability FOREIGN KEY (product) REFERENCES product(num),
+    CONSTRAINT fk_product_traceability FOREIGN KEY (product) REFERENCES product(code),
     CONSTRAINT fk_box_traceability FOREIGN KEY (box) REFERENCES box(num),
     CONSTRAINT fk_package_traceability FOREIGN KEY (package) REFERENCES package(num),
     CONSTRAINT fk_packaging_traceability FOREIGN KEY (packaging) REFERENCES packaging(code),
@@ -169,7 +176,6 @@ CREATE TABLE incident (
 );
 
 -- TABLE REPORT
---Duda con las fechas
 CREATE TABLE report (
     folio INT AUTO_INCREMENT PRIMARY KEY,
     start_date DATE NOT NULL,
@@ -193,11 +199,11 @@ CREATE TABLE user_traceability (
 -- PACKAGING-MATERIAL
 CREATE TABLE material_packging (
     packaging VARCHAR(5),
-    material VARCHAR (5)
+    material VARCHAR (5),
     quantity INT,
     PRIMARY KEY (packaging, material),
     CONSTRAINT fk_packaging_material FOREIGN KEY (packaging) REFERENCES packaging(code),
-    CONSTRAINT fk_material_packaging FOREIGN KEY (material) REFERENCES material(num)
+    CONSTRAINT fk_material_packaging FOREIGN KEY (material) REFERENCES material(code)
 );
 
 -- MATERIAL-PACKAGE
@@ -206,6 +212,6 @@ CREATE TABLE material_package (
     package INT,
     quantity INT,
     PRIMARY KEY (material, package),
-    CONSTRAINT fk_material_package FOREIGN KEY (material) REFERENCES material(num),
+    CONSTRAINT fk_material_package FOREIGN KEY (material) REFERENCES material(code),
     CONSTRAINT fk_package_material FOREIGN KEY (package) REFERENCES package(num)
 );
