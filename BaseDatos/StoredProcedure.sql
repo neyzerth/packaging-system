@@ -31,3 +31,8 @@ BEGIN
     SELECT * FROM report --creo que el * no esta bien
     WHERE report_date BETWEEN start_date AND end_date;
 END;
+
+
+--Pudieramos hacer un sp o  triggers que al hacer un moviento en el proceso del embalaje actualice la tabla estado de la trazabilidad
+--Creo que seria mejor un trigger por que nos evitamos tener que mandarlo a llamar
+--

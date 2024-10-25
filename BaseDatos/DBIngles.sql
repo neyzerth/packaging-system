@@ -6,7 +6,7 @@ CREATE TABLE user_type (
 );
 
 -- TABLE USER
---duda con los apellidos
+
 CREATE TABLE user (
     num INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL UNIQUE, 
@@ -26,6 +26,7 @@ CREATE TABLE user (
     CONSTRAINT fk_user_type FOREIGN KEY (user_type) REFERENCES user_type(code),
     CONSTRAINT fk_user_supervisor FOREIGN KEY (supervisor) REFERENCES user(num)
 );
+
 
 -- TABLE BOX
 CREATE TABLE box (

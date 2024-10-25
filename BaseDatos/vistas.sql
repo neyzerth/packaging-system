@@ -61,7 +61,8 @@ SELECT
     num,
     date,
     barcode,
-    tag_type
+    tag_type,
+    destination
 FROM tag;
 
 

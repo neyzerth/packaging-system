@@ -67,13 +67,13 @@ VALUES
 ('UOM04', 'Meters'),
 ('UOM05', 'Pounds');
 
-INSERT INTO material (material_name, description, available_quantity, unit_of_measure)
+INSERT INTO material (code,material_name, description, available_quantity, unit_of_measure)
 VALUES 
-('Steel', 'High-quality steel', 500, 'UOM01'),
-('Plastic', 'Durable plastic', 200, 'UOM03'),
-('Wood', 'Solid oak wood', 300, 'UOM03'),
-('Aluminum', 'Lightweight aluminum', 400, 'UOM01'),
-('Glass', 'Tempered glass', 150, 'UOM02');
+('stl','Steel', 'High-quality steel', 500, 'UOM01'),
+('pla','Plastic', 'Durable plastic', 200, 'UOM03'),
+('wod','Wood', 'Solid oak wood', 300, 'UOM03'),
+('alm','Aluminum', 'Lightweight aluminum', 400, 'UOM01'),
+('glas','Glass', 'Tempered glass', 150, 'UOM02');
 
 INSERT INTO package (product_quantity, weight, tracking_code, packaging, box, tag)
 VALUES 
@@ -91,13 +91,13 @@ VALUES
 ('Protocol D', 'protocol_d.pdf'),
 ('Protocol E', 'protocol_e.pdf');
 
-INSERT INTO product (name, description, height, width, length, weight, package, packaging_protocol)
+INSERT INTO product (code,name, description, height, width, length, weight, package, packaging_protocol)
 VALUES 
-('Product A', 'High-end product', 10.0, 12.0, 15.0, 1.5, 1, 1),
-('Product B', 'Medium-quality product', 8.0, 10.0, 12.0, 1.2, 2, 2),
-('Product C', 'Budget product', 5.0, 7.0, 10.0, 0.8, 3, 3),
-('Product D', 'Luxury product', 15.0, 18.0, 20.0, 2.5, 4, 4),
-('Product E', 'Standard product', 9.0, 11.0, 14.0, 1.1, 5, 5);
+('S10','Product A', 'High-end product', 10.0, 12.0, 15.0, 1.5, 1, 1),
+('P30','Product B', 'Medium-quality product', 8.0, 10.0, 12.0, 1.2, 2, 2),
+('X','Product C', 'Budget product', 5.0, 7.0, 10.0, 0.8, 3, 3),
+('ip15','Product D', 'Luxury product', 15.0, 18.0, 20.0, 2.5, 4, 4),
+('ip16','Product E', 'Standard product', 9.0, 11.0, 14.0, 1.1, 5, 5);
 
 INSERT INTO state (code, description)
 VALUES 
@@ -109,11 +109,11 @@ VALUES
 
 INSERT INTO traceability (product, box, package, packaging, state)
 VALUES 
-(1, 1, 1, 'PK001', 'ST01'),
-(2, 2, 2, 'PK002', 'ST02'),
-(3, 3, 3, 'PK003', 'ST03'),
-(4, 4, 4, 'PK004', 'ST04'),
-(5, 5, 5, 'PK005', 'ST05');
+('S10', 1, 1, 'PK001', 'ST01'),
+('P30', 2, 2, 'PK002', 'ST02'),
+('X', 3, 3, 'PK003', 'ST03'),
+('ip15', 4, 4, 'PK004', 'ST04'),
+('ip16', 5, 5, 'PK005', 'ST05');
 
 INSERT INTO incident (date, description, user, traceability)
 VALUES 
@@ -141,16 +141,16 @@ VALUES
 
 INSERT INTO material_packging (packaging, material, quantity)
 VALUES 
-(1, 1, 50),
-(2, 2, 100),
-(3, 3, 75),
-(4, 4, 150),
-(5, 5, 60);
+(1, 'stl', 50),
+(2, 'pla', 100),
+(3, 'wod', 75),
+(4, 'alm', 150),
+(5, 'glas', 60);
 
 INSERT INTO material_package (material, package, quantity)
 VALUES 
-(1, 1, 30),
-(2, 2, 40),
-(3, 3, 50),
-(4, 4, 60),
-(5, 5, 70);
+(1, 'stl', 30),
+(2, 'pla', 40),
+(3, 'wod', 50),
+(4, 'alm', 60),
+(5, 'glas', 70);
