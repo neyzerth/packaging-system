@@ -43,6 +43,10 @@
     flex-direction: column !important;
 }
 
+.flex-row {
+    flex-direction: row !important;
+}
+
 .p-fixed {
     position: fixed;
 }
@@ -61,6 +65,10 @@
 
 .m-auto {
     margin: auto !important;
+}
+
+.mr-auto {
+    margin-right: auto !important;
 }
 
 .mb-auto {
