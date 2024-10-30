@@ -68,16 +68,46 @@ BEGIN
     WHERE num = NEW.package;
 END $$
 
+drop trigger calculate_package_weight;
+DELIMITER $$
+CREATE TRIGGER calculate_package_weight
+BEFORE INSERT ON package
+FOR EACH ROW
+BEGIN
+    DECLARE prod_weight DECIMAL(10, 2);
+
+    SET prod_weight = (
+        SELECT SUM(weight) * NEW.product_quantity
+        FROM product
+        WHERE package = NEW.num
+    );
+
+    SET NEW.weight = prod_weight;
+END $$
+
 DELIMITER ;
 
 -- Insert de prueba en la tabla product
 INSERT INTO product (code, name, description, height, width, length, weight, package, packaging_protocol)
 VALUES ('P0', 'Pixel 5', 'Premium product', 14.40, 7.30, 0.80, 180, 1, 1);
+INSERT INTO product (code, name, description, height, width, length, weight, package, packaging_protocol)
+VALUES ('P0', 'Pixel 5', 'Premium product', 14.40, 7.30, 0.80, 1, 1);
 
 
-select * from product where package = 1
+select * from product where package = 1;
+select * from product where package = 1;
+SELECT * FROM package;
+
+INSERT INTO package(product_quantity, tracking_code, box, tag) VALUES
+(5, 2345,3, 2 )
+
+SELECT SUM(weight)
+    FROM product
+    WHERE package = 1;
 
 SELECT * FROM package WHERE num = 1;
+
+
 
 select * from package
 

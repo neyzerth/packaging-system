@@ -113,9 +113,11 @@ CREATE TABLE package (
     product_quantity INT,
     weight DECIMAL(10, 2),
     tracking_code INT,
+    product VARCHAR (5),
     packaging VARCHAR(5),
     box INT,
     tag int,
+    CONSTRAINT fk_product_package FOREIGN KEY (product) REFERENCES product(code),
     CONSTRAINT fk_packaging_package FOREIGN KEY (packaging) REFERENCES packaging(code),
     CONSTRAINT fk_box_package FOREIGN KEY (box) REFERENCES box(num),
     CONSTRAINT fk_tag_package FOREIGN KEY (tag) REFERENCES tag(num)
@@ -137,9 +139,7 @@ CREATE TABLE product (
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
     weight DECIMAL(10, 2),
-    package INT,
     packaging_protocol INT,
-    CONSTRAINT fk_package_product FOREIGN KEY (package) REFERENCES package(num),
     CONSTRAINT fk_packaging_protocol_product FOREIGN KEY (packaging_protocol) REFERENCES packaging_protocol(num)
 );
 

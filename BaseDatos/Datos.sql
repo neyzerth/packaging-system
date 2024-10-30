@@ -75,13 +75,13 @@ VALUES
 ('alm','Aluminum', 'Lightweight aluminum', 400, 'UOM01'),
 ('glas','Glass', 'Tempered glass', 150, 'UOM02');
 
-INSERT INTO package (product_quantity, weight, tracking_code, packaging, box, tag)
+INSERT INTO package (product_quantity, weight, tracking_code, product,packaging, box, tag)
 VALUES 
-(10, 25.5, 123456, 'PK001', 1, 1),
-(20, 50.0, 654321, 'PK002', 2, 2),
-(15, 35.2, 987654, 'PK003', 3, 3),
-(30, 60.7, 112233, 'PK004', 4, 4),
-(25, 45.9, 445566, 'PK005', 5, 5);
+(10, 25.5, 123456, 'S10','PK001', 1, 1),
+(20, 50.0, 654321, 'P30','PK002', 2, 2),
+(15, 35.2, 987654, 'X','PK003', 3, 3),
+(30, 60.7, 112233, 'S23','PK004', 4, 4),
+(25, 45.9, 445566, 'S24','PK005', 5, 5);
 
 INSERT INTO packaging_protocol (name, file_name)
 VALUES 
@@ -91,13 +91,13 @@ VALUES
 ('Protocol_Urgent', 'protocol_urg.pdf'),
 ('Protocol_Perishable', 'protocol_per.pdf');
 
-INSERT INTO product (code,name, description, height, width, length, weight, package, packaging_protocol)
+INSERT INTO product (code,name, description, height, width, length, weight, packaging_protocol)
 VALUES 
-('S10', 'Samsung S10', 'Medium-quality product', 14.99, 7.04, 0.78, 157, 1, 1),
-('P30', 'Huawei P30', 'Medium-quality product', 14.91, 7.14, 0.76, 165, 2, 2),
-('X', 'iPhone X', 'Budget product', 14.36, 7.09, 0.77, 174, 3, 3),
-('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168, 4, 4),
-('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232, 5, 5); 
+('S10', 'Samsung S10', 'Medium-quality product', 14.99, 7.04, 0.78, 157, 1),
+('P30', 'Huawei P30', 'Medium-quality product', 14.91, 7.14, 0.76, 165,2),
+('X', 'iPhone X', 'Budget product', 14.36, 7.09, 0.77, 174,3),
+('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168,4),
+('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232,5); 
 
 INSERT INTO state (code, description)
 VALUES 
