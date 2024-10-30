@@ -201,7 +201,7 @@ CREATE TABLE material_packging (
     packaging VARCHAR(5),
     material VARCHAR (5),
     quantity INT,
-    PRIMARY KEY (packaging, material),
+    PRIMARY KEY (material,packaging),
     CONSTRAINT fk_packaging_material FOREIGN KEY (packaging) REFERENCES packaging(code),
     CONSTRAINT fk_material_packaging FOREIGN KEY (material) REFERENCES material(code)
 );

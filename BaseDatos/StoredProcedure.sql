@@ -1,9 +1,12 @@
+-- Active: 1723058837855@@127.0.0.1@3306@embalaje
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
 
+drop Procedure check_zone_capacity
+
 --corregir 
-CREATE PROCEDURE check_zone_capacity (
+CREATE PROCEDURE sp_check_zone_capacity (
     IN zone_code VARCHAR(5), 
     IN package_quantity INT, 
     OUT result BIT

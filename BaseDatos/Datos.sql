@@ -144,11 +144,12 @@ VALUES
 
 INSERT INTO material_packging (packaging, material, quantity)
 VALUES 
-(1, 'stl', 50),
-(2, 'pla', 100),
-(3, 'wod', 75),
-(4, 'alm', 150),
-(5, 'glas', 60);
+('pla', 'PK002', 100),
+('stl', 'PK001', 50),
+('wod', 'PK003', 75),
+('alm', 'PK004', 150),
+('glas', 'PK005', 60);
+
 
 INSERT INTO material_package (material, package, quantity)
 VALUES 
