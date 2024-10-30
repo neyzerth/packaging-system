@@ -107,28 +107,14 @@ CREATE TABLE material (
     CONSTRAINT fk_unit_of_measure FOREIGN KEY (unit_of_measure) REFERENCES unit_of_measure(code)
 );
 
--- TABLE PACKAGE
-CREATE TABLE package (
-    num INT AUTO_INCREMENT PRIMARY KEY,
-    product_quantity INT,
-    weight DECIMAL(10, 2),
-    tracking_code INT,
-    product VARCHAR (5),
-    packaging VARCHAR(5),
-    box INT,
-    tag int,
-    CONSTRAINT fk_product_package FOREIGN KEY (product) REFERENCES product(code),
-    CONSTRAINT fk_packaging_package FOREIGN KEY (packaging) REFERENCES packaging(code),
-    CONSTRAINT fk_box_package FOREIGN KEY (box) REFERENCES box(num),
-    CONSTRAINT fk_tag_package FOREIGN KEY (tag) REFERENCES tag(num)
-);
-
 -- TABLE PACKAGING PROTOCOL
 CREATE TABLE packaging_protocol (
     num INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
     file_name VARCHAR(30)
 );
+
+
 
 -- TABLE PRODUCT
 CREATE TABLE product (
@@ -142,6 +128,24 @@ CREATE TABLE product (
     packaging_protocol INT,
     CONSTRAINT fk_packaging_protocol_product FOREIGN KEY (packaging_protocol) REFERENCES packaging_protocol(num)
 );
+
+-- TABLE PACKAGE
+CREATE TABLE package (
+    num INT AUTO_INCREMENT PRIMARY KEY,
+    product_quantity INT,
+    weight DECIMAL(10, 2),
+    product VARCHAR (5),
+    packaging VARCHAR(5),
+    box INT,
+    tag int,
+    CONSTRAINT fk_product_package FOREIGN KEY (product) REFERENCES product(code),
+    CONSTRAINT fk_packaging_package FOREIGN KEY (packaging) REFERENCES packaging(code),
+    CONSTRAINT fk_box_package FOREIGN KEY (box) REFERENCES box(num),
+    CONSTRAINT fk_tag_package FOREIGN KEY (tag) REFERENCES tag(num)
+);
+
+
+
 
 -- TABLE STATE FOR TRACEABILITY
 CREATE TABLE state (
