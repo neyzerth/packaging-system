@@ -13,6 +13,8 @@ SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, A
 FROM information_schema.TRIGGERS 
 WHERE TRIGGER_SCHEMA = 'embalaje';
 
+DROP TRIGGER after_insert_tag
+
 --CHECAR Como Funciona el INSERT OR UPDATE
 
 --Calcular el volumen de la caja en un insert
@@ -161,4 +163,61 @@ VALUES
 ('stl',3, 70)
 
 select * from packaging
+
+
+---Etiqueta
+
+drop Trigger before_insert_tag
+
+CREATE TRIGGER before_insert_tag
+BEFORE INSERT ON tag
+FOR EACH ROW
+BEGIN
+    DECLARE checksum INT DEFAULT 0;
+    DECLARE gs1_code VARCHAR(255);
+    DECLARE i INT DEFAULT 1;
+    DECLARE len INT;
+    DECLARE digito INT;
+    DECLARE suma_impar INT DEFAULT 0;
+    DECLARE suma_par INT DEFAULT 0;
+
+    -- Generar el código GS1-128 básico (sin checksum)
+    SET gs1_code = CONCAT(
+        '(17)', DATE_FORMAT(NEW.date, '%y%m%d'),
+        '(410)', NEW.destination,
+        '(420)', NEW.tag_type
+    );
+    
+    -- Longitud del código generado
+    SET len = CHAR_LENGTH(gs1_code);
+
+    -- Calcular el checksum recorriendo cada carácter
+    WHILE i <= len DO
+        SET digito = CAST(SUBSTRING(gs1_code, i, 1) AS UNSIGNED);
+
+        IF i % 2 = 1 THEN
+            -- Sumar posición impar y multiplicar por 3
+            SET suma_impar = suma_impar + digito;
+        ELSE
+            -- Sumar posición par
+            SET suma_par = suma_par + digito;
+        END IF;
+        
+        SET i = i + 1;
+    END WHILE;
+
+    -- Sumar los resultados y calcular el checksum
+    SET checksum = (10 - ((suma_impar * 3 + suma_par) % 10)) % 10;
+
+    -- Concatenar el checksum al final del código GS1-128
+    SET NEW.barcode = CONCAT(gs1_code, checksum);
+END;
+
+DELIMITER ;
+
+select * from tag
+
+Insert into tag (date,tag_type,destination)
+values ('2024-10-30','TT03','UABC')
+
 

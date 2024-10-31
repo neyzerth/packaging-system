@@ -70,7 +70,7 @@ CREATE TABLE tag_type (
 CREATE TABLE tag (
     num INT AUTO_INCREMENT PRIMARY KEY,
     date DATE,
-    barcode INT,
+    barcode VARCHAR(255),
     tag_type varchar(5),
     destination VARCHAR(25),
     CONSTRAINT fk_tag_type_tag FOREIGN KEY (tag_type) REFERENCES tag_type(code)
