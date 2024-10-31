@@ -5,8 +5,8 @@ const toggleImage = document.getElementById('toggleImage');
 const toggleText = document.getElementById('toggleText');
 const paragraph = document.getElementById('paragraph');
 const images = [
-    '../src/img/padlock-unlocked.svg',
-    '../src/img/user.svg'
+    '../structures/svg/padlock-unlocked.svg',
+    '../structures/svg/user.svg'
 ];
 
 link.addEventListener('click', event => {
@@ -24,7 +24,7 @@ link.addEventListener('click', event => {
         rightDiv.innerHTML = isLogin
             ? `
 
-            <form action="#">
+            <form action="">
                 <strong style="font-size: 20px;">¡Solicita tu código!</strong>
                 <p>Te enviaremos instrucciones al correo electronico.</p>
                 <input class="form-control" type="text" required placeholder="Ingresa tu correo electrónico">
@@ -32,7 +32,7 @@ link.addEventListener('click', event => {
                 <button class="btn-primary">Siguiente</button>
             </form>`
             : `
-            <form action="#">
+            <form action="">
                 <strong style="font-size: 20px;">¡Hola de nuevo!</strong>
                 <p>¡Nos alegramos de volver a verte!</p>
                 <input class="form-control" type="text" required placeholder="Usuario">
