@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+
+    require "userFun.php";
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $name = $_POST['name'];
+        $first_surname = $_POST['first_surname'];
+        $second_surname = $_POST['second_surname'];
+        $date = $_POST['date'];
+        $neighborhood = $_POST['neighborhood'];
+        $street = $_POST['street'];
+        $postal_code = $_POST['postal_code'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $user_type = $_POST['user_type'];
+        $supervisor = $_POST['supervisor'];
+
+        $result = addUser($username, $password, $name, $first_surname,
+            $second_surname, $date, $neighborhood, $street, $postal_code,
+            $phone, $email, $user_type, $supervisor
+        );
+
+        if($result){
+            echo '<p>Registered User<p>';
+        }
+    }
+
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,57 +53,61 @@
             </div>
             <div class="row-div">
                 <div class="">
-                    <form action="../users/listUsers.html">
+                    <form action="addUser.php">
                         <h2>Profile</h2>
                         <div class="row-form">
                             <div class="row-md-6">
-                                <label for="">Name</label>
+                                <label for="name">Name</label>
                                 <div class="input-group">
-                                    <input type="text" required>
+                                    <input name="name" id="name" type="text" required>
                                 </div>
                             </div>
                             <div class="row-md-6">
-                                <label for="">Lastname</label>
+                                <label for="first_surname">First Surname</label>
                                 <div class="input-group">
-                                    <input type="text" required>
-                                </div>
-                            </div>
-                            <div class="row-lg-12">
-                                <label for="">User</label>
-                                <div class="input-group">
-                                    <input type="text" required placeholder="@Username">
-                                </div>
-                            </div>
-                            <div class="row-lg-12">
-                                <label for="">Email</label>
-                                <div class="input-group">
-                                    <input type="email" required placeholder="you@example.com">
-                                </div>
-                            </div>
-                            <div class="row-lg-12">
-                                <label for="">Phone number</label>
-                                <div class="input-group">
-                                    <input type="text" required placeholder="xx-xxx-xxxx-xxx">
-                                </div>
-                            </div>
-                            <div class="row-lg-12">
-                                <label for="">Password</label>
-                                <div class="input-group">
-                                    <input type="password" required placeholder="***">
+                                    <input name="first_surname" id="first_surname" type="text" required>
                                 </div>
                             </div>
                             <div class="row-md-6">
-                                <label for="">User type</label>
-                                <select class="input-group" name="" id="options">
+                                <label for="second_surname">Second Surname</label>
+                                <div class="input-group">
+                                    <input name="second_surname" id="second_surname" type="text" required>
+                                </div>
+                            </div>
+                            <div class="row-lg-12">
+                                <label for="username">User</label>
+                                <div class="input-group">
+                                    <input name="username" id="username" type="text" required placeholder="@Username">
+                                </div>
+                            </div>
+                            <div class="row-lg-12">
+                                <label for="email">Email</label>
+                                <div class="input-group">
+                                    <input name="email" id="email" type="email" placeholder="you@example.com">
+                                </div>
+                            </div>
+                            <div class="row-lg-12">
+                                <label for="phone">Phone number</label>
+                                <div class="input-group">
+                                    <input name="phone" id="phone" type="text" required placeholder="xx-xxx-xxxx-xxx">
+                                </div>
+                            </div>
+                            <div class="row-lg-12">
+                                <label for="password">Password</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" id="password" required placeholder="***">
+                                </div>
+                            </div>
+                            <div class="row-md-6">
+                                <label for="user_type">User type</label>
+                                <select name="user_type" id="user_type" class="input-group" name="" id="options">
                                     <option value="Empleado">Employee</option>
-                                    <option value="Supervisor">Supervisor</option>
-                                    <option value="Administrador">Administrator</option>
                                 </select>
                             </div>
                             <div class="row-md-6">
-                                <label for="">Date of Birth</label>
+                                <label for="date">Date of Birth</label>
                                 <div class="input-group">
-                                    <input type="date" name="" id="" required>
+                                    <input type="date" name="date" id="date" required>
                                 </div>
                             </div>
                         </div>
@@ -83,42 +117,37 @@
                             <div class="row-sm-3">
                                 <label for="">Postal code</label>
                                 <div class="input-group">
-                                    <input type="text" placeholder="#">
-                                </div>
-                            </div>
-                            <div class="row-md-9">
-                                <label for="">Colonia</label>
-                                <div class="input-group">
-                                    <input type="text" placeholder="">
+                                    <input name="postal-code" id="postal-code" type="text" placeholder="#">
                                 </div>
                             </div>
                             <div class="row-md-9">
                                 <label for="">Neighborhood</label>
                                 <div class="input-group">
-                                    <input type="text" placeholder="">
+                                    <input name="neighborhood" id="neighborhood" type="text" placeholder="">
                                 </div>
                             </div>
+<!--street, supervisor-->
                             <div class="row-sm-3">
-                                <label for="">Interior number</label>
+                                <label for="">Street</label>
                                 <div class="input-group">
-                                    <input type="text" placeholder="#">
+                                    <input name="street" id="street" type="text" placeholder="#">
                                 </div>
+                            </div>
+                            <div class="row-md-6">
+                                <label for="supervisor">Supervisor</label>
+                                <select name="supervisor" id="supervisor" class="input-group" name="" id="options">
+                                    <option value="supervisor">supervisor</option>
+                                </select>
                             </div>
                         </div>
                         <hr class="border-bottom" style="margin-top: 2rem; margin-bottom: 2rem;">
                         <button class="btn-primary" type="submit">Confirm Registration</button>
                     </form>
                 </div>
-                <!--
-                
-                <div class="col-sm-4">
-
-                </div>
-                -->
             </div>
         </main>
         <footer class="text-center" style="margin-top: 3rem; padding-top: 3rem; margin-bottom: 3rem;">
-            <p>© 2024-2025 Company Name</p>
+            <p>© 2024-2025 Packakings</p>
         </footer>
     </div>
 </body>

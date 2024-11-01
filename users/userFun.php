@@ -4,15 +4,16 @@ function addUser(
     $username, $password, 
     $name, $firstSurname, $secondSurname, 
     $dateOfBirth, $neighborhood, $street, $postalCode,
-    $phone, $email, $active, $userType, $supervisor
+    $phone, $email, 
+    $userType, $supervisor
 ){
     $db = connectdb();
-    $query = "call sp_ser(".
-        $username.",". $password.",". 
-        $name.",". $firstSurname.",". $secondSurname.",". 
-        $dateOfBirth.",". $neighborhood.",". $street.",". $postalCode.",".
-        $phone.",". $email.",". $active.",". $userType.",". $supervisor
-    .");";
+    $query = "call sp_insertUSer(".
+        "$username, $password,". 
+        "$name, $firstSurname, $secondSurname, ".
+        "$dateOfBirth,$neighborhood,$street, $postalCode,".
+        "$phone,$email,$userType,$supervisor".
+    ");";
 
     try {
         $response = mysqli_query($db, $query);
