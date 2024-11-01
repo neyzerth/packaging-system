@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@embalaje
+-- Active: 1728065056405@@127.0.0.1@3306@packaging
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -57,6 +57,7 @@ call sp_generate_report ('2024-09-01','2024-09-30')
 --usuario general
 DELIMITER $$
 
+drop procedure sp_insertUser;
 CREATE PROCEDURE sp_insertUser(
     IN p_username VARCHAR(30),
     IN p_password VARCHAR(20),
@@ -69,7 +70,6 @@ CREATE PROCEDURE sp_insertUser(
     IN p_postal_code INT,
     IN p_phone VARCHAR(15),
     IN p_email VARCHAR(30),
-    IN p_active BIT,
     IN p_user_type VARCHAR(5),
     IN p_supervisor INT
 )
@@ -85,11 +85,11 @@ BEGIN
     INSERT INTO user (
         username, password, name, first_surname, second_surname,
         date_of_birth, neighborhood, street, postal_code, phone,
-        email, active, user_type, supervisor
+        email, user_type, supervisor
     ) VALUES (
         p_username, p_password, p_name, p_first_surname, p_second_surname,
         p_date_of_birth, p_neighborhood, p_street, p_postal_code, p_phone,
-        p_email, p_active, p_user_type, p_supervisor
+        p_email, p_user_type, p_supervisor
     );
 END $$
 DELIMITER ;
