@@ -140,8 +140,8 @@
                             </div>
                             <div class="row-md-6">
                                 <label for="supervisor">Supervisor</label>
-                                <?php while ($user_type = mysqli_fetch_assoc($user_types)):?>    
-                                    <option value="<?php echo $user_type['code']; ?>"><?php echo $user_type['name']; ?></option>
+                                <?php while ($supervisor = mysqli_fetch_assoc($supervisors)):?>    
+                                    <option value="<?php echo $supervisor['num']; ?>"><?php echo $supervisor['name']; ?></option>
                                 <?php endwhile; ?>
                             </div>
                         </div>
