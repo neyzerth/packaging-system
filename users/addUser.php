@@ -7,6 +7,8 @@
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
 
+    var_dump($user_types);
+
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $username = $_POST['username'];
         $password = $_POST['password'];
