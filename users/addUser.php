@@ -2,8 +2,11 @@
 <html lang="en">
 
 <?php
-
     require "userFun.php";
+
+    $user_types = getUserTypes();
+    $supervisors = getSupervisors();
+
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -101,7 +104,9 @@
                             <div class="row-md-6">
                                 <label for="user_type">User type</label>
                                 <select name="user_type" id="user_type" class="input-group" name="" id="options">
-                                    <option value="Empleado">Employee</option>
+                                <?php while ($user_type = mysqli_fetch_assoc($user_types)):?>    
+                                    <option value="<?php echo $user_type['code']; ?>"><?php echo $user_type['name']; ?></option>
+                                <?php endwhile; ?>
                                 </select>
                             </div>
                             <div class="row-md-6">
@@ -135,9 +140,9 @@
                             </div>
                             <div class="row-md-6">
                                 <label for="supervisor">Supervisor</label>
-                                <select name="supervisor" id="supervisor" class="input-group" name="" id="options">
-                                    <option value="supervisor">supervisor</option>
-                                </select>
+                                <?php while ($user_type = mysqli_fetch_assoc($user_types)):?>    
+                                    <option value="<?php echo $user_type['code']; ?>"><?php echo $user_type['name']; ?></option>
+                                <?php endwhile; ?>
                             </div>
                         </div>
                         <hr class="border-bottom" style="margin-top: 2rem; margin-bottom: 2rem;">

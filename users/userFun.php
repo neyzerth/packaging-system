@@ -23,3 +23,16 @@ function addUser(
     }
 }
 
+function getUserTypes(){
+    $db = connectdb();
+    $query = "SELECT code, name FROM user_type;";
+
+    return mysqli_query($db, $query);
+}
+function getSupervisors(){
+    $db = connectdb();
+    $query = "SELECT num, name FROM user WHERE supervisor IS NULL;";
+
+    return mysqli_query($db, $query);
+}
+
