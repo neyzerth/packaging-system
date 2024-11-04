@@ -75,14 +75,6 @@ VALUES
 ('alm','Aluminum', 'Lightweight aluminum', 400, 'UOM01'),
 ('glas','Glass', 'Tempered glass', 150, 'UOM02');
 
-INSERT INTO package (product_quantity, weight, tracking_code, packaging, box, tag)
-VALUES 
-(10, 25.5, 123456, 'PK001', 1, 1),
-(20, 50.0, 654321, 'PK002', 2, 2),
-(15, 35.2, 987654, 'PK003', 3, 3),
-(30, 60.7, 112233, 'PK004', 4, 4),
-(25, 45.9, 445566, 'PK005', 5, 5);
-
 INSERT INTO packaging_protocol (name, file_name)
 VALUES 
 ('Protocol_Standard', 'protocol_st.pdf'),
@@ -91,13 +83,23 @@ VALUES
 ('Protocol_Urgent', 'protocol_urg.pdf'),
 ('Protocol_Perishable', 'protocol_per.pdf');
 
-INSERT INTO product (code,name, description, height, width, length, weight, package, packaging_protocol)
+INSERT INTO product (code,name, description, height, width, length, weight, packaging_protocol)
 VALUES 
-('S10', 'Samsung S10', 'Medium-quality product', 14.99, 7.04, 0.78, 157, 1, 1),
-('P30', 'Huawei P30', 'Medium-quality product', 14.91, 7.14, 0.76, 165, 2, 2),
-('X', 'iPhone X', 'Budget product', 14.36, 7.09, 0.77, 174, 3, 3),
-('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168, 4, 4),
-('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232, 5, 5); 
+('S10', 'Samsung S10', 'Medium-quality product', 14.99, 7.04, 0.78, 157, 1),
+('P30', 'Huawei P30', 'Medium-quality product', 14.91, 7.14, 0.76, 165,2),
+('X', 'iPhone X', 'Budget product', 14.36, 7.09, 0.77, 174,3),
+('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168,4),
+('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232,5); 
+
+INSERT INTO package (product_quantity, weight, product,packaging, box, tag)
+VALUES 
+(10, 25.5, 'S10','PK001', 1, 1),
+(20, 50.0, 'P30','PK002', 2, 2),
+(15, 35.2,  'X','PK003', 3, 3),
+(30, 60.7,  'S23','PK004', 4, 4),
+(25, 45.9,  'S24','PK005', 5, 5);
+
+
 
 INSERT INTO state (code, description)
 VALUES 
@@ -110,11 +112,11 @@ VALUES
 --ESTO EMPEZO DESDE 6 NO DE 1
 INSERT INTO traceability (product, box, package, packaging, state)
 VALUES 
-('S10', 1, 1, 'PK001', 'ST01'),
-('P30', 2, 2, 'PK002', 'ST02'),
-('X', 3, 3, 'PK003', 'ST03'),
-('S23', 4, 4, 'PK004', 'ST04'),
-('S23', 5, 5, 'PK005', 'ST05');
+('S10', 1, 16, 'PK001', 'ST01'),
+('P30', 2, 17, 'PK002', 'ST02'),
+('X', 3, 18, 'PK003', 'ST03'),
+('S23', 4, 19, 'PK004', 'ST04'),
+('S23', 5, 20, 'PK005', 'ST05');
 
 INSERT INTO incident (date, description, user, traceability)
 VALUES 
@@ -140,20 +142,21 @@ VALUES
 (2, 7),
 (3, 8),
 (4, 9),
-(5, );
+(5, 10);
 
-INSERT INTO material_packging (packaging, material, quantity)
+INSERT INTO material_packging (material,packaging, quantity)
 VALUES 
-(1, 'stl', 50),
-(2, 'pla', 100),
-(3, 'wod', 75),
-(4, 'alm', 150),
-(5, 'glas', 60);
+('pla', 'PK002', 100),
+('stl', 'PK001', 50),
+('wod', 'PK003', 75),
+('alm', 'PK004', 150),
+('glas','PK005', 60);
+
 
 INSERT INTO material_package (material, package, quantity)
 VALUES 
-('stl',1, 30),
-('pla',2, 40),
-('wod',3, 50),
-('alm',4, 60),
-('glas',5, 70);
+('stl',16, 30),
+('pla',17, 40),
+('wod',18, 50),
+('alm',19, 60),
+('glas',20, 70);
