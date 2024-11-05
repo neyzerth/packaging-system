@@ -16,8 +16,8 @@ FROM user;
 CREATE VIEW vw_user_personal_info AS
 SELECT 
     num,
-    CONCAT(name,' ',first_surname,'  ',second_surname) AS full_name,
-    date_of_birth,
+    CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
+    DATE_FORMAT(date_of_birth, "%M/%d/%y"),
     neighborhood,
     street,
     postal_code,
@@ -28,8 +28,8 @@ FROM user;
 CREATE VIEW vw_supervisor
 SELECT num
     username,
-    CONCAT(name,' ',first_surname,' ',second_surname) AS full_name,
-    date_of_birth,
+    CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
+    DATE_FORMAT(date_of_birth, "%M/%d/%y"),
     neighborhood,
     street,
     postal_code,
