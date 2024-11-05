@@ -8,18 +8,24 @@ function addUser(
     $userType, $supervisor
 ){
     $db = connectdb();
+    
+    $postalCode = nullDb($postalCode);
+    $supervisor = nullDb($supervisor);
+
     $query = "call sp_insertUSer(".
-        "$username, $password,". 
-        "$name, $firstSurname, $secondSurname, ".
-        "$dateOfBirth,$neighborhood,$street, $postalCode,".
-        "$phone,$email,$userType,$supervisor".
+        "'$username', $password,". 
+        "'$name', '$firstSurname', '$secondSurname', ".
+        "'$dateOfBirth','$neighborhood','$street', $postalCode,".
+        "'$phone','$email','$userType',$supervisor".
     ");";
+
+    echo "<p>$query</p>";
 
     try {
         $response = mysqli_query($db, $query);
-        return true;
+        return "Usuario registrado con exito";
     } catch (Exception $e) {
-        return false;
+        return "". $e->getMessage();
     }
 }
 

@@ -6,7 +6,7 @@
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
     
-
+    echo $_SERVER['REQUEST_METHOD'];
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -27,9 +27,7 @@
             phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor
         );
 
-        if($result){
-            echo '<p>Registered User<p>';
-        }
+        echo $result;
     }
 
 ?>
@@ -45,7 +43,7 @@
             </div>
             <div class="row-div">
                 <div class="">
-                    <form action="addUser.php">
+                    <form action="addUser.php" method="post">
                         <h2>Profile</h2>
                         <div class="row-form">
                             <div class="row-md-6">
@@ -92,7 +90,7 @@
                             </div>
                             <div class="row-md-6">
                                 <label for="user_type">User type</label>
-                                <select name="user_type" id="user_type" class="input-group" name="" id="options">
+                                <select required name="user_type" id="user_type" class="input-group" name="" id="options">
                                 <?php 
                                     while ($user_type = mysqli_fetch_assoc($user_types)):   
                                         echo "<option value='{$user_type['code']}'>{$user_type['name']}</option>";

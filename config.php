@@ -18,3 +18,7 @@ function connectdb(){
         return false;
     }
 }
+
+function nullDb($param){
+    return $param == '' ? "NULL" : $param;
+}
