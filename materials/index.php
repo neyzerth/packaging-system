@@ -1,3 +1,10 @@
+<?php
+    require("../config.php");
+    require HEADER;
+    require "userFun.php";
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
