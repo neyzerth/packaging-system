@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/styles/!important.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/styles/!color-palette.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/styles/panel.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../styles/!important.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../styles/!color-palette.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../styles/panel.css?v=<?php echo time(); ?>">
 
 </head>
 

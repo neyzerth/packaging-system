@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidebar</title>
-    <?php define('BASE_URL', 'http://localhost/packaking-system'); ?>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/styles/!important.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/styles/!color-palette.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>/styles/sidebar.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../styles/!important.css?">
+    <link rel="stylesheet" href="../styles/!color-palette.css?">
+    <link rel="stylesheet" href="../styles/sidebar.css?">
 </head>
 
 <body>
