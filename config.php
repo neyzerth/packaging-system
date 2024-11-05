@@ -1,7 +1,7 @@
 <?php
 define("URL","{$_SERVER['HTTP_HOST']}");
-define("ROOT","{$_SERVER['DOCUMENT_ROOT']}");
-define("STYLE","/styles/");
+define("ROOT","{$_SERVER['DOCUMENT_ROOT']}/packaging-system/");
+define("STYLE","../styles/");
 define("HEADER",ROOT."/structures/header.php");
 define("FOOTER",ROOT."/structures/footer.php");
 define("SIDEBAR",ROOT."/structures/sidebar.php");

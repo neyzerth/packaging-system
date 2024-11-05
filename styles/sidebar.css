@@ -2,8 +2,18 @@
     margin: 0;
 }
 
-.nav {
+.link-body {
+    fill: var(--blue-dark);
+    justify-content: center;
+}
+
+.link-body:hover {
+    fill: var(--blue-medium);
+}
+
+.navg {
     padding-left: 0;
+    list-style: none;
 }
 
 .nav-link {
@@ -26,15 +36,4 @@
 .nav-link.active:hover {
     background-color: var(--background-hover);
     fill: var(--icon-dark);
-}
-
-.link-body {
-    fill: var(--blue-dark);
-    justify-content: center;
-    transition: fill .15s ease-in-out, transform .15s ease-in-out;
-}
-
-.link-body:hover {
-    fill: var(--blue-medium);
-    transform: scale(1.05);
 }
