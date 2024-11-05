@@ -9,9 +9,10 @@ SELECT
     username,
     password,
     active,
-    user_type,
+    (SELECT name FROM user_type 
+    WHERE code = u.user_type) AS user,
     supervisor
-FROM user;
+FROM user AS u WHERE u.active = 1;
 
 CREATE VIEW vw_user_personal_info AS
 SELECT 
@@ -22,8 +23,10 @@ SELECT
     street,
     postal_code,
     phone,
-    email
-FROM user;
+    email,
+    (SELECT name FROM user_type 
+    WHERE code = u.user_type) AS user
+FROM user AS u WHERE u.active = 1;
 
 CREATE VIEW vw_supervisor
 SELECT num
