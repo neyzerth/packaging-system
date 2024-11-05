@@ -60,8 +60,6 @@ error_reporting(E_ALL);
                         <!--<th><input type="checkbox" id="checkboxMaestro1" onclick="toggleAllCheckboxes(this, 'table1')"></th>-->
                         <th> </th>
                         <th>#</th>
-                        <th>Father surname</th>
-                        <th>Mother surname</th>
                         <th>Name</th>
                         <th>Date of Birth</th>
                         <th>User type</th>
@@ -73,11 +71,9 @@ error_reporting(E_ALL);
                         <!--<td><input type="checkbox"></td>-->
                         <td onclick="toggleInfo(this)">^</td>
                         <td><?php echo $user['num']; ?></td>
-                        <td><?php echo $user['first_surname']; ?></td>
-                        <td><?php echo $user['second_surname']; ?></td>
-                        <td><?php echo $user['name']; ?></td>
+                        <td><?php echo $user['full_name']; ?></td>
                         <td><?php echo $user['date_of_birth']; ?></td>
-                        <td>Administrator</td>
+                        <td><?php echo $user['user']; ?></td>
                     </tr>
                     <tr class="extra-info">
                         <td colspan="8">Here you can add more information about this person.</td>

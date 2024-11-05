@@ -32,7 +32,7 @@ function addUser(
 function getUsers(){
     $db = connectdb();
 
-    $query = "SELECT num, first_surname, second_surname, name, date_of_birth FROM user_personal_info;";
+    $query = "SELECT num, full_name, date_of_birth, user FROM vw_user_personal_info;";
 
     $result = mysqli_query($db, $query);
 
@@ -54,7 +54,7 @@ function getUserTypes(){
 }
 function getSupervisors(){
     $db = connectdb();
-    $query = "SELECT num, name FROM user WHERE supervisor IS NULL;";
+    $query = "SELECT num, name FROM vw_supervisor;";
 
     return mysqli_query($db, $query);
 }
