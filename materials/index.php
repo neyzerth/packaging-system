@@ -16,11 +16,11 @@
 
 <body class="d-flex">
     <?php
-    include("../structures/sidebar/index.php")
+    include("../structures/index.php")
     ?>
     <main>
         <?php
-        include("../structures/header/index.php")
+        include("../structures/index.php")
         ?>
         <div>
             <table>
