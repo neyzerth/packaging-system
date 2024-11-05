@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
+    <?php define('BASE_URL', 'http://localhost/packaking-system'); ?>
     <link rel="stylesheet" href="../styles/!important.css">
     <link rel="stylesheet" href="../styles/!color-palette.css">
     <link rel="stylesheet" href="../styles/login.css">
@@ -19,7 +20,7 @@
             <strong id="toggleText">¿Has olvidado la contraseña?</strong>
             <p id="paragraph">Selecciona el icono para solicitar instrucciones.</p>
         </div>
-        <form action="#" id="rightDiv">
+        <form action="<?php echo BASE_URL; ?>/users/index.php?v=<?php echo time(); ?>" id="rightDiv">
             <strong style="font-size: 20px;">¡Hola de nuevo!</strong>
             <p>¡Nos alegramos de volver a verte!</p>
             <input class="form-control" type="text" required placeholder="Usuario">
