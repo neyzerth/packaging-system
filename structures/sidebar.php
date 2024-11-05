@@ -26,14 +26,14 @@
                 </a>
             </li>
             <li>
-                <a href="boxes/index.php" class="nav-link border-bottom border-bottom">
+                <a href="/boxes/index.php" class="nav-link border-bottom border-bottom">
                     <svg width="40" height="24" viewBox="0 0 16 16">
                         <path d="M8.01 4.555 4.005 7.11 8.01 9.665 4.005 12.22 0 9.651l4.005-2.555L0 4.555 4.005 2zm-4.026 8.487 4.006-2.555 4.005 2.555-4.005 2.555zm4.026-3.39 4.005-2.556L8.01 4.555 11.995 2 16 4.555 11.995 7.11 16 9.665l-4.005 2.555z" />
                     </svg>
                 </a>
             </li>
             <li>
-                <a href=<?=URL?>"/materials/index.php" class="nav-link border-bottom border-bottom">
+                <a href="/materials/index.php" class="nav-link border-bottom border-bottom">
                     <svg width="40" height="24" viewBox="0 -0.5 17 17">
                         <g transform="translate(0.000000, 2.000000)">
                             <path d="M2.967,0 C1.783,0 0.861,0.524 0.365,1.476 C0.011,2.154 0.002,2.823 0.002,2.897 L0.002,11.333 C0.002,11.333 1.189,9.988 3.274,11.333 C5.951,12.932 6.853,10.562 8.011,11.333 C9.856,12.763 10.926,11.333 10.926,11.333 C10.926,11.333 10.913,4.481 10.926,4.302 C10.996,3.158 11.152,2.138 11.587,1.376 C12.072,0.527 12.735,0.001 13.468,0.001 L2.967,0.001 L2.967,0 Z" class="si-glyph-fill"></path>
