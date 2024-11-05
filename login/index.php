@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="../styles/!important.css">
     <link rel="stylesheet" href="../styles/!color-palette.css">
     <link rel="stylesheet" href="../styles/login.css">
@@ -27,7 +27,7 @@
             <button class="btn-primary">Iniciar sesión</button>
         </form>
     </main>
-    <script src="login.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
