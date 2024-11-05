@@ -29,6 +29,23 @@ function addUser(
     }
 }
 
+function getUsers(){
+    $db = connectdb();
+
+    $query = "SELECT num, first_surname, second_surname, name, date_of_birth FROM user_personal_info;";
+
+    $result = mysqli_query($db, $query);
+
+    $users = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $users[] = $row;
+    }
+
+    mysqli_close($db);
+
+    return $users;
+}
+
 function getUserTypes(){
     $db = connectdb();
     $query = "SELECT code, name FROM user_type;";
