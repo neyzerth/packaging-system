@@ -1,13 +1,4 @@
-<?php
-    include "config.php";
-    if(!isset($_SESSION['user_session'])){
-        echo'<p>NO LOGUEADO</p>';
-        header("Location: /login/");
-        exit();
-    } else {
-        echo'<p>LOGUEADO</p>';
-    }
-?>
+
 
 <h1>AQUI DEBE SER EL HOME</h1>
 <?php
@@ -20,4 +11,17 @@ echo "<p>{$_SERVER['DOCUMENT_ROOT']}<p>";
 
 echo "<p>".URL."<p>";
 echo "<p>".HEADER."<p>";
+
+include "config.php";
+    if(!isset($_SESSION['num'])){
+        echo'<p>NO LOGUEADO</p>';
+        header("Location: /login/");
+        exit();
+    } else {
+        echo'<p>LOGUEADO</p>';
+    }
 ?>
+
+<script>
+    alert("AAAAAAAAAAAAA")
+</script>
