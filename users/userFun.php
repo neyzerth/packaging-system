@@ -19,13 +19,11 @@ function addUser(
         "'$phone','$email','$userType',$supervisor".
     ");";
 
-    echo "<p>$query</p>";
 
     try {
-        $response = mysqli_query($db, $query);
-        return "Usuario registrado con exito";
+        return $response = mysqli_query($db, $query);
     } catch (Exception $e) {
-        return "". $e->getMessage();
+        return $e->getMessage();
     }
 }
 
