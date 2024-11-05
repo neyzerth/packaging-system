@@ -1,4 +1,11 @@
 <?php
+define("URL","{$_SERVER['HTTP_HOST']}");
+define("ROOT","{$_SERVER['DOCUMENT_ROOT']}");
+define("STYLE","/styles/");
+define("HEADER","/structures/header.php");
+define("FOOTER","/structures/footer.php");
+define("SIDEBAR","/structures/sidebar.php");
+define("IMAGES","/structures/images/");
 
 function connectdb(){
 

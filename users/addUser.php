@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
+    require("../config.php");
+    require HEADER;
     require "userFun.php";
 
     $user_types = getUserTypes();
@@ -34,17 +33,6 @@
     }
 
 ?>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="/styles/!important.css">
-    <link rel="stylesheet" href="/styles/!color-palette.css">
-    <link rel="stylesheet" href="/styles/register.css">
-</head>
-
-<body>
 
     <div class="container">
         <main>
@@ -162,6 +150,3 @@
             <p>© 2024-2025 Packakings</p>
         </footer>
     </div>
-</body>
-
-</html>
