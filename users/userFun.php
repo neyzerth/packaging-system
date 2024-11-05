@@ -54,7 +54,7 @@ function getUserTypes(){
 }
 function getSupervisors(){
     $db = connectdb();
-    $query = "SELECT num, name FROM vw_supervisor;";
+    $query = "SELECT num, full_name FROM vw_supervisor;";
 
     return mysqli_query($db, $query);
 }

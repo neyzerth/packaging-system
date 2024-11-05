@@ -6,7 +6,6 @@
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
     
-    echo $_SERVER['REQUEST_METHOD'];
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -27,7 +26,6 @@
             phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor
         );
 
-        echo $result;
     }
 
 ?>
@@ -132,7 +130,7 @@
                                 <select name="supervisor" id="supervisor">
                                 <?php 
                                     while ($supervisor = mysqli_fetch_assoc($supervisors)):   
-                                        echo "<option value='{$supervisor['num']}'>{$supervisor['name']}</option>";
+                                        echo "<option value='{$supervisor['num']}'>{$supervisor['full_name']}</option>";
                                     endwhile; 
                                 ?>
                                 </select>

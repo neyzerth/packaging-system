@@ -1,16 +1,18 @@
+-- Active: 1728065056405@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
 
 --Vistas de Usuario
+drop view vw_user_info;
+
 CREATE VIEW vw_user_info AS
 SELECT 
     num,
     username,
     password,
     active,
-    (SELECT name FROM user_type 
-    WHERE code = u.user_type) AS user,
+    user_type,
     supervisor
 FROM user AS u WHERE u.active = 1;
 
@@ -28,18 +30,19 @@ SELECT
     WHERE code = u.user_type) AS user
 FROM user AS u WHERE u.active = 1;
 
-CREATE VIEW vw_supervisor
-SELECT num
+drop view vw_supervisor;
+CREATE VIEW vw_supervisor AS
+SELECT num,
     username,
     CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
-    DATE_FORMAT(date_of_birth, "%M-%d-%y"),
+    DATE_FORMAT(date_of_birth, "%M-%d-%y") AS date_of_birth,
     neighborhood,
     street,
     postal_code,
     phone,
     email
 From user
-where supervisor is NULL and user_type <> 'admin'
+where user_type = 'super'
 
 
 --VISTA DE CAJA

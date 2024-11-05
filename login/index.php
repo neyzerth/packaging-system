@@ -1,31 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    require("../config.php");
+    require HEADER;
+    require "logFun.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
-    <?php define('BASE_URL', 'http://localhost/packaking-system'); ?>
-    <link rel="stylesheet" href="../styles/!important.css">
-    <link rel="stylesheet" href="../styles/!color-palette.css">
-    <link rel="stylesheet" href="../styles/login.css">
-</head>
+    $msg = "Put your credentials.";
+
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if(login($username,$password)){
+            header("Location: /"); 
+            exit();
+        } else {
+            $msg = 'Username or password incorrect.';
+        }
+    }
+?>
 
 <body class="d-flex">
     <main class="d-flex m-auto">
         <div id="leftDiv">
             <a class="d-contents" href="#" id="link">
-                <img class="p mb rounded-circle" src="../structures/svg/padlock-unlocked.svg" alt="" id="toggleImage">
+                <img class="p mb rounded-circle" src=<?php echo SVG."padlock-unlocked.svg" ?> alt="" id="toggleImage">
             </a>
-            <strong id="toggleText">¿Has olvidado la contraseña?</strong>
-            <p id="paragraph">Selecciona el icono para solicitar instrucciones.</p>
+            <strong id="toggleText">¿Forgot your password?</strong>
+            <p id="paragraph">Select yhe icon to see instructions.</p>
         </div>
-        <form action="<?php echo BASE_URL; ?>/users/index.php?v=<?php echo time(); ?>" id="rightDiv">
-            <strong style="font-size: 20px;">¡Hola de nuevo!</strong>
-            <p>¡Nos alegramos de volver a verte!</p>
-            <input class="form-control" type="text" required placeholder="Usuario">
-            <input class="form-control" type="text" required placeholder="Password">
-            <button class="btn-primary">Iniciar sesión</button>
+        <form action="/login/" id="rightDiv" method="post">
+            <strong style="font-size: 20px;">Hello again!</strong>
+            <p><?php echo $msg ?></p>
+            <input id="username" name="username" class="form-control" type="text" required placeholder="User">
+            <input id="password" name="password" class="form-control" type="password" required placeholder="Password">
+            <button type="submit" class="btn-primary">Login</button>
         </form>
     </main>
     <script src="script.js"></script>

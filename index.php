@@ -1,3 +1,14 @@
+<?php
+    include "config.php";
+    if(!isset($_SESSION['user_session'])){
+        echo'<p>NO LOGUEADO</p>';
+        header("Location: /login/");
+        exit();
+    } else {
+        echo'<p>LOGUEADO</p>';
+    }
+?>
+
 <h1>AQUI DEBE SER EL HOME</h1>
 <?php
 include("config.php");

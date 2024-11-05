@@ -5,7 +5,8 @@ define("STYLE","/styles/");
 define("HEADER",ROOT."/structures/header.php");
 define("FOOTER",ROOT."/structures/footer.php");
 define("SIDEBAR",ROOT."/structures/sidebar.php");
-define("IMAGES",ROOT."/structures/images/");
+define("SVG","/structures/svg/");
+define("IMAGES","/structures/images/");
 
 function connectdb(){
 
