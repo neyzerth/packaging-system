@@ -6,8 +6,7 @@
 
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
-
-    var_dump($user_types);
+    
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $username = $_POST['username'];
@@ -24,9 +23,9 @@
         $user_type = $_POST['user_type'];
         $supervisor = $_POST['supervisor'];
 
-        $result = addUser($username, $password, $name, $first_surname,
-            $second_surname, $date, $neighborhood, $street, $postal_code,
-            $phone, $email, $user_type, $supervisor
+        $result = addUser(username: $username, password: $password, name: $name, firstSurname: $first_surname,
+            secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code,
+            phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor
         );
 
         if($result){
@@ -106,9 +105,11 @@
                             <div class="row-md-6">
                                 <label for="user_type">User type</label>
                                 <select name="user_type" id="user_type" class="input-group" name="" id="options">
-                                <?php while ($user_type = mysqli_fetch_assoc($user_types)):?>    
-                                    <option value="<?php echo $user_type['code']; ?>"><?php echo $user_type['name']; ?></option>
-                                <?php endwhile; ?>
+                                <?php 
+                                    while ($user_type = mysqli_fetch_assoc($user_types)):   
+                                        echo "<option value='{$user_type['code']}'>{$user_type['name']}</option>";
+                                    endwhile; 
+                                ?>
                                 </select>
                             </div>
                             <div class="row-md-6">
@@ -142,9 +143,13 @@
                             </div>
                             <div class="row-md-6">
                                 <label for="supervisor">Supervisor</label>
-                                <?php while ($supervisor = mysqli_fetch_assoc($supervisors)):?>    
-                                    <option value="<?php echo $supervisor['num']; ?>"><?php echo $supervisor['name']; ?></option>
-                                <?php endwhile; ?>
+                                <select name="supervisor" id="supervisor">
+                                <?php 
+                                    while ($supervisor = mysqli_fetch_assoc($supervisors)):   
+                                        echo "<option value='{$supervisor['num']}'>{$supervisor['name']}</option>";
+                                    endwhile; 
+                                ?>
+                                </select>
                             </div>
                         </div>
                         <hr class="border-bottom" style="margin-top: 2rem; margin-bottom: 2rem;">
