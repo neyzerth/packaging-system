@@ -3,7 +3,7 @@
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
 
 --Vistas de Usuario
-CREATE VIEW user_info AS
+CREATE VIEW vw_user_info AS
 SELECT 
     num,
     username,
@@ -13,13 +13,11 @@ SELECT
     supervisor
 FROM user;
 
-CREATE VIEW user_personal_info AS
+CREATE VIEW vw_user_personal_info AS
 SELECT 
     num,
-    name,
-    first_surname,
-    second_surname,
-    date_of_birth,
+    CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
+    DATE_FORMAT(date_of_birth, "%M/%d/%y"),
     neighborhood,
     street,
     postal_code,
@@ -27,8 +25,22 @@ SELECT
     email
 FROM user;
 
+CREATE VIEW vw_supervisor
+SELECT num
+    username,
+    CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
+    DATE_FORMAT(date_of_birth, "%M/%d/%y"),
+    neighborhood,
+    street,
+    postal_code,
+    phone,
+    email
+From user
+where supervisor is NULL and user_type <> 'admin'
+
+
 --VISTA DE CAJA
-CREATE VIEW box_info AS
+CREATE VIEW vw_box_info AS
 SELECT 
     num,
     height,
@@ -39,7 +51,7 @@ SELECT
 FROM box;
 
 --VISTA ZONA
-CREATE VIEW zone_info AS
+CREATE VIEW vw_zone_info AS
 SELECT 
     code,
     area,
@@ -48,7 +60,7 @@ SELECT
 FROM zone;
 
 --VISTA DE SALIDA
-CREATE VIEW outbound_info AS
+CREATE VIEW vw_outbound_info AS
 SELECT 
     num,
     date,
@@ -56,7 +68,7 @@ SELECT
 FROM outbound;
 
 --VISTA ETIQUETA
-CREATE VIEW tag_info AS
+CREATE VIEW vw_tag_info AS
 SELECT 
     num,
     date,
@@ -68,7 +80,7 @@ FROM tag;
 
 --VISTA EMBALAJE
 
-CREATE VIEW packaging_info AS
+CREATE VIEW vw_packaging_info AS
 SELECT 
     code,
     height,
@@ -81,7 +93,7 @@ SELECT
 FROM packaging;
 
 --VISTA MATERIAL
-CREATE VIEW material_info AS
+CREATE VIEW vw_material_info AS
 SELECT 
     num,
     material_name,
@@ -91,7 +103,7 @@ SELECT
 FROM material;
 
 --VISTA PAQUETE
-CREATE VIEW package_info AS
+CREATE VIEW vw_package_info AS
 SELECT 
     num,
     product_quantity,
@@ -103,7 +115,7 @@ SELECT
 FROM package;
 
 --VISTA PROTOCOLO EMBALAJE
-CREATE VIEW packaging_protocol_info AS
+CREATE VIEW vw_packaging_protocol_info AS
 SELECT 
     num,
     name,
@@ -112,7 +124,7 @@ FROM packaging_protocol;
 
 
 --VISTA DE PRODUCTO
-CREATE VIEW product_info AS
+CREATE VIEW vw_product_info AS
 SELECT 
     num,
     name,
@@ -126,7 +138,7 @@ SELECT
 FROM product;
 
 --VISTA DE TRAZABILIDAD
-CREATE VIEW traceability_info AS
+CREATE VIEW vw_traceability_info AS
 SELECT 
     num,
     product,
@@ -137,7 +149,7 @@ SELECT
 FROM traceability;
 
 --VISTA DE INCIDENCIA
-CREATE VIEW incident_info AS
+CREATE VIEW vw_incident_info AS
 SELECT 
     num,
     date,
