@@ -9,8 +9,7 @@ SELECT
     username,
     password,
     active,
-    (SELECT name FROM user_type 
-    WHERE code = u.user_type) AS user,
+    user_type,
     supervisor
 FROM user AS u WHERE u.active = 1;
 
@@ -18,7 +17,7 @@ CREATE VIEW vw_user_personal_info AS
 SELECT 
     num,
     CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
-    DATE_FORMAT(date_of_birth, "%M/%d/%y"),
+    DATE_FORMAT(date_of_birth, "%M/%d/%y") AS date_of_birth,
     neighborhood,
     street,
     postal_code,
@@ -32,7 +31,7 @@ CREATE VIEW vw_supervisor
 SELECT num
     username,
     CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
-    DATE_FORMAT(date_of_birth, "%M/%d/%y"),
+    DATE_FORMAT(date_of_birth, "%M/%d/%y") AS date_of_birth,
     neighborhood,
     street,
     postal_code,
