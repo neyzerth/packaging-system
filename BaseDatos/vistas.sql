@@ -101,7 +101,7 @@ FROM packaging;
 --VISTA MATERIAL
 CREATE VIEW vw_material_info AS
 SELECT 
-    num,
+    code,
     material_name,
     description,
     available_quantity,

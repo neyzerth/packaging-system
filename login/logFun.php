@@ -9,12 +9,10 @@ function login($username, $password)
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Verificar si se obtuvo un resultado
     $bool = $result->num_rows > 0;
     if ($bool) {
         $user = $result->fetch_assoc();
 
-        // Guarda la información del usuario en la supervariable $_SESSION
         $_SESSION['num'] = $user['num'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['user_type'] = $user['user_type'];

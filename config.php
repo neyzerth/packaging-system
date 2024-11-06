@@ -4,11 +4,12 @@ define("ROOT", "{$_SERVER['DOCUMENT_ROOT']}/");
 
 define("STYLE", "/styles/");
 
-define("HEADER", ROOT . "structures/header.php");
-define("FOOTER", ROOT . "structures/footer.php");
+define("HEAD", ROOT . "home/head.php");
+define("HEADER", ROOT . "home/header.php");
+define("FOOTER", ROOT . "home/footer.php");
 define("SIDEBAR", ROOT . "structures/sidebar.php");
-define("SVG", ROOT."structures/svg/");
-define("IMAGES", ROOT."structures/images/");
+define("SVG", "/structures/svg/");
+define("IMAGES", "/structures/images/");
 
 function connectdb()
 {
@@ -22,7 +23,13 @@ function connectdb()
         return false;
     }
 }
-
+function validateSession(){
+    session_start();
+    if(!isset($_SESSION['num'])){
+        header("Location: /login/");
+        exit();
+    }
+}
 function nullDb($param)
 {
     return $param == '' ? "NULL" : $param;

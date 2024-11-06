@@ -22,7 +22,7 @@
 
     function getMaterial(){
         $db = connectdb();
-        $query = "SELECT num, material_name, description, available_quantity, unit_of_measure FROM vw_material_info;";
+        $query = "SELECT code, material_name, description, available_quantity, unit_of_measure FROM vw_material_info;";
         $result = mysqli_query($db, $query);
 
         $materials = [];

@@ -1,4 +1,10 @@
-<?php require_once "../config.php"; ?>
+<?php 
+$form = "/materials/addMaterial.php";
+require_once "../config.php";
+include HEADER;
+include 'listMaterial.php';
+include FOOTER; 
+/*
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,3 +72,4 @@
                     - descripción
                     - cantidad_disponible
     -->
+    */

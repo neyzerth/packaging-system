@@ -1,4 +1,7 @@
 <?php
+session_start(); 
+session_unset();
+session_destroy(); 
 require_once "../config.php";
 require "logFun.php";
 
@@ -22,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administar Cajas</title>
+    <title>Login</title>
     <link rel="stylesheet" href="<?php echo STYLE . "!important.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "login.css" ?>">
@@ -32,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main class="d-flex m-auto">
         <div id="leftDiv">
             <a class="d-contents" href="#" id="link">
-                <img class="p mb rounded-circle" src=<?php echo SVG . "svg/padlock-unlocked.svg" ?> alt="" id="toggleImage">
+                <img class="p mb rounded-circle" src=<?php echo SVG . "padlock-unlocked.svg" ?> alt="" id="toggleImage">
             </a>
             <strong id="toggleText">¿Forgot your password?</strong>
             <p id="paragraph">Select the icon to request instructions.</p>
         </div>
-        <form action="\GitHub\packaking-system/boxes/index.php" id="rightDiv" method="post">
+        <form action="/login/" id="rightDiv" method="post">
             <strong style="font-size: 20px;">Hello again!</strong>
             <p><?php echo $msg ?></p>
             <input id="username" name="username" class="form-control" type="text"  autocomplete="off" required placeholder="User">

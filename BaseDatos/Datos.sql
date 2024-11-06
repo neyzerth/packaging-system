@@ -61,19 +61,19 @@ VALUES
 
 INSERT INTO unit_of_measure (code, description)
 VALUES 
-('UOM01', 'Kilograms'),
-('UOM02', 'Liters'),
-('UOM03', 'Pieces'),
-('UOM04', 'Meters'),
-('UOM05', 'Pounds');
+('kg', 'Kilograms'),
+('lt', 'Liters'),
+('pc', 'Pieces'),
+('mt', 'Meters'),
+('lb', 'Pounds');
 
 INSERT INTO material (code,material_name, description, available_quantity, unit_of_measure)
 VALUES 
-('stl','Steel', 'High-quality steel', 500, 'UOM01'),
-('pla','Plastic', 'Durable plastic', 200, 'UOM03'),
-('wod','Wood', 'Solid oak wood', 300, 'UOM03'),
-('alm','Aluminum', 'Lightweight aluminum', 400, 'UOM01'),
-('glas','Glass', 'Tempered glass', 150, 'UOM02');
+('stl','Steel', 'High-quality steel', 500, 'kg'),
+('pla','Plastic', 'Durable plastic', 200, 'pc'),
+('wod','Wood', 'Solid oak wood', 300, 'pc'),
+('alm','Aluminum', 'Lightweight aluminum', 400, 'kg'),
+('glas','Glass', 'Tempered glass', 150, 'lt');
 
 INSERT INTO packaging_protocol (name, file_name)
 VALUES 
