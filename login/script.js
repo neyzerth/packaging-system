@@ -23,28 +23,27 @@ link.addEventListener('click', event => {
 
         rightDiv.innerHTML = isLogin
             ? `
-
-            <form action="">
-                <strong style="font-size: 20px;">¡Solicita tu código!</strong>
-                <p>Te enviaremos instrucciones al correo electronico.</p>
-                <input class="form-control" type="text" required placeholder="Ingresa tu correo electrónico">
-                <input class="form-control" type="text" required placeholder="Confirma tu correo electrónico">
-                <button class="btn-primary">Siguiente</button>
+            <form action="\GitHub\packaking-system/boxes/index.php" id="rightDiv" method="post">
+                <strong style="font-size: 20px;">Request your code!</strong>
+                <p>We will send instructions to your email.</p>
+                <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="Enter your email">
+                <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Confirm your email">
+                <button type="submit" class="btn-primary">Next step</button>
             </form>`
             : `
-            <form action="">
-                <strong style="font-size: 20px;">¡Hola de nuevo!</strong>
-                <p>¡Nos alegramos de volver a verte!</p>
-                <input class="form-control" type="text" required placeholder="Usuario">
-                <input class="form-control" type="text" required placeholder="Password">
-                <button class="btn-primary">Iniciar sesión</button>
+            <form action="\GitHub\packaking-system/boxes/index.php" id="rightDiv" method="post">
+                <strong style="font-size: 20px;">Hello again!</strong>
+                <p><?php echo $msg ?></p>
+                <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="User">
+                <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Password">
+                <button type="submit" class="btn-primary">Login</button>
             </form>`;
 
         toggleImage.src = images[+isLogin];
 
-        toggleText.textContent = isLogin ? '¿Ya tienes una cuenta?' : '¿Has olvidado la contraseña?';
+        toggleText.textContent = isLogin ? 'Already have an account?' : 'Forgot password?';
 
-        paragraph.textContent = isLogin ? 'Selecciona el icono para iniciar sesión.' : 'Selecciona el icono para solicitar instrucciones.';
+        paragraph.textContent = isLogin ? 'Select the icon to login.' : 'Select the icon to request instructions.';
 
         leftDiv.style.opacity = '1';
         rightDiv.style.opacity = '1';

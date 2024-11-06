@@ -1,5 +1,4 @@
 <?php require_once "../config.php"; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,16 +9,12 @@
     <link rel="stylesheet" href="<?php echo STYLE . "!important.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "table.css" ?>">
-    <link rel="stylesheet" href="<?php echo STYLE . "sidebar.css" ?>">
 </head>
 
 <body class="d-flex">
-
-    <?php
-    include(SIDEBAR)
-    ?>
+    <?php include(SIDEBAR) ?>
     <main>
-
+        <?php include(HEADER) ?>
         <table>
             <thead>
                 <tr>

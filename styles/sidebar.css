@@ -1,12 +1,15 @@
-
+* {
+    margin: 0;
+}
 
 .link-body {
     fill: var(--blue-dark);
-    justify-content: center;
+    transition: fill 0.15s ease-in-out, transform 0.15s ease-in-out;
 }
 
 .link-body:hover {
     fill: var(--blue-medium);
+    transform: scale(1.05);
 }
 
 .nav {
@@ -24,14 +27,4 @@
 .nav-link:hover {
     background-color: var(--background-hover);
     fill: var(--text-light);
-}
-
-.nav-link.active {
-    background-color: var(--background-not-hover);
-    fill: var(--text-light);
-}
-
-.nav-link.active:hover {
-    background-color: var(--background-hover);
-    fill: var(--icon-dark);
 }
