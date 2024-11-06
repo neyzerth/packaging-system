@@ -1,16 +1,3 @@
-<?php require_once "../config.php"; ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barra Lateral</title>
-    <link rel="stylesheet" href="<?php echo STYLE . "!important.css"; ?>">
-    <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css"; ?>">
-    <link rel="stylesheet" href="<?php echo STYLE . "sidebar.css"; ?>">
-</head>
-
 <body>
     <div class="bg-body-light d-flex flex-column" style="position: fixed;
     height: 100%;">

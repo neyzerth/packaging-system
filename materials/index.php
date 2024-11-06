@@ -17,7 +17,7 @@
 <body class="d-flex">
     <?php include(SIDEBAR) ?>
     <main>
-        <?php include(HEADER) ?>
+        <?php //include(HEADER) ?>
         <table>
             <thead>
                 <tr>
