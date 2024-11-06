@@ -1,11 +1,13 @@
 <?php
-
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(error_level: E_ALL);
 
     require("../config.php");
     require HEADER;
-    require "userFun.php";
+    require "materialFun.php";
 
-    $users = getUsers();    
+    $materials = getMaterial();
 ?>
 
 <body>
@@ -58,23 +60,26 @@
                         <!--<th><input type="checkbox" id="checkboxMaestro1" onclick="toggleAllCheckboxes(this, 'table1')"></th>-->
                         <th> </th>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Date of Birth</th>
-                        <th>User type</th>
+                        <th>CODE</th>
+                        <th>NAME</th>
+                        <th>DESCRIPTION</th>
+                        <th>ACTUAL QUANTITY</th>
+                        <th>UNIT OF MATERIAL</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($materials as $material): ?>
                     <tr>
                         <!--<td><input type="checkbox"></td>-->
                         <td onclick="toggleInfo(this)">^</td>
-                        <td><?php echo $user['num']; ?></td>
-                        <td><?php echo $user['full_name']; ?></td>
-                        <td><?php echo $user['date_of_birth']; ?></td>
-                        <td><?php echo $user['user']; ?></td>
+                        <td><?php echo $material['code']; ?></td>
+                        <td><?php echo $material['material_name']; ?></td>
+                        <td><?php echo $material['description']; ?></td>
+                        <td><?php echo $material['available_quantity']; ?></td>
+                        <td><?php echo $material['unit_of_measure']; ?></td>
                     </tr>
                     <tr class="extra-info">
-                        <td colspan="8">Here you can add more information about this person.</td>
+                        <td colspan="8">Here you can add more information about that material.</td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
