@@ -46,7 +46,7 @@ BEGIN
 END;
 
 
-call sp_generate_report ('2024-09-01','2024-09-30')
+call sp_generate_report ('2024-09-01','2024-09-30');
 
 
 --Pudieramos hacer un sp o  triggers que al hacer un moviento en el proceso del embalaje actualice la tabla estado de la trazabilidad
@@ -56,9 +56,7 @@ call sp_generate_report ('2024-09-01','2024-09-30')
 
 --usuario general
 DELIMITER $$
-
-drop procedure sp_insertUser;
-CREATE PROCEDURE sp_insertUser(
+CREATE PROCEDURE addUser(
     IN p_username VARCHAR(30),
     IN p_password VARCHAR(20),
     IN p_name VARCHAR(50),
@@ -91,15 +89,36 @@ BEGIN
         p_date_of_birth, p_neighborhood, p_street, p_postal_code, p_phone,
         p_email, p_user_type, p_supervisor
     );
+
+    SELECT num, username, full_name, user
+    FROM vw_user_personal_info
+    WHERE username = p_username;
+
 END $$
-DELIMITER ;
-
-
---add incidencia (fecha,descipcion,trazabilida)
 
 DELIMITER $$
+CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
+BEGIN
+    DECLARE user_exists INT;
+    SET user_exists = (
+        SELECT COUNT(*) FROM user 
+        WHERE username = usern 
+        AND password = passw
+        AND active = 1
+    );
+    
+    IF user_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid username or password';
+    END IF;
 
-CREATE PROCEDURE sp_addIncident(
+    SELECT num, username, user_type 
+    FROM vw_user_info
+    WHERE username = usern;
+
+END $$
+DELIMITER $$
+
+CREATE PROCEDURE addIncident(
     IN p_date DATE,
     IN p_description VARCHAR(255),
     IN p_traceability INT
@@ -113,10 +132,54 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid traceability ID';
     END IF;
 
-    INSERT INTO incidencia (fecha, descripcion, trazabilidad)
+    INSERT INTO incident (date, description, traceability)
     VALUES (p_date, p_description, p_traceability);
+
+    SELECT num, date, description, user, traceability
+    FROM incident WHERE num = LAST_INSERT_ID();
+
 END $$
-DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE addBox(
+    IN p_height DECIMAL(10,2),
+    IN p_width DECIMAL(10,2),
+    IN p_length DECIMAL(10,2),
+    IN p_weight DECIMAL(10,2)
+)
+BEGIN
+    INSERT INTO box (height, width, length, weight)
+    VALUES(p_height, p_width, p_length, p_weight);
+
+    SELECT num, height, width, length, volume, weight
+    FROM box WHERE num = LAST_INSERT_ID();
+END $$
+
+DELIMITER $$
+CREATE PROCEDURE addMaterial(
+    IN p_code VARCHAR(5),
+    IN p_name VARCHAR(50),
+    IN p_description VARCHAR(255),
+    IN p_unit VARCHAR(5)
+)
+BEGIN
+    DECLARE exist_unit INT;
+
+    SELECT COUNT(*) INTO exist_unit
+    FROM unit_of_measure WHERE code = p_unit;
+
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid unit of measure code';
+    END IF;
+
+    INSERT INTO material (code, material_name, description, available_quantity, unit_of_measure)
+    VALUES(p_code, p_name, p_description, 0, p_unit);
+
+    SELECT code, material_name, description, available_quantity, unit_of_measure
+    FROM material WHERE code = p_code;
+END $$
+
+
 
 
 
