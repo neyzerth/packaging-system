@@ -155,11 +155,13 @@ BEGIN
     FROM box WHERE num = LAST_INSERT_ID();
 END $$
 
+drop procedure addMaterial;
 DELIMITER $$
 CREATE PROCEDURE addMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(255),
+    IN p_quantity INT,
     IN p_unit VARCHAR(5)
 )
 BEGIN
@@ -173,7 +175,7 @@ BEGIN
     END IF;
 
     INSERT INTO material (code, material_name, description, available_quantity, unit_of_measure)
-    VALUES(p_code, p_name, p_description, 0, p_unit);
+    VALUES(p_code, p_name, p_description, p_quantity, p_unit);
 
     SELECT code, material_name, description, available_quantity, unit_of_measure
     FROM material WHERE code = p_code;

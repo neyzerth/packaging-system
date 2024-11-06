@@ -4,20 +4,15 @@
     function addMaterial($code, $material_name, $description, $available_quantity, $unit_of_measure){
         $db = connectdb();
 
-        $query = "call sp_insertMaterial("."
-        '$code','$material_name'"."
-        '$description','$available_quantity'"."
-        '$unit_of_measure'"." 
-        );";
+        $query = "call addMaterial(".
+            "'$code','$material_name',".
+            "'$description',$available_quantity,".
+            "'$unit_of_measure'". 
+        ");";
 
         echo "<p>$query</p>";
 
-        try {
-            $response = mysqli_query($db, $query);
-            return "Material registrado con exito";
-        } catch (Exception $e) {
-            return "". $e->getMessage();
-        }
+        return $db->query($query);
     } 
 
     function getMaterial(){

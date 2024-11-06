@@ -12,7 +12,7 @@ function addUser(
     $postalCode = nullDb($postalCode);
     $supervisor = nullDb($supervisor);
 
-    $query = "call sp_insertUSer(".
+    $query = "call addUser(".
         "'$username', $password,". 
         "'$name', '$firstSurname', '$secondSurname', ".
         "'$dateOfBirth','$neighborhood','$street', $postalCode,".
@@ -21,7 +21,7 @@ function addUser(
 
 
     try {
-        return $response = mysqli_query($db, $query);
+        return mysqli_query($db, $query);
     } catch (Exception $e) {
         return $e->getMessage();
     }

@@ -1,25 +1,23 @@
-
+<?php
+    $protocols = getProtocols();
+?>
 <table>
     <thead>
         <tr>
-            <th><input type="checkbox"></th>
             <th> </th>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Archivo</th>
+            <th>Name</th>
+            <th>File</th>
         </tr>
     </thead>
     <tbody>
-        <!--JavaScript + PHP-->
-
-        <!--Ejemplo de la estructura HTML-->
+    <?php foreach ($protocols as $protocol):?>
         <tr>
-            <td><input type="checkbox"></td>
             <td>^</td>
-            <td>1</td>
-            <td>Protocolo de embalaje</td>
-            <td>PE.pdf</td>
+            <td><?php echo  $protocol['num'];?> </td>
+            <td><?php echo  $protocol['name'];?></td>
+            <td><?php echo  $protocol['file_name'];?></td>
         </tr>
-        <!--Ejemplo de la estructura HTML-->
+    <?php endforeach; ?>
     </tbody>
 </table>

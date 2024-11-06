@@ -1,31 +1,30 @@
-<table>
-            <thead>
-                <tr>
-                    <th><input type="checkbox"></th>
-                    <th> </th>
-                    <th>#</th>
-                    <th>Alto</th>
-                    <th>Ancho</th>
-                    <th>Largo</th>
-                    <th>Volumen</th>
-                    <th>Peso</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!--JavaScript + PHP-->
+<?php
+    $boxes = getBoxes();
+?>
 
-                <!--Ejemplo de la estructura HTML-->
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>^</td>
-                    <td>1</td>
-                    <td>20cm</td>
-                    <td>2cm</td>
-                    <td>40cm</td>
-                    <td>1600cm^3</td>
-                    <td>10kg</td>
-                </tr>
-                <!--Ejemplo de la estructura HTML-->
-            </tbody>
-        </table>
-    </main>
+<table>
+    <thead>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>#</th>
+            <th>Height</th>
+            <th>Width</th>
+            <th>Length</th>
+            <th>Volume</th>
+            <th>Weight</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($boxes as $box): ?>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td><?php echo $box['num'] ?></td>
+            <td><?php echo $box['height'].'cm' ?></td>
+            <td><?php echo $box['width'].'cm' ?></td>
+            <td><?php echo $box['length'].'cm' ?></td>
+            <td><?php echo $box['volume'].'cm2' ?></td>
+            <td><?php echo $box['weight'].'g' ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

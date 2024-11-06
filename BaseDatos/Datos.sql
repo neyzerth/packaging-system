@@ -1,7 +1,7 @@
 INSERT INTO user_type (code, name, description) VALUES 
-('ADMIN', 'administrator', "User with full access to the system"),
-('SUPER', 'supervisor', "User who oversees other users"),
-('EMPLO', 'employee', "User with limited access to the system");
+('ADMIN', 'Administrator', "User with full access to the system"),
+('SUPER', 'Supervisor', "User who oversees other users"),
+('EMPLO', 'Employee', "User with limited access to the system");
 
 INSERT INTO user (username, password, name, first_surname, second_surname, date_of_birth, neighborhood, street, postal_code, phone, email, user_type, supervisor)
 VALUES 
