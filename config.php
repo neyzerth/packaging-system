@@ -1,14 +1,17 @@
 <?php
-define("URL","{$_SERVER['HTTP_HOST']}");
-define("ROOT","{$_SERVER['DOCUMENT_ROOT']}");
-define("STYLE","/styles/");
-define("HEADER",ROOT."/structures/header.php");
-define("FOOTER",ROOT."/structures/footer.php");
-define("SIDEBAR",ROOT."/structures/sidebar.php");
-define("SVG","/structures/svg/");
-define("IMAGES","/structures/images/");
+define("URL", "http://{$_SERVER['HTTP_HOST']}/");
+define("ROOT", "{$_SERVER['DOCUMENT_ROOT']}/");
 
-function connectdb(){
+define("STYLE", "/styles/");
+
+define("HEADER", ROOT . "structures/header.php");
+define("FOOTER", ROOT . "structures/footer.php");
+define("SIDEBAR", ROOT . "structures/sidebar.php");
+define("SVG", ROOT."structures/svg/");
+define("IMAGES", ROOT."structures/images/");
+
+function connectdb()
+{
 
     try {
         $db = mysqli_connect("localhost", "root", "", "packaging");
@@ -20,6 +23,7 @@ function connectdb(){
     }
 }
 
-function nullDb($param){
+function nullDb($param)
+{
     return $param == '' ? "NULL" : $param;
 }

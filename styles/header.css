@@ -6,16 +6,16 @@
     border: 1px solid var(--text-dark);
 }
 
-.nav {
+.new-nav {
     padding-left: 0;
     display: flex;
     list-style: none;
 }
 
-li {
+.new-li {
     padding: 0.5rem;
 }
 
-a {
+.new-a {
     display: contents;
 }

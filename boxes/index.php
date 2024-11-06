@@ -1,3 +1,4 @@
+<?php require_once "../config.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,20 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administar Cajas</title>
-    <link rel="stylesheet" href="../styles/!important.css">
-    <link rel="stylesheet" href="../styles/!color-palette.css">
-    <link rel="stylesheet" href="../styles/table.css">
-    <link rel="stylesheet" href="../styles/sidebar.css">
+    <link rel="stylesheet" href="<?php echo STYLE . "!important.css" ?>">
+    <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css" ?>">
+    <link rel="stylesheet" href="<?php echo STYLE . "table.css" ?>">
 </head>
 
 <body class="d-flex">
-    <?php
-    include("../structures/sidebar/index.php")
-    ?>
+    <?php include(SIDEBAR) ?>
     <main>
-        <?php
-        include("../structures/header/index.php")
-        ?>
+        <?php include(HEADER) ?>
         <table>
             <thead>
                 <tr>

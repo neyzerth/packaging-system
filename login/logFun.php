@@ -1,12 +1,9 @@
 <?php
-
 require_once "../config.php";
-
-session_start(); 
-
-function login($username, $password) {
+session_start();
+function login($username, $password)
+{
     $db = connectdb();
-
     $stmt = $db->prepare("SELECT num, username, user_type FROM vw_user_info WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
@@ -23,7 +20,7 @@ function login($username, $password) {
         $_SESSION['user_type'] = $user['user_type'];
     }
 
-    $stmt->close(); 
+    $stmt->close();
     $db->close();
 
     return $bool;
