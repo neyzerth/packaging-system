@@ -1,4 +1,4 @@
--- Active: 1728065056405@@127.0.0.1@3306@packaging
+-- Active: 1729280514950@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -114,7 +114,6 @@ SELECT
     num,
     product_quantity,
     weight,
-    tracking_code,
     packaging,
     box,
     tag

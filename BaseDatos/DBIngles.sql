@@ -1,8 +1,8 @@
--- Active: 1723058837855@@127.0.0.1@3306@embalaje
+-- Active: 1729280514950@@127.0.0.1@3306@packaging
 
-drop DATABASE embalaje
+drop DATABASE packaging;
 
-create DATABASE embalaje
+create DATABASE packaging;
 
 
 -- TABLE USER TYPE

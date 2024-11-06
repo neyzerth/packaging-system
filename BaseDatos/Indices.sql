@@ -1,3 +1,4 @@
+-- Active: 1729280514950@@127.0.0.1@3306@packaging
 show  index from user
 
 --En la tabla tag campo barcode
