@@ -52,12 +52,19 @@
             </a>
         </li>
     </ul>
-    <a href="#" class="link-body d-flex p">
-        <img class="rounded-circle" src="https://github.com/mdo.png" width="40" height="40">
+    <a href="#" class="link-body dropdown-toggle" id="profile-toggle">
+        <img class="rounded-circle" src="https://github.com/mdo.png" width="24" height="24">
     </a>
+    <ul class="dropdown-menu" id="dropdown-menu">
+        <li>
+            <a href="#">Profile</a>
+        </li>
+        <li style="border-bottom: none;">
+            <a href="<?php echo URL."login/"; ?>">Logout</a>
+        </li>
+    </ul>
 </aside>
-
-
+<script src="structures/sidebar.js"></script>
 
 
 
