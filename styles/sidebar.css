@@ -84,13 +84,16 @@
 
 .link-body {
     padding: 1rem;
-    border-top: 1px solid var(--white-dark);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.link-body:hover img{
+.link-body .bi {
+    border-radius: 50%;
+}
+
+.link-body:hover .bi{
     opacity: 0.8; 
 }
 
