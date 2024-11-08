@@ -1,5 +1,6 @@
 .sidebar {
-    background-color: var(--background-dark);
+    background-color: var(--background-light);
+    box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -18,7 +19,7 @@
     border-bottom: 1px solid var(--white-dark);
     display: block;
     position: relative;
-    transition: background-color .15s ease-in-out, fill .15s ease-in-out;
+    transition: background-color .15s ease-in-out, fill .15s ease-in-out, border-bottom .15s ease-in-out;
 }
 
 .nav-link:hover {
@@ -55,20 +56,20 @@
 }
 
 .nav-link.active {
-    border-bottom: 1px solid var(--blue-medium);
+    border-bottom: 1px solid var(--blue-dark);
 }
 
 .nav-link.near-active {
-    border-bottom: 1px solid var(--blue-medium);
+    border-bottom: 1px solid var(--blue-dark);
 }
 
 .active {
-    background-color: var(--blue-medium);
+    background-color: var(--blue-dark);
     fill: var(--white-light);
 }
 
 .active:hover {
-    background-color: var(--blue-medium);
+    background-color: var(--blue-dark);
     fill: var(--white-light);
 }
 
@@ -89,6 +90,10 @@
     justify-content: center;
 }
 
+.link-body:hover img{
+    opacity: 0.8; 
+}
+
 .dropdown-toggle::after {
     color: var(--white-gray);
     margin-left: .255em;
@@ -99,11 +104,11 @@
 }
 
 .dropdown-toggle:hover::after {
-    color: var(--white-medium);
+    color: var(--white-dark);
 }
 
 .dropdown-menu {
-    background-color: var(--background-dark);
+    background-color: var(--background-light);
     display: none;
     position: absolute;
     inset: auto auto 0px 0px;
