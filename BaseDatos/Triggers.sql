@@ -1,4 +1,4 @@
--- Active: 1729280514950@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 
 --Miniimos 2 triggers
 --Minimo 2 Stored Procedure
@@ -11,7 +11,7 @@
 -----------------------------------
 SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
 FROM information_schema.TRIGGERS 
-WHERE TRIGGER_SCHEMA = 'embalaje';
+WHERE TRIGGER_SCHEMA = 'packaging';
 
 DROP TRIGGER after_insert_tag
 
