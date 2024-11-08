@@ -2,6 +2,7 @@
                 <p>© 2024-2025 Packakings</p>
         </footer>
     </main>
+    <script src="../structures/sidebar.js"></script>
 </body>
 
 </html>

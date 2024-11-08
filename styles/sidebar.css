@@ -1,6 +1,5 @@
 .sidebar {
     background-color: var(--background-dark);
-    box-shadow: 10px 0 10px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -27,13 +26,6 @@
     fill: var(--white-medium);
 }
 
-.nav-link .bi {
-    transition: transform 0.15s ease-in-out;
-}
-.nav-link:hover .bi {
-    transform: scale(1.2);
-}
-
 .nav-link[tooltip]::after {
     content: attr(tooltip);
     background-color: var(--background-dark);
@@ -53,6 +45,40 @@
 .nav-link[tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
+}
+
+.nav-link .bi {
+    transition: transform 0.15s ease-in-out;
+}
+.nav-link:hover .bi {
+    transform: scale(1.2);
+}
+
+.nav-link.active {
+    border-bottom: 1px solid var(--blue-medium);
+}
+
+.nav-link.near-active {
+    border-bottom: 1px solid var(--blue-medium);
+}
+
+.active {
+    background-color: var(--blue-medium);
+    fill: var(--white-light);
+}
+
+.active:hover {
+    background-color: var(--blue-medium);
+    fill: var(--white-light);
+}
+
+.active .bi {
+    transition: none;
+    transform: none;
+}
+
+.active:hover .bi{
+    transform: none;
 }
 
 .link-body {
@@ -76,9 +102,6 @@
     color: var(--white-medium);
 }
 
-
-
-
 .dropdown-menu {
     background-color: var(--background-dark);
     display: none;
@@ -101,22 +124,4 @@
 
 .dropdown-menu li a:hover {
     background-color: var(--white-dark);
-}
-
-
-
-
-
-
-
-
-
-
-/*
-.link-body img{
-    transition: transform 0.15s ease-in-out;
-}
-
-.link-body:hover img{
-    transform: scale(1.2);
 }
