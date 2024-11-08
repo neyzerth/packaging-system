@@ -28,15 +28,3 @@
     --red: #D93B48;
     --red-dark: #A62D2D;
 }
-
-.bg-body-light {
-    background-color: var(--background-light) !important;
-}
-
-.bg-body-dark {
-    background-color: var(--background-dark) !important;
-}
-
-.text-light {
-    color: var(--text-light);
-}

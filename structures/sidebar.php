@@ -52,8 +52,8 @@
             </a>
         </li>
     </ul>
-    <a href="#" class="link-body dropdown-toggle" id="profile-toggle" tooltip="Staff">
-        <img class="bi" src="https://github.com/mdo.png" width="24" height="24">
+    <a href="#" class="link-body dropdown-toggle" id="profile-toggle">
+        <img class="bi" src="https://github.com/mdo.png" width="40" height="40">
     </a>
     <ul class="dropdown-menu" id="dropdown-menu">
         <li>

@@ -1,20 +1,12 @@
 * {
-    color: var(--text-light);
+    color: var(--white-dark);
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     list-style: none;
 }
 
-html, body {
-    height: 100%;
-}
-
 body {
     background-color: var(--background-gray);
     display: flex;
-}
-
-main {
-    margin: auto;
 }

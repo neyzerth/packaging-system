@@ -28,11 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Login</title>
     <link rel="stylesheet" href="<?php echo STYLE . "!important.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css" ?>">
+    <link rel="stylesheet" href="<?php echo STYLE . "body.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "login.css" ?>">
 </head>
 
-<body class="d-flex">
-    <main class="d-flex m-auto">
+<body>
+    <main class="login">
         <div id="leftDiv">
             <a class="d-contents" href="#" id="link">
                 <img class="p mb rounded-circle" src=<?php echo SVG . "padlock-unlocked.svg" ?> alt="" id="toggleImage">
