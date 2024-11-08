@@ -9,6 +9,7 @@
 .navegation {
     padding-left: 0;
     list-style: none;
+    margin-bottom: auto;
 }
 
 .nav-link {
@@ -53,18 +54,12 @@
     visibility: visible;
 }
 
-
-
-
-
-/*
 .link-body {
-    fill: var(--blue-dark);
-    transition: fill 0.15s ease-in-out, transform 0.15s ease-in-out;
+    display: flex;
+    padding: 1rem;
+    transition: transform 0.15s ease-in-out;
 }
 
 .link-body:hover {
-    fill: var(--blue-medium);
-    transform: scale(1.05);
+    transform: scale(1.2);
 }
-*/
