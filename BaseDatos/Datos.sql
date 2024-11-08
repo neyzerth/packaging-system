@@ -91,13 +91,13 @@ VALUES
 ('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168,4),
 ('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232,5); 
 
-INSERT INTO package (product_quantity, weight, product,packaging, box, tag)
+INSERT INTO package (product_quantity, weight, product,packaging, box, tag,traceability)
 VALUES 
-(10, 25.5, 'S10','PK001', 1, 1),
-(20, 50.0, 'P30','PK002', 2, 2),
-(15, 35.2,  'X','PK003', 3, 3),
-(30, 60.7,  'S23','PK004', 4, 4),
-(25, 45.9,  'S24','PK005', 5, 5);
+(10, 25.5, 'S10','PK001', 1, 1,1),
+(20, 50.0, 'P30','PK002', 2, 2,2),
+(15, 35.2,  'X','PK003', 3, 3,3),
+(30, 60.7,  'S23','PK004', 4, 4,4),
+(25, 45.9,  'S24','PK005', 5, 5,5);
 
 
 
@@ -110,13 +110,13 @@ VALUES
 ('ST05', 'Returned');
 
 --ESTO EMPEZO DESDE 6 NO DE 1
-INSERT INTO traceability (product, box, package, packaging, state)
+INSERT INTO traceability (product,packaging, state)
 VALUES 
-('S10', 1, 16, 'PK001', 'ST01'),
-('P30', 2, 17, 'PK002', 'ST02'),
-('X', 3, 18, 'PK003', 'ST03'),
-('S23', 4, 19, 'PK004', 'ST04'),
-('S23', 5, 20, 'PK005', 'ST05');
+('S10', 'PK001', 'ST01'),
+('P30', 'PK002', 'ST02'),
+('X','PK003', 'ST03'),
+('S23', 'PK004', 'ST04'),
+('S23' ,'PK005', 'ST05');
 
 INSERT INTO incident (date, description, user, traceability)
 VALUES 

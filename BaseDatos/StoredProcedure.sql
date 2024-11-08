@@ -1,4 +1,4 @@
--- Active: 1729280514950@@127.0.0.1@3306@packaging
+-- Active: 1723058837855@@127.0.0.1@3306@embalaje
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -30,9 +30,6 @@ select * from zone
 CALL check_zone_capacity('Z001',55,@Resultado);
 
 select @Resultado as respuesta
-
-
-
 
 --Pudieramos cambiar el nombre a search_report
 CREATE PROCEDURE sp_generate_report(
@@ -93,7 +90,6 @@ BEGIN
     SELECT num, username, full_name, user
     FROM vw_user_personal_info
     WHERE username = p_username;
-
 END $$
 
 DELIMITER $$
@@ -114,7 +110,6 @@ BEGIN
     SELECT num, username, user_type 
     FROM vw_user_info
     WHERE username = usern;
-
 END $$
 DELIMITER $$
 
@@ -137,7 +132,6 @@ BEGIN
 
     SELECT num, date, description, user, traceability
     FROM incident WHERE num = LAST_INSERT_ID();
-
 END $$
 
 DELIMITER $$

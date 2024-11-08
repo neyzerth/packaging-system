@@ -138,10 +138,12 @@ CREATE TABLE package (
     packaging VARCHAR(5),
     box INT,
     tag int,
+    traceability int,
     CONSTRAINT fk_product_package FOREIGN KEY (product) REFERENCES product(code),
     CONSTRAINT fk_packaging_package FOREIGN KEY (packaging) REFERENCES packaging(code),
     CONSTRAINT fk_box_package FOREIGN KEY (box) REFERENCES box(num),
-    CONSTRAINT fk_tag_package FOREIGN KEY (tag) REFERENCES tag(num)
+    CONSTRAINT fk_tag_package FOREIGN KEY (tag) REFERENCES tag(num),
+    CONSTRAINT fk_traceability_package FOREIGN KEY (traceability) REFERENCES traceability(num)
 );
 
 
@@ -157,13 +159,9 @@ CREATE TABLE state (
 CREATE TABLE traceability (
     num INT AUTO_INCREMENT PRIMARY KEY,
     product VARCHAR(5),
-    box INT,
-    package INT,
     packaging VARCHAR(5),
     state VARCHAR(5),
     CONSTRAINT fk_product_traceability FOREIGN KEY (product) REFERENCES product(code),
-    CONSTRAINT fk_box_traceability FOREIGN KEY (box) REFERENCES box(num),
-    CONSTRAINT fk_package_traceability FOREIGN KEY (package) REFERENCES package(num),
     CONSTRAINT fk_packaging_traceability FOREIGN KEY (packaging) REFERENCES packaging(code),
     CONSTRAINT fk_state_traceability FOREIGN KEY (state) REFERENCES state(code)
 );
