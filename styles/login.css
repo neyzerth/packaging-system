@@ -1,15 +1,4 @@
-html,
-body {
-    height: 100%;
-}
 
-body {
-    background-color: var(--background-dark);
-    font-family: sans-serif;
-    font-size: 1rem;
-    color: var(--text-gray);
-    margin: 0;
-}
 
 main {
     background-color: var(--background-light);

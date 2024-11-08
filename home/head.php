@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="<?php echo STYLE . "!important.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "header.css" ?>">
-    <link rel="stylesheet" href="<?php echo STYLE . "home.css" ?>">
+    <link rel="stylesheet" href="<?php echo STYLE . "body.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "sidebar.css" ?>">
+    <link rel="stylesheet" href="<?php echo STYLE . "home.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "table.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "forms.css" ?>">
     

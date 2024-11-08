@@ -1,21 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-}
 
-html,
-body {
-    height: 100%;
-}
-
-body {
-    background-color: var(--background-dark);
-    color: var(--text-light);
-    font-size: 1rem;
-    font-family: sans-serif;
-    margin: 0;
-    display: flex;
-}
 
 main {
     background-color: var(--background-light);

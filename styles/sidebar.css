@@ -1,43 +1,32 @@
 .sidebar {
-    background-color: var(--background-light);
-    box-shadow: 10px 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0.3rem 0 0.938rem rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    position: fixed;
-    height: 100%;
 }
 
 .navegation {
-    padding-left: 0;
-    list-style: none;
     margin-bottom: auto;
 }
 
 .nav-link {
-    fill: var(--white-gray);
     padding: 1rem;
-    border-bottom: 1px solid var(--white-dark);
     display: block;
     position: relative;
-    transition: background-color .15s ease-in-out, fill .15s ease-in-out, border-bottom .15s ease-in-out;
+    transition: background-color .15s ease-in-out, fill .15s ease-in-out;
 }
 
 .nav-link:hover {
     background-color: var(--white-dark);
-    fill: var(--white-medium);
 }
 
 .nav-link[tooltip]::after {
     content: attr(tooltip);
     background-color: var(--background-dark);
-    color: var(--white-light);
-    border-radius: 4px;
-    padding: 6px;
-    font-size: 1rem;
-    top: 16px;
+    color: var(--blue-medium);
+    padding: 0.375rem;
+    top: 1rem;
     left: 110%;
     opacity: 0;
-    font-family: sans-serif;
     position: absolute;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out;
@@ -47,39 +36,24 @@
     opacity: 1;
     visibility: visible;
 }
-
 .nav-link .bi {
-    transition: transform 0.15s ease-in-out;
+    fill: var(--white-gray);
 }
+
 .nav-link:hover .bi {
-    transform: scale(1.2);
-}
-
-.nav-link.active {
-    border-bottom: 1px solid var(--blue-dark);
-}
-
-.nav-link.near-active {
-    border-bottom: 1px solid var(--blue-dark);
+    fill: var(--white-medium);
 }
 
 .active {
     background-color: var(--blue-dark);
-    fill: var(--white-light);
 }
 
 .active:hover {
     background-color: var(--blue-dark);
-    fill: var(--white-light);
 }
 
 .active .bi {
-    transition: none;
-    transform: none;
-}
-
-.active:hover .bi{
-    transform: none;
+    fill: var(--white-medium);
 }
 
 .link-body {
@@ -111,9 +85,11 @@
 }
 
 .dropdown-menu {
-    background-color: var(--background-light);
+    background-color: var(--background-dark);
+    padding-left: 0;
     display: none;
     position: absolute;
+    list-style: none;
     inset: auto auto 0px 0px;
     transform: translate(0, -56px);
     border: 1px solid var(--white-dark);
