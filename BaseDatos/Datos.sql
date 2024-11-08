@@ -91,16 +91,6 @@ VALUES
 ('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168,4),
 ('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232,5); 
 
-INSERT INTO package (product_quantity, weight, product,packaging, box, tag,traceability)
-VALUES 
-(10, 25.5, 'S10','PK001', 1, 1,1),
-(20, 50.0, 'P30','PK002', 2, 2,2),
-(15, 35.2,  'X','PK003', 3, 3,3),
-(30, 60.7,  'S23','PK004', 4, 4,4),
-(25, 45.9,  'S24','PK005', 5, 5,5);
-
-
-
 INSERT INTO state (code, description)
 VALUES 
 ('ST01', 'In Transit'),
@@ -118,31 +108,41 @@ VALUES
 ('S23', 'PK004', 'ST04'),
 ('S23' ,'PK005', 'ST05');
 
+INSERT INTO package (product_quantity, weight, product,packaging, box, tag,traceability)
+VALUES 
+(10, 25.5, 'S10','PK001', 1, 1,1),
+(20, 50.0, 'P30','PK002', 2, 2,2),
+(15, 35.2,  'X','PK003', 3, 3,3),
+(30, 60.7,  'S23','PK004', 4, 4,4),
+(25, 45.9,  'S24','PK005', 5, 5,5);
+
+
+
 INSERT INTO incident (date, description, user, traceability)
 VALUES 
-('2024-10-05', 'Package damaged during transport', 3, 6),
-('2024-10-06', 'Late delivery', 4, 7),
-('2024-10-07', 'Wrong item delivered', 5, 8),
-('2024-10-08', 'Missing items in package', 2, 9),
-('2024-10-09', 'Package lost in transit', 1, 10);
+('2024-10-05', 'Package damaged during transport', 3, 1),
+('2024-10-06', 'Late delivery', 4, 2),
+('2024-10-07', 'Wrong item delivered', 5, 3),
+('2024-10-08', 'Missing items in package', 2, 4),
+('2024-10-09', 'Package lost in transit', 1,5);
 
 
 --ESTO EMPEZO DESDE 6 NO DE 1
 INSERT INTO report (start_date, end_date, report_date, packed_products, observations, traceability)
 VALUES 
-('2024-09-01', '2024-09-30', '2024-10-01', 1000, 'No major issues', 6),
-('2024-09-01', '2024-09-30', '2024-10-02', 1200, 'Delayed deliveries', 7),
-('2024-09-01', '2024-09-30', '2024-10-03', 1100, 'Damaged products', 8),
-('2024-09-01', '2024-09-30', '2024-10-04', 1050, 'Excellent performance', 9),
-('2024-09-01', '2024-09-30', '2024-10-05', 1150, 'Returned packages', 10);
+('2024-09-01', '2024-09-30', '2024-10-01', 1000, 'No major issues', 1),
+('2024-09-01', '2024-09-30', '2024-10-02', 1200, 'Delayed deliveries', 2),
+('2024-09-01', '2024-09-30', '2024-10-03', 1100, 'Damaged products', 3),
+('2024-09-01', '2024-09-30', '2024-10-04', 1050, 'Excellent performance', 4),
+('2024-09-01', '2024-09-30', '2024-10-05', 1150, 'Returned packages', 5);
 
 INSERT INTO user_traceability (user, traceability)
 VALUES 
-(1, 6),
-(2, 7),
-(3, 8),
-(4, 9),
-(5, 10);
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
 
 INSERT INTO material_packging (material,packaging, quantity)
 VALUES 
@@ -155,8 +155,8 @@ VALUES
 
 INSERT INTO material_package (material, package, quantity)
 VALUES 
-('stl',16, 30),
-('pla',17, 40),
-('wod',18, 50),
-('alm',19, 60),
-('glas',20, 70);
+('stl',6, 30),
+('pla',7, 40),
+('wod',8, 50),
+('alm',9, 60),
+('glas',10, 70);

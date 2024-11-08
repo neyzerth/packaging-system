@@ -1,4 +1,4 @@
--- Active: 1729280514950@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 
 drop DATABASE packaging;
 
@@ -129,6 +129,24 @@ CREATE TABLE product (
     CONSTRAINT fk_packaging_protocol_product FOREIGN KEY (packaging_protocol) REFERENCES packaging_protocol(num)
 );
 
+-- TABLE STATE FOR TRACEABILITY
+CREATE TABLE state (
+    code VARCHAR (5)  PRIMARY KEY,
+    description VARCHAR(50) NOT NULL
+);
+
+-- TABLE TRACEABILITY 
+CREATE TABLE traceability (
+    num INT AUTO_INCREMENT PRIMARY KEY,
+    product VARCHAR(5),
+    packaging VARCHAR(5),
+    state VARCHAR(5),
+    CONSTRAINT fk_product_traceability FOREIGN KEY (product) REFERENCES product(code),
+    CONSTRAINT fk_packaging_traceability FOREIGN KEY (packaging) REFERENCES packaging(code),
+    CONSTRAINT fk_state_traceability FOREIGN KEY (state) REFERENCES state(code)
+);
+
+
 -- TABLE PACKAGE
 CREATE TABLE package (
     num INT AUTO_INCREMENT PRIMARY KEY,
@@ -149,22 +167,8 @@ CREATE TABLE package (
 
 
 
--- TABLE STATE FOR TRACEABILITY
-CREATE TABLE state (
-    code VARCHAR (5)  PRIMARY KEY,
-    description VARCHAR(50) NOT NULL
-);
 
--- TABLE TRACEABILITY 
-CREATE TABLE traceability (
-    num INT AUTO_INCREMENT PRIMARY KEY,
-    product VARCHAR(5),
-    packaging VARCHAR(5),
-    state VARCHAR(5),
-    CONSTRAINT fk_product_traceability FOREIGN KEY (product) REFERENCES product(code),
-    CONSTRAINT fk_packaging_traceability FOREIGN KEY (packaging) REFERENCES packaging(code),
-    CONSTRAINT fk_state_traceability FOREIGN KEY (state) REFERENCES state(code)
-);
+
 
 -- TABLE INCIDENT
 CREATE TABLE incident (
