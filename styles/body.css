@@ -1,12 +1,20 @@
 * {
-    color: var(--white-dark);
+    color: var(--white-gray);
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: sans-serif;
+    text-decoration: none;
     list-style: none;
 }
 
 body {
-    background-color: var(--background-gray);
+    background-color: var(--background-dark);
     display: flex;
+}
+
+p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
 }
