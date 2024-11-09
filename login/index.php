@@ -1,16 +1,11 @@
 <?php
 session_start(); 
-session_unset();
-session_destroy(); 
 require_once "../config.php";
 require "logFun.php";
-
-$msg = "Put your credentials.";
-
+$msg = "We're so excited to see you again!";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
     if (login($username, $password)) {
         header("Location: /");
         exit();
@@ -40,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </svg>
         <h3>Content blurred due to screen resolution.</h3>
     </div>
+    <div id="msg" data-msg="<?php echo htmlspecialchars($msg); ?>"></div>
     <main class="login">
         <div class="division" id="leftDiv">
                 <a class="div-link" href="#" id="link">
@@ -53,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="division" id="rightDiv">
             <form action="#" method="post">
                 <h2>Welcome back!</h2>
-                <p><?php echo $msg ?></p>
+                <p id="msgDisplay"><?php echo $msg ?></p>
                 <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="User">
                 <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Password">
                 <button type="submit" class="btn-primary">Login</button>
