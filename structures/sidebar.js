@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.querySelectorAll('.nav-link').forEach(link => {
+document.querySelectorAll('.sidebar .nav-link').forEach(link => {
     if (link.pathname === location.pathname) {
         link.classList.add('active');
     }

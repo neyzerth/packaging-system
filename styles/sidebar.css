@@ -7,13 +7,13 @@
     position: fixed;
 }
 
-.navegation {
+.sidebar .navegation {
     margin-bottom: auto;
 }
 
 /********************************************************************************************/
 
-.nav-link {
+.sidebar .nav-link {
     height: 3.5rem;
     padding-inline: 1rem;
     display: block;
@@ -22,11 +22,11 @@
     transition: background-color .2s ease-in-out;
 }
 
-.nav-link:hover {
+.sidebar .nav-link:hover {
     background-color: var(--white-dark);
 }
 
-.nav-link[tooltip]::after{
+.sidebar .nav-link[tooltip]::after{
     content: attr(tooltip);
     background-color: var(--background-gray);
     color: var(--blue-light);
@@ -41,7 +41,7 @@
     transition: opacity 0.5s ease, visibility 0.05s ease;
 }
 
-.nav-link[tooltip]:hover::after {
+.sidebar .nav-link[tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
 }

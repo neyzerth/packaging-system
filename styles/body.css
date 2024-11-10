@@ -6,11 +6,17 @@
     font-family: sans-serif;
     text-decoration: none;
     list-style: none;
+    overflow: hidden;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
     background-color: var(--background-dark);
     display: flex;
+    flex-direction: column;
 }
 
 p {
