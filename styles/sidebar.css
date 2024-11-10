@@ -19,7 +19,7 @@
     display: block;
     align-content: center;
     position: relative;
-    transition: background-color .2s ease-in-out, fill .2s ease-in-out;
+    transition: background-color .2s ease-in-out;
 }
 
 .nav-link:hover {
@@ -29,7 +29,7 @@
 .nav-link[tooltip]::after{
     content: attr(tooltip);
     background-color: var(--background-gray);
-    color: var(--blue-medium);
+    color: var(--blue-light);
     padding: 0.375rem;
     top: 0.65rem;
     left: 120%;
@@ -46,24 +46,12 @@
     visibility: visible;
 }
 
-.nav-link .bi {
-    fill: var(--white-gray);
-}
-
-.nav-link:hover .bi {
-    fill: var(--white-medium);
-}
-
-.active {
+.active, .active:hover {
     background-color: var(--blue-dark);
 }
 
 .active:hover {
-    background-color: var(--blue-dark);
-}
-
-.active .bi {
-    fill: var(--white-medium);
+    background-color: var(--blue-light);
 }
 
 /********************************************************************************************/
@@ -77,11 +65,12 @@
 }
 
 .link-body .bi {
+    width: 40px;
     border-radius: 50%;
 }
 
 .link-body:hover .bi{
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
 .dropdown-toggle::after {
@@ -113,7 +102,7 @@
 }
 
 .dropdown-menu li a {
-    color: var(--white-gray);
+    color: var(--white-medium);
     padding: 0.5rem 2rem;
     text-decoration: none;
     display: block;

@@ -6,8 +6,8 @@ const toggleText = document.getElementById('toggleText');
 const paragraph = document.getElementById('paragraph');
 const msg = document.getElementById('msg').getAttribute('data-msg');
 const images = [
-    `<path d="M5.5 7V4.5a2.5 2.5 0 1 1 5 0V7H11a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h.5zm1-2.5V7h3V4.5a1.5 1.5 0 0 0-3 0zm1.5 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5z"/>`,
-    `<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>`
+    '/structures/svg/closed-lock.svg',
+    '/structures/svg/user.svg'
 ];
 link.addEventListener('click', event => {
     event.preventDefault();
@@ -35,7 +35,7 @@ link.addEventListener('click', event => {
                 <button type="submit" class="btn-primary">Login</button>
             </form>
             `;
-        toggleImage.innerHTML = images[+isLogin];
+        toggleImage.src = images[+isLogin];
         toggleText.textContent = isLogin ? 'Already have an account?' : 'Forgot password?';
         paragraph.textContent = isLogin ? 'Select the icon to login' : 'Select the icon for more information';
         leftDiv.style.opacity = '1';

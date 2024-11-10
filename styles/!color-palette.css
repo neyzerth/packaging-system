@@ -4,25 +4,14 @@
     --background-gray: #2B2C31;
     --background-dark: #222326;
 
-    --background-not-hover: #404249;
-    --background-hover: #393B40;
-
-
-    
-    --text-light: #F2F2F2;
-    --icon-dark: #D7D8D9;
-    --text-gray: #B8BBBF;
-    --text-dark: #686B73;
-
     --white-light: #F2F2F2;
     --white-medium: #D7D8D9;
     --white-gray: #B8BBBF;
     --white-dark: #686B73;
 
-
-    
-    --blue-medium: #5C73F2;
+    --blue-light: #5C73F2;
     --blue-dark: #495ABF;
+
     --green: #2A8C4C;
     --green-dark: #18592F;
     --red: #D93B48;
