@@ -12,8 +12,7 @@ if(!isset($_SESSION['num'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Packakings</title>
-    <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css" ?>">
-    <link rel="stylesheet" href="<?php echo STYLE . "body.css" ?>">
+    <link rel="stylesheet" href="<?php echo STYLE . "global.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "sidebar.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "home.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "header.css" ?>">

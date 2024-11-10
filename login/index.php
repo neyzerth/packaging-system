@@ -21,8 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="<?php echo STYLE . "!color-palette.css" ?>">
-    <link rel="stylesheet" href="<?php echo STYLE . "body.css" ?>">
+    <link rel="stylesheet" href="<?php echo STYLE . "global.css" ?>">
     <link rel="stylesheet" href="<?php echo STYLE . "login.css" ?>">
 </head>
 
