@@ -6,7 +6,7 @@
     font-family: sans-serif;
     text-decoration: none;
     list-style: none;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 html, body {
