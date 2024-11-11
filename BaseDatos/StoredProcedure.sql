@@ -194,6 +194,60 @@ END $$
 
 call addMaterial ('tl','Tela','Tela para celulares','500','mt')
 
+drop Procedure addProduct
+
+Delimiter $$
+CREATE PROCEDURE addProduct(
+    IN p_code VARCHAR(5),
+    IN p_name VARCHAR(50),
+    IN p_description VARCHAR(255),
+    IN p_height DECIMAL(10,2),
+    IN p_width DECIMAL(10,2),
+    IN p_length DECIMAL(10,2),
+    IN p_weight DECIMAL(10,2),
+    IN p_packaging_protocol INT
+)
+BEGIN
+    DECLARE exist_unit INT;
+
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid product code';
+    END IF;
+
+    INSERT INTO product
+    VALUES(p_code,p_name,p_description,p_height,
+    p_width,p_length,p_weight,p_packaging_protocol);
+
+    SELECT code,name,description,packaging_protocol
+    From product WHERE code = p_code;
+END $$
+
+call addProduct('S20', 'Samsung S20', 'Medium-quality product', 14.99, 7.04, 0.78, 157, 1)
+
+
+drop Procedure addPackagingProtocol
+DELIMITER $$
+Create Procedure addPackagingProtocol(
+    IN p_name varchar(50),
+    IN p_file_name varchar (30)
+)
+BEGIN
+    DECLARE exist_unit INT;
+
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid protocol code';
+    END IF;
+
+    INSERT INTO packaging_protocol(name,file_name)
+    VALUES(p_name,p_file_name);
+
+    SELECT num,name,file_name
+    From packaging_protocol WHERE num = LAST_INSERT_ID();
+END $$
+END $$
+
+call addPackagingProtocol('Hola','HOLAGUAPO.PDF')
+
 
 
 
