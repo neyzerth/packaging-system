@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@embalaje
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -50,6 +50,7 @@ call sp_generate_report ('2024-09-01','2024-09-30');
 --Creo que seria mejor un trigger por que nos evitamos tener que mandarlo a llamar
 --
 
+drop PROCEDURE addUser
 
 --usuario general
 DELIMITER $$
@@ -87,10 +88,13 @@ BEGIN
         p_email, p_user_type, p_supervisor
     );
 
-    SELECT num, username, full_name, user
-    FROM vw_user_personal_info
+    SELECT num, username,
+    CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,user_type
+    FROM user
     WHERE username = p_username;
 END $$
+
+CALL addUser('administ', 'adminpass', 'John', 'Doe', 'Smith', '1980-05-14', 'Downtown', 'Main St', 12345, '555-1234', 'admin02@example.com', 'ADMIN', NULL)
 
 DELIMITER $$
 CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
@@ -111,28 +115,39 @@ BEGIN
     FROM vw_user_info
     WHERE username = usern;
 END $$
+
+CALL validateUser('administ', 'adminpass')
+
+drop Procedure addIncident
+
 DELIMITER $$
+
+--Le agregue el user por que no lo tenia entonces si se usaba esto ninguna incidencia dentria usuario
+--Ocupo saber si ocupan el id o el nombre
 
 CREATE PROCEDURE addIncident(
     IN p_date DATE,
     IN p_description VARCHAR(255),
+    IN p_user VARCHAR(30),
     IN p_traceability INT
 )
 BEGIN
     DECLARE traceability_count INT DEFAULT 0;
 
-    SELECT COUNT(*) INTO traceability_count FROM trazabilidad WHERE num = p_traceability;
+    SELECT COUNT(*) INTO traceability_count FROM traceability WHERE num = p_traceability;
 
     IF traceability_count = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid traceability ID';
     END IF;
 
-    INSERT INTO incident (date, description, traceability)
-    VALUES (p_date, p_description, p_traceability);
+    INSERT INTO incident (date, description, user,traceability)
+    VALUES (p_date, p_description,p_user ,p_traceability);
 
     SELECT num, date, description, user, traceability
     FROM incident WHERE num = LAST_INSERT_ID();
 END $$
+
+call addIncident('2023-11-11','N/A',1,3)
 
 DELIMITER $$
 CREATE PROCEDURE addBox(
@@ -148,6 +163,8 @@ BEGIN
     SELECT num, height, width, length, volume, weight
     FROM box WHERE num = LAST_INSERT_ID();
 END $$
+
+call addBox(5,5,5,5)
 
 drop procedure addMaterial;
 DELIMITER $$
@@ -174,6 +191,8 @@ BEGIN
     SELECT code, material_name, description, available_quantity, unit_of_measure
     FROM material WHERE code = p_code;
 END $$
+
+call addMaterial ('tl','Tela','Tela para celulares','500','mt')
 
 
 
