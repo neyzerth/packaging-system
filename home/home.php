@@ -1,7 +1,3 @@
-<div class="overlay">
-    <img src="<?php echo SVG . "hidden-eye.svg"; ?>">
-    <h4>Content blurred due to screen resolution.</h4>
-</div>
 <main class="home">
     <ul class="navegation">
         <li>

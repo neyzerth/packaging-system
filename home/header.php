@@ -1,6 +1,4 @@
-
 <?php include HEAD; ?>
-
 <header>
     <div class="d-flex align-center">
         <form role="search">

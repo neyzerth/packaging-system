@@ -1,12 +1,3 @@
-.overlay {
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    display: none;
-    position: fixed;
-}
-
 .login {
     background-color: var(--background-gray);
     box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.3);
@@ -97,19 +88,4 @@
 .swapped-right {
     transform: translateX(-100%);
     opacity: 0;
-}
-
-/********************************************************************************************/
-
-@media (max-width: 926px) or (max-height: 438px) {
-    .login {
-        filter: blur(15px);
-        pointer-events: none;
-        transition: filter 0.5s ease;
-    }
-    
-    .overlay {
-        display: block;
-        text-align: center;
-    }
 }
