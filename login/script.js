@@ -4,47 +4,40 @@ const link = document.getElementById('link');
 const toggleImage = document.getElementById('toggleImage');
 const toggleText = document.getElementById('toggleText');
 const paragraph = document.getElementById('paragraph');
+const msg = document.getElementById('msg').getAttribute('data-msg');
 const images = [
-    '../structures/svg/padlock-unlocked.svg',
-    '../structures/svg/user.svg'
+    '/structures/svg/closed-lock.svg',
+    '/structures/svg/user.svg'
 ];
-
 link.addEventListener('click', event => {
     event.preventDefault();
-
     leftDiv.style.opacity = '0';
     rightDiv.style.opacity = '0';
-
     leftDiv.classList.toggle('swapped');
     rightDiv.classList.toggle('swapped-right');
-
     setTimeout(() => {
         const isLogin = leftDiv.classList.contains('swapped');
-
         rightDiv.innerHTML = isLogin
-            ? `
-            <form action="\GitHub\packaking-system/boxes/index.php" id="rightDiv" method="post">
-                <strong style="font-size: 20px;">Request your code!</strong>
+            ?`
+            <form action="" method="post">
+                <h2>Request your code!</h2>
                 <p>We will send instructions to your email.</p>
-                <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="Enter your email">
-                <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Confirm your email">
+                <input id="email" name="email" class="form-control" type="email"  autocomplete="off" required placeholder="Enter your email">
+                <input id="confirm-email" name=" confirm-email" class="form-control" type="email" autocomplete="off" required placeholder="Confirm your email">
                 <button type="submit" class="btn-primary">Next step</button>
-            </form>`
-            : `
-            <form action="\GitHub\packaking-system/boxes/index.php" id="rightDiv" method="post">
-                <strong style="font-size: 20px;">Hello again!</strong>
-                <p><?php echo $msg ?></p>
-                <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="User">
+            </form>
+            ` : `
+            <form action="" method="post">
+                <h2>Welcome back!</h2>
+                <p>${msg}</p>
+                <input id="username" name="username" class="form-control" type="text"  autocomplete="off" required placeholder="User">
                 <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Password">
                 <button type="submit" class="btn-primary">Login</button>
-            </form>`;
-
+            </form>
+            `;
         toggleImage.src = images[+isLogin];
-
         toggleText.textContent = isLogin ? 'Already have an account?' : 'Forgot password?';
-
-        paragraph.textContent = isLogin ? 'Select the icon to login.' : 'Select the icon to request instructions.';
-
+        paragraph.textContent = isLogin ? 'Select the icon to login' : 'Select the icon for more information';
         leftDiv.style.opacity = '1';
         rightDiv.style.opacity = '1';
     }, 800);

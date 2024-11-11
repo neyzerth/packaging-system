@@ -1,67 +1,77 @@
-* {
-    margin: 0;
-    padding: 0;
+.overlay {
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    display: none;
+    position: fixed;
 }
 
-html,
-body {
+.home {
+    margin-left: 72px;
     height: 100%;
-}
-
-body {
-    background-color: var(--background-dark);
-    color: var(--text-light);
-    font-size: 1rem;
-    font-family: sans-serif;
-    margin: 0;
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
-main {
-    background-color: var(--background-light);
+.home .navegation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     width: 100%;
-    margin: 18px 18px 18px 90px;
-    padding: 2rem;
+}
+
+/********************************************************************************************/
+
+.home .navegation li {
     border-radius: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 1rem;
+    transition: background-color .2s ease-in-out;
 }
 
-header {
-    display: flex;
-    justify-content: center;
+.home .navegation li:hover {
+    background-color: var(--background-gray);
+    border-radius: 2rem;
+    padding: 1rem;
 }
 
-.new-ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.new-lis {
-    padding-inline: 8rem;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-    display: flex;
-    flex-direction: column;
+.home .nav-link {
+    color: var(--white-medium);
+    display: contents;
     text-align: center;
 }
 
-.new-lis a {
-    width: 100px;
-
-    fill: var(--text-gray);
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: var(--text-gray);
-    font-size: 2rem;
-    align-items: center;
+.home .nav-link .bi {
+    padding-bottom: 1rem;
+    width: 232px;
 }
 
-span {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+/********************************************************************************************/
+
+@media (max-width: 926px) or (max-height: 438px) {
+    .sidebar, .home {
+        filter: blur(15px);
+        pointer-events: none;
+        transition: filter 0.5s ease;
+    }
+
+    .home, footer {
+        display: none;
+    }
+    
+    .overlay {
+        display: block;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1390.5px) or (max-height: 722.25px)  {
+    .home .nav-link .bi {
+        width: 160px;
+    }
+
+    .home .nav-link h2 {
+        font-size: 1.2rem;
+    }
 }

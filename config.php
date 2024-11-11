@@ -9,7 +9,7 @@ define("HEADER", ROOT . "home/header.php");
 define("FOOTER", ROOT . "home/footer.php");
 define("SIDEBAR", ROOT . "structures/sidebar.php");
 define("SVG", "/structures/svg/");
-define("IMAGES", "/structures/images/");
+define("IMG", "/structures/img/");
 
 function connectdb()
 {
