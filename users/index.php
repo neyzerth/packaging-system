@@ -3,6 +3,6 @@ $form = "/users/addUser.php";
 require_once "../config.php";
 require "userFun.php";
 
-include HEADER;
+include HEAD;
 include 'listUsers.php';
 include FOOTER;

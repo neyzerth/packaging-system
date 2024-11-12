@@ -73,11 +73,9 @@
 }
 
 .dropdown-toggle::after {
-    margin-left: .255em;
-    content: "";
-    border-bottom: .3em solid;
-    border-right: .3em solid transparent;
-    border-left: .3em solid transparent;
+    margin-left: 0.5rem;
+    font-size: 0.5rem;
+    content: "▲";
     transition: color .2s ease-in-out;
 }
 
@@ -108,4 +106,12 @@
 
 .dropdown-menu li a:hover {
     background-color: var(--background-dark);
+}
+
+/********************************************************************************************/
+
+@media (max-height: 722.25px)  {
+    .sidebar .link-body{
+        display: none;
+    }
 }

@@ -21,4 +21,8 @@ if(!isset($_SESSION['num'])){
 </head>
 
 <body>
+    <div class="overlay">
+        <img src="<?php echo SVG . "hidden-eye.svg"; ?>">
+        <h4>Content blurred due to screen resolution.</h4>
+    </div>
     <?php include SIDEBAR; ?>

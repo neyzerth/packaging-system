@@ -1,7 +1,7 @@
 <?php 
 $form = "/materials/addMaterial.php";
 require_once "../config.php";
-include HEADER;
+include HEAD;
 include 'listMaterial.php';
 include FOOTER; 
 /*
