@@ -4,10 +4,15 @@ define("ROOT", "{$_SERVER['DOCUMENT_ROOT']}/");
 
 define("STYLE", "/styles/");
 
-define("HEAD", ROOT . "home/head.php");
 define("HEADER", ROOT . "home/header.php");
+define("HEAD", ROOT . "home/head.php");
+define("ASIDE", ROOT . "home/aside.php");
+define("HOME", ROOT . "home/home.php");
+define("FOOT", ROOT . "home/foot.php");
 define("FOOTER", ROOT . "home/footer.php");
+
 define("SIDEBAR", ROOT . "structures/sidebar.php");
+define("CSS", ROOT . "structures/css/");
 define("SVG", "/structures/svg/");
 define("IMG", "/structures/img/");
 
