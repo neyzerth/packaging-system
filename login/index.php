@@ -24,10 +24,6 @@
         <link rel="stylesheet" href="<?php echo CSS . "login.css" ?>">
     </head>
 <body>
-    <div class="overlay">
-        <img src="<?php echo SVG . "hidden-eye.svg"; ?>">
-        <h3>Content blurred due to screen resolution.</h3>
-    </div>
     <div id="msg" data-msg="<?php echo htmlspecialchars($msg); ?>"></div>
     <main class="login">
         <div class="division" id="leftDiv">
