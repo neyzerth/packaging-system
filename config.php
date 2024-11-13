@@ -11,11 +11,13 @@ define("SIDEBAR", ROOT . "structures/sidebar.php");
 define("SVG", "/structures/svg/");
 define("IMG", "/structures/img/");
 
+include 'dbconfig.php';
+
 function connectdb()
 {
 
     try {
-        $db = mysqli_connect("localhost", "root", "", "packaging");
+        $db = mysqli_connect(DBHOST, DBUSER, DBPASSW, DBNAME);
         //echo "<p>Conectado<p>";
         return $db;
     } catch (Exception $e) {
