@@ -10,7 +10,7 @@ CREATE UNIQUE INDEX UQ_packaging_tag ON packaging(tag);
 CREATE UNIQUE INDEX UQ_package_tag ON package(tag);
 
 --Tabla package en campo tracking_code
-CREATE UNIQUE INDEX UQ_package_tracking_code ON package(tracking_code);
+--CREATE UNIQUE INDEX UQ_package_tracking_code ON package(tracking_code);
 
 --Tabla product campo name
 CREATE UNIQUE INDEX UQ_product_name ON product(name);

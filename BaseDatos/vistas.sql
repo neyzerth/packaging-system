@@ -1,3 +1,4 @@
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -27,8 +28,8 @@ SELECT
     WHERE code = u.user_type) AS user
 FROM user AS u WHERE u.active = 1;
 
-CREATE VIEW vw_supervisor
-SELECT num
+CREATE VIEW vw_supervisor AS
+SELECT num,
     username,
     CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
     DATE_FORMAT(date_of_birth, "%M/%d/%y") AS date_of_birth,
@@ -38,7 +39,7 @@ SELECT num
     phone,
     email
 From user
-where supervisor is NULL and user_type <> 'admin'
+where supervisor is NULL and user_type <> 'admin';
 
 
 --VISTA DE CAJA
@@ -97,7 +98,7 @@ FROM packaging;
 --VISTA MATERIAL
 CREATE VIEW vw_material_info AS
 SELECT 
-    num,
+    code,
     material_name,
     description,
     available_quantity,
@@ -110,7 +111,7 @@ SELECT
     num,
     product_quantity,
     weight,
-    tracking_code,
+    product,
     packaging,
     box,
     tag
@@ -128,14 +129,13 @@ FROM packaging_protocol;
 --VISTA DE PRODUCTO
 CREATE VIEW vw_product_info AS
 SELECT 
-    num,
+    code,
     name,
     description,
     height,
     width,
     length,
     weight,
-    package,
     packaging_protocol
 FROM product;
 
