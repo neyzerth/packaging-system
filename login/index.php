@@ -1,30 +1,28 @@
 <?php
-session_start(); 
-require_once "../config.php";
-require "logFun.php";
-$msg = "We're so excited to see you again!";
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    if (login($username, $password)) {
-        header("Location: /");
-        exit();
-    } else {
-        $msg = 'Username or password incorrect.';
+    session_start(); 
+    require_once "../config.php";
+    require "logFun.php";
+    $msg = "We're so excited to see you again!";
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        if (login($username, $password)) {
+            header("Location: /");
+            exit();
+        } else {
+            $msg = 'Username or password incorrect.';
+        }
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="<?php echo STYLE . "global.css" ?>">
-    <link rel="stylesheet" href="<?php echo STYLE . "login.css" ?>">
-</head>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="<?php echo CSS . "global.css" ?>">
+        <link rel="stylesheet" href="<?php echo CSS . "login.css" ?>">
+    </head>
 <body>
     <div class="overlay">
         <img src="<?php echo SVG . "hidden-eye.svg"; ?>">
@@ -49,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
         </div>
     </main>
-    <script src="script.js"></script>
+    <script src="<?php echo JS . "login.js" ?>"></script>
 </body>
-
 </html>
