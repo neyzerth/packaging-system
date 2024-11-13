@@ -1,5 +1,5 @@
 <?php
-    require_once "../config.php";
+require_once "../config.php";
 function addProduct($code, $name, $description, $height, $width, $length, $weight, $packaging_protocol) {
     $db = connectdb(); 
 
@@ -31,7 +31,7 @@ function getProducts(){
     $query = "SELECT code, name, description,". 
         "height, width, length, weight, packaging_protocol".
         " FROM product;";
-
         //echo $query;
-    return $result = mysqli_query($db, $query);
-}
+        return $result = mysqli_query($db, $query);
+    }
+?>

@@ -6,8 +6,8 @@ const toggleText = document.getElementById('toggleText');
 const paragraph = document.getElementById('paragraph');
 const msg = document.getElementById('msg').getAttribute('data-msg');
 const images = [
-    '/structures/svg/closed-lock.svg',
-    '/structures/svg/user.svg'
+    '/src/svg/closed-lock.svg',
+    '/src/svg/user.svg'
 ];
 link.addEventListener('click', event => {
     event.preventDefault();
