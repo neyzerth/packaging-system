@@ -34,7 +34,7 @@
             </div>
             <div class="row-div">
                 <div class="">
-                    <form action="addBox.php" method="post">
+                    <form action="addBox.php" method="post" autocomplete="off">
                         <div class="row-form">
                             <div class="row-md-6">
                                 <label for="height">Height (cm)</label>

@@ -9,7 +9,7 @@
             "'$file_name'".
         ");";
     
-        echo "<p>$query</p>"; 
+        //echo "<p>$query</p>"; 
     
         try {
             return mysqli_query($db, $query);
