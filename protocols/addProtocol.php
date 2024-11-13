@@ -37,13 +37,13 @@
                             <div class="row-md-6">
                                 <label for="height">Name of protocol</label>
                                 <div class="input-group">
-                                    <input name="name" id="name" type="text" step="0.01" required>
+                                    <input name="name" id="name" type="text" step="0.01" required maxlength="50">
                                 </div>
                             </div>
                             <div class="row-md-6">
                                 <label for="width">Name of the file</label>
                                 <div class="input-group">
-                                    <input name="file_name" id="file_name" type="text" step="0.01" required>
+                                    <input name="file_name" id="file_name" type="text" step="0.01" required maxlength="30">
                                 </div>
                             </div>
                         <hr class="border-bottom" style="margin-top: 2rem; margin-bottom: 2rem;">
