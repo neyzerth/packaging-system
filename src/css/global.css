@@ -48,14 +48,6 @@ body {
     flex-direction: column;
 }
 
-.overlay {
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    display: none;
-    position: fixed;
-}
 
 /********************************************************************************************/
 
@@ -66,16 +58,3 @@ p {
 }
 
 /********************************************************************************************/
-
-@media (max-width: 926px) or (max-height: 438px) {
-    .sidebar, main {
-        filter: blur(15px);
-        pointer-events: none;
-        transition: filter 0.5s ease;
-    }
-    
-    .overlay {
-        display: block;
-        text-align: center;
-    }
-}
