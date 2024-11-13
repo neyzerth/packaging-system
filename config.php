@@ -11,10 +11,11 @@ define("HOME", ROOT . "home/home.php");
 define("FOOT", ROOT . "home/foot.php");
 define("FOOTER", ROOT . "home/footer.php");
 
-define("SIDEBAR", ROOT . "structures/sidebar.php");
-define("CSS",  "/structures/css/");
-define("SVG", "/structures/svg/");
-define("IMG", "/structures/img/");
+define("SIDEBAR", ROOT . "src/sidebar.php");
+define("CSS",  "/src/css/");
+define("JS",  "/src/js/");
+define("SVG", "/src/svg/");
+define("IMG", "/src/img/");
 
 include 'dbconfig.php';
 
