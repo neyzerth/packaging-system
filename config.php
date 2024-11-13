@@ -12,7 +12,7 @@ define("FOOT", ROOT . "home/foot.php");
 define("FOOTER", ROOT . "home/footer.php");
 
 define("SIDEBAR", ROOT . "structures/sidebar.php");
-define("CSS", ROOT . "structures/css/");
+define("CSS",  "/structures/css/");
 define("SVG", "/structures/svg/");
 define("IMG", "/structures/img/");
 
