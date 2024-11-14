@@ -28,8 +28,8 @@
     <div class="container">
         <div class="login row">
             <div class="division col-6" id="leftDiv">
-                <a class="div-link" href="#" id="link">
-                    <img class="bi" src="<?php echo SVG . "closed-lock.svg"; ?>" id="toggleImage">
+                <a class="div-link" id="link" href="#">
+                    <img class="bi" id="toggleImage" src="<?php echo SVG . "closed-lock.svg"; ?>">
                 </a>
                 <h4 id="toggleText">Forgot password?</h4>
                 <p id="paragraph">Select the icon for more information</p>
@@ -38,9 +38,9 @@
                 <form action="#" method="post">
                     <h2>Welcome back!</h2>
                     <p id="msgDisplay"><?php echo $msg ?></p>
-                    <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="User">
-                    <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Password">
-                    <button type="submit" class="btn-primary">Login</button>
+                    <input class="form-control" id="username" name="username" type="text" autocomplete="off" required placeholder="User">
+                    <input class="form-control" id="password" name="password" type="password" autocomplete="off" required placeholder="Password">
+                    <button class="btn-primary" type="submit">Login</button>
                 </form>
             </div>
         </div>
@@ -48,68 +48,3 @@
     <script src="<?php echo JS . "login.js" ?>"></script>
 </body>
 </html>
-
-
-
-<!--
-    <div class="container" style="margin: auto;">
-        <main class="login row">
-            <div class="division col-6" id="leftDiv">
-                <a class="div-link" href="#" id="link">
-                    <img class="bi" src="<?php echo SVG . "closed-lock.svg"; ?>" id="toggleImage">
-                </a>
-                <h4 id="toggleText">Forgot password?</h4>
-                <p id="paragraph">Select the icon for more information</p>
-            </div>
-            <div class="division col-6" id="rightDiv">
-                <form action="#" method="post">
-                    <h2>Welcome back!</h2>
-                    <p id="msgDisplay"><?php echo $msg ?></p>
-                    <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="User">
-                    <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Password">
-                    <button type="submit" class="btn-primary">Login</button>
-                </form>
-            </div>
-        </main>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <main class="login">
-        <div class="division" id="leftDiv">
-                <a class="div-link" href="#" id="link">
-                    <img class="bi" src="<?php echo SVG . "closed-lock.svg"; ?>" id="toggleImage">
-                </a>
-            <h4 id="toggleText">Forgot password?</h4>
-            <p id="paragraph">Select the icon for more information</p>
-        </div>
-        <div class="division" id="rightDiv">
-            <form action="#" method="post">
-                <h2>Welcome back!</h2>
-                <p id="msgDisplay"><?php echo $msg ?></p>
-                <input id="username" name="username" class="form-control" type="text" autocomplete="off" required placeholder="User">
-                <input id="password" name="password" class="form-control" type="password" autocomplete="off" required placeholder="Password">
-                <button type="submit" class="btn-primary">Login</button>
-            </form>
-        </div>
-    </main>
--->
