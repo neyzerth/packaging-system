@@ -5,7 +5,6 @@
 
 drop Procedure check_zone_capacity
 
---corregir 
 CREATE PROCEDURE sp_check_zone_capacity (
     IN zone_code VARCHAR(5), 
     IN package_quantity INT, 
@@ -179,9 +178,136 @@ BEGIN
     FROM material WHERE code = p_code;
 END $$
 
+--sp para insertar embalaje sin el campo de salida
+DELIMITER $$
+
+CREATE PROCEDURE addPackaging(
+    IN p_code varchar(5),
+    IN p_height DECIMAL(10, 2),
+    IN p_width DECIMAL(10, 2),
+    IN p_length DECIMAL(10, 2),
+    IN p_package_quantity INT,
+    IN p_zone VARCHAR(5),
+    IN p_tag int,
+)
+BEGIN
+    DECLARE exist_unit INT;
+
+    SELECT COUNT(*) INTO exist_unit
+    FROM Packaging WHERE code = p_code;
+
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Packaging code';
+    END IF;
+
+    INSERT INTO packaging(code,height,width,length,package_quantity,zone,tag)
+    VALUES(p_code,p_height,p_width,p_length,p_package_quantity,p_zone,p_tag)
+
+    SELECT code,volume,package_quantity,zone
+    FROM PACKAGING WHERE code = p_code;
+END$$
 
 
+--sp para insertar salida
+DELIMITER $$
+CREATE Procedure addOutbound(
+    IN p_num INT,
+    IN p_date DATE,
+    IN p_exit_quantity INT
+)
+BEGIN
+    SELECT COUNT(*) INTO exist_unit
+    FROM bound WHERE num = p_num;
+
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Packaging code';
+    END IF;
+
+    INSER INTO bound(num,date,exit_quantity)
+    VALUES(p_num,p_date,p_exit_quantity)
+
+    SELECT num,date,exit_quantity
+    FROM bound WHERE num = p_num;
+END$$
+
+--sp para insertar Zona
+DELIMITER $$
+CREATE PROCEDURE addZone(
+    In p_code VARCHAR(5),
+    In p_area VARCHAR(50),
+    In p_available_capacity INT,
+    In p_total_capacity INT
+)
+BEGIN
+    DECLARE exist_unit INT;
+
+    SELECT COUNT(*) INTO exist_unit
+    FROM zone WHERE code = p_code;
+
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Zone code';
+    END IF;
+
+    INSERT INTO zone(code,area,available_capacity,total_capacity)
+    VALUES(p_code,p_area,p_available_capacity,p_total_capacity)
+
+    SELECT code,area,available_capacity,total_capacity
+    FROM zone WHERE code = p_code;
+END $$
 
 
+--sp para insertar informe  ///CORREGIR
+DELIMITER $$
+CREATE Procedure addReport(
+    IN p_folio INT,
+    IN p_start_date DATE,
+    IN p_end_date DATE,
+    IN p_report_date DATE,
+    IN p_packed_products INT,
+    IN p_observations TEXT,
+    IN p_traceability INT,
+)
+BEGIN
+    DECLARE exist_unit INT;
 
+    SELECT COUNT(*) INTO exist_unit
+    FROM report WHERE code = p_folio;
 
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Zone code';
+    END IF;
+
+    INSERT INTO report(folio,start_date,end_date,report_date,packed_products,observations,traceability)
+    VALUES(p_folio,p_start_date,p_end_date,p_report_date,p_packed_products,p_observations,p_traceability)
+
+    SELECT start_date,end_date,packed_products,observations,traceability
+    FROM report where folio = p_folio
+END$$
+
+--sp para insertar tag
+DELIMITER $$
+CREATE Procedure addTag(
+    IN p_num INT,
+    IN p_date DATE,
+    IN p_barcode VARCHAR(255),
+    IN p_tag_type varchar(5),
+    IN p_destination VARCHAR(25),
+)
+BEGIN
+    DECLARE exist_unit INT;
+
+    SELECT COUNT(*) INTO exist_unit
+    FROM tag WHERE num = p_num;
+
+    IF exist_unit = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Tag number';
+    END IF;
+
+    INSERT INTO tag(num,date,barcode,tag_type,destination)
+    VALUES (p_num,p_date,p_barcode,p_tag_type,p_destination)
+
+    SELECT num,date,barcode,tag_type,destination
+    from tag where num = p_num
+END$$
+
+--sp para darle salida a un embalaje (Seria hacer un update en la tabla de embalaje)

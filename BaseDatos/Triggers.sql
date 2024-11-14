@@ -52,42 +52,6 @@ where num = 6
 
 --Por que agrega varios productos diferentes y se hace el calculo bien osea suma el peso de todos los prodcutos y lo multiplica
 --por la cantida de producto ej  180+180+157=517 * 10 = 5170 no se si eso deberia de ser correcto jeje
-DELIMITER $$
-
-CREATE TRIGGER calculate_package_weight_after_product_insert
-AFTER INSERT ON product
-FOR EACH ROW
-BEGIN
-    DECLARE total_weight DECIMAL(10, 2);
-
-    SELECT SUM(p.weight * pk.product_quantity) INTO total_weight
-    FROM product p
-    JOIN package pk ON pk.num = p.package
-    WHERE p.package = NEW.package;
-
-    UPDATE package
-    SET weight = total_weight
-    WHERE num = NEW.package;
-END $$
-
-drop trigger calculate_package_weight;
-DELIMITER $$
-CREATE TRIGGER calculate_package_weight
-BEFORE INSERT ON package
-FOR EACH ROW
-BEGIN
-    DECLARE prod_weight DECIMAL(10, 2);
-
-    SET prod_weight = (
-        SELECT SUM(weight) * NEW.product_quantity
-        FROM product
-        WHERE package = NEW.num
-    );
-
-    SET NEW.weight = prod_weight;
-END $$
-
-DELIMITER ;
 
 -- Insert de prueba en la tabla product
 INSERT INTO product (code, name, description, height, width, length, weight, package, packaging_protocol)
@@ -106,15 +70,6 @@ INSERT INTO package(product_quantity, tracking_code, box, tag) VALUES
 SELECT SUM(weight)
     FROM product
     WHERE package = 1;
-
-SELECT * FROM package WHERE num = 1;
-
-
-
-select * from package
-
-
-select * from packaging
 
 
 --Falta saber lo del peso del embalaje
@@ -220,4 +175,29 @@ select * from tag
 Insert into tag (date,tag_type,destination)
 values ('2024-10-30','TT03','UABC')
 
+
+--Trigger para el estado de trazabilidad
+
+--Trigger para la cantidad de salida de los embalajes tabla outbound
+
+--Tigger para sacar el volumen del embalaje en insert y update
+
+DELIMITER $$
+CREATE TRIGGER calculate_packaging_volume_insert
+BEFORE INSERT ON packaging
+FOR EACH ROW
+Begin
+    SET NEW.volume = NEW.height*NEW.width*NEW.length;
+END $$
+DELIMITER;
+
+
+DELIMITER $$
+CREATE TRIGGER calculate_packaging_volume_update
+BEFORE UPDATE ON packaging
+FOR EACH ROW
+Begin
+    SET NEW.volume = NEW.height*NEW.width*NEW.length;
+END $$
+DELIMITER;
 

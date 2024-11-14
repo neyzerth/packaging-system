@@ -82,6 +82,8 @@ CREATE TABLE packaging (
     height DECIMAL(10, 2),
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
+    volume DECIMAL(10, 2), --nuevo
+    weight DECIMAL(10, 2) 
     package_quantity INT,
     zone VARCHAR(5),
     outbound INT,
@@ -111,8 +113,12 @@ CREATE TABLE material (
 CREATE TABLE packaging_protocol (
     num INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
-    file_name VARCHAR(30)
+    file_name VARCHAR(255)
 );
+
+
+alter table packaging_protocol
+MODIFY COLUMN  file_name VARCHAR(255)
 
 
 
