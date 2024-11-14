@@ -179,8 +179,10 @@ BEGIN
 END $$
 
 --sp para insertar embalaje sin el campo de salida
-DELIMITER $$
 
+--Agregar volumen en el select para la base mas actualizada
+drop Procedure addPackaging
+DELIMITER $$
 CREATE PROCEDURE addPackaging(
     IN p_code varchar(5),
     IN p_height DECIMAL(10, 2),
@@ -191,23 +193,18 @@ CREATE PROCEDURE addPackaging(
     IN p_tag int
 )
 BEGIN
-    DECLARE exist_unit INT;
-
-    SELECT COUNT(*) INTO exist_unit
-    FROM Packaging WHERE code = p_code;
-
-    IF exist_unit = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Packaging code';
-    END IF;
-
     INSERT INTO packaging(code,height,width,length,package_quantity,zone,tag)
     VALUES(p_code,p_height,p_width,p_length,p_package_quantity,p_zone,p_tag);
 
-    SELECT (code,volume,package_quantity,zone)
+    SELECT code,package_quantity,zone
     FROM PACKAGING WHERE code = p_code;
 END$$
 
-call addPackaging
+call addPackaging('PK006', 10.0, 15.0, 20.0, 25, 'Z001',1)
+
+select * from packaging
+
+select * from zone
 
 
 --sp para insertar salida
