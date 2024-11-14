@@ -200,7 +200,7 @@ BEGIN
     FROM PACKAGING WHERE code = p_code;
 END$$
 
-call addPackaging('PK006', 10.0, 15.0, 20.0, 25, 'Z001',1)
+call addPackaging('PK007', 10.0, 15.0, 20.0, 25, 'Z001',1)
 
 select * from packaging
 
