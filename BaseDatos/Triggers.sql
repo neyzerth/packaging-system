@@ -175,6 +175,7 @@ select * from tag
 Insert into tag (date,tag_type,destination)
 values ('2024-10-30','TT03','UABC')
 
+--Triger para que se actulize actumaticamente la available_capacity en zona 
 
 --Trigger para el estado de trazabilidad
 

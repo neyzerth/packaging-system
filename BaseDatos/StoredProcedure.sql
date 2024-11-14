@@ -1,4 +1,4 @@
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1723058837855@@127.0.0.1@3306@embalaje
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -188,7 +188,7 @@ CREATE PROCEDURE addPackaging(
     IN p_length DECIMAL(10, 2),
     IN p_package_quantity INT,
     IN p_zone VARCHAR(5),
-    IN p_tag int,
+    IN p_tag int
 )
 BEGIN
     DECLARE exist_unit INT;
@@ -201,36 +201,38 @@ BEGIN
     END IF;
 
     INSERT INTO packaging(code,height,width,length,package_quantity,zone,tag)
-    VALUES(p_code,p_height,p_width,p_length,p_package_quantity,p_zone,p_tag)
+    VALUES(p_code,p_height,p_width,p_length,p_package_quantity,p_zone,p_tag);
 
-    SELECT code,volume,package_quantity,zone
+    SELECT (code,volume,package_quantity,zone)
     FROM PACKAGING WHERE code = p_code;
 END$$
 
+call addPackaging
+
 
 --sp para insertar salida
+drop Procedure addOutbound
+
 DELIMITER $$
-CREATE Procedure addOutbound(
-    IN p_num INT,
+
+CREATE PROCEDURE addOutbound(
     IN p_date DATE,
     IN p_exit_quantity INT
 )
 BEGIN
-    SELECT COUNT(*) INTO exist_unit
-    FROM bound WHERE num = p_num;
+    DECLARE exist_unit INT DEFAULT 1; 
 
-    IF exist_unit = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Packaging code';
-    END IF;
+    INSERT INTO outbound(date, exit_quantity)
+    VALUES (p_date, p_exit_quantity);
 
-    INSER INTO bound(num,date,exit_quantity)
-    VALUES(p_num,p_date,p_exit_quantity)
-
-    SELECT num,date,exit_quantity
-    FROM bound WHERE num = p_num;
-END$$
+    SELECT num, date, exit_quantity
+    FROM outbound
+    WHERE num = LAST_INSERT_ID();
+END $$
+call addOutbound ('2023-1-1',7)
 
 --sp para insertar Zona
+drop Procedure addZone
 DELIMITER $$
 CREATE PROCEDURE addZone(
     In p_code VARCHAR(5),
@@ -241,73 +243,112 @@ CREATE PROCEDURE addZone(
 BEGIN
     DECLARE exist_unit INT;
 
-    SELECT COUNT(*) INTO exist_unit
-    FROM zone WHERE code = p_code;
-
     IF exist_unit = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Zone code';
     END IF;
 
     INSERT INTO zone(code,area,available_capacity,total_capacity)
-    VALUES(p_code,p_area,p_available_capacity,p_total_capacity)
+    VALUES(p_code,p_area,p_available_capacity,p_total_capacity);
 
     SELECT code,area,available_capacity,total_capacity
     FROM zone WHERE code = p_code;
 END $$
 
+call addZone ('Z006','C',1,17)
 
---sp para insertar informe  ///CORREGIR
+SELECT * from zone 
+
+--sp para insertar informe   //Que se ocupario insetar aqui?
+drop Procedure addReport
 DELIMITER $$
 CREATE Procedure addReport(
-    IN p_folio INT,
     IN p_start_date DATE,
     IN p_end_date DATE,
     IN p_report_date DATE,
     IN p_packed_products INT,
     IN p_observations TEXT,
-    IN p_traceability INT,
+    IN p_traceability INT
 )
 BEGIN
     DECLARE exist_unit INT;
-
-    SELECT COUNT(*) INTO exist_unit
-    FROM report WHERE code = p_folio;
 
     IF exist_unit = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Zone code';
     END IF;
 
-    INSERT INTO report(folio,start_date,end_date,report_date,packed_products,observations,traceability)
-    VALUES(p_folio,p_start_date,p_end_date,p_report_date,p_packed_products,p_observations,p_traceability)
+    INSERT INTO report(start_date,end_date,report_date,packed_products,observations,traceability)
+    VALUES(p_start_date,p_end_date,p_report_date,p_packed_products,p_observations,p_traceability);
 
     SELECT start_date,end_date,packed_products,observations,traceability
-    FROM report where folio = p_folio
-END$$
+    FROM report where folio = LAST_INSERT_ID();
+END $$
+
+call addReport('2024-09-01', CURRENT_DATE, '2024-10-01', 1000, 'No major issues', 7)
+
+select * from report
+
+SELECT * from traceability
 
 --sp para insertar tag
+drop Procedure addTag
 DELIMITER $$
 CREATE Procedure addTag(
-    IN p_num INT,
     IN p_date DATE,
-    IN p_barcode VARCHAR(255),
     IN p_tag_type varchar(5),
-    IN p_destination VARCHAR(25),
+    IN p_destination VARCHAR(25)
 )
 BEGIN
-    DECLARE exist_unit INT;
+    INSERT INTO tag(date,tag_type,destination)
+    VALUES (p_date,p_tag_type,p_destination);
 
-    SELECT COUNT(*) INTO exist_unit
-    FROM tag WHERE num = p_num;
-
-    IF exist_unit = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Tag number';
-    END IF;
-
-    INSERT INTO tag(num,date,barcode,tag_type,destination)
-    VALUES (p_num,p_date,p_barcode,p_tag_type,p_destination)
-
-    SELECT num,date,barcode,tag_type,destination
-    from tag where num = p_num
+    SELECT num, barcode,date,tag_type,destination
+    from tag where num = LAST_INSERT_ID();
 END$$
 
---sp para darle salida a un embalaje (Seria hacer un update en la tabla de embalaje)
+call addTag(CURRENT_DATE, 'TT01','Tj')
+
+select * from tag_type
+
+--sp para darle salida a un embalaje 
+
+--Pensar el nombre correcto en ingles
+--Deria hacer un select para ver que si se realizo el cambio como los demas?
+
+DELIMITER $$
+
+CREATE PROCEDURE Sp_RegistroSalidaEmbalaje (
+    IN p_packaging_code VARCHAR(5), 
+    IN p_exit_quantity INT          
+)
+BEGIN
+    DECLARE available_quantity INT;
+
+    -- Comprobar si el embalaje existe y obtener la cantidad disponible
+    SELECT package_quantity INTO available_quantity
+    FROM packaging
+    WHERE code = p_packaging_code;
+
+    -- Validar si la cantidad disponible es suficiente
+    IF available_quantity IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Embalaje no encontrado.';
+    ELSEIF available_quantity < p_exit_quantity THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cantidad insuficiente en inventario.';
+    ELSE
+        -- Actualizar la cantidad de embalajes disponibles
+        UPDATE packaging
+        SET package_quantity = package_quantity - p_exit_quantity
+        WHERE code = p_packaging_code;
+
+
+        INSERT INTO outbound (date, exit_quantity)
+        VALUES (CURRENT_DATE, p_exit_quantity);
+    END IF;
+END $$
+
+call Sp_RegistroSalidaEmbalaje('PK001',100)
+
+
+select * from packaging
+
+select * from outbound
+
