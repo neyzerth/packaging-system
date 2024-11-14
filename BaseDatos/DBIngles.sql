@@ -1,9 +1,8 @@
--- Active: 1723058837855@@127.0.0.1@3306@embalaje
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 
-drop DATABASE embalaje
-
-create DATABASE embalaje
-
+drop DATABASE packaging;
+create DATABASE packaging;
+USE packaging;
 
 -- TABLE USER TYPE
 CREATE TABLE user_type (
@@ -13,7 +12,6 @@ CREATE TABLE user_type (
 );
 
 -- TABLE USER
-
 CREATE TABLE user (
     num INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL UNIQUE, 
@@ -33,7 +31,6 @@ CREATE TABLE user (
     CONSTRAINT fk_user_type FOREIGN KEY (user_type) REFERENCES user_type(code),
     CONSTRAINT fk_user_supervisor FOREIGN KEY (supervisor) REFERENCES user(num)
 );
-
 
 -- TABLE BOX
 CREATE TABLE box (
@@ -149,9 +146,6 @@ CREATE TABLE package (
     CONSTRAINT fk_box_package FOREIGN KEY (box) REFERENCES box(num),
     CONSTRAINT fk_tag_package FOREIGN KEY (tag) REFERENCES tag(num)
 );
-
-
-
 
 -- TABLE STATE FOR TRACEABILITY
 CREATE TABLE state (
