@@ -10,11 +10,9 @@
     define("JS", "/src/js/");
     define("CSS", "/src/css/");
     define("SVG", "/src/svg/");
-    define("IMG", "/src/img/");
     function connectdb() {
         try {
             $db = mysqli_connect("localhost", "root", "", "packaging");
-            //echo "<p>Conectado<p>";
             return $db;
         } catch (Exception $e) {
             echo "<p>Conection Error: {$e->getMessage()}<p>";

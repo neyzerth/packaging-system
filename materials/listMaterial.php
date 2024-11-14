@@ -5,7 +5,7 @@
 ?>
     <main class="tables">
         <div class="background">
-            <?php include HEADER ?>
+        <?php $link="addMaterial.php"; include HEADER; ?>
             <table class="table">
                 <thead>
                     <tr>

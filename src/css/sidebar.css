@@ -56,19 +56,19 @@
 /********************************************************************************************/
 
 .link-body {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: contents;
 }
 
 .link-body .bi {
+    background-color: var(--background-medium);
     width: 40px;
     border-radius: 50%;
+    margin: 1rem;
+    padding: 0.4rem;
     transition: opacity .2s ease-in-out;
 }
 
-.link-body:hover .bi{
+.link-body:hover .bi {
     opacity: 0.8;
 }
 
@@ -106,12 +106,4 @@
 
 .dropdown-menu li a:hover {
     background-color: var(--background-dark);
-}
-
-/********************************************************************************************/
-
-@media (max-height: 722.25px)  {
-    .sidebar .link-body{
-        display: none;
-    }
 }
