@@ -1,18 +1,19 @@
 .tables {
+    padding: 1rem;
     margin-left: 72px;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+}
+
+.tables .background {
+    background-color: var(--background-black);
+    border-radius: 2rem;
 }
 
 .table {
     border-collapse: collapse;
-    margin: 1rem;
-}
-
-thead, tfoot {
-    background-color: var(--background-black);
+    width: 100%;
 }
 
 thead tr th {
@@ -29,6 +30,7 @@ thead tr th:hover {
 
 tbody tr td {
     border-top: 1px solid var(--background-medium);
+    padding-inline: 1rem;
 }
 
 tbody tr:nth-child(even) {
