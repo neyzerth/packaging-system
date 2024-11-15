@@ -23,15 +23,20 @@ function addProduct($code, $name, $description, $height, $width, $length, $weigh
     }
 }
 
-
-
-
 function getProducts(){
     $db = connectdb();
     $query = "SELECT code, name, description,". 
         "height, width, length, weight, packaging_protocol".
         " FROM product;";
         //echo $query;
-        return $result = mysqli_query($db, $query);
-    }
-?>
+    return $result = mysqli_query($db, $query);
+}
+
+function getProtocols(){
+    $db = connectdb();
+    $query = "SELECT num, name, file_name".
+        " FROM packaging_protocol;";
+
+        //echo $query;
+    return $result = mysqli_query($db, $query);
+}

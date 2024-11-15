@@ -7,14 +7,19 @@
         $width = $_POST['width'];
         $length = $_POST['length'];
         $weight = $_POST['weight'];
-        $result = addBox(height: $height, width: $width, length: $length, weight: $weight);
-        if ($result) {
+
+        $result = addBox(height: $height, width: $width, 
+            length: $length, weight: $weight
+        );
+
+        if($result){
             echo '<h2>Box registered</h2>';
         } else {
             echo "<h2>Error</h2>";
         }
     }
 ?>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="addBox.php" method="post">
