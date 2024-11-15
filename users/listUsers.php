@@ -3,7 +3,7 @@
 ?>
     <main class="tables">
         <div class="background">
-            <?php include HEADER ?>
+            <?php $link="addUser.php"; include HEADER; ?>
             <table class="table">
                 <thead>
                     <tr>

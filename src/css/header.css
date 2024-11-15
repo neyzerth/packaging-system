@@ -1,27 +1,27 @@
-.header {
+.tables .header {
     padding: 1rem;
     padding-inline: 2rem;
     display: flex;
     justify-content: space-between;
 }
 
-.header div {
+.tables .header div {
     display: flex;
     gap: 1rem;
 }
 
-.header div a {
+.tables .header div a {
     display: contents;
 }
 
-.header div input {
+.tables .header div input {
     background-color: var(--background-dark);
     border-radius: 2rem;
     border: none;
     text-align: center;
 }
 
-.header div input:focus {
+.tables .header div input:focus {
     outline: 2px solid var(--blue-dark);
 }
 
@@ -29,15 +29,15 @@
     color: var(--white-dark);
 }
 
-.header ul {
+.tables .header ul {
     display: flex;
 }
 
-.header ul li {
+.tables .header ul li {
     padding-left: 1rem;
     display: flex;
 }
 
-.header ul li a {
+.tables .header ul li a {
     display: contents;
 }

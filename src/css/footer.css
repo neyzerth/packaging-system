@@ -1,19 +1,19 @@
-.footer {
+.tables .footer {
     padding: 1rem;
     padding-inline: 2rem;
     display: flex;
     justify-content: center;
 }
 
-.footer ul {
+.tables .footer ul {
     display: flex;
 }
 
-.footer ul li {
+.tables .footer ul li {
     padding-inline: 1rem;
     display: flex;
 }
 
-.footer ul li a {
+.tables .footer ul li a {
     display: contents;
 }

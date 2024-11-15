@@ -1,4 +1,3 @@
-
     <aside class="sidebar">
         <ul class="navegation">
             <li>
@@ -37,8 +36,8 @@
                 </a>
             </li>
         </ul>
-        <a href="#" class="link-body dropdown-toggle" id="profile-toggle">
-            <img class="bi" src="<?php echo IMG . "person.jpeg" ?>">
+        <a href="#" class="link-body " id="profile-toggle">
+            <img class="bi" src="<?php echo SVG . "user.svg" ?>">
         </a>
         <ul class="dropdown-menu" id="dropdown-menu">
             <li>

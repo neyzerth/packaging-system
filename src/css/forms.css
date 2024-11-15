@@ -1,85 +1,84 @@
-/*
-h2 {
-    margin: 0;
+.forms {
+    padding: 1rem;
+    margin-left: 72px;
 }
 
-.container {
-    width: 100%;
-    max-width: 960px;
-    margin-inline: auto;
+.forms .background {
+    background-color: var(--background-black);
+    border-radius: 2rem;
 }
 
-.row-div {
+
+.forms .header {
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.forms .footer {
+    padding: 1rem;
     display: flex;
+    justify-content: center
 }
 
-.row-div>* {
-    padding-right: 2rem;
-    padding-left: 2rem;
-    margin-top: 3rem;
+/********************************************************************************************/
+
+.form {
+    padding: 1rem;
 }
 
-.row-form {
+.form .rows {
     display: flex;
     flex-wrap: wrap;
 }
 
-.row-form>* {
+.form .rows>* {
     padding-right: 1rem;
     padding-left: 1rem;
     margin-top: 2rem;
 }
 
-.input-group {
+.form .inputs {
     margin-top: .5rem;
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-input,
-select {
+.form .inputs>*, .inputs {
     background-color: var(--background-dark);
-    color: var(--text-light);
     font-size: 1rem;
     padding: .375rem .75rem;
     border: none;
     outline: 1px solid var(--text-dark);
-    border-radius: 5px;
 }
 
-.btn-primary {
-    background-color: var(--blue-medium);
-    color: var(--text-light);
-    font-size: 1.2rem;
-    width: 100%;
-    border-radius: 5px;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-    cursor: pointer;
-    border: none;
-}
+/********************************************************************************************/
 
-.col-sm-4 {
+.row-sm-3 {
     width: 33.3333%;
 }
 
-.col-md-8 {
-    width: 66.6667%;
-}
-
-.row-sm-3 {
-    width: 40%;
-}
-
-.row-md-6 {
+.row-md-5 {
     width: 50%;
 }
 
-.row-md-9 {
-    width: 60%;
+.row-lg-10 {
+    width: 100%;
 }
 
-.row-lg-12 {
+.btn-primary {
+    background-color: var(--blue-dark);
+    color: var(--white-medium);
     width: 100%;
+    padding: 1rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: var(--blue-light);
 }

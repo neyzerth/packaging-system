@@ -1,22 +1,10 @@
 .login {
     background-color: var(--background-gray);
     box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.3);
-    width: 880px;
-    height: 350px;
     border-radius: 2rem;
-    padding: 2rem;
-    display: flex;
-    margin: auto;
-    transition: filter 0.5s ease;
 }
 
 .division {
-    width: 50%;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     text-align: center;
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
@@ -30,8 +18,7 @@
 .div-link .bi {
     background-color: var(--background-dark);
     border-radius: 50%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
     padding: 1rem;
     transition: background-color 0.2s ease-in-out;
 }
@@ -44,7 +31,7 @@
 
 .form-control {
     background-color: var(--background-dark);
-    width: 100%;
+    width: 90%;
     padding: 1rem;
     margin-bottom: 1rem;
     border: none;
@@ -64,9 +51,8 @@
 
 .btn-primary {
     background-color: var(--blue-dark);
-    color: var(--white-medium);
     font-weight: bold;
-    width: 100%;
+    width: 90%;
     padding: 1rem;
     border: none;
     border-radius: 2rem;
@@ -88,4 +74,26 @@
 .swapped-right {
     transform: translateX(-100%);
     opacity: 0;
+}
+
+/*******************************************************************************************/
+
+@media (max-width: 500px) {
+    .login {
+        flex-direction: column-reverse;
+    }
+
+    .col-6 {
+        width:100%;
+    }
+
+    .swapped {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    
+    .swapped-right {
+        transform: translateY(100%);
+        opacity: 0;
+    }
 }
