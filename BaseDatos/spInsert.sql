@@ -43,10 +43,10 @@ END $$
 
 --Usertype
 DELIMITER $$
-Create PROCEDURE UpdateUserType(
+Create PROCEDURE insertUserType(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
-    IN p_description VARCHAR(100),
+    IN p_description VARCHAR(100)
 )
 Begin
     INSERT into user_type (code,name,description)
@@ -54,8 +54,12 @@ Begin
 
     Select code,name,description
     from tag_type
-    where code = p_code
+    where code = p_code;
 END$$
+
+call insertUserType('a','a','a')
+
+select * from user_type
 
 --box
 DELIMITER $$
@@ -97,7 +101,9 @@ BEGIN
     SELECT code,name, description, available_quantity, unit_of_measure
     FROM material WHERE code = p_code;
 END $$
---Product
+
+
+--Product FALTAAAAA AGREGAR VOLUMEN A LA BASE
 
 Delimiter $$
 Create PROCEDURE UpdateProduct(
@@ -107,7 +113,7 @@ Create PROCEDURE UpdateProduct(
     IN p_height DECIMAL(10,2),
     IN p_width DECIMAL(10,2),
     IN p_length DECIMAL(10,2),
-    IN p_weight DECIMAL(10,2),
+    IN p_weight DECIMAL(10,2)
 )
 Begin
     Insert into(code,name,description,height,width,length,weight)

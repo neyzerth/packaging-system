@@ -1,10 +1,13 @@
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 ---------------------------------------
 --Actualizar registro
 ---------------------------------------
 
 --Usuario
+drop Procedure UpdateUser
 DELIMITER $$
 Create PROCEDURE UpdateUser(
+    IN p_num int,
     IN p_username VARCHAR(30),
     IN p_password VARCHAR(20),
     IN p_name VARCHAR(50),
@@ -16,19 +19,23 @@ Create PROCEDURE UpdateUser(
     IN p_postal_code INT,
     IN p_phone VARCHAR(15),
     IN p_email VARCHAR(30),
-    In p_activa bit,
+    In p_active bit,
     IN p_user_type VARCHAR(5),
     IN p_supervisor INT
 )
 BEGIN
     UPDATE user
-    SET username=p_username,password = p_password, name = p_name, first_surname = p_first_surname,
+    SET num=p_num,username=p_username,password = p_password, name = p_name, first_surname = p_first_surname,
     second_surname = p_second_surname, date_of_birth = p_date_of_birth,
     neighborhood = p_neighborhood, street = p_street, postal_code = p_postal_code,
-    phone = p_phone, email = p_email, activa = p_activa, 
+    phone = p_phone, email = p_email, active = p_active, 
     user_type= p_user_type, supervisor = p_supervisor
-    WHERE username = p_username;
+    WHERE num = p_num;
 END$$
+
+call UpdateUser(1,'1', '1', 'John', 'Doe', 'Smith', '1980-05-14', 'Downtown', 'Main St', 12345, '555-1234', 'admin01@example.com', 1,'ADMIN', NULL)
+
+select * from user
 
 --Tipo de usuario
 DELIMITER $$
@@ -36,13 +43,17 @@ Create PROCEDURE UpdateUserType(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(100),
-    IN p_active bit,
+    IN p_active bit
 )
 Begin
     UPDATE user_type
     SET name = p_name, description = p_description, active = p_active
     where code = p_code; 
 END$$
+
+call UpdateUserType('EMPLO', 'employer', "User with limited access to the system",1);
+
+select * from user_type
 
 --Caja
 DELIMITER $$
@@ -61,22 +72,35 @@ BEGIN
     weight = p_weight
     WHERE num = p_num;
 END$$
---Material
+
+call `UpdateBox`(1,5,4,7,3.5)
+
+select * from box
+
+--Material  REVISAAAAAARRRRR
 DELIMITER $$    
 Create PROCEDURE UpdateMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(100),
     In p_avaliable_quantity int,
-    IN p_active bit
+    IN p_active bit,
+    IN p_unit_of_mesure varchar(5)
 )
 BEGIN
     UPDATE material
-    SET name = p_name, description = p_description, available_quantity = p_avaliable_quantity,active = p_active
+    SET name = p_name, 
+    description = p_description, 
+    available_quantity = p_avaliable_quantity,
+    active = p_active,
+    unit_of_measure=p_unit_of_mesure
     WHERE code = p_code;
-End$$
+End $$
 
---Producto
+
+select * from material
+
+--Producto 
 Delimiter $$
 Create PROCEDURE UpdateProduct(
     IN p_code VARCHAR(5),
@@ -86,15 +110,23 @@ Create PROCEDURE UpdateProduct(
     IN p_width DECIMAL(10,2),
     IN p_length DECIMAL(10,2),
     IN p_weight DECIMAL(10,2),
-    In p_active
+    In p_active bit
 )
 Begin
     UPDATE product
-    SET name = p_name, description = p_description, height = p_height, width = p_width
+    SET name = p_name, description = p_description, height = p_height, width = p_width,
     length = p_length, weight = p_weight, active = p_active
     WHERE code = p_code;
 END$$
---Salida
+
+call UpdateProduct('X', 'iPhone XX', 'Budget product', 14.36, 7.09, 0.77, 174, 0)
+
+select * from product
+
+--Salida 
+
+drop Procedure `UpdateOutBound`
+
 DELIMITER $$
 Create PROCEDURE UpdateOutBound(
     IN p_num INT,
@@ -107,6 +139,11 @@ Begin
     SET date = p_date, exit_quantity = p_exit_quantity, active = p_active
     WHERE num = p_num;
 end $$
+
+
+call UpdateOutBound(1,'2024-11-11', 17,1)
+
+SELECT * from outbound
 
 --Zona
 DELIMITER $$
@@ -123,6 +160,10 @@ UPDATE zone
     WHERE code = p_code;
 end $$
 
+call UpdateZone('Z001', 'Warehouse A', 100, 100,1)
+
+sELECT * FROM zone
+
 --Protocolo
 DELIMITER $$
 Create PROCEDURE UpdateProtocolo(
@@ -137,26 +178,36 @@ Begin
     WHERE num = p_num;
 end $$
 
+call UpdateProtocolo(1,'Protocolo 1','protocolo1.pdf',1)
+
+select * from packaging_protocol
+
 --Paquete
+drop Procedure `UpdatePaquete`
+
 DELIMITER $$
-Create PROCEDURE UpdatePaquete(
+Create PROCEDURE UpdatePackage(
     IN p_num INT,
     IN p_product_quantity int,
     IN p_weight decimal (10,2),
     IN p_product varchar(5),
     In p_packaging varchar(5),
     IN p_box int,
-    IN p_tag int,
+    IN p_tag int
 )
 begin
-    UPDATE packaging
+    UPDATE package
     SET product_quantity = p_product_quantity, weight = p_weight, product = p_product, 
     packaging= p_packaging, box = p_box, tag = p_tag
     WHERE num = p_num;
 end $$
 
+call `UpdatePackage`(1,10, 25.5, 'X', 'PK001', 2, 1)
 
---Embalaje
+
+select * from package
+
+--Embalaje 
 DELIMITER $$
 Create PROCEDURE UpdatePackaging(
     IN p_code varchar(5),
@@ -171,9 +222,14 @@ Create PROCEDURE UpdatePackaging(
 begin
     UPDATE packaging
     SET height = p_height, width = p_width, length = p_length,weight = p_weight,
-    package_quantity = package_quantity, , zone = p_zone, tag = p_tag
+    package_quantity = p_package_quantity,  zone = p_zone, tag = p_tag
     WHERE code = p_code;
 end $$
+
+call UpdatePackaging('PK001', 10.0, 15.0, 20.0,NULL,30 ,'Z001', 2)
+
+Select  * from packaging
+
 --Etiqueta
 DELIMITER $$
 Create PROCEDURE UpdateTag(
@@ -187,6 +243,12 @@ begin
     SET date = p_date, tag_type = p_tag_type, destination = p_destination
     WHERE num= p_num;
 end $$
+
+
+call `UpdateTag`(1, '2022-01-01', 'TT01','tJ')
+
+select * from tag
+
 --Tipo de etiqueta
 DELIMITER $$
 Create PROCEDURE UpdateTagType(
@@ -198,6 +260,10 @@ begin
     SET description = p_description
     WHERE code = p_code;
 end $$
+
+call `UpdateTagType`('TT01', 'Etiqueta de prueba')
+
+SELECT * FROM tag_type
 
 --Report
 DELIMITER $$
@@ -216,17 +282,28 @@ Begin
     report_date = p_report_date, packed_products = p_packed_products,
     observations =p_observations, traceability = p_traceability
     WHERE folio = p_folio;
+end $$
+
+
+call ReportPackaging (1,'2024-09-01', '2024-09-30', '2024-10-01', 10, 'Too much', 1)
+
+select * from report
+
 --Incidente
 DELIMITER $$
 Create PROCEDURE UpdateIncident(
     IN p_num int,
     IN p_date DATE,
     IN p_description VARCHAR(255),
-    /* In p_user int, */
-    IN p_traceability INT,
+    IN p_traceability INT
 )
 begin
     UPDATE incident
     SET date = p_date, description = p_description,traceability = p_traceability
     WHERE num = p_num;
 end $$
+
+
+call `UpdateIncident`(1,'2024-09-01', 'Incidente de prueba',5)
+
+select * from incident
