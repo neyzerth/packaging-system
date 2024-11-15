@@ -4,8 +4,10 @@
     require "logFun.php";
     $msg = "We're so excited to see you again!";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
         $username = $_POST['username'];
         $password = $_POST['password'];
+        
         if (login($username, $password)) {
             header("Location: /");
             exit();
@@ -35,11 +37,11 @@
                 <p id="paragraph">Select the icon for more information</p>
             </div>
             <div class="division col-6" id="rightDiv">
-                <form action="/" method="post">
+                <form action="" method="post">
                     <h2>Welcome back!</h2>
                     <p id="msgDisplay"><?php echo $msg ?></p>
                     <input class="form-control" id="username" name="username" type="text" autocomplete="off" required placeholder="User">
-                    <input class="form-control" id="password" name="password" type="password" autocomplete="off" required placeholder="Password">
+                    <input class="form-control" id="password" name="password" type="password" autocomplete="off" placeholder="Password">
                     <button class="btn-primary" type="submit">Login</button>
                 </form>
             </div>
