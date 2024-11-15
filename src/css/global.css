@@ -134,8 +134,10 @@ p {
     font-size: 0.875rem;
 }
 
+
 hr {
     margin-top: 2rem; 
     margin-bottom: 2rem;
     border: 1px solid var(--background-medium);
 }
+
