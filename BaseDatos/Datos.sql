@@ -51,13 +51,13 @@ VALUES
 ('2024-10-04', '556677889', 'TT04'),
 ('2024-10-05', '998877665', 'TT05');
 
-INSERT INTO packaging (code, height, width, length, package_quantity, zone, outbound, tag)
+INSERT INTO packaging (code, height, width, length,volume,weight, package_quantity, zone, outbound, tag)
 VALUES 
-('PK001', 10.0, 15.0, 20.0, 100, 'Z001', 1, 1),
-('PK002', 12.0, 18.0, 25.0, 150, 'Z002', 2, 2),
-('PK003', 8.0, 10.0, 15.0, 75, 'Z003', 3, 3),
-('PK004', 14.0, 16.0, 30.0, 50, 'Z004', 4, 4),
-('PK005', 9.0, 11.0, 22.0, 60, 'Z005', 5, 5);
+('PK001', 10.0, 15.0, 20.0, 100,NULL,30 ,'Z001', 1, 1),
+('PK002', 12.0, 18.0, 25.0, 150,NULL,10, 'Z002', 2, 2),
+('PK003', 8.0, 10.0, 15.0, 75,NULL,20 ,'Z003', 3, 3),
+('PK004', 14.0, 16.0, 30.0, 50,NULL,40, 'Z004', 4, 4),
+('PK005', 9.0, 11.0, 22.0, 60,NULL,50, 'Z005', 5, 5);
 
 INSERT INTO unit_of_measure (code, description)
 VALUES 
@@ -107,13 +107,13 @@ VALUES
 ('ST04', 'Out for Delivery'),
 ('ST05', 'Returned');
 
-INSERT INTO traceability (product, box, package, packaging, state)
+INSERT INTO traceability (product, packaging, state)
 VALUES 
-('S10', 1, 1, 'PK001', 'ST01'),
-('P30', 2, 2, 'PK002', 'ST02'),
-('X', 3, 3, 'PK003', 'ST03'),
-('S23', 4, 4, 'PK004', 'ST04'),
-('S24', 5, 5, 'PK005', 'ST05');
+('S10', 'PK001', 'ST01'),
+('P30', 'PK002', 'ST02'),
+('X','PK003', 'ST03'),
+('S23', 'PK004', 'ST04'),
+('S24',  'PK005', 'ST05');
 
 -- Ahora ajustamos el insert en la tabla incident que hace referencia a los registros de traceability
 INSERT INTO incident (date, description, user, traceability)

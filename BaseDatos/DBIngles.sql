@@ -1,4 +1,4 @@
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 
 drop DATABASE packaging;
 create DATABASE packaging;
@@ -8,7 +8,8 @@ USE packaging;
 CREATE TABLE user_type (
     code VARCHAR(5)  PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
-    description VARCHAR(50) NOT NULL
+    description VARCHAR(50) NOT NULL,
+    active BIT DEFAULT TRUE
 );
 
 -- TABLE USER
@@ -39,7 +40,8 @@ CREATE TABLE box (
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
     volume DECIMAL(10, 2), 
-    weight DECIMAL(10, 2)
+    weight DECIMAL(10, 2),
+    active BIT DEFAULT TRUE
 );
 
 -- TABLE ZONE
@@ -47,14 +49,16 @@ CREATE TABLE zone (
     code VARCHAR(5) PRIMARY KEY,
     area VARCHAR(50) NOT NULL UNIQUE,
     available_capacity INT,
-    total_capacity INT
+    total_capacity INT,
+    active BIT DEFAULT TRUE
 );
 
 -- TABLE OUTBOUBD
 CREATE TABLE outbound (
     num INT AUTO_INCREMENT PRIMARY KEY,
     date DATE,
-    exit_quantity INT
+    exit_quantity INT,
+    active BIT DEFAULT TRUE
 );
 
 -- TABLE TAG TYPE
@@ -79,8 +83,8 @@ CREATE TABLE packaging (
     height DECIMAL(10, 2),
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
-    volume DECIMAL(10, 2), --nuevo
-    weight DECIMAL(10, 2) 
+    volume DECIMAL(10, 2), 
+    weight DECIMAL(10, 2), 
     package_quantity INT,
     zone VARCHAR(5),
     outbound INT,
@@ -99,18 +103,23 @@ CREATE TABLE unit_of_measure (
 -- TABLE MATERIAL
 CREATE TABLE material (
     code VARCHAR(5) PRIMARY KEY,
-    material_name VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     description VARCHAR(255),
     available_quantity INT,
+    active BIT DEFAULT TRUE,
     unit_of_measure VARCHAR(5),
     CONSTRAINT fk_unit_of_measure FOREIGN KEY (unit_of_measure) REFERENCES unit_of_measure(code)
 );
+
+ALTER TABLE material
+change  material_name name VARCHAR(50) NOT NULL;;
 
 -- TABLE PACKAGING PROTOCOL
 CREATE TABLE packaging_protocol (
     num INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
-    file_name VARCHAR(255)
+    file_name VARCHAR(255),
+    active BIT DEFAULT TRUE
 );
 
 
@@ -127,7 +136,9 @@ CREATE TABLE product (
     height DECIMAL(10, 2),
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
+    volume  DECIMAL(10, 2),
     weight DECIMAL(10, 2),
+    active BIT DEFAULT TRUE,
     packaging_protocol INT,
     CONSTRAINT fk_packaging_protocol_product FOREIGN KEY (packaging_protocol) REFERENCES packaging_protocol(num)
 );
@@ -157,13 +168,9 @@ CREATE TABLE state (
 CREATE TABLE traceability (
     num INT AUTO_INCREMENT PRIMARY KEY,
     product VARCHAR(5),
-    box INT,
-    package INT,
     packaging VARCHAR(5),
     state VARCHAR(5),
     CONSTRAINT fk_product_traceability FOREIGN KEY (product) REFERENCES product(code),
-    CONSTRAINT fk_box_traceability FOREIGN KEY (box) REFERENCES box(num),
-    CONSTRAINT fk_package_traceability FOREIGN KEY (package) REFERENCES package(num),
     CONSTRAINT fk_packaging_traceability FOREIGN KEY (packaging) REFERENCES packaging(code),
     CONSTRAINT fk_state_traceability FOREIGN KEY (state) REFERENCES state(code)
 );

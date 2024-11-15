@@ -30,9 +30,44 @@ Begin
 END $$
 DELIMITER;
 
+--Tigger para sacar el volumen del embalaje en insert y update
 
---Falta saber lo del peso del embalaje
+DELIMITER $$
+CREATE TRIGGER calculate_packaging_volume_insert
+BEFORE INSERT ON packaging
+FOR EACH ROW
+Begin
+    SET NEW.volume = NEW.height*NEW.width*NEW.length;
+END $$
+DELIMITER;
 
+
+DELIMITER $$
+CREATE TRIGGER calculate_packaging_volume_update
+BEFORE UPDATE ON packaging
+FOR EACH ROW
+Begin
+    SET NEW.volume = NEW.height*NEW.width*NEW.length;
+END $$
+
+
+--Trigger para sacer el volumen de un producto en insert y update
+DELIMITER $$
+CREATE TRIGGER calculate_product_volume_insert
+BEFORE INSERT ON product
+FOR EACH ROW
+Begin
+    SET NEW.volume = NEW.height*NEW.width*NEW.length;
+END $$
+
+
+DELIMITER $$
+CREATE TRIGGER calculate_product_volume_insert
+BEFORE INSERT ON product
+FOR EACH ROW
+Begin
+    SET NEW.volume = NEW.height*NEW.width*NEW.length;
+END $$
 
 
 --TRIGER DE MATERIAL
@@ -131,24 +166,40 @@ DELIMITER ;
 
 --Trigger para la cantidad de salida de los embalajes tabla outbound
 
---Tigger para sacar el volumen del embalaje en insert y update
 
-DELIMITER $$
-CREATE TRIGGER calculate_packaging_volume_insert
-BEFORE INSERT ON packaging
-FOR EACH ROW
-Begin
-    SET NEW.volume = NEW.height*NEW.width*NEW.length;
-END $$
-DELIMITER;
+
+--Pensar el nombre correcto en ingles
 
 
 DELIMITER $$
-CREATE TRIGGER calculate_packaging_volume_update
-BEFORE UPDATE ON packaging
-FOR EACH ROW
-Begin
-    SET NEW.volume = NEW.height*NEW.width*NEW.length;
-END $$
-DELIMITER;
+CREATE PROCEDURE Sp_RegistroSalidaEmbalaje (
+    IN p_packaging_code VARCHAR(5), 
+    IN p_exit_quantity INT          
+)
+BEGIN
+    DECLARE available_quantity INT;
 
+    SELECT package_quantity INTO available_quantity
+    FROM packaging
+    WHERE code = p_packaging_code;
+
+    IF available_quantity IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Packaging not found.';
+    ELSEIF available_quantity < p_exit_quantity THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventary.';
+    ELSE
+        UPDATE packaging
+        SET package_quantity = package_quantity - p_exit_quantity
+        WHERE code = p_packaging_code;
+
+
+        INSERT INTO outbound (date, exit_quantity)
+        VALUES (CURRENT_DATE, p_exit_quantity);
+    END IF;
+END $$
+
+
+--DUDAAAA
+--Trigger peso paquete
+
+--Trigger peso embalaje
