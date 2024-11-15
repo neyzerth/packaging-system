@@ -42,8 +42,10 @@ BEGIN
 END $$
 
 --Usertype
+drop Procedure insertUserType
+
 DELIMITER $$
-Create PROCEDURE insertUserType(
+Create PROCEDURE addUserType(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(100)
@@ -57,7 +59,7 @@ Begin
     where code = p_code;
 END$$
 
-call insertUserType('a','a','a')
+call addUserType('a','a','a')
 
 select * from user_type
 

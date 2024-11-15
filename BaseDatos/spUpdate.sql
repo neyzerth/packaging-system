@@ -77,26 +77,32 @@ call `UpdateBox`(1,5,4,7,3.5)
 
 select * from box
 
---Material  REVISAAAAAARRRRR
-DELIMITER $$    
-Create PROCEDURE UpdateMaterial(
+--Material
+
+drop Procedure UpdateMaterial
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(100),
-    In p_avaliable_quantity int,
-    IN p_active bit,
-    IN p_unit_of_mesure varchar(5)
+    IN p_available_quantity INT,
+    IN p_active BIT,
+    IN p_unit_of_measure VARCHAR(5)
 )
 BEGIN
-    UPDATE material
-    SET name = p_name, 
-    description = p_description, 
-    available_quantity = p_avaliable_quantity,
-    active = p_active,
-    unit_of_measure=p_unit_of_mesure
-    WHERE code = p_code;
-End $$
+        UPDATE material
+        SET 
+            name = p_name, 
+            description = p_description, 
+            available_quantity = p_available_quantity,
+            active = p_active,
+            unit_of_measure = p_unit_of_measure
+        WHERE code = p_code;
+END $$
 
+call UpdateMaterial('stl', 'Steel', 'High-quality ', 500, 0,'UOM01')
 
 select * from material
 
