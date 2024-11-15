@@ -276,4 +276,12 @@ select * from tag_type
 
 
 
+--unidad de medida
 
+
+--tipo de etiqueta
+
+
+--trazabilidad
+
+--tablas muchos a muchos

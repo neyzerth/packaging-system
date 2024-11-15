@@ -5,7 +5,7 @@
 -----------------------------------
 SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
 FROM information_schema.TRIGGERS 
-WHERE TRIGGER_SCHEMA = 'embalaje';
+WHERE TRIGGER_SCHEMA = 'packaging';
 
 DROP TRIGGER after_insert_tag
 

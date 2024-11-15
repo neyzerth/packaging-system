@@ -272,8 +272,10 @@ call `UpdateTagType`('TT01', 'Etiqueta de prueba')
 SELECT * FROM tag_type
 
 --Report
+
+drop Procedure ReportPackaging
 DELIMITER $$
-Create PROCEDURE ReportPackaging(
+Create PROCEDURE updateReport(
     IN p_folio VARCHAR(5),
     IN p_start_date DATE,
     IN p_end_date DATE,
@@ -291,7 +293,7 @@ Begin
 end $$
 
 
-call ReportPackaging (1,'2024-09-01', '2024-09-30', '2024-10-01', 10, 'Too much', 1)
+call updateReport(1,'2024-09-01', '2024-09-30', '2024-10-01', 10, 'Too much', 1)
 
 select * from report
 
@@ -313,3 +315,10 @@ end $$
 call `UpdateIncident`(1,'2024-09-01', 'Incidente de prueba',5)
 
 select * from incident
+
+--unidad de medida
+
+
+--trazabilidad
+
+--tablas muchos a muchos
