@@ -17,11 +17,15 @@ define("JS",  "/src/js/");
 define("SVG", "/src/svg/");
 define("IMG", "/src/img/");
 
-include 'dbconfig.php';
+define('DBHOST', 'localhost');
+define('DBUSER', 'root');
+define('DBPASSW', '');
+define('DBNAME', 'packaging'); 
+
+//include 'dbconfig.php';
 
 function connectdb()
 {
-
     try {
         $db = mysqli_connect(DBHOST, DBUSER, DBPASSW, DBNAME);
         //echo "<p>Conectado<p>";

@@ -35,7 +35,7 @@
                 <p id="paragraph">Select the icon for more information</p>
             </div>
             <div class="division col-6" id="rightDiv">
-                <form action="#" method="post">
+                <form action="/" method="post">
                     <h2>Welcome back!</h2>
                     <p id="msgDisplay"><?php echo $msg ?></p>
                     <input class="form-control" id="username" name="username" type="text" autocomplete="off" required placeholder="User">
