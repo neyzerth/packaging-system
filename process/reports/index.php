@@ -1,5 +1,5 @@
 <?php
-$form = "/reports/addIncident.php";
+$form = "addIncident.php";
 require_once "../../config.php";
 include HEAD;
 include 'listIncidents.php';
