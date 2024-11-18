@@ -9,7 +9,7 @@
 
     function getMaterial() {
         $db = connectdb();
-        $query = "SELECT code, material_name, description, available_quantity, unit_of_measure FROM vw_material_info;";
+        $query = "SELECT * FROM material WHERE active = 1;";
         $result = mysqli_query($db, $query);
         $materials = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -44,6 +44,30 @@
     
         // Vincular los parámetros
         $stmt->bind_param("ssiiis", $code, $name, $description, $available_quantity, $active, $unit_of_measure);
+        
+        // Ejecutar el procedimiento
+        if ($stmt->execute()) {
+            $result = true; 
+        } else {
+            $result = false; 
+        }
+        
+        $stmt->close();
+        $db->close();
+        
+        return $result; 
+    }
+
+    function deactivateMaterial($code) {
+        $db = connectdb();
+        
+        $stmt = $db->prepare("CALL dropMaterial(?)");
+        
+        if ($stmt === false) {
+            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+        }
+    
+        $stmt->bind_param("s", $code);
         
         // Ejecutar el procedimiento
         if ($stmt->execute()) {

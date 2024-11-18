@@ -21,20 +21,25 @@
         }
     }
 ?>
-
-<form action="updateMaterial.php" method="POST" autocomplete="off">
-    <input type="hidden" name="code" value="<?php echo $material['code']; ?>">
-    <label>Name:</label>
-    <input type="text" name="material_name" value="<?php echo $material['material_name']; ?>" required>
-    
-    <label>Description:</label>
-    <textarea name="description" required><?php echo $material['description']; ?></textarea>
-    
-    <label>Available Quantity:</label>
-    <input type="number" name="available_quantity" value="<?php echo $material['available_quantity']; ?>" required>
-    
-    <label>Unit of Measure:</label>
-    <input type="text" name="unit_of_measure" value="<?php echo $material['unit_of_measure']; ?>" required>
-    
-    <button type="submit">Update</button>
-</form>
+<main class="tables">
+    <div class="background">
+        <table class="table">
+            <form action="editMaterial.php" method="POST" autocomplete="off">
+                <input type="hidden" name="code" value="<?php echo $material['code']; ?>">
+                <label>Name:</label>
+                <input type="text" name="material_name" value="<?php echo $material['name']; ?>" required>
+                
+                <label>Description:</label>
+                <textarea name="description" required><?php echo $material['description']; ?></textarea>
+                
+                <label>Available Quantity:</label>
+                <input type="number" name="available_quantity" value="<?php echo $material['available_quantity']; ?>" required>
+                
+                <label>Unit of Measure:</label>
+                <input type="text" name="unit_of_measure" value="<?php echo $material['unit_of_measure']; ?>" required>
+                
+                <button type="submit">Update</button>
+            </form>
+        </table>
+    </div>
+</main>
