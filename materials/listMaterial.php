@@ -34,6 +34,9 @@
                         <td><?php echo $material['material_name']; ?></td>
                         <td><?php echo $material['description']; ?></td>
                         <td><?php echo $material['available_quantity'].$material['unit_of_measure']; ?></td>
+                        <td>
+                            <a href="editMaterial.php?code=<?php echo $material['code']; ?>">Edit</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

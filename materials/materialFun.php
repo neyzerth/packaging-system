@@ -23,4 +23,38 @@
         $query = "SELECT code, description FROM unit_of_measure;";
         return mysqli_query($db, $query);
     }
+
+    function getMaterialByCode($code) {
+        $db = connectdb();
+        $query = "SELECT code, name, description, available_quantity, unit_of_measure FROM vw_material_info WHERE code = '$code';";
+        $result = mysqli_query($db, $query);
+        $material = mysqli_fetch_assoc($result);
+        mysqli_close($db);
+        return $material;
+    }
+
+    function updateMaterial($code, $name, $description, $available_quantity, $active, $unit_of_measure) {
+        $db = connectdb();
+        
+        $stmt = $db->prepare("CALL UpdateMaterial(?, ?, ?, ?, ?, ?)");
+        
+        if ($stmt === false) {
+            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+        }
+    
+        // Vincular los parámetros
+        $stmt->bind_param("ssiiis", $code, $name, $description, $available_quantity, $active, $unit_of_measure);
+        
+        // Ejecutar el procedimiento
+        if ($stmt->execute()) {
+            $result = true; 
+        } else {
+            $result = false; 
+        }
+        
+        $stmt->close();
+        $db->close();
+        
+        return $result; 
+    }
 ?>
