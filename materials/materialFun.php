@@ -31,7 +31,7 @@
 
     function getMaterialByCode($code) {
         $db = connectdb();
-        $query = "SELECT code, name, description, available_quantity, unit_of_measure FROM vw_material_info WHERE code = '$code';";
+        $query = "SELECT * FROM material WHERE code = '$code';";
         $result = mysqli_query($db, $query);
         $material = mysqli_fetch_assoc($result);
         mysqli_close($db);
@@ -48,13 +48,14 @@
         }
     
         // Vincular los parámetros
-        $stmt->bind_param("ssiiis", $code, $name, $description, $available_quantity, $active, $unit_of_measure);
+        $stmt->bind_param("sssiis", $code, $name, $description, $available_quantity, $active, $unit_of_measure);
         
         // Ejecutar el procedimiento
         if ($stmt->execute()) {
             $result = true; 
         } else {
-            $result = false; 
+            $result = false;
+            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();
@@ -78,7 +79,8 @@
         if ($stmt->execute()) {
             $result = true; 
         } else {
-            $result = false; 
+            $result = false;
+            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();

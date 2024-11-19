@@ -5,7 +5,10 @@
 ?>
     <main class="tables">
         <div class="background">
-        <?php $link="addMaterial.php"; include HEADER; ?>
+        <?php
+            $link="?a=add"; 
+            include HEADER; 
+        ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -26,6 +29,10 @@
                             <span class="column-order"></span>
                         </th>
                         <th>
+                            <span>Protocol</span>
+                            <span class="column-order"></span>
+                        </th>
+                        <th>
                             <span>Edit material</span>
                             <span class="column-order"></span>
                         </th>
@@ -37,9 +44,10 @@
                         <td><?php echo $material['code']; ?></td>
                         <td><?php echo $material['name']; ?></td>
                         <td><?php echo $material['description']; ?></td>
-                        <td><?php echo $material['available_quantity'].$material['unit_of_measure']; ?></td>
+                        <td><?php echo $material['available_quantity']; ?></td>
+                        <td><?php echo $material['unit_of_measure']; ?></td>
                         <td>
-                            <a href="editMaterial.php?code=<?php echo $material['code']; ?>">Edit</a>
+                            <a href="?a=edit&code=<?php echo $material['code']; ?>">Edit</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
