@@ -5,8 +5,7 @@
     if (isset($_GET['code'])) {
         $code = $_GET['code'];
         
-        // Llamar a la función para desactivar el material
-        if (deactivateMaterial($code)) {
+        if (disableMaterial($code)) {
             echo "Material desactivado correctamente.";
         } else {
             echo "Error al desactivar el material.";

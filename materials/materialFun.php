@@ -58,7 +58,7 @@
         return $result; 
     }
 
-    function deactivateMaterial($code) {
+    function disableMaterial($code) {
         $db = connectdb();
         
         $stmt = $db->prepare("CALL dropMaterial(?)");

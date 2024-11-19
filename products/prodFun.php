@@ -25,11 +25,15 @@ function addProduct($code, $name, $description, $height, $width, $length, $weigh
 
 function getProducts(){
     $db = connectdb();
-    $query = "SELECT code, name, description,". 
-        "height, width, length, weight, packaging_protocol".
-        " FROM product;";
-        //echo $query;
-    return $result = mysqli_query($db, $query);
+    $query = "SELECT * FROM product WHERE active = 1;";
+
+        $result = mysqli_query($db, $query);
+        $products = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $products[] = $row;
+            }
+            mysqli_close($db);
+            return $products;
 }
 
 function getProtocols(){
@@ -39,4 +43,58 @@ function getProtocols(){
 
         //echo $query;
     return $result = mysqli_query($db, $query);
+}
+
+function getProductByCode($code) {
+    $db = connectdb();
+    $query = "SELECT code, name, description, height, width, length, weight, packaging_protocol FROM vw_product_info WHERE code = '$code';";
+    $result = mysqli_query($db, $query);
+    $product = mysqli_fetch_assoc($result);
+    mysqli_close($db);
+    return $product;
+}
+
+function updateProduct($code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol) {
+    $db = connectdb();
+    $stmt = $db ->prepare("CALL UpdateProduct (?,?,?,?,?,?,?,?)");
+
+    if($stmt === false){
+        die('Error en la preparacion de la consulta:'.htmlspecialchars($db->error));
+    }
+
+    $stmt->bind_param("sssiiiiii", $code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol);
+    if ($stmt->execute()){
+        $result = true;
+    } else {
+        $result = false;
+    }
+
+    $stmt->close();
+    $db->close();
+
+    return $result;
+}
+
+function disableProduct($code) {
+    $db = connectdb();
+    
+    $stmt = $db->prepare("CALL dropProduct(?)");
+    
+    if ($stmt === false) {
+        die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+    }
+
+    $stmt->bind_param("s", $code);
+    
+    // Ejecutar el procedimiento
+    if ($stmt->execute()) {
+        $result = true; 
+    } else {
+        $result = false; 
+    }
+    
+    $stmt->close();
+    $db->close();
+    
+    return $result; 
 }
