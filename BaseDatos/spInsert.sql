@@ -276,12 +276,84 @@ select * from tag_type
 
 
 
---unidad de medida
+--unidad de medida  --revisar
+drop Procedure addUnit_of_measure
 
+DELIMITER $$
+CREATE PROCEDURE addUnit_of_measure(
+    IN p_code VARCHAR(5),
+    IN p_description VARCHAR(50)
+)
+BEGIN
+    INSERT INTO unit_of_measure(code, description)
+    VALUES (p_code, p_description);
 
---tipo de etiqueta
+    SELECT code, description
+    FROM unit_of_measure
+    WHERE code = p_code;
+END$$
+
+CALL addUnit_of_measure('UOM08', 'Prueba 4');
+
+select * from unit_of_measure
 
 
 --trazabilidad
 
 --tablas muchos a muchos
+
+DELIMITER $$
+
+CREATE PROCEDURE addUserTraceability(
+    IN p_user INT,
+    IN p_traceability INT
+)
+BEGIN
+    INSERT INTO user_traceability(user, traceability)
+    VALUES (p_user, p_traceability);
+
+    SELECT user, traceability
+    FROM user_traceability
+    WHERE user = p_user AND traceability = p_traceability;
+END$$
+
+CALL addUserTraceability(1, 100);
+
+
+DELIMITER $$
+
+CREATE PROCEDURE addMaterialPackging(
+    IN p_packaging VARCHAR(5),
+    IN p_material VARCHAR(5),
+    IN p_quantity INT
+)
+BEGIN
+    INSERT INTO material_packging(packaging, material, quantity)
+    VALUES (p_packaging, p_material, p_quantity);
+
+    SELECT packaging, material, quantity
+    FROM material_packging
+    WHERE packaging = p_packaging AND material = p_material;
+END$$
+
+
+select * from material_packging
+
+DELIMITER $$
+
+CREATE PROCEDURE addMaterialPackage(
+    IN p_material VARCHAR(5),
+    IN p_package INT,
+    IN p_quantity INT
+)
+BEGIN
+    INSERT INTO material_package(material, package, quantity)
+    VALUES (p_material, p_package, p_quantity);
+
+    SELECT material, package, quantity
+    FROM material_package
+    WHERE material = p_material AND package = p_package;
+END$$
+
+
+select * from material_package

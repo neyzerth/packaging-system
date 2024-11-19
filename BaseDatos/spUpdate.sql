@@ -125,7 +125,7 @@ Begin
     WHERE code = p_code;
 END$$
 
-call UpdateProduct('X', 'iPhone XX', 'Budget product', 14.36, 7.09, 0.77, 174, 0)
+call UpdateProduct('X', 'iPhone X', ' product', 14.36, 7.09, 0.77, 174, 0)
 
 select * from product
 
@@ -317,8 +317,74 @@ call `UpdateIncident`(1,'2024-09-01', 'Incidente de prueba',5)
 select * from incident
 
 --unidad de medida
+Delimiter $$
+Create procedure updateUnit_of_measure(
+    IN p_code varchar(5),
+    IN p_description varchar(50)
+)
+BEGIN
+    UPDATE unit_of_measure
+    SET description = p_description
+    WHERE code = p_code;
+END$$
 
+call updateUnit_of_measure('UOM01','KG')
+
+select * from unit_of_measure
 
 --trazabilidad
 
 --tablas muchos a muchos
+
+
+CREATE PROCEDURE updateUserTraceability(
+    IN p_old_user INT,
+    IN p_old_traceability INT,
+    IN p_new_user INT,
+    IN p_new_traceability INT
+)
+BEGIN
+    UPDATE user_traceability
+    SET user = p_new_user, traceability = p_new_traceability
+    WHERE user = p_old_user AND traceability = p_old_traceability;
+
+    SELECT user, traceability
+    FROM user_traceability
+    WHERE user = p_new_user AND traceability = p_new_traceability;
+END$$
+
+select * from user_traceability
+
+CREATE PROCEDURE updateMaterialPackging(
+    IN p_packaging VARCHAR(5),
+    IN p_material VARCHAR(5),
+    IN p_quantity INT
+)
+BEGIN
+    UPDATE material_packging
+    SET quantity = p_quantity
+    WHERE packaging = p_packaging AND material = p_material;
+
+    SELECT packaging, material, quantity
+    FROM material_packging
+    WHERE packaging = p_packaging AND material = p_material;
+END$$
+
+select * from material_packging
+
+CREATE PROCEDURE updateMaterialPackage(
+    IN p_material VARCHAR(5),
+    IN p_package INT,
+    IN p_quantity INT
+)
+BEGIN
+    UPDATE material_package
+    SET quantity = p_quantity
+    WHERE material = p_material AND package = p_package;
+
+    SELECT material, package, quantity
+    FROM material_package
+    WHERE material = p_material AND package = p_package;
+END$$
+
+select * from material_packging
