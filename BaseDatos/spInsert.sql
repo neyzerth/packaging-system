@@ -80,11 +80,13 @@ BEGIN
 END $$
 
 --Material
+drop Procedure addMaterial
 DELIMITER $$
 CREATE PROCEDURE addMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(255),
+    IN p_available_quantity int,
     IN p_unit VARCHAR(5)
 )
 BEGIN
@@ -98,11 +100,15 @@ BEGIN
     END IF;
 
     INSERT INTO material (code, name, description, available_quantity, unit_of_measure)
-    VALUES(p_code, p_name, p_description, 0, p_unit);
+    VALUES(p_code, p_name, p_description, p_available_quantity, p_unit);
 
     SELECT code,name, description, available_quantity, unit_of_measure
     FROM material WHERE code = p_code;
 END $$
+
+call addMaterial('GDL','GOLD','N/A',77,'UOM01')
+
+SELECT * FROM material
 
 
 --Product FALTAAAAA AGREGAR VOLUMEN A LA BASE
