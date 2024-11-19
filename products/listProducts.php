@@ -54,8 +54,8 @@
                         <td><?php echo $product['length'] ?></td>
                         <td><?php echo $product['packaging_protocol'] ?></td>
                         <td>
-                            <a href="editProduct.php?code=<?php echo $material['code']; ?>">Edit</a>
-                            <a href="disableProduct.php?code=<?php echo $material['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
+                            <a href="editProduct.php?code=<?php echo $product['code']; ?>">Edit</a>
+                            <a href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
                         </td>
                     </tr>
                     <?php endforeach;?>
