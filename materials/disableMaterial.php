@@ -11,7 +11,7 @@
             echo "Error al desactivar el material.";
         }
 
-        header("Location: listMaterial.php");
+        header("Location: index.php");
         exit();
     } else {
         echo "Código de material no proporcionado.";

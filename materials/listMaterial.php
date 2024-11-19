@@ -40,7 +40,6 @@
                         <td><?php echo $material['available_quantity'].$material['unit_of_measure']; ?></td>
                         <td>
                             <a href="editMaterial.php?code=<?php echo $material['code']; ?>">Edit</a>
-                            <a href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este material?');">Disable</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

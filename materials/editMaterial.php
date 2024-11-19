@@ -23,6 +23,7 @@
 ?>
 <main class="tables">
     <div class="background">
+        <a href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este material?');">Disable</a>
         <table class="table">
             <form action="editMaterial.php" method="POST" autocomplete="off">
                 <input type="hidden" name="code" value="<?php echo $material['code']; ?>">

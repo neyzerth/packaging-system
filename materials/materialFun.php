@@ -2,9 +2,14 @@
     require_once "../config.php";
     function addMaterial($code, $material_name, $description, $available_quantity, $unit_of_measure) {
         $db = connectdb();
-        $query = "call addMaterial(" . "'$code','$material_name'," . "'$description',$available_quantity," . "'$unit_of_measure'" . ");";
-        echo "<p>$query</p>";
-        return $db->query($query);
+        try {
+            $query = "call addMaterial(" . "'$code','$material_name'," . "'$description',$available_quantity," . "'$unit_of_measure'" . ");";
+            //echo "<p>$query</p>";
+            return $db->query($query);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+        
     } 
 
     function getMaterial() {
