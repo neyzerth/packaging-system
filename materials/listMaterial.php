@@ -32,10 +32,6 @@
                             <span>Protocol</span>
                             <span class="column-order"></span>
                         </th>
-                        <th>
-                            <span>Edit material</span>
-                            <span class="column-order"></span>
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
