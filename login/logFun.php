@@ -2,9 +2,9 @@
 require_once "../config.php";
 //AGREGUE ESTE IF POR QUE ME SALIA ESTE ERROR:
 //Notice: session_start(): Ignoring session_start() because a session is already active 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+//if (session_status() === PHP_SESSION_NONE) {
+//    session_start();
+//}
 function login($username, $password)
 {
     $db = connectdb();
@@ -21,5 +21,6 @@ function login($username, $password)
         $_SESSION['username'] = $user['username'];
         $_SESSION['user_type'] = $user['user_type'];
     }
+    return $bool;
 }
 ?>

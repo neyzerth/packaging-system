@@ -22,7 +22,7 @@ define('DBUSER', 'root');
 define('DBPASSW', '');
 define('DBNAME', 'packaging'); 
 
-//include 'dbconfig.php';
+include 'dbconfig.php';
 
 function connectdb()
 {
