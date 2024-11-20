@@ -1,11 +1,11 @@
 <?php
     require_once("../config.php");
-    require_once("protocolFun.php");
+    require_once("boxFun.php");
 
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         
-        if (disableMaterial($num)) {
+        if (disableBox($num)) {
             echo "Protocolo desactivado correctamente.";
         } else {
             echo "Error al desactivar el protocolo.";

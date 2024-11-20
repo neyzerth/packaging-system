@@ -1,9 +1,14 @@
 <?php
-    $users = getUsers();    
+    require_once("../config.php");
+    require "userFun.php";
+    $users = getUsers();
 ?>
     <main class="tables">
         <div class="background">
-            <?php $link="addUser.php"; include HEADER; ?>
+            <?php 
+            $link="?a=add";
+            include HEADER;
+            ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -32,6 +37,9 @@
                         <td><?php echo $user['full_name']; ?></td>
                         <td><?php echo $user['date_of_birth']; ?></td>
                         <td><?php echo $user['user']; ?></td>
+                        <td>
+                            <a href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

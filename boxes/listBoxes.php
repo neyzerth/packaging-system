@@ -1,9 +1,14 @@
 <?php
+    require_once("../config.php");
+    require "boxFun.php";
     $boxes = getBoxes();
 ?>
     <main class="tables">
         <div class="background">
-            <?php $link="addBox.php"; include HEADER; ?>
+            <?php 
+            $link="?a=add"; 
+            include HEADER; 
+            ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -42,6 +47,9 @@
                         <td><?php echo $box['length'].'cm' ?></td>
                         <td><?php echo $box['volume'].'cm2' ?></td>
                         <td><?php echo $box['weight'].'g' ?></td>
+                        <td>
+                            <a href="?a=edit&num=<?php echo $box['num'];?>">Edit</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
