@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    require("../../config.php");
+    require HEAD;
+    require "reportFun.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register-incidents</title>
-    <link rel="stylesheet" href="/styles/!important.css">
-    <link rel="stylesheet" href="/styles/!color-palette.css">
-    <link rel="stylesheet" href="/styles/register.css">
-</head>
+    if ($_SERVER['REQUEST_METHOD']=='POST'){
+        $date = $_POST['date'];
+        $description = $_POST['description'];
+        $traceability = $_POST['traceability'];
 
-<body>
-    <div class="container">
-        <main>
-            <div class="row-div">
-                <div class="">
-                    <form action="../incidents/listIncidents.html" method="post">
+        $result = addIncident(date: $date, description: $description, traceability: $traceability);
+    }
+?>
+                    <form action="addIncident.php" method="post" autocomplete="off">
                         <h2>Incident</h2>
                         <div class="row-form">
                             <div class="row-lg-12">
@@ -27,7 +23,7 @@
                             <div class="row-lg-12">
                                 <label for="">Description</label>
                                 <div class="input-group">
-                                    <textarea type="text" required placeholder=""></textarea>
+                                    <textarea type="text" required placeholder="" ></textarea>
                                 </div>
                             </div>
                             <div class="row-lg-12">
