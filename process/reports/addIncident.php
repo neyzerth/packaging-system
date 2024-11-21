@@ -1,6 +1,4 @@
 <?php
-    require("../../config.php");
-    require HEAD;
     require "reportFun.php";
 
     if ($_SERVER['REQUEST_METHOD']=='POST'){
@@ -11,7 +9,7 @@
         $result = addIncident(date: $date, description: $description, traceability: $traceability);
     }
 ?>
-                    <form action="addIncident.php" method="post" autocomplete="off">
+                    <form action="?a=add" method="post" autocomplete="off">
                         <h2>Incident</h2>
                         <div class="row-form">
                             <div class="row-lg-12">
@@ -39,10 +37,4 @@
                 </div>
             </div>
         </main>
-        <footer class="text-center" style="margin-top: 3rem; padding-top: 3rem; margin-bottom: 3rem;">
-            <p>© 2024-2025 Company Name</p>
-        </footer>
-    </div>
-</body>
 
-</html>

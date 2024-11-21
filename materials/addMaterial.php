@@ -1,6 +1,4 @@
 <?php
-    require("../config.php");
-    require HEAD;
     require "materialFun.php";
     $unit_of_measures = getUnitMeasure();
     if ($_SERVER['REQUEST_METHOD']=='POST') {
@@ -16,7 +14,7 @@
 ?>
     <main class="forms">
         <div class="background">
-            <form class="form" action="addMaterial.php" method="post" autocomplete="off">
+            <form class="form" action="?a=add" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Materials</h1>
@@ -67,4 +65,3 @@
             </form>
         </div>
     </main>
-    <?php include FOOT; ?>

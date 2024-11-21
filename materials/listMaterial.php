@@ -65,6 +65,4 @@
                     </tr>
                 </tfoot>
             </table>
-            <?php include FOOTER ?>
-        </div>
-    </main>
+            

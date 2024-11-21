@@ -1,5 +1,4 @@
 <?php
-    require_once("../../config.php");
     require "reportFun.php";
 
     $traceabilities = getTraceabilityIncident();

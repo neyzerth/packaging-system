@@ -1,6 +1,4 @@
 <?php
-    require("../config.php");
-    require HEAD;
     require "prodFun.php";
 
     $protocols = getProtocols();
