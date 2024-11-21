@@ -1,7 +1,7 @@
 <?php
-    require_once("../config.php");
-    require "userFun.php";
-    $users = getUsers();
+    require_once("../../../config.php");
+    require "zoneFun.php";
+    $zones = getZones();
 ?>
     <main class="tables">
         <div class="background">
@@ -17,28 +17,28 @@
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Area</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Date of birth</span>
+                            <span>Available capacity</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>User type</span>
+                            <span>Total capacity</span>
                             <span class="column-order"></span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($zones as $zone): ?>
                     <tr>
-                        <td><?php echo $user['num']; ?></td>
-                        <td><?php echo $user['full_name']; ?></td>
-                        <td><?php echo $user['date_of_birth']; ?></td>
-                        <td><?php echo $user['user']; ?></td>
+                        <td><?php echo $zone['code']; ?></td>
+                        <td><?php echo $zone['area']; ?></td>
+                        <td><?php echo $zone['available_capacity']; ?></td>
+                        <td><?php echo $zone['total_capacity']; ?></td>
                         <td>
-                            <a href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
+                            <a href="?a=edit&code=<?php echo $zone['code'];?>">Edit</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -49,13 +49,13 @@
                             <span>Code</span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Area</span>
                         </th>
                         <th>
-                            <span>Date of birth</span>
+                            <span>Available capacity</span>
                         </th>
                         <th>
-                            <span>User type</span>
+                            <span>Total capacity</span>
                         </th>
                     </tr>
                 </tfoot>

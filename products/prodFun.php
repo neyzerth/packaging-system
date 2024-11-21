@@ -56,13 +56,14 @@ function getProductByCode($code) {
 
 function updateProduct($code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol) {
     $db = connectdb();
-    $stmt = $db ->prepare("CALL UpdateProduct (?,?,?,?,?,?,?,?)");
+    $stmt = $db ->prepare("CALL UpdateProduct (?,?,?,?,?,?,?,?,?)");
 
     if($stmt === false){
         die('Error en la preparacion de la consulta:'.htmlspecialchars($db->error));
     }
 
-    $stmt->bind_param("sssiiiiii", $code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol);
+    //s->string , i->integer, d->double
+    $stmt->bind_param("sssddddii", $code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol);
     if ($stmt->execute()){
         $result = true;
     } else {

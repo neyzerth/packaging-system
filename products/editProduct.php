@@ -7,6 +7,10 @@
     if (isset($_GET['code'])) {
         $code = $_GET['code'];
         $product = getProductByCode($code);
+        if (!$product) {
+            echo "Product not found";
+            exit;
+        }
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,10 +22,10 @@
         $length = $_POST['length'];
         $weight = $_POST['weight'];
         $active = 1; 
-        $packaging_protocol = $_POST['packaking_protocol'];
+        $packaging_protocol = $_POST['packaging_protocol'];
 
-        if (updateProduct($code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol)) {
-            echo "Material actualizado con éxito.";
+        if (updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, active:$active, packaging_protocol:$packaging_protocol)) {
+            echo "Producto actualizado con éxito.";
         } else {
             echo "Error al actualizar el producto.";
         }
@@ -29,8 +33,9 @@
 ?>
 <main class="tables">
     <div class="background">
+        <a href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
         <table class="table">
-            <form action="editProduct.php" method="POST" autocomplete="off">
+            <form action="" method="POST" autocomplete="off">
                 <input type="hidden" name="code" value="<?php echo $product['code']; ?>">
                 <label>Name:</label>
                 <input type="text" name="name" value="<?php echo $product['name']; ?>" required>
@@ -51,13 +56,14 @@
                 <input type="number" name="weight" value="<?php echo $product['weight']; ?>" required>
                 
                 <label for="supervisor">Protocol</label>
-                    <select name="packaging_protocol" id="supervisor">
+                <select name="packaging_protocol">
                     <?php 
-                    while ($protocol = mysqli_fetch_assoc($protocols)):   
-                    echo "<option value='{$protocol['num']}'>{$protocol['file_name']}</option>";
-                    endwhile; 
+                        while ($protocol = mysqli_fetch_assoc($protocols)):  
+                            $selected = $product['packaging_protocol'] === $protocol['num'] ? 'selected' : '';
+                            echo "<option value='{$protocol['num']}' $selected>{$protocol['file_name']}</option>";
+                        endwhile; 
                     ?>
-                    </select>
+                </select>
                 
                 <button type="submit">Update</button>
             </form>

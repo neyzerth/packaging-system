@@ -6,7 +6,10 @@
 
 <main class="tables">
         <div class="background">
-        <?php $link="addMaterial.php"; include HEADER; ?>
+        <?php 
+            $link="?a=add";
+            include HEADER;
+        ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -35,6 +38,9 @@
                         <td><?php echo $incident['date']; ?></td>
                         <td><?php echo $incident['description']; ?></td>
                         <td><?php echo $incident['traceability']?></td>
+                        <td>
+                            <a href="?a=edit&num=<?php echo $incident['num']; ?>">Edit</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
