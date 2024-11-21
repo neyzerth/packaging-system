@@ -1,21 +1,42 @@
 <?php
     require_once "../config.php";
 
-    function addPackagingProtocol($name, $file_name) {
-        $db = connectdb(); 
-    
-        $query = "CALL addPackagingProtocol(".
-            "'$name',".
-            "'$file_name'".
-        ");";
+    function addPackagingProtocol($name, $file) {
+
+        error_log("Starting upload of pdf...");
+
+        $file_name = $name == "" ? $file['name'] : $name.".pdf";
+        $destination = PDFDIR . "/$file_name";
+        $tempDest = $file['tmp_name'];
+
+        error_log("name:  $file_name | destination: $destination | tempDest: $tempDest");
+
+        if(move_uploaded_file($tempDest, $destination)){
+            error_log("Moving...");
+            $db = connectdb(); 
+            $query = "CALL addPackagingProtocol(".
+                "'$name',".
+                "'$file_name'".
+            ");";
+
+            try {
+                mysqli_query($db, $query);
+                error_log("Upload succesful of: ".$file_name);
+                return true;
+            } catch (Exception $e) {
+                error_log($e->getMessage());
+                return false;
+            }
+
+        } else {
+            error_log("Error upload the pdf: ".$file_name);
+            return false;
+        }
+        
     
         //echo "<p>$query</p>"; 
     
-        try {
-            return mysqli_query($db, $query);
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        
     }
     
     function getProtocols(){

@@ -1,7 +1,7 @@
     <main class="home">
         <ul class="navegation">
             <li>
-                <a class="nav-link" href="<?php echo URL . "process/reports/" ?>">
+                <a class="nav-link" href="<?php echo URL . "/process/reports/" ?>">
                     <img class="bi" src="<?php echo SVG . "file.svg" ?>">
                     <h2>Reports</h2>
                 </a>
@@ -13,7 +13,7 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href=<?php echo URL . "process/warehouse/" ?>">
+                <a class="nav-link" href="<?php echo URL . "process/warehouse/" ?>">
                     <img class="bi" src="<?php echo SVG . "safe.svg" ?>">
                     <h2>Warehouse</h2>
                 </a>

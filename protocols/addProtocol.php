@@ -2,20 +2,21 @@
     require("../config.php");
     require HEAD;
     require "protocolFun.php";
+    
+    var_dump($_FILES['pdf']);
+    echo "<br>";
+    var_dump($_FILES);
 
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-        $name = $_POST['name'];
-        $file_name = $_POST['file_name'];
+    if($_SERVER['REQUEST_METHOD']=='POST' && isset($_FILES['pdf'])){
+        $file = $_FILES['pdf'];
+        $name  = $_POST['name'];
 
+        error_log("POST PDF: $name - ".$_FILES['pdf']['name']);
         $result = addPackagingProtocol(
-            name: $name, file_name: $file_name
+            name: $name, file: $file
         );
 
-        if($result){
-            echo '<h2>Protocol registered</h2>';
-        } else {
-            echo "<h2>Error</h2>";
-        }
+       
 
     }
 
@@ -32,18 +33,18 @@
             </div>
             <div class="row-div">
                 <div class="">
-                    <form action="addProtocol.php" method="post" autocomplete="off">
+                    <form action="" method="post" autocomplete="off" enctype="multipart/form-data">
                         <div class="row-form">
                             <div class="row-md-6">
                                 <label for="height">Name of protocol</label>
                                 <div class="input-group">
-                                    <input name="name" id="name" type="text" step="0.01" required maxlength="50">
+                                    <input name="name" id="name" type="text" step="0.01" maxlength="50">
                                 </div>
                             </div>
                             <div class="row-md-6">
-                                <label for="width">Name of the file</label>
+                                <label for="width">Filename</label>
                                 <div class="input-group">
-                                    <input name="file_name" id="file_name" type="text" step="0.01" required maxlength="30">
+                                    <input type="file" name="pdf" id="pdf" type="text" step="0.01" required accept=".pdf">
                                 </div>
                             </div>
                         <hr class="border-bottom" style="margin-top: 2rem; margin-bottom: 2rem;">

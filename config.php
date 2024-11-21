@@ -1,6 +1,8 @@
 <?php
 define("URL", "http://{$_SERVER['HTTP_HOST']}/");
 define("ROOT", "{$_SERVER['DOCUMENT_ROOT']}/");
+define("PDFDIR", ROOT . "uploads/");
+
 
 define("STYLE", "/styles/");
 
@@ -26,7 +28,7 @@ function connectdb()
         //echo "<p>Conectado<p>";
         return $db;
     } catch (Exception $e) {
-        echo "<p>Conection Error: {$e->getMessage()}<p>";
+        error_log($e->getMessage());
         return false;
     }
 }
