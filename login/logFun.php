@@ -1,5 +1,5 @@
 <?php
-require_once "../config.php";
+require_once __DIR__ . "/../config.php";
 //AGREGUE ESTE IF POR QUE ME SALIA ESTE ERROR:
 //Notice: session_start(): Ignoring session_start() because a session is already active 
 //if (session_status() === PHP_SESSION_NONE) {
