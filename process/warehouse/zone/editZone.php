@@ -66,4 +66,3 @@
             </form>
         </div>
     </main>
-    <?php include FOOT; ?>

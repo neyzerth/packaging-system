@@ -8,7 +8,7 @@
             <ul>
                 <li>
 
-                    <a href="<?php echo $form; ?>">
+                    <a href="?a=add">
                         <img class="" src="<?php echo SVG . "plus-circle.svg" ?>" >
                     </a>
                 </li>

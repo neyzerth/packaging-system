@@ -1,6 +1,4 @@
 <?php
-    require("../config.php");
-    require HEAD;
     require "protocolFun.php";
     
     var_dump($_FILES['pdf']);
@@ -53,4 +51,3 @@
                 </div>
             </div>
         </main>
-<?php include FOOTER; ?>

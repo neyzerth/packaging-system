@@ -1,5 +1,4 @@
 <?php
-    require_once("../config.php");
     require "materialFun.php";
 
     $unit_of_measures = getUnitMeasure();
