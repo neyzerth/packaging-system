@@ -9,8 +9,7 @@
 
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_FILES['pdf'])){
         $file = $_FILES['pdf'];
-        $name  = $_POST['name'] == "" ?
-            $_FILES['pdf']['name'] : $_POST['name'];
+        $name  = $_POST['name'];
 
         error_log("POST PDF: $name - ".$_FILES['pdf']['name']);
         $result = addPackagingProtocol(

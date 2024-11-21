@@ -21,7 +21,7 @@
 
             try {
                 mysqli_query($db, $query);
-                error_log("Se subio el archivo ".$file_name);
+                error_log("Upload succesful of: ".$file_name);
                 return true;
             } catch (Exception $e) {
                 error_log($e->getMessage());
@@ -29,7 +29,7 @@
             }
 
         } else {
-            error_log("Error al subir el archivo ".$file_name);
+            error_log("Error upload the pdf: ".$file_name);
             return false;
         }
         
