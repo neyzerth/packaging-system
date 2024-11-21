@@ -17,7 +17,7 @@ define("JS",  "/src/js/");
 define("SVG", "/src/svg/");
 define("IMG", "/src/img/");
 
-include "dbconfig.php";
+include 'dbconfig.php';
 
 function connectdb()
 {
