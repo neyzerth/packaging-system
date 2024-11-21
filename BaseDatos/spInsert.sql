@@ -79,6 +79,8 @@ BEGIN
     FROM box WHERE num = LAST_INSERT_ID();
 END $$
 
+CALL addBox (11.5, 12.0, 20.0, 10.0);
+
 --Material
 drop Procedure addMaterial
 DELIMITER $$

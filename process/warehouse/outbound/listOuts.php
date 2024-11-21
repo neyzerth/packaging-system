@@ -1,7 +1,7 @@
 <?php
-    require_once("../config.php");
-    require "userFun.php";
-    $users = getUsers();
+    require_once("../../../config.php");
+    require "outFun.php";
+    $outs = getOuts();
 ?>
     <main class="tables">
         <div class="background">
@@ -13,32 +13,27 @@
                 <thead>
                     <tr>
                         <th>
-                            <span>Code</span>
+                            <span>Num</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Date</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Date of birth</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>User type</span>
+                            <span>Exit quantity</span>
                             <span class="column-order"></span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($outs as $out): ?>
                     <tr>
-                        <td><?php echo $user['num']; ?></td>
-                        <td><?php echo $user['full_name']; ?></td>
-                        <td><?php echo $user['date_of_birth']; ?></td>
-                        <td><?php echo $user['user']; ?></td>
+                        <td><?php echo $out['num']; ?></td>
+                        <td><?php echo $out['date']; ?></td>
+                        <td><?php echo $out['exit_quantity']; ?></td>
                         <td>
-                            <a href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
+                            <a href="?a=edit&num=<?php echo $out['num'];?>">Edit</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -46,16 +41,13 @@
                 <tfoot>
                     <tr>
                         <th>
-                            <span>Code</span>
+                            <span>Num</span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Date</span>
                         </th>
                         <th>
-                            <span>Date of birth</span>
-                        </th>
-                        <th>
-                            <span>User type</span>
+                            <span>Exit quantity</span>
                         </th>
                     </tr>
                 </tfoot>

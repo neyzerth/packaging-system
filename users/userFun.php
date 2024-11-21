@@ -13,7 +13,7 @@
     }
     function getUsers() {
         $db = connectdb();
-        $query = "SELECT num, full_name, date_of_birth, user FROM vw_user_personal_info;";
+        $query = "SELECT * FROM vw_user_personal_info;";
         $result = mysqli_query($db, $query);
         $users = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -32,5 +32,65 @@
         $db = connectdb();
         $query = "SELECT num, full_name FROM vw_supervisor;";
         return mysqli_query($db, $query);
+    }
+
+    function getUserByNumber($num) {
+        $db = connectdb();
+        $query = "SELECT * FROM user WHERE num = '$num';";
+        $result = mysqli_query($db, $query);
+        $protocol = mysqli_fetch_assoc($result);
+        mysqli_close($db);
+        return $protocol;
+    }
+
+    function updateUser($num, $username, $password, $name, $first_surname, $second_surname, $date_of_birth, $neighborhood, $street, $postal_code, $phone, $email, $active, $user_type, $supervisor) {
+        $db = connectdb();
+        
+        $stmt = $db->prepare("CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        
+        if ($stmt === false) {
+            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+        }
+        
+        // Vincular los parámetros
+        $stmt->bind_param("issssssssisssi", $num, $username, $password, $name, $first_surname, $second_surname, $date_of_birth, $neighborhood, $street, $postal_code, $phone, $email, $active, $user_type, $supervisor);
+        
+        // Ejecutar el procedimiento
+        if ($stmt->execute()) {
+            $result = true; 
+        } else {
+            $result = false;
+            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+        }
+        
+        $stmt->close();
+        $db->close();
+        
+        return $result; 
+    }
+    
+    function disableUser($num) {
+        $db = connectdb();
+        
+        $stmt = $db->prepare("CALL dropUser(?)");
+        
+        if ($stmt === false) {
+            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+        }
+    
+        $stmt->bind_param("i", $num);
+        
+        // Ejecutar el procedimiento
+        if ($stmt->execute()) {
+            $result = true; 
+        } else {
+            $result = false;
+            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+        }
+        
+        $stmt->close();
+        $db->close();
+        
+        return $result; 
     }
 ?>

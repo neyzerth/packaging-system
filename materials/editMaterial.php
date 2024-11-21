@@ -3,6 +3,7 @@
     require "materialFun.php";
 
     $unit_of_measures = getUnitMeasure();
+    
     if (isset($_GET['code'])) {
         $code = $_GET['code'];
         $material = getMaterialByCode($code);

@@ -1,19 +1,19 @@
 <?php 
-    $form = "/boxes/addBox.php";
+    $form = "addZone.php";
     $action = isset($_GET['a']) ? $_GET['a'] : null;
 
-    require_once "../config.php";
+    require_once "../../../config.php";
     include HEAD;
-
+    
     switch($action){
         
-        case 'add': include "addBox.php";
+        case 'add': include "addZone.php";
             break;
         
-        case 'edit': include "editBox.php";
+        case 'edit': include "editZone.php";
             break;
         
-        default: include "listBoxes.php";
+        default: include "listZones.php";
         break;
     }
 

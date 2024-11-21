@@ -13,7 +13,7 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?php echo URL . "process/" ?>">
                     <img class="bi" src="<?php echo SVG . "process.svg" ?>">
                     <h2>Process</h2>
                 </a>
