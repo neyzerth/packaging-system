@@ -1,5 +1,5 @@
 <?php 
-    $form = "/zone/addZone.php";
+    $form = "addZone.php";
     $action = isset($_GET['a']) ? $_GET['a'] : null;
 
     require_once "../../../config.php";
