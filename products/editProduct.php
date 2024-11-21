@@ -31,7 +31,7 @@
         }
     }
 ?>
-<main class="tables">
+<main class="forms">
     <div class="background">
         <a href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
         <table class="table">
@@ -67,6 +67,5 @@
                 
                 <button type="submit">Update</button>
             </form>
-        </table>
     </div>
 </main>
