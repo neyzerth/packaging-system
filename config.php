@@ -17,11 +17,6 @@ define("JS",  "/src/js/");
 define("SVG", "/src/svg/");
 define("IMG", "/src/img/");
 
-define('DBHOST', 'localhost');
-define('DBUSER', 'root');
-define('DBPASSW', '');
-define('DBNAME', 'packaging'); 
-
 include 'dbconfig.php';
 
 function connectdb()
