@@ -57,36 +57,37 @@
                     </div>
                 </div>
                 <div class="row-sm-3">
-                    <h4 for="code">Code</h4>
+                    <h4 for="height">Height</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" required maxlength="5">
+                        <input name="height" id="height" type="number" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
-                    <h4 for="name">Product Name</h4>
+                    <h4 for="width">Width</h4>
                     <div class="inputs">
-                        <input name="name" id="name" type="text" required maxlength="50">
+                        <input name="width" id="width" type="number" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
-                    <h4 for="description">Description</h4>
+                    <h4 for="length">Length</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="fragile" required maxlength="255">
+                        <input name="length" id="length" type="number" required >
+                    </div>
+                </div>
+                
+                <div class="row-md-5">
+                    <h4 for="weight">Weight</h4>
+                    <div class="inputs">
+                        <input name="weight" id="weight" type="number" placeholder="999" required maxlength="10">
                     </div>
                 </div>
                 <div class="row-md-5">
-                    <h4 for="available_quantity">Quantity</h4>
+                    <h4 for="packaging_protocol">Packaging Protocol</h4>
                     <div class="inputs">
-                        <input name="available_quantity" id="available_quantity" type="number" placeholder="999" required maxlength="10">
-                    </div>
-                </div>
-                <div class="row-md-5">
-                    <h4 for="unit_of_measure">Unit of measure</h4>
-                    <div class="inputs">
-                        <select class="input" required name="unit_of_measure" id="unit_of_measure options">
+                        <select class="input" required name="packaging_protocol" id="packaging_protocol options">
                             <?php 
-                                while ($unit_of_measure = mysqli_fetch_assoc($unit_of_measures)):   
-                                    echo "<option value='{$unit_of_measure['code']}'>{$unit_of_measure['description']}</option>";
+                                while ($protocol = mysqli_fetch_assoc($protocols)):   
+                                    echo "<option value='{$protocol['code']}'>{$protocol['name']}</option>";
                                 endwhile; 
                             ?>
                         </select>

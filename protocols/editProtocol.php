@@ -25,23 +25,53 @@
         }
     }
 ?>
-<main class="tables">
+
+
+<main class="forms">
     <div class="background">
-        <a href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este protocolo?');">Disable</a>
+        <form class="form" action="" method="post" autocomplete="off" enctype="multipart/form-data">
+            <header class="header">
+                <img src="<?php  echo SVG . "icon.svg" ?>">
+                <h1>Materials</h1>
+            </header>
+            <h2>Material</h2>
+            <div class="rows">
+                <div class="row-sm-3">
+                    <a class="btn" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este protocolo?');">Disable</a>
+                </div>
+            </div>
+            <div class="rows">
+                <div class="row-md-5">
+                    <h4 for="name">Num</h4>
+                    <div class="inputs">
+                        <input name="name" id="name" type="text"  value="<?php echo $protocol['num']; ?>" readonly>
+                    </div>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="name">Name of protocol</h4>
+                    <div class="inputs">
+                        <input name="name" id="name" type="text"  value="<?php echo $protocol['name']; ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="rows">
+                <div class="row-md-5">
+                    <h4 for="name">Actual File</h4>
+                    <div class="inputs">
+                        <input name="name" id="name" type="text"  value="<?php echo $protocol['file_name']; ?>" readonly>
+                    </div>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="pdf">New file</h4>
+                    <input class="inputs" name="pdf" id="pdf" type="file" accept=".pdf" >
+                </div>
 
-        <table class="table">
-            <form action="" method="POST" autocomplete="off">
-                <label>Protocol Number: </label>
-                <input type="number" name="num" value="<?php echo $protocol['num']; ?>" readonly>
-
-                <label>Name:</label>
-                <input type="text" name="name" value="<?php echo $protocol['name']; ?>" required>
-                
-                <label>File name:</label>
-                <input type="text" name="file_name" value="<?php echo $protocol['file_name']; ?>" required>
-                
-                <button type="submit">Update</button>
-            </form>
-        </table>
+            </div>
+            <hr>
+            <footer class="footer">
+                <button class="btn-primary" type="submit">Confirm</button>
+            </footer>
+        </form>
     </div>
 </main>
+

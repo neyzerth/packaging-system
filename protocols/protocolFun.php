@@ -5,7 +5,8 @@
 
         error_log("Starting upload of pdf...");
 
-        $file_name = $name == "" ? $file['name'] : $name.".pdf";
+        $file_name = $file['name'];
+        $name = $name == "" ? pathinfo($file['name'], PATHINFO_FILENAME) : $name;
         $destination = PDFDIR . "/$file_name";
         $tempDest = $file['tmp_name'];
 
