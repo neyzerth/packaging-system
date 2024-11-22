@@ -26,7 +26,7 @@ END;
 
 select * from zone
 
-CALL check_zone_capacity('Z001',55,@Resultado);
+CALL sp_check_zone_capacity('Z001',155,@Resultado);
 
 select @Resultado as respuesta
 
@@ -34,6 +34,8 @@ select @Resultado as respuesta
 
 
 --Pudieramos cambiar el nombre a search_report
+drop PROCEDURE sp_generate_report
+
 CREATE PROCEDURE sp_generate_report(
     IN start_date DATE,
     IN end_date DATE
@@ -45,8 +47,12 @@ BEGIN
 END;
 
 
-call sp_generate_report ('2024-09-01','2024-09-30');
+call sp_generate_report ('2023-10-22','2023-11-22');
 
+update report
+set start_date = '2023-10-22',
+end_date = '2023-11-22'
+where folio = 5
 
 DELIMITER $$
 CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
