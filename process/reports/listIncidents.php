@@ -37,9 +37,11 @@
                 <td><?php echo $incident['date']; ?></td>
                 <td><?php echo $incident['description']; ?></td>
                 <td><?php echo $incident['traceability']?></td>
+                <?php if(validateUser("ADMIN", "SUPER")): ?>
                 <td>
                     <a href="?a=edit&num=<?php echo $incident['num']; ?>">Edit</a>
                 </td>
+                <?php endif; ?>
             </tr>
             <?php endforeach; ?>
         </tbody>

@@ -31,9 +31,11 @@
                         <td><?php echo $out['num']; ?></td>
                         <td><?php echo $out['date']; ?></td>
                         <td><?php echo $out['exit_quantity']; ?></td>
+                        <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
                             <a href="?a=edit&num=<?php echo $out['num'];?>">Edit</a>
                         </td>
+                        <?php endif; ?>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

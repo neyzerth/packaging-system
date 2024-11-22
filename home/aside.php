@@ -10,11 +10,13 @@
                     <img class="bi" src="<?php echo SVG . "boxes.svg" ?>">
                 </a>
             </li>
+            <?php if(validateUser("ADMIN", "SUPER")): ?>
             <li>
                 <a class="nav-link" href="<?php echo URL . "materials/" ?>" tooltip="Materials">
                     <img class="bi" src="<?php echo SVG . "materials.svg" ?>">
                 </a>
             </li>
+            <?php endif; ?>
             <li>
                 <a class="nav-link" href="<?php echo URL . "process/" ?>" tooltip="Process">
                     <img class="bi" src="<?php echo SVG . "process.svg" ?>">
@@ -30,11 +32,13 @@
                     <img class="bi" src="<?php echo SVG . "protocols.svg" ?>">
                 </a>
             </li>
+            <?php if(validateUser("ADMIN")): ?>
             <li>
-                <a class="nav-link" href="<?php echo URL . "users/" ?>" tooltip="Staff">
+                <a class="nav-link" href="<?php echo URL . "users/" ?>" tooltip="Users">
                     <img class="bi" src="<?php echo SVG . "users.svg" ?>">
                 </a>
             </li>
+            <?php endif; ?>
         </ul>
         <a href="#" class="link-body " id="profile-toggle">
             <img class="bi" src="<?php echo SVG . "user.svg" ?>">
@@ -44,7 +48,7 @@
                 <a href="#">Profile</a>
             </li>
             <li style="border-bottom: none">
-                <a href="<?php echo URL . "login/" ?>">Logout</a>
+                <a href="<?php echo URL . "?a=logout" ?>">Logout</a>
             </li>
         </ul>
     </aside>

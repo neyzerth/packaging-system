@@ -33,7 +33,11 @@
                         <td><?php echo  $protocol['name'];?></td>
                         <td><?php echo  $protocol['file_name'];?></td>
                         <td>
-                            <a href="?a=edit&num=<?php echo $protocol['num'];?>">Edit</a>
+                            <?php if(validateUser("ADMIN", "SUPER")): ?>
+                                <a class="btn" href="?a=edit&num=<?php echo $protocol['num'];?>">Edit</a>
+                            <?php endif; ?>
+                            
+                            <a class="btn" href="<?php echo URL."uploads/".$protocol['file_name']?>">View</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -52,3 +56,4 @@
                     </tr>
                 </tfoot>
             </table>
+            <?php include FOOTER?>

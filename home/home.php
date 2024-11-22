@@ -6,12 +6,14 @@
                     <h2>Boxes</h2>
                 </a>
             </li>
+            <?php if(validateUser("ADMIN", "SUPER")): ?>
             <li>
                 <a class="nav-link" href="<?php echo URL . "materials/" ?>">
                     <img class="bi" src="<?php echo SVG . "materials.svg" ?>">
                     <h2>Materials</h2>
                 </a>
             </li>
+            <?php endif; ?>
             <li>
                 <a class="nav-link" href="<?php echo URL . "process/" ?>">
                     <img class="bi" src="<?php echo SVG . "process.svg" ?>">
@@ -32,11 +34,13 @@
                     <h2>Protocols</h2>
                 </a>
             </li>
+            <?php if(validateUser("ADMIN")): ?>
             <li>
                 <a class="nav-link" href="<?php echo URL . "users/" ?>">
                     <img class="bi" src="<?php echo SVG . "users.svg" ?>">
                     <h2>Users</h2>
                 </a>
             </li>
+            <?php endif; ?>
         </ul>
     </main>
