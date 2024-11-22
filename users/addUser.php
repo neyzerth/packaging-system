@@ -17,6 +17,11 @@
         $user_type = $_POST['user_type'];
         $supervisor = $_POST['supervisor'];
         $result = addUser(username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor);
+        if($result){
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Box Registered.</span></div>";
+        } else {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+        }
     }
 ?>
     <main class="forms">
@@ -137,3 +142,11 @@
         </div>
     </main>
     <?php include FOOT ?>
+    <script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>

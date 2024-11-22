@@ -23,9 +23,11 @@
         $traceability = $_POST['traceability'];
 
         if (updateIncident(num:$num, date:$date, description:$description, traceability:$traceability)) {
-            echo "Incidente actualizado con éxito.";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Incidente actualizado con éxito.</span></div>";
+
         } else {
-            echo "Error al actualizar el incidente.";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el incidente.</span></div>";
+
         }
     }
 ?>
@@ -79,3 +81,11 @@
             </form>
         </div>
     </main>
+    <script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>

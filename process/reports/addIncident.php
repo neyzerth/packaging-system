@@ -7,6 +7,11 @@
         $traceability = $_POST['traceability'];
 
         $result = addIncident(date: $date, description: $description, traceability: $traceability);
+        if($result){
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Incident Registered.</span></div>";
+        } else {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+        }
     }
 ?>
 
@@ -45,3 +50,11 @@
             </form>
         </div>
     </main>
+    <script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>

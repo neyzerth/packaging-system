@@ -18,10 +18,10 @@
         $exit_quantity = $_POST['exit_quantity'];
         $active = 1;
 
-        if($result = updateOutbound(num: $num, date: $date, exit_quantity: $exit_quantity, active: $active)){
-            echo "Out updated successfully";
+        if($result){
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Out updated successfully</span></div>";
         } else {
-            echo "Error updating out";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating out</span></div>";
         }
     }
 ?>
@@ -63,3 +63,11 @@
             </form>
         </div>
     </main>
+    <script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>

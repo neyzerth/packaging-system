@@ -19,9 +19,9 @@
         $active = 1; 
 
         if (updateProtocol(num:$num, name:$name, file_name:$file_name, active:$active)) {
-            echo "Protocolo actualizado con éxito.";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocolo actualizado con éxito.</span></div>";
         } else {
-            echo "Error al actualizar el protocolo.";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el protocolo.</span></div>";
         }
     }
 ?>
@@ -74,4 +74,11 @@
         </form>
     </div>
 </main>
-
+<script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>
