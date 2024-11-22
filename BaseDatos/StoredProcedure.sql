@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -34,25 +34,28 @@ select @Resultado as respuesta
 
 
 --Pudieramos cambiar el nombre a search_report
-drop PROCEDURE sp_generate_report
+drop PROCEDURE search_report
 
-CREATE PROCEDURE sp_generate_report(
-    IN start_date DATE,
-    IN end_date DATE
+CREATE PROCEDURE search_report(
+    IN p_start_date DATE,
+    IN p_end_date DATE
 )
 BEGIN
-    SELECT * FROM report 
-    WHERE start_date = start_date
-    AND end_date = end_date ;
+    SELECT folio,start_date,end_date,report_date,packed_products,observations,traceability
+    FROM report 
+    WHERE start_date = p_start_date
+    AND end_date = p_end_date ;
 END;
 
 
-call sp_generate_report ('2023-10-22','2023-11-22');
+call search_report ('2023-10-22','2023-11-22');
 
 update report
 set start_date = '2023-10-22',
 end_date = '2023-11-22'
 where folio = 5
+
+select * from report
 
 DELIMITER $$
 CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
