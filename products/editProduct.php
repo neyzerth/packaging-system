@@ -80,7 +80,6 @@
                         <input name="length" id="length" type="number" value="<?php echo $product['length']; ?>" required >
                     </div>
                 </div>
-                
                 <div class="row-md-5">
                     <h4 for="weight">Weight</h4>
                     <div class="inputs">

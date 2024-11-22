@@ -21,16 +21,18 @@
         $active = 1; 
         $unit_of_measure = $_POST['unit_of_measure'];
 
-        if (updateMaterial(code:$code, name:$name, description:$description, available_quantity:$available_quantity, active:$active, unit_of_measure:$unit_of_measure)) {
-            echo "Material actualizado con éxito.";
+        if (updateMaterial(code: $code, name: $name, description: $description, available_quantity: $available_quantity, active: $active, unit_of_measure: $unit_of_measure)) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Material actualizado con éxito.</span></div>";
         } else {
-            echo "Error al actualizar el material.";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error al actualizar el material.</span></div>";
         }
     }
 ?>
 <main class="forms">
     <div class="background">
+
         <form class="form" action="" method="post" autocomplete="off">
+
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Materials</h1>
@@ -82,3 +84,11 @@
         </form>
     </div>
 </main>
+<script>
+    setTimeout(() => {
+        const successMsg = document.getElementById('success-msg');
+        const errorMsg = document.getElementById('error-msg');
+        if (successMsg) successMsg.style.display = 'none';
+        if (errorMsg) errorMsg.style.display = 'none';
+    }, 3000);
+</script>

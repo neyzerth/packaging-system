@@ -2,5 +2,6 @@
 /temp/
 dbconfig.php
 prueba.php
-/BaseDatos/prueba.sql
-/uploads/*
+/.vscode
+*.sql
+*.json

@@ -82,3 +82,20 @@
 .btn-primary:hover {
     background-color: var(--blue-light);
 }
+
+/********************************************************************************************/
+
+.div-msg {
+    position: fixed;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    margin-left: 36px;
+}
+
+.msg {
+    background-color: var(--background-black);
+    padding: 3rem;
+    margin: auto
+}
