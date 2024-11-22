@@ -37,9 +37,11 @@
                         <td><?php echo $zone['area']; ?></td>
                         <td><?php echo $zone['available_capacity']; ?></td>
                         <td><?php echo $zone['total_capacity']; ?></td>
+                        <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
                             <a href="?a=edit&code=<?php echo $zone['code'];?>">Edit</a>
                         </td>
+                        <?php endif;?>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

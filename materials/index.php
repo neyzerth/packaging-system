@@ -1,10 +1,18 @@
 <?php
-$action = isset($_GET['a']) ? $_GET['a'] : null;
 
 require_once "../config.php";
+
+session_start();
+
+if(!validateUser("ADMIN", "SUPER")){
+    header("Location: /");
+    exit;
+}
+
+
 include HEAD;
 
-crudRedirect($action, "listMaterial.php", 
+crudRedirect(getAction(), "listMaterial.php", 
     "addMaterial.php", "editMaterial.php"
 );
 

@@ -32,11 +32,9 @@ function logout(){
 
 function validateUser(string ...$validUsers){
 
-    session_start();
-
-    error_log("Validating...".$_SESSION['user_type']);
-
     validateSession();
+    
+    error_log("Validating...".$_SESSION['user_type']);
 
     if($validUsers == "ALL"){
         return true;

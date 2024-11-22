@@ -5,10 +5,7 @@
 ?>
     <main class="tables">
         <div class="background">
-        <?php
-            $link="?a=add"; 
-            include HEADER; 
-        ?>
+        <?php include HEADER; ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -29,8 +26,11 @@
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Protocol</span>
+                            <span>Unit Measure</span>
                             <span class="column-order"></span>
+                        </th>
+                        <th>
+                            <span>Actions</span>
                         </th>
                     </tr>
                 </thead>
@@ -38,13 +38,15 @@
                     <?php foreach ($materials as $material): ?>
                     <tr>
                         <td><?php echo $material['code']; ?></td>
-                        <td><?php echo $material['name']; ?></td>
+                        <td><?php echo $material['material_name']; ?></td>
                         <td><?php echo $material['description']; ?></td>
                         <td><?php echo $material['available_quantity']; ?></td>
                         <td><?php echo $material['unit_of_measure']; ?></td>
+                        <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="?a=edit&code=<?php echo $material['code']; ?>">Edit</a>
+                            <a href="?a=edit&code=<?php echo $material['code']; ?>" class="btn">Edit</a>
                         </td>
+                        <?php endif;?>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
