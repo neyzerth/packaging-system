@@ -3,3 +3,5 @@
 dbconfig.php
 prueba.php
 /.vscode
+*.sql
+*.json
