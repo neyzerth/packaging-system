@@ -36,10 +36,7 @@ function validateUser(string ...$validUsers){
 
     error_log("Validating...".$_SESSION['user_type']);
 
-    if(!isset($_SESSION)){
-        header("Location: /login/");
-        exit;
-    }
+    validateSession();
 
     if($validUsers == "ALL"){
         return true;
