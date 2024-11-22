@@ -21,6 +21,11 @@ define("IMG", "/src/img/");
 
 include 'dbconfig.php';
 
+require_once __DIR__."/login/logFun.php";
+
+function getAction(){
+    return isset($_GET['a']) ? $_GET['a'] : null;
+}
 function connectdb()
 {
     try {
