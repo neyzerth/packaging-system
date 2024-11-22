@@ -116,12 +116,13 @@ Create PROCEDURE UpdateProduct(
     IN p_width DECIMAL(10,2),
     IN p_length DECIMAL(10,2),
     IN p_weight DECIMAL(10,2),
-    In p_active bit
+    In p_active bit,
+    In p_packaging_protocol INT
 )
 Begin
     UPDATE product
     SET name = p_name, description = p_description, height = p_height, width = p_width,
-    length = p_length, weight = p_weight, active = p_active
+    length = p_length, weight = p_weight, active = p_active, packaging_protocol = p_packaging_protocol
     WHERE code = p_code;
 END$$
 
@@ -131,14 +132,14 @@ select * from product
 
 --Salida 
 
-drop Procedure `UpdateOutBound`
+drop Procedure `UpdateOutBound`;
 
 DELIMITER $$
 Create PROCEDURE UpdateOutBound(
     IN p_num INT,
     IN p_date DATE,
     In p_exit_quantity int,
-    In active bit
+    In p_active bit
 )
 Begin
     UPDATE outbound
@@ -170,21 +171,22 @@ call UpdateZone('Z001', 'Warehouse A', 100, 100,1)
 
 sELECT * FROM zone
 
+DROP PROCEDURE UpdateProtocol;
 --Protocolo
 DELIMITER $$
-Create PROCEDURE UpdateProtocolo(
+Create PROCEDURE UpdateProtocol(
     IN p_num INT,
     In p_name varchar(50),
-    In file_name varchar(255),
+    In p_file_name varchar(255),
     In p_active bit
 )
 Begin
     UPDATE packaging_protocol
-    SET name = p_name, file_name = file_name, active = p_active
+    SET name = p_name, file_name = p_file_name, active = p_active
     WHERE num = p_num;
 end $$
 
-call UpdateProtocolo(1,'Protocolo 1','protocolo1.pdf',1)
+call UpdateProtocol(1,'Protocolo 1','protocolo1.pdf',1);
 
 select * from packaging_protocol
 

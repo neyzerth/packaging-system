@@ -1,10 +1,14 @@
 <?php
+    require_once("../config.php");
     require_once "prodFun.php";
     $products = getProducts();
 ?>
     <main class="tables">
         <div class="background">
-            <?php include HEADER ?>
+            <?php 
+            $link = "?a=add";
+            include HEADER 
+            ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -53,10 +57,11 @@
                         <td><?php echo $product['width'] ?></td>
                         <td><?php echo $product['length'] ?></td>
                         <td><?php echo $product['packaging_protocol'] ?></td>
+                        <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="editProduct.php?code=<?php echo $product['code']; ?>">Edit</a>
-                            <a href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
+                            <a class="btn" href="?a=edit&code=<?php echo $product['code']; ?>">Edit</a>
                         </td>
+                        <?php endif;?>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
@@ -89,6 +94,5 @@
                     </tr>
                 </tfoot>
             </table>
-            <?php include FOOTER ?>
         </div>
     </main>

@@ -1,6 +1,8 @@
 <?php
 define("URL", "http://{$_SERVER['HTTP_HOST']}/");
 define("ROOT", "{$_SERVER['DOCUMENT_ROOT']}/");
+define("PDFDIR", ROOT . "uploads/");
+
 
 define("STYLE", "/styles/");
 
@@ -19,6 +21,11 @@ define("IMG", "/src/img/");
 
 include 'dbconfig.php';
 
+require_once __DIR__."/login/logFun.php";
+
+function getAction(){
+    return isset($_GET['a']) ? $_GET['a'] : null;
+}
 function connectdb()
 {
     try {
@@ -26,7 +33,7 @@ function connectdb()
         //echo "<p>Conectado<p>";
         return $db;
     } catch (Exception $e) {
-        echo "<p>Conection Error: {$e->getMessage()}<p>";
+        error_log($e->getMessage());
         return false;
     }
 }
@@ -40,4 +47,19 @@ function validateSession(){
 function nullDb($param)
 {
     return $param == '' ? "NULL" : $param;
+}
+
+function crudRedirect($action, $listFile, $addFile, $editFile){
+    switch($action){
+        
+        case 'add': include $addFile;
+            break;
+        
+        case 'edit': include $editFile;
+            break;
+        
+        default: include $listFile;
+        break;
+    }
+
 }

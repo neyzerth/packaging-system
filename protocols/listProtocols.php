@@ -1,9 +1,14 @@
 <?php
+    require_once("../config.php");
+    require "protocolFun.php";
     $protocols = getProtocols();
 ?>
     <main class="tables">
         <div class="background">
-            <?php include HEADER ?>
+            <?php 
+            $link="?a=add";
+            include HEADER 
+            ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -27,6 +32,13 @@
                         <td><?php echo  $protocol['num'];?> </td>
                         <td><?php echo  $protocol['name'];?></td>
                         <td><?php echo  $protocol['file_name'];?></td>
+                        <td>
+                            <?php if(validateUser("ADMIN", "SUPER")): ?>
+                                <a class="btn" href="?a=edit&num=<?php echo $protocol['num'];?>">Edit</a>
+                            <?php endif; ?>
+                            
+                            <a class="btn" href="<?php echo URL."uploads/".$protocol['file_name']?>">View</a>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -44,6 +56,4 @@
                     </tr>
                 </tfoot>
             </table>
-            <?php include FOOTER ?>
-        </div>
-    </main>
+            <?php include FOOTER?>

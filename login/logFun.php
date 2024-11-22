@@ -23,4 +23,34 @@ function login($username, $password)
     }   
     return $bool;
 }
+
+function logout(){
+    session_start();
+
+    session_unset();
+    
+    session_destroy();
+
+    //delete the cookies
+    //if (ini_get("session.use_cookies")) {
+    //    $params = session_get_cookie_params();
+    //    setcookie(session_name(), '', time() - 3600, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+    //}
+
+    header("Location: /login/");
+    exit;
+}
+
+function validateUser(string ...$validUsers){
+
+    validateSession();
+    
+    error_log("Validating...".$_SESSION['user_type']);
+
+    if($validUsers == "ALL"){
+        return true;
+    }
+
+    return in_array($_SESSION['user_type'], $validUsers);
+}
 ?>

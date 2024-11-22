@@ -1,11 +1,14 @@
 <?php
-    require_once("../config.php");
-    require "materialFun.php";
-    $materials = getMaterial();
+    require_once("../../../config.php");
+    require "zoneFun.php";
+    $zones = getZones();
 ?>
     <main class="tables">
         <div class="background">
-        <?php include HEADER; ?>
+            <?php 
+            $link="?a=add";
+            include HEADER;
+            ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -14,37 +17,29 @@
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Area</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Description</span>
+                            <span>Available capacity</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Actual Quantity</span>
+                            <span>Total capacity</span>
                             <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Unit Measure</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Actions</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($materials as $material): ?>
+                    <?php foreach ($zones as $zone): ?>
                     <tr>
-                        <td><?php echo $material['code']; ?></td>
-                        <td><?php echo $material['material_name']; ?></td>
-                        <td><?php echo $material['description']; ?></td>
-                        <td><?php echo $material['available_quantity']; ?></td>
-                        <td><?php echo $material['unit_of_measure']; ?></td>
+                        <td><?php echo $zone['code']; ?></td>
+                        <td><?php echo $zone['area']; ?></td>
+                        <td><?php echo $zone['available_capacity']; ?></td>
+                        <td><?php echo $zone['total_capacity']; ?></td>
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="?a=edit&code=<?php echo $material['code']; ?>" class="btn">Edit</a>
+                            <a href="?a=edit&code=<?php echo $zone['code'];?>">Edit</a>
                         </td>
                         <?php endif;?>
                     </tr>
@@ -56,13 +51,13 @@
                             <span>Code</span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Area</span>
                         </th>
                         <th>
-                            <span>Description</span>
+                            <span>Available capacity</span>
                         </th>
                         <th>
-                            <span>Actual Quantity</span>
+                            <span>Total capacity</span>
                         </th>
                     </tr>
                 </tfoot>

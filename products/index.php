@@ -1,8 +1,13 @@
 <?php 
-    $form = "/products/addProduct.php";
+    $action = isset($_GET['a']) ? $_GET['a'] : null;
+
     require_once "../config.php";
-    require_once "prodFun.php";
+
     include HEAD;
-    include 'listProducts.php';
+    
+    crudRedirect($action,
+        "listProducts.php", "addProduct.php", "editProduct.php"
+    );
+
     include FOOT;
 ?>

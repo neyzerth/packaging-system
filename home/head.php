@@ -1,9 +1,5 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['num'])){
-        header("Location: /login/");
-        exit();
-    }
+    validateUser("ALL");
 ?>
 <!DOCTYPE html>
 <html lang="en">

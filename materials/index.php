@@ -1,20 +1,20 @@
 <?php
-$form = "/materials/addMaterial.php";
-$action = isset($_GET['a']) ? $_GET['a'] : null;
 
 require_once "../config.php";
+
+session_start();
+
+if(!validateUser("ADMIN", "SUPER")){
+    header("Location: /");
+    exit;
+}
+
+
 include HEAD;
 
-switch($action){
-    
-    case 'add': include "addMaterial.php";
-        break;
-    
-    case 'edit': include "editMaterial.php";
-        break;
-    
-    default: include "listMaterial.php";
-    break;
-}
+crudRedirect(getAction(), "listMaterial.php", 
+    "addMaterial.php", "editMaterial.php"
+);
+
 include FOOT;
 ?>
