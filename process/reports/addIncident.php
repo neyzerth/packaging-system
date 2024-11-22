@@ -9,32 +9,39 @@
         $result = addIncident(date: $date, description: $description, traceability: $traceability);
     }
 ?>
-                    <form action="?a=add" method="post" autocomplete="off">
-                        <h2>Incident</h2>
-                        <div class="row-form">
-                            <div class="row-lg-12">
-                                <label for="">Date</label>
-                                <div class="input-group">
-                                    <input type="date" required placeholder="">
-                                </div>
-                            </div>
-                            <div class="row-lg-12">
-                                <label for="">Description</label>
-                                <div class="input-group">
-                                    <textarea type="text" required placeholder="" ></textarea>
-                                </div>
-                            </div>
-                            <div class="row-lg-12">
-                                <label for="">Trazability</label>
-                                <div class="input-group">
-                                    <input type="text" required placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="border-bottom" style="margin-top: 2rem; margin-bottom: 2rem;">
-                        <button class="btn-primary" type="submit">Confirm Registration</button>
-                    </form>
-                </div>
-            </div>
-        </main>
 
+    <main class="forms">
+        <div class="background">
+            <form class="form" action="?a=add" method="post" autocomplete="off">
+                <header class="header">
+                    <img src="<?php  echo SVG . "icon.svg" ?>">
+                    <h1>Report</h1>
+                </header>
+                <h2>Incident</h2>
+                <div class="rows">
+                    <div class="row-md-5">
+                        <h4>Date</h4>
+                        <div class="inputs">
+                            <input type="date" required placeholder="">
+                        </div>
+                    </div>
+                    <div class="row-md-5">
+                        <h4>Trazability</h4>
+                        <div class="inputs">
+                            <input type="text" required placeholder="">
+                        </div>
+                    </div>
+                    <div class="row-lg-12">
+                        <h4>Description</h4>
+                        <div class="inputs">
+                            <textarea type="text" required placeholder="" ></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <footer class="footer">
+                    <button class="btn-primary" type="submit">Confirm Registration</button>
+                </footer>
+            </form>
+        </div>
+    </main>

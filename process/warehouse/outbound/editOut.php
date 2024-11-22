@@ -28,7 +28,6 @@
     <main class="forms">
         <div class="background">
 
-            <a href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta salida?');">Disable</a>
 
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
@@ -36,6 +35,8 @@
                     <h1>Outbounds</h1>
                 </header>
                 <h2>Outbound</h2>
+                <hr>
+                <a class="btn-primary" href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta salida?');">Disable</a>
                 <div class="rows">
                     <div class="row-sm-3">
                         <h4 for="code">Num</h4>
@@ -54,6 +55,8 @@
                         <div class="inputs">
                             <input name="exit_quantity" id="description" type="number" placeholder="999" required maxlength="10"value="<?php echo $out['exit_quantity']; ?>">
                         </div>
+                    </div>
+                </div>
                 <footer class="footer">
                     <button class="btn-primary" type="submit">Update</button>
                 </footer>

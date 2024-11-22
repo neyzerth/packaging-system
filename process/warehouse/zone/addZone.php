@@ -18,19 +18,19 @@
                 </header>
                 <h2>Zone</h2>
                 <div class="rows">
-                    <div class="row-sm-3">
+                    <div class="row-md-5">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
                             <input name="code" id="code" type="text" required maxlength="5">
                         </div>
                     </div>
-                    <div class="row-sm-3">
+                    <div class="row-md-5">
                         <h4 for="material_name">Area</h4>
                         <div class="inputs">
                             <input name="area" id="material_name" type="text" required maxlength="50">
                         </div>
                     </div>
-                    <div class="row-sm-3">
+                    <div class="row-md-5">
                         <h4 for="description">Available capacity</h4>
                         <div class="inputs">
                             <input name="available_capacity" id="description" type="number" placeholder="999" required maxlength="10">
@@ -41,6 +41,7 @@
                         <div class="inputs">
                             <input name="total_capacity" id="available_quantity" type="number" placeholder="999" required maxlength="10">
                         </div>
+                    </div>
                 </div>
                 
                 <footer class="footer">
