@@ -1,5 +1,4 @@
 <?php
-    require_once("../config.php");
     require "materialFun.php";
 
     $unit_of_measures = getUnitMeasure();
@@ -31,33 +30,43 @@
 ?>
 <main class="forms">
     <div class="background">
-        <form class="form" action="" method="POST" autocomplete="off">
+
+        <form class="form" action="" method="post" autocomplete="off">
+
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Materials</h1>
             </header>
-            <a class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este material?');">Disable</a>
-            <input type="hidden" name="code" value="<?php echo $material['code']; ?>">
+            <h2>Material</h2>
             <div class="rows">
                 <div class="row-sm-3">
-                    <h4>Name</h4>
+                    <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input type="text" name="material_name" value="<?php echo $material['name']; ?>" required>
+                        <input name="code" id="code" type="text" value="<?php echo $material['code']; ?>" required maxlength="5">
                     </div>
                 </div>
-
                 <div class="row-sm-3">
-                    <h4>Available Quantity</h4>
+                    <h4 for="material_name">Name of material</h4>
                     <div class="inputs">
-                    <input type="number" name="available_quantity" value="<?php echo $material['available_quantity']; ?>" required>
-
+                        <input name="material_name" id="material_name" type="text" value="<?php echo $material['material_name']; ?>" required maxlength="50">
                     </div>
                 </div>
-
                 <div class="row-sm-3">
-                    <h4>Unit of Measure</h4>
+                    <h4 for="description">Description</h4>
                     <div class="inputs">
-                        <select class="input" required name="unit_of_measure">
+                        <input name="description" id="description" type="text" placeholder="fragile" value="<?php echo $material['description']; ?>" required maxlength="255">
+                    </div>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="available_quantity">Available Quantity</h4>
+                    <div class="inputs">
+                        <input name="available_quantity" id="available_quantity" type="number" placeholder="999" value="<?php echo $material['available_quantity']; ?>" required maxlength="10">
+                    </div>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="unit_of_measure">Unit of measure</h4>
+                    <div class="inputs">
+                        <select class="input" required name="unit_of_measure" id="unit_of_measure options">
                             <?php 
                                 while ($unit = mysqli_fetch_assoc($unit_of_measures)): 
                                     $selected = $material['unit_of_measure'] === $unit['code'] ? 'selected' : '';
@@ -67,17 +76,10 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="row-lg-10">
-                    <h4>Description</h4>
-                    <div class="inputs" style="">
-                        <textarea style="resize: none; height: 500px" name="description" required><?php echo $material['description']; ?></textarea>
-                    </div>
-                </div>
             </div>
             <hr>
             <footer class="footer">
-                <button class="btn-primary" type="submit">Update</button>
+                <button class="btn-primary" type="submit">Confirm</button>
             </footer>
         </form>
     </div>

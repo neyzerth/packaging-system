@@ -141,3 +141,27 @@ hr {
     border: 1px solid var(--background-medium);
 }
 
+.btn {
+    background-color: var(--white-dark);
+    color: var(--white-medium);
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+.btn-secondary {
+    background: none; 
+    border: none; 
+    color: inherit; 
+    padding: 0; 
+    font: inherit; 
+    cursor: pointer;
+    text-decoration: underline; 
+}
+.btn:hover{
+    background-color: var(--blue-light);
+}
+

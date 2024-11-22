@@ -37,9 +37,11 @@
                         <td><?php echo $user['full_name']; ?></td>
                         <td><?php echo $user['date_of_birth']; ?></td>
                         <td><?php echo $user['user']; ?></td>
+                        <?php if(validateUser("ADMIN")):?>
                         <td>
                             <a href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
                         </td>
+                        <?php endif;?>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

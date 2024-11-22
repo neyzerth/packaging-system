@@ -23,4 +23,23 @@ function login($username, $password)
     }   
     return $bool;
 }
+
+function logout(){
+    session_unset();
+    session_destroy();
+    header("Location: /login/");
+}
+
+function validateUser(string ...$validUsers){
+
+    validateSession();
+    
+    error_log("Validating...".$_SESSION['user_type']);
+
+    if($validUsers == "ALL"){
+        return true;
+    }
+
+    return in_array($_SESSION['user_type'], $validUsers);
+}
 ?>

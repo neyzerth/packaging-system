@@ -2,18 +2,18 @@
     require_once("../config.php");
     require_once("userFun.php");
 
-    if (isset($_GET['num'])) {
+    if (validateUser("ADMIN") && isset($_GET['num'])) {
         $num = $_GET['num'];
         
-        if (disableProduct($num)) {
-            echo "Producto desactivado correctamente.";
+        if (disableUser($num)) {
+            echo "usuario desactivado correctamente.";
         } else {
-            echo "Error al desactivar el producto.";
+            echo "Error al desactivar el usuario.";
         }
 
         header("Location: listProduct.php");
         exit();
     } else {
-        echo "Código de producto no proporcionado.";
+        echo "Código de usuario no proporcionado.";
     }
 ?>

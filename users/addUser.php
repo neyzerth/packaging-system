@@ -1,6 +1,4 @@
 <?php
-    require("../config.php");
-    include HEAD;
     require "userFun.php";
     $user_types = getUserTypes();
     $supervisors = getSupervisors();

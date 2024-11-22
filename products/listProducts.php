@@ -57,9 +57,11 @@
                         <td><?php echo $product['width'] ?></td>
                         <td><?php echo $product['length'] ?></td>
                         <td><?php echo $product['packaging_protocol'] ?></td>
+                        <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="?a=edit&code=<?php echo $product['code']; ?>">Edit</a>
+                            <a class="btn" href="?a=edit&code=<?php echo $product['code']; ?>">Edit</a>
                         </td>
+                        <?php endif;?>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
@@ -92,6 +94,5 @@
                     </tr>
                 </tfoot>
             </table>
-            <?php include FOOTER ?>
         </div>
     </main>

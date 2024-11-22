@@ -1,6 +1,8 @@
 <?php
-    require_once("../../config.php");
     require "reportFun.php";
+    if(!validateUser("ADMIN", "SUPER")){
+        header("Location: /process/reports");
+    }
 
     $traceabilities = getTraceabilityIncident();
     

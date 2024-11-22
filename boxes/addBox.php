@@ -1,6 +1,5 @@
 <?php
-    require("../config.php");
-    require HEAD;
+
     require "boxFun.php";
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $height = $_POST['height'];
@@ -22,7 +21,7 @@
 
     <main class="forms">
         <div class="background">
-            <form class="form" action="addBox.php" method="post">
+            <form class="form" action="?a=add" method="post">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Boxes</h1>
@@ -61,4 +60,3 @@
             </form>
         </div>
     </main>
-    <?php include FOOT ?>

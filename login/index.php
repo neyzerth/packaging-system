@@ -1,7 +1,7 @@
 <?php
     session_start(); 
     require_once "../config.php";
-    require "logFun.php";
+    require_once "logFun.php";
     $msg = "We're so excited to see you again!";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
