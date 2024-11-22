@@ -132,14 +132,14 @@ select * from product
 
 --Salida 
 
-drop Procedure `UpdateOutBound`
+drop Procedure `UpdateOutBound`;
 
 DELIMITER $$
 Create PROCEDURE UpdateOutBound(
     IN p_num INT,
     IN p_date DATE,
     In p_exit_quantity int,
-    In active bit
+    In p_active bit
 )
 Begin
     UPDATE outbound
