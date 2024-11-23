@@ -4,8 +4,7 @@
         $date = $_POST['date'];
         $exit_quantity = $_POST['exit_quantity'];
 
-        $result = addOut(date:$date, exit_quantity:$exit_quantity);
-        if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active)){
+        if($result = addOut(date:$date, exit_quantity:$exit_quantity)){
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Outbonds updated successfully</span></div>";
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating zone</span></div>";

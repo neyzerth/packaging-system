@@ -44,7 +44,7 @@
                 <div class="row-md-5">
                     <h4 for="name">Num</h4>
                     <div class="inputs">
-                        <input name="name" id="name" type="text"  value="<?php echo $protocol['num']; ?>" readonly>
+                        <input name="num" id="name" type="text"  value="<?php echo $protocol['num']; ?>" readonly>
                     </div>
                 </div>
                 <div class="row-md-5">
@@ -58,7 +58,7 @@
                 <div class="row-md-5">
                     <h4 for="name">Actual File</h4>
                     <div class="inputs">
-                        <input name="name" id="name" type="text"  value="<?php echo $protocol['file_name']; ?>" readonly>
+                        <input name="file_name" id="name" type="text"  value="<?php echo $protocol['file_name']; ?>" readonly>
                     </div>
                 </div>
                 <div class="row-md-5">

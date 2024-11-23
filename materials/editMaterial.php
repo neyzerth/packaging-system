@@ -46,7 +46,7 @@
                     <div class="row-sm-3">
                         <h4 for="material_name">Name of material</h4>
                         <div class="inputs">
-                            <input name="material_name" id="material_name" type="text" value="<?php echo $material['material_name']; ?>" required maxlength="50">
+                            <input name="material_name" id="material_name" type="text" value="<?php echo $material['name']; ?>" required maxlength="50">
                         </div>
                     </div>
                     <div class="row-sm-3">

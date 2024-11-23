@@ -18,7 +18,7 @@
         $exit_quantity = $_POST['exit_quantity'];
         $active = 1;
 
-        if($result){
+        if($result = updateOutbound(num:$num, date:$date, exit_quantity:$exit_quantity, active:$active)) {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Out updated successfully</span></div>";
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating out</span></div>";
