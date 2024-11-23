@@ -38,7 +38,12 @@ function connectdb()
     }
 }
 function validateSession(){
-    session_start();
+    //Notice: session_start(): Ignoring session_start() because a session is already active
+    //Por eso agregue este if
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
     if(!isset($_SESSION['num'])){
         header("Location: /login/");
         exit();
