@@ -53,11 +53,12 @@ VALUES
 
 INSERT INTO packaging (code, height, width, length,volume,weight, package_quantity, zone, outbound, tag)
 VALUES 
-('PK001', 10.0, 15.0, 20.0, 100,NULL,30 ,'Z001', 1, 1),
-('PK002', 12.0, 18.0, 25.0, 150,NULL,10, 'Z002', 2, 2),
-('PK003', 8.0, 10.0, 15.0, 75,NULL,20 ,'Z003', 3, 3),
-('PK004', 14.0, 16.0, 30.0, 50,NULL,40, 'Z004', 4, 4),
-('PK005', 9.0, 11.0, 22.0, 60,NULL,50, 'Z005', 5, 5);
+('PK001', 10.0, 15.0, 20.0, 10,NULL,30 ,'Z001', 1, 1),
+('PK002', 12.0, 18.0, 25.0, 10,NULL,10, 'Z002', 2, 2),
+('PK003', 8.0, 10.0, 15.0, 7,NULL,20 ,'Z003', 3, 3),
+('PK004', 14.0, 16.0, 30.0, 5,NULL,40, 'Z004', 4, 4),
+('PK005', 9.0, 11.0, 22.0, 6,NULL,5, 'Z005', 5, 5);
+
 
 INSERT INTO unit_of_measure (code, description)
 VALUES 
@@ -67,7 +68,7 @@ VALUES
 ('UOM04', 'Meters'),
 ('UOM05', 'Pounds');
 
-INSERT INTO material (code, material_name, description, available_quantity, unit_of_measure)
+INSERT INTO material (code, name, description, available_quantity, unit_of_measure)
 VALUES 
 ('stl', 'Steel', 'High-quality steel', 500, 'UOM01'),
 ('pla', 'Plastic', 'Durable plastic', 200, 'UOM03'),
@@ -132,3 +133,29 @@ VALUES
 ('2024-09-01', '2024-09-30', '2024-10-03', 1100, 'Damaged products', 3),
 ('2024-09-01', '2024-09-30', '2024-10-04', 1050, 'Excellent performance', 4),
 ('2024-09-01', '2024-09-30', '2024-10-05', 1150, 'Lost packages', 5);
+
+INSERT INTO user_traceability (user, traceability)
+VALUES 
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
+INSERT INTO material_packging (material,packaging, quantity)
+VALUES 
+('pla', 'PK002', 100),
+('stl', 'PK001', 50),
+('wod', 'PK003', 75),
+('alm', 'PK004', 150),
+('glas','PK005', 60);
+
+
+INSERT INTO material_package (material, package, quantity)
+VALUES 
+('stl',1, 30),
+('pla',2, 40),
+('wod',3, 50),
+('alm',4, 60)
+
+

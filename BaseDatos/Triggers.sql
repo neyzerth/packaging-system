@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 
 -----------------------------------
             --TRIGGERS
@@ -19,11 +19,6 @@ Begin
 END $$
 DELIMITER;
 
-INSERT INTO box (height, width, length,weight)
-VALUES (10.5, 12.0, 15.0,3.5)
-
-select * from box
-
 --Calcular el volumen de la caja en un update
 DELIMITER $$
 CREATE TRIGGER calculate_box_volume_update
@@ -34,9 +29,6 @@ Begin
 END $$
 DELIMITER;
 
-Update box
-SET height=5,width=10
-where num=6
 
 --Tigger para sacar el volumen del embalaje en insert y update
 
@@ -59,7 +51,7 @@ Begin
 END $$
 
 
---Trigger para sacer el volumen de un producto en insert y update
+/* --Trigger para sacer el volumen de un producto en insert y update
 DELIMITER $$
 CREATE TRIGGER calculate_product_volume_insert
 BEFORE INSERT ON product
@@ -75,7 +67,7 @@ BEFORE INSERT ON product
 FOR EACH ROW
 Begin
     SET NEW.volume = NEW.height*NEW.width*NEW.length;
-END $$
+END $$ */
 
 
 --TRIGER DE MATERIAL
@@ -90,14 +82,6 @@ BEGIN
     WHERE code = NEW.material;
 END $$
 
-select * from material
-
-INSERT INTO material_packging (packaging, material, quantity)
-VALUES ('PK001', 'plat', 7);
-
-select * from packaging
-
-select * from material_packging
 
 DELIMITER $$
 
@@ -158,10 +142,6 @@ BEGIN
     SET NEW.barcode = CONCAT(gs1_code, checksum);
 END;
 
-select * from tag
-
-Insert into tag (date,tag_type,destination)
-values ('2024-10-30','TT03','UABC')
 
 CREATE TRIGGER before_UPDATE_tag
 BEFORE UPDATE ON tag
@@ -311,14 +291,6 @@ BEGIN
 END $$
 
 
-INSERT INTO packaging (code, height, width, length, volume, weight, package_quantity, zone, outbound, tag)
-VALUES ('PKG01', 10.0, 5.0, 2.0, 100.0, 1.5, 100, 'Z001', 5, 1);
-
-INSERT INTO outbound (date, exit_quantity, active)
-VALUES (CURRENT_DATE, 50, TRUE);
-
-SELECT * FROM packaging;
-
 
 --------------------------------------------------------------
 
@@ -355,26 +327,6 @@ BEGIN
     SET NEW.weight = product_weight * NEW.product_quantity;
 END $$
 ---------------------------------------------------------------------------------------
-select * from package where packaging='PK001'
-
-update package
-set weight=5
-where num=1
-
-select * from product
-
-select * from packaging
-
-
-INSERT INTO product (code, name, description, height, width, length,  weight, active, packaging_protocol)
-VALUES 
-('11', 'iPhone 11', 'Product', 14.36, 7.09, 0.77,3.00, TRUE, NULL);
-
-INSERT INTO package (num, product_quantity, weight, product, packaging, box, tag)
-VALUES 
-(default, 10, 5, '11', 'PK001', 2, 1)
-
-
 
 
 
@@ -423,10 +375,3 @@ BEGIN
     WHERE code = NEW.packaging;
 END;
 -------------------------------------------------------------
-INSERT INTO package (num, product_quantity, weight, product, packaging, box, tag)
-VALUES 
-(default, 10, 5, '11', 'PK001', 2, 1)
-
-select * from package where packaging='PK001'
-
-select * from packaging where code='PK001'

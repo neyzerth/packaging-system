@@ -1,4 +1,4 @@
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 ---------------------------------------
 --Actualizar registro
 ---------------------------------------
@@ -25,7 +25,7 @@ Create PROCEDURE UpdateUser(
 )
 BEGIN
     UPDATE user
-    SET num=p_num,username=p_username,password = p_password, name = p_name, first_surname = p_first_surname,
+    SET num=p_num,username=p_username,password = sha1(p_password), name = p_name, first_surname = p_first_surname,
     second_surname = p_second_surname, date_of_birth = p_date_of_birth,
     neighborhood = p_neighborhood, street = p_street, postal_code = p_postal_code,
     phone = p_phone, email = p_email, active = p_active, 
@@ -33,9 +33,6 @@ BEGIN
     WHERE num = p_num;
 END$$
 
-call UpdateUser(1,'1', '1', 'John', 'Doe', 'Smith', '1980-05-14', 'Downtown', 'Main St', 12345, '555-1234', 'admin01@example.com', 1,'ADMIN', NULL)
-
-select * from user
 
 --Tipo de usuario
 DELIMITER $$
@@ -51,9 +48,7 @@ Begin
     where code = p_code; 
 END$$
 
-call UpdateUserType('EMPLO', 'employer', "User with limited access to the system",1);
 
-select * from user_type
 
 --Caja
 DELIMITER $$
@@ -73,9 +68,7 @@ BEGIN
     WHERE num = p_num;
 END$$
 
-call `UpdateBox`(1,5,4,7,3.5)
 
-select * from box
 
 --Material
 
@@ -102,9 +95,7 @@ BEGIN
         WHERE code = p_code;
 END $$
 
-call UpdateMaterial('stl', 'Steel', 'High-quality ', 500, 0,'UOM01')
 
-select * from material
 
 --Producto 
 Delimiter $$
@@ -126,9 +117,7 @@ Begin
     WHERE code = p_code;
 END$$
 
-call UpdateProduct('X', 'iPhone X', ' product', 14.36, 7.09, 0.77, 174, 0)
 
-select * from product
 
 --Salida 
 
@@ -148,9 +137,7 @@ Begin
 end $$
 
 
-call UpdateOutBound(1,'2024-11-11', 17,1)
 
-SELECT * from outbound
 
 --Zona
 DELIMITER $$
@@ -167,9 +154,7 @@ UPDATE zone
     WHERE code = p_code;
 end $$
 
-call UpdateZone('Z001', 'Warehouse A', 100, 100,1)
 
-sELECT * FROM zone
 
 DROP PROCEDURE UpdateProtocol;
 --Protocolo
@@ -186,12 +171,9 @@ Begin
     WHERE num = p_num;
 end $$
 
-call UpdateProtocol(1,'Protocolo 1','protocolo1.pdf',1);
-
-select * from packaging_protocol
 
 --Paquete
-drop Procedure `UpdatePaquete`
+
 
 DELIMITER $$
 Create PROCEDURE UpdatePackage(
@@ -210,10 +192,6 @@ begin
     WHERE num = p_num;
 end $$
 
-call `UpdatePackage`(1,10, 25.5, 'X', 'PK001', 2, 1)
-
-
-select * from package
 
 --Embalaje 
 DELIMITER $$
@@ -234,9 +212,7 @@ begin
     WHERE code = p_code;
 end $$
 
-call UpdatePackaging('PK001', 10.0, 15.0, 20.0,NULL,30 ,'Z001', 2)
 
-Select  * from packaging
 
 --Etiqueta
 DELIMITER $$
@@ -253,9 +229,6 @@ begin
 end $$
 
 
-call `UpdateTag`(1, '2022-01-01', 'TT01','tJ')
-
-select * from tag
 
 --Tipo de etiqueta
 DELIMITER $$
@@ -269,13 +242,10 @@ begin
     WHERE code = p_code;
 end $$
 
-call `UpdateTagType`('TT01', 'Etiqueta de prueba')
 
-SELECT * FROM tag_type
 
 --Report
 
-drop Procedure ReportPackaging
 DELIMITER $$
 Create PROCEDURE updateReport(
     IN p_folio VARCHAR(5),
@@ -295,10 +265,6 @@ Begin
 end $$
 
 
-call updateReport(1,'2024-09-01', '2024-09-30', '2024-10-01', 10, 'Too much', 1)
-
-select * from report
-
 --Incidente
 DELIMITER $$
 Create PROCEDURE UpdateIncident(
@@ -314,10 +280,6 @@ begin
 end $$
 
 
-call `UpdateIncident`(1,'2024-09-01', 'Incidente de prueba',5)
-
-select * from incident
-
 --unidad de medida
 Delimiter $$
 Create procedure updateUnit_of_measure(
@@ -329,10 +291,6 @@ BEGIN
     SET description = p_description
     WHERE code = p_code;
 END$$
-
-call updateUnit_of_measure('UOM01','KG')
-
-select * from unit_of_measure
 
 --trazabilidad
 
@@ -355,7 +313,6 @@ BEGIN
     WHERE user = p_new_user AND traceability = p_new_traceability;
 END$$
 
-select * from user_traceability
 
 CREATE PROCEDURE updateMaterialPackging(
     IN p_packaging VARCHAR(5),
@@ -372,7 +329,6 @@ BEGIN
     WHERE packaging = p_packaging AND material = p_material;
 END$$
 
-select * from material_packging
 
 CREATE PROCEDURE updateMaterialPackage(
     IN p_material VARCHAR(5),
@@ -389,4 +345,3 @@ BEGIN
     WHERE material = p_material AND package = p_package;
 END$$
 
-select * from material_packging
