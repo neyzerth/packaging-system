@@ -25,7 +25,7 @@ Create PROCEDURE UpdateUser(
 )
 BEGIN
     UPDATE user
-    SET num=p_num,username=p_username,password = p_password, name = p_name, first_surname = p_first_surname,
+    SET num=p_num,username=p_username,password = sha1(p_password), name = p_name, first_surname = p_first_surname,
     second_surname = p_second_surname, date_of_birth = p_date_of_birth,
     neighborhood = p_neighborhood, street = p_street, postal_code = p_postal_code,
     phone = p_phone, email = p_email, active = p_active, 
