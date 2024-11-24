@@ -201,7 +201,10 @@ END;
 
 --Trigger para que se actulize automaticamente la available_capacity en zona  despues de insert en packaging
 
-DELIMITER $$
+
+drop Trigger update_zone_capacity_after_insert
+
+/* DELIMITER $$
 
 CREATE TRIGGER update_zone_capacity_after_insert
 AFTER INSERT ON packaging
@@ -210,21 +213,37 @@ BEGIN
     UPDATE zone
     SET available_capacity = available_capacity - NEW.package_quantity
     WHERE code = NEW.zone;
-END$$
-
-DELIMITER ;
-
---Trigger para el estado de trazabilidad
-
---Trigger para la cantidad de salida de los embalajes tabla outbound
-
-
-
---Pensar el nombre correcto en ingles
+END$$ */
 
 
 DELIMITER $$
-CREATE PROCEDURE Sp_RegistroSalidaEmbalaje (
+
+CREATE TRIGGER update_zone_capacity_after_insert
+AFTER INSERT ON packaging
+FOR EACH ROW
+BEGIN
+    DECLARE new_available_capacity INT;
+
+    SELECT available_capacity - NEW.package_quantity INTO new_available_capacity
+    FROM zone
+    WHERE code = NEW.zone;
+
+
+    IF new_available_capacity >= 0 THEN
+        UPDATE zone
+        SET available_capacity = new_available_capacity
+        WHERE code = NEW.zone;
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
+    END IF;
+END$$
+
+------------------------------------------------------
+
+drop Procedure Sp_RecordPackagingExit
+
+DELIMITER $$
+CREATE PROCEDURE Sp_RecordPackagingExit (
     IN p_packaging_code VARCHAR(5), 
     IN p_exit_quantity INT          
 )
@@ -235,23 +254,175 @@ BEGIN
     FROM packaging
     WHERE code = p_packaging_code;
 
+
     IF available_quantity IS NULL THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Packaging not found.';
     ELSEIF available_quantity < p_exit_quantity THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventary.';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventory.';
     ELSE
         UPDATE packaging
         SET package_quantity = package_quantity - p_exit_quantity
         WHERE code = p_packaging_code;
 
-
         INSERT INTO outbound (date, exit_quantity)
         VALUES (CURRENT_DATE, p_exit_quantity);
     END IF;
 END $$
+DELIMITER ;
+
+-- Al llamarlo dice packaging not found pero funciona 
+CALL Sp_RecordPackagingExit('PKG01', 50);
 
 
---DUDAAAA
---Sp login
---Trigger pquete
+SELECT * FROM packaging;
+
+
+SELECT * FROM outbound;
+
+
+----------------------------------------------------------
+--Se supone que es el sp de arriba a trigger pero aun no funciona
+DELIMITER $$
+CREATE TRIGGER tUpdatePackagingOutbound
+AFTER INSERT ON outbound
+FOR EACH ROW
+BEGIN
+    DECLARE available_quantity INT;
+
+
+    SELECT package_quantity INTO available_quantity
+    FROM packaging
+    WHERE outbound = NEW.num;
+
+
+    IF available_quantity IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Packaging not found.';
+    ELSEIF available_quantity < NEW.exit_quantity THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventory.';
+    ELSE
+        UPDATE packaging
+        SET package_quantity = package_quantity - NEW.exit_quantity
+        WHERE outbound = NEW.num;
+    END IF;
+END $$
+
+
+INSERT INTO packaging (code, height, width, length, volume, weight, package_quantity, zone, outbound, tag)
+VALUES ('PKG01', 10.0, 5.0, 2.0, 100.0, 1.5, 100, 'Z001', 5, 1);
+
+INSERT INTO outbound (date, exit_quantity, active)
+VALUES (CURRENT_DATE, 50, TRUE);
+
+SELECT * FROM packaging;
+
+
+--------------------------------------------------------------
+
+--Trigger peso paquete el problema es que no puedes actualizar el peso del paquete
+-- por que el peso depende directamente del peso del producto
+
+drop Trigger before_insert_package
+
+DELIMITER $$
+
+CREATE TRIGGER before_insert_package
+BEFORE INSERT ON package
+FOR EACH ROW
+BEGIN
+    DECLARE product_weight DECIMAL(10, 2);
+    
+    SELECT weight INTO product_weight
+    FROM product
+    WHERE code = NEW.product;
+
+    SET NEW.weight = product_weight*NEW.product_quantity;
+END $$
+
+CREATE TRIGGER before_update_package
+BEFORE UPDATE ON package
+FOR EACH ROW
+BEGIN
+    DECLARE product_weight DECIMAL(10, 2);
+    
+    SELECT weight INTO product_weight
+    FROM product
+    WHERE code = NEW.product;
+
+    SET NEW.weight = product_weight * NEW.product_quantity;
+END $$
+---------------------------------------------------------------------------------------
+select * from package where packaging='PK001'
+
+update package
+set weight=5
+where num=1
+
+select * from product
+
+select * from packaging
+
+
+INSERT INTO product (code, name, description, height, width, length,  weight, active, packaging_protocol)
+VALUES 
+('11', 'iPhone 11', 'Product', 14.36, 7.09, 0.77,3.00, TRUE, NULL);
+
+INSERT INTO package (num, product_quantity, weight, product, packaging, box, tag)
+VALUES 
+(default, 10, 5, '11', 'PK001', 2, 1)
+
+
+
+
+
 --Trigger peso embalaje
+------------------------------------------------------------
+drop Trigger calculate_packaging_weight
+
+DELIMITER $$
+
+CREATE TRIGGER update_packaging_weight
+AFTER INSERT ON package
+FOR EACH ROW
+BEGIN
+    DECLARE total_weight DECIMAL(10,2);
+
+    SELECT SUM(weight) INTO total_weight
+    FROM package
+    WHERE packaging = NEW.packaging;
+
+    IF total_weight IS NULL THEN
+        SET total_weight = 0;
+    END IF;
+
+    UPDATE packaging
+    SET weight = total_weight
+    WHERE code = NEW.packaging;
+END;
+
+
+CREATE TRIGGER update_packaging_weight_update
+AFTER update ON package
+FOR EACH ROW
+BEGIN
+    DECLARE total_weight DECIMAL(10,2);
+
+    SELECT SUM(weight) INTO total_weight
+    FROM package
+    WHERE packaging = NEW.packaging;
+
+    IF total_weight IS NULL THEN
+        SET total_weight = 0;
+    END IF;
+
+    UPDATE packaging
+    SET weight = total_weight
+    WHERE code = NEW.packaging;
+END;
+-------------------------------------------------------------
+INSERT INTO package (num, product_quantity, weight, product, packaging, box, tag)
+VALUES 
+(default, 10, 5, '11', 'PK001', 2, 1)
+
+select * from package where packaging='PK001'
+
+select * from packaging where code='PK001'
