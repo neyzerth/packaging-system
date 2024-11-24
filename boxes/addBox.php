@@ -18,6 +18,9 @@
         }
     }
 ?>
+<head>
+    <script src="boxForm.js"></script>
+</head>
 
     <main class="forms">
         <div class="background">
