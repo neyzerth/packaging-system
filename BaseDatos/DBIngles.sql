@@ -12,11 +12,15 @@ CREATE TABLE user_type (
     active BIT DEFAULT TRUE
 );
 
+ALTER TABLE user
+MODIFY password VARCHAR(40);
+
+
 -- TABLE USER
 CREATE TABLE user (
     num INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL UNIQUE, 
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(40) NOT NULL,
     name VARCHAR(50) NOT NULL,
     first_surname VARCHAR(30) NOT NULL,
     second_surname VARCHAR(30),

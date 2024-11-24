@@ -26,7 +26,7 @@ END;
 
 select * from zone
 
-CALL check_zone_capacity('Z001',55,@Resultado);
+CALL sp_check_zone_capacity('Z001',155,@Resultado);
 
 select @Resultado as respuesta
 
@@ -34,19 +34,28 @@ select @Resultado as respuesta
 
 
 --Pudieramos cambiar el nombre a search_report
-CREATE PROCEDURE sp_generate_report(
-    IN start_date DATE,
-    IN end_date DATE
+drop PROCEDURE search_report
+
+CREATE PROCEDURE search_report(
+    IN p_start_date DATE,
+    IN p_end_date DATE
 )
 BEGIN
-    SELECT * FROM report 
-    WHERE start_date = start_date
-    AND end_date = end_date ;
+    SELECT folio,start_date,end_date,report_date,packed_products,observations,traceability
+    FROM report 
+    WHERE start_date = p_start_date
+    AND end_date = p_end_date ;
 END;
 
 
-call sp_generate_report ('2024-09-01','2024-09-30');
+call search_report ('2023-10-22','2023-11-22');
 
+update report
+set start_date = '2023-10-22',
+end_date = '2023-11-22'
+where folio = 5
+
+select * from report
 
 DELIMITER $$
 CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
@@ -69,6 +78,51 @@ BEGIN
 
 END $$
 DELIMITER $$
+
+
+drop Procedure login 
+DELIMITER $$
+
+DELIMITER $$
+
+CREATE PROCEDURE login(
+    IN p_user VARCHAR(30),
+    IN p_password VARCHAR(40), 
+    OUT p_result BIT           
+)
+BEGIN
+    DECLARE user_exists INT; 
+
+
+    SET user_exists = (SELECT COUNT(*) FROM user WHERE username = p_user AND password = SHA1(p_password));
+    
+    IF user_exists > 0 THEN
+        SET p_result = 1; 
+    ELSE
+        SET p_result = 0; 
+    END IF;
+END $$
+
+CALL addUser('Axel', 'Leyva', 'John', 'Doe', 'Smith', '1985-06-15', 'Downtown', 'Main Street 123', 
+12345, '123-456-7890', 'jdoe@example.com', 'ADMIN', NULL);
+
+SET @login_result = NULL;
+
+
+CALL login('Axel', 'Leyva', @login_result);
+
+
+SELECT @login_result; 
+
+
+
+
+
+
+
+
+
+
 
 
 

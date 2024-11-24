@@ -19,6 +19,10 @@ Begin
 END $$
 DELIMITER;
 
+INSERT INTO box (height, width, length,weight)
+VALUES (10.5, 12.0, 15.0,3.5)
+
+select * from box
 
 --Calcular el volumen de la caja en un update
 DELIMITER $$
@@ -29,6 +33,10 @@ Begin
     SET NEW.volume = NEW.height*NEW.width*NEW.length;
 END $$
 DELIMITER;
+
+Update box
+SET height=5,width=10
+where num=6
 
 --Tigger para sacar el volumen del embalaje en insert y update
 
@@ -73,7 +81,6 @@ END $$
 --TRIGER DE MATERIAL
 
 DELIMITER $$
-
 CREATE TRIGGER material_packging_insert
 AFTER INSERT ON material_packging
 FOR EACH ROW
@@ -82,6 +89,11 @@ BEGIN
     SET available_quantity = available_quantity - NEW.quantity
     WHERE code = NEW.material;
 END $$
+
+select * from material
+
+
+select * from material_packging
 
 DELIMITER $$
 
@@ -165,19 +177,15 @@ BEGIN
         '(410)', NEW.destination,
         '(420)', NEW.tag_type
     );
-    
-    -- Longitud del código generado
+
     SET len = CHAR_LENGTH(gs1_code);
 
-    -- Calcular el checksum recorriendo cada carácter
     WHILE i <= len DO
         SET digito = CAST(SUBSTRING(gs1_code, i, 1) AS UNSIGNED);
 
         IF i % 2 = 1 THEN
-            -- Sumar posición impar y multiplicar por 3
             SET suma_impar = suma_impar + digito;
         ELSE
-            -- Sumar posición par
             SET suma_par = suma_par + digito;
         END IF;
         
@@ -244,6 +252,6 @@ END $$
 
 
 --DUDAAAA
---Trigger peso paquete
-
+--Sp login
+--Trigger pquete
 --Trigger peso embalaje

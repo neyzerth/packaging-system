@@ -1,7 +1,11 @@
 ---------------------------------------
 --Insertar registro
 ---------------------------------------
+drop Procedure addUser
 DELIMITER $$
+
+--Este procedimiento dice que invalid colum username pero eso se debia a que la vista vw_user_personal_info
+--no tiene la columna username entonces la agregue
 CREATE PROCEDURE addUser(
     IN p_username VARCHAR(30),
     IN p_password VARCHAR(20),
@@ -22,24 +26,36 @@ BEGIN
     DECLARE type_exists INT;
     SET type_exists = (SELECT COUNT(*) FROM user_type WHERE code = p_user_type);
 
+
     IF type_exists = 0 THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid user_type code';
     END IF;
+
 
     INSERT INTO user (
         username, password, name, first_surname, second_surname,
         date_of_birth, neighborhood, street, postal_code, phone,
         email, user_type, supervisor
     ) VALUES (
-        p_username, p_password, p_name, p_first_surname, p_second_surname,
+        p_username, SHA1(p_password), p_name, p_first_surname, p_second_surname,
         p_date_of_birth, p_neighborhood, p_street, p_postal_code, p_phone,
         p_email, p_user_type, p_supervisor
     );
+
 
     SELECT num, username, full_name, user
     FROM vw_user_personal_info
     WHERE username = p_username;
 END $$
+DELIMITER ;
+
+
+CALL addUser('hola', 'hola', 'John', 'Doe', 'Smith', '1985-06-15', 'Downtown', 'Main Street 123', 
+12345, '123-456-7890', 'jdoe@example.com', 'ADMIN', NULL);
+
+select * from `user`
+
+
 
 --Usertype
 drop Procedure insertUserType
