@@ -26,7 +26,7 @@ END;
 
 select * from zone
 
-CALL sp_check_zone_capacity('Z001',155,@Resultado);
+CALL sp_check_zone_capacity('Z002',155,@Resultado);
 
 select @Resultado as respuesta
 
@@ -57,6 +57,7 @@ where folio = 5
 
 select * from report
 
+drop Procedure `validateUser`
 DELIMITER $$
 CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
 BEGIN
@@ -64,7 +65,7 @@ BEGIN
     SET user_exists = (
         SELECT COUNT(*) FROM user 
         WHERE username = usern 
-        AND password = passw
+        AND password = SHA1(passw)
         AND active = 1
     );
     
@@ -75,10 +76,12 @@ BEGIN
     SELECT num, username, user_type 
     FROM vw_user_info
     WHERE username = usern;
-
 END $$
 DELIMITER $$
 
+call validateUser('Axel','Leyva')
+
+select * from user
 
 drop Procedure login 
 DELIMITER $$

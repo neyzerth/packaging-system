@@ -92,6 +92,10 @@ END $$
 
 select * from material
 
+INSERT INTO material_packging (packaging, material, quantity)
+VALUES ('PK001', 'plat', 7);
+
+select * from packaging
 
 select * from material_packging
 
