@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -78,6 +78,51 @@ BEGIN
 
 END $$
 DELIMITER $$
+
+
+drop Procedure login 
+DELIMITER $$
+
+DELIMITER $$
+
+CREATE PROCEDURE login(
+    IN p_user VARCHAR(30),
+    IN p_password VARCHAR(40), 
+    OUT p_result BIT           
+)
+BEGIN
+    DECLARE user_exists INT; 
+
+
+    SET user_exists = (SELECT COUNT(*) FROM user WHERE username = p_user AND password = SHA1(p_password));
+    
+    IF user_exists > 0 THEN
+        SET p_result = 1; 
+    ELSE
+        SET p_result = 0; 
+    END IF;
+END $$
+
+CALL addUser('Axel', 'Leyva', 'John', 'Doe', 'Smith', '1985-06-15', 'Downtown', 'Main Street 123', 
+12345, '123-456-7890', 'jdoe@example.com', 'ADMIN', NULL);
+
+SET @login_result = NULL;
+
+
+CALL login('Axel', 'Leyva', @login_result);
+
+
+SELECT @login_result; 
+
+
+
+
+
+
+
+
+
+
 
 
 
