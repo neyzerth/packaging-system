@@ -18,17 +18,16 @@
         $exit_quantity = $_POST['exit_quantity'];
         $active = 1;
 
-        if($result = updateOutbound(num: $num, date: $date, exit_quantity: $exit_quantity, active: $active)){
-            echo "Out updated successfully";
+        if($result = updateOutbound(num:$num, date:$date, exit_quantity:$exit_quantity, active:$active)) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Out updated successfully</span></div>";
         } else {
-            echo "Error updating out";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating out</span></div>";
         }
     }
 ?>
     <main class="forms">
         <div class="background">
 
-            <a href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta salida?');">Disable</a>
 
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
@@ -36,6 +35,8 @@
                     <h1>Outbounds</h1>
                 </header>
                 <h2>Outbound</h2>
+                <hr>
+                <a class="btn-primary" href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta salida?');">Disable</a>
                 <div class="rows">
                     <div class="row-sm-3">
                         <h4 for="code">Num</h4>
@@ -54,9 +55,19 @@
                         <div class="inputs">
                             <input name="exit_quantity" id="description" type="number" placeholder="999" required maxlength="10"value="<?php echo $out['exit_quantity']; ?>">
                         </div>
+                    </div>
+                </div>
                 <footer class="footer">
                     <button class="btn-primary" type="submit">Update</button>
                 </footer>
             </form>
         </div>
     </main>
+    <script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>

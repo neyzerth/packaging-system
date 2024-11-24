@@ -23,38 +23,69 @@
         $traceability = $_POST['traceability'];
 
         if (updateIncident(num:$num, date:$date, description:$description, traceability:$traceability)) {
-            echo "Incidente actualizado con éxito.";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Incidente actualizado con éxito.</span></div>";
+
         } else {
-            echo "Error al actualizar el incidente.";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el incidente.</span></div>";
+
         }
     }
 ?>
-<main class="tables">
-    <div class="background">
+    <main class="forms">
+        <div class="background">
+            <form class="form" action="" method="post" autocomplete="off">
+                <header class="header">
+                    <img src="<?php  echo SVG . "icon.svg" ?>">
+                    <h1></h1>
+                </header>
+                <h2></h2>
+                <div class="rows">
+                    <div class="row-sm-3">
+                        <h4 for="code">Incident number</h4>
+                        <div class="inputs">
+                        <input type="number" name="num" value="<?php echo $incident['num']; ?>" readonly>
 
-        <table class="table">
-            <form action="" method="POST" autocomplete="off">
-                <label>Incident number: </label>
-                <input type="number" name="num" value="<?php echo $incident['num']; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="row-sm-3">
+                        <h4 for="material_name">Incident date</h4>
+                        <div class="inputs">
+                        <input type="date" name="date" value="<?php echo $incident['date']; ?>" required>
 
-                <label>Incident date:</label>
-                <input type="date" name="date" value="<?php echo $incident['date']; ?>" required>
-
-                <label>Description:</label>
-                <textarea name="description" required><?php echo $incident['description']; ?></textarea>
-
-                <label>Traceability:</label>
-                <select name="traceability" required>
-                    <?php
-                        foreach ($traceabilities as $traceability) {
-                            $selected = ($incident['traceability'] === $traceability['num']) ? 'selected' : '';
-                            echo "<option value='{$traceability['num']}' $selected>{$traceability['num']}</option>";
-                        }
-                    ?>
-                </select>
-                
-                <button type="submit">Update</button>
+                        </div>
+                    </div>
+                    <div class="row-sm-3">
+                        <h4 for="unit_of_measure">Traceability</h4>
+                        <div class="inputs">
+                            <select name="traceability" required>
+                                <?php
+                                    foreach ($traceabilities as $traceability) {
+                                        $selected = ($incident['traceability'] === $traceability['num']) ? 'selected' : '';
+                                        echo "<option value='{$traceability['num']}' $selected>{$traceability['num']}</option>";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-lg-10">
+                        <h4 for="description">Description</h4>
+                        <div class="inputs">
+                        <textarea name="description" required><?php echo $incident['description']; ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <footer class="footer">
+                    <button class="btn-primary" type="submit">Update</button>
+                </footer>
             </form>
-        </table>
-    </div>
-</main>
+        </div>
+    </main>
+    <script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>

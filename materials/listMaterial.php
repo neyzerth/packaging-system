@@ -38,7 +38,7 @@
                     <?php foreach ($materials as $material): ?>
                     <tr>
                         <td><?php echo $material['code']; ?></td>
-                        <td><?php echo $material['material_name']; ?></td>
+                        <td><?php echo $material['name']; ?></td>
                         <td><?php echo $material['description']; ?></td>
                         <td><?php echo $material['available_quantity']; ?></td>
                         <td><?php echo $material['unit_of_measure']; ?></td>

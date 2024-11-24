@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="<?php echo CSS . "header.css" ?>">
         <link rel="stylesheet" href="<?php echo CSS . "table.css" ?>">
         <link rel="stylesheet" href="<?php echo CSS . "footer.css" ?>">
+        <link rel="stylesheet" href="<?php echo CSS . "processView.css" ?>">
     </head>
 <body>
     <?php include ASIDE ?>

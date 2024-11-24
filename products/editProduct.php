@@ -23,10 +23,10 @@
         $active = 1; 
         $packaging_protocol = $_POST['packaging_protocol'];
 
-        if (updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, active:$active, packaging_protocol:$packaging_protocol)) {
-            echo "Producto actualizado con éxito.";
+        if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, active:$active, packaging_protocol:$packaging_protocol)){
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Producto actualizado con éxito.</span></div>";
         } else {
-            echo "Error al actualizar el producto.";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
         }
     }
 ?>
@@ -107,3 +107,11 @@
         </form>
     </div>
 </main>
+<script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>
