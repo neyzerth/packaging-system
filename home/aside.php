@@ -44,9 +44,6 @@
             <img class="bi" src="<?php echo SVG . "user.svg" ?>">
         </a>
         <ul class="dropdown-menu" id="dropdown-menu">
-            <li>
-                <a href="#">Profile</a>
-            </li>
             <li style="border-bottom: none">
                 <a href="<?php echo URL . "?a=logout" ?>">Logout</a>
             </li>

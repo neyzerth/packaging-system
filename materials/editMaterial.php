@@ -33,8 +33,9 @@
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Materials</h1>
+                    <h1>Edit Materials</h1>
                 </header>
+                <hr>
                 <h2>Material</h2>
                 <div class="rows">
                     <div class="row-sm-3">

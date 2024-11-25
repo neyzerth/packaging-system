@@ -32,11 +32,11 @@
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Outbounds</h1>
+                    <h1>Edit Outbound</h1>
                 </header>
-                <h2>Outbound</h2>
-                <hr>
                 <a class="btn-primary" href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta salida?');">Disable</a>
+                <hr>
+                <h2>Outbound</h2>
                 <div class="rows">
                     <div class="row-sm-3">
                         <h4 for="code">Num</h4>
@@ -57,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+                <hr>
                 <footer class="footer">
                     <button class="btn-primary" type="submit">Update</button>
                 </footer>

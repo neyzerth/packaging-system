@@ -1,11 +1,7 @@
         <header class="header">
             <div>
                 <form action="" method="get">
-                    <input type="text" name="search" id="search">
-                    <button class="btn-secondary" type="submit">
-                        Search
-                        <img src="<?php echo SVG . "search.svg" ?>" alt="">
-                    </button>
+                    <input type="text" name="search" id="search" placeholder="Search: Press Enter">
                 </form>
             </div>
             <?php if(validateUser("ADMIN", "SUPER")):?>
@@ -15,7 +11,6 @@
                         <p> Add</p>
                         <img class="" src="<?php echo SVG . "plus-circle.svg" ?>" >
                     </a>
-                    
                 </li>
             </ul>
             <?php endif;?>

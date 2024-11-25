@@ -35,14 +35,11 @@
         <form class="form" action="" method="post" autocomplete="off">
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
-                <h1>Products</h1>
+                <h1>Edit Products</h1>
             </header>
+            <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
+            <hr>
             <h2>Products</h2>
-            <div class="rows">
-                <div class="row-sm-3">
-                    <a class="btn" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
-                </div>
-            </div>
             <div class="rows">
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>

@@ -9,6 +9,7 @@
             $link="?a=add";
             include HEADER;
             ?>
+            <h1>Users</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -39,7 +40,7 @@
                         <td><?php echo $user['user']; ?></td>
                         <?php if(validateUser("ADMIN")):?>
                         <td>
-                            <a href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
+                            <a class="btn" href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
                         </td>
                         <?php endif;?>
                     </tr>
