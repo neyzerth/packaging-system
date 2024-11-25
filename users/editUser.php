@@ -1,7 +1,7 @@
 <?php
     require_once("../config.php");
     require "userFun.php";
-
+    session_start();
     $supervisors = getSupervisors();
     $userTypes = getUserTypes();
 
@@ -31,11 +31,20 @@
         $supervisor = $_POST['supervisor'];
 
         if (updateUser(num:$num, username: $username, password: $password, name: $name, first_surname: $first_surname, second_surname: $second_surname, date_of_birth: $date, neighborhood: $neighborhood, street: $street, postal_code: $postal_code, phone: $phone, email: $email, active:$active, user_type: $user_type, supervisor: $supervisor)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Producto actualizado con éxito.</span></div>";
-
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+
+
+        header("Location: index.php");
+        exit();
     }
 ?>
 
@@ -165,11 +174,4 @@
             </form>
         </div>
     </main>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+    <?php include FOOT ?>

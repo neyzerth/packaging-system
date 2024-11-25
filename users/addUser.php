@@ -1,8 +1,11 @@
 <?php
     require "userFun.php";
+    session_start();
+
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
-    if ($_SERVER['REQUEST_METHOD']=='POST') {
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $name = $_POST['name'];
@@ -16,14 +19,33 @@
         $email = $_POST['email'];
         $user_type = $_POST['user_type'];
         $supervisor = $_POST['supervisor'];
-        $result = addUser(username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor);
-        if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Box Registered.</span></div>";
+
+
+        $result = addUser(
+            username: $username, password: $password, name: $name,
+            firstSurname: $first_surname, secondSurname: $second_surname,
+            dateOfBirth: $date, neighborhood: $neighborhood, street: $street,
+            postalCode: $postal_code, phone: $phone, email: $email,
+            userType: $user_type, supervisor: $supervisor
+        );
+
+        if ($result) {
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+
+        header("Location: index.php");
+        exit();
     }
 ?>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="addUser.php" method="post" autocomplete="off">
@@ -142,11 +164,3 @@
         </div>
     </main>
     <?php include FOOT ?>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>

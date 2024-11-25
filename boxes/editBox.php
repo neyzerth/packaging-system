@@ -1,7 +1,7 @@
 <?php
     require_once("../config.php");
     require "boxFun.php";
-    
+    session_start(); 
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         $box = getBoxByNumber($num);
@@ -20,11 +20,19 @@
         $weight = $_POST['weight'];
 
         if (updateBox(num:$num, height:$height, width:$width, length:$length, weight:$weight)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Caja actualizado con éxito.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
 
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error al actualizar la caja.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: index.php");
+        exit(); 
     }
 ?>
 <main class="forms">
@@ -73,14 +81,6 @@
 
                     </div>
                 </div>
-                <!--
-                <div class="row-sm-3">
-                    <h4></h4>
-                    <div class="inputs">
-                        
-                    </div>
-                </div>
-                -->
             </div>
             <hr>
             <footer class="footer">
@@ -89,11 +89,4 @@
         </form>
     </div>
 </main>
-<script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+<?php include FOOT ?>

@@ -1,7 +1,7 @@
 <?php
     require_once("../../../config.php");
     require "zoneFun.php";
-
+    session_start();
     if (isset($_GET['code'])) {
         $code = $_GET['code'];
         $zone = getZoneByCode($code);
@@ -20,10 +20,18 @@
         $active = 1;
 
         if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active)){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Zone updated successfully</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating zone</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
     <main class="forms">
@@ -72,11 +80,4 @@
             </form>
         </div>
     </main>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+    <?php include FOOT ?>

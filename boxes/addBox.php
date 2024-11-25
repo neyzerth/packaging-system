@@ -1,6 +1,7 @@
 <?php
 
     require "boxFun.php";
+    session_start(); 
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $height = $_POST['height'];
         $width = $_POST['width'];
@@ -12,10 +13,18 @@
         );
 
         if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Box Registered.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: index.php");
+        exit(); 
     }
 ?>
 
@@ -61,11 +70,4 @@
             </form>
         </div>
     </main>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+    <?php include FOOT ?>

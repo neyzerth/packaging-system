@@ -1,5 +1,17 @@
 <?php
     validateUser("ALL");
+
+    session_start();
+
+
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+    echo "<div class='div-msg' id='disp'>
+            <span id='{$message['type']}-msg' class='msg'>{$message['text']}</span>
+          </div>";
+
+    unset($_SESSION['message']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
