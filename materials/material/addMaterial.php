@@ -32,9 +32,16 @@
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /");
         exit();
     }
+
+
+    if(isset($_POST['btn_find'])){
+        $seller_name = $_POST['find_seller'];
+        $query = "SELECT * FROM seller WHERE name LIKE '%$seller_name%';";
+    }
+    
 ?>
 <script src="materialForm.js"></script>
 <main class="forms">
@@ -92,4 +99,15 @@
         </form>
     </div>
 </main>
+<<<<<<< HEAD:materials/material/addMaterial.php
+<script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+</script>
+=======
 <?php include FOOT ?>
+

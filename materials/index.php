@@ -1,20 +1,6 @@
 <?php
-
-require_once "../config.php";
-
-session_start();
-
-if(!validateUser("ADMIN", "SUPER")){
-    header("Location: /");
-    exit;
-}
-
-
-include HEAD;
-
-crudRedirect(getAction(), "listMaterial.php", 
-    "addMaterial.php", "editMaterial.php"
-);
-
-include FOOT;
+    require_once "../config.php";
+    include HEAD;
+    include 'home.php';
+    include FOOT;
 ?>
