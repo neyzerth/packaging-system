@@ -10,7 +10,6 @@
             name: $name, file: $file
         );
 
-       
         if($result){
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol Registered.</span></div>";
         } else {
