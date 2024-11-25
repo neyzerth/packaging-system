@@ -76,6 +76,8 @@ drop Procedure UpdateMaterial
 
 DELIMITER $$
 
+DELIMITER $$
+
 CREATE PROCEDURE UpdateMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
@@ -85,14 +87,27 @@ CREATE PROCEDURE UpdateMaterial(
     IN p_unit_of_measure VARCHAR(5)
 )
 BEGIN
-        UPDATE material
-        SET 
-            name = p_name, 
-            description = p_description, 
-            available_quantity = p_available_quantity,
-            active = p_active,
-            unit_of_measure = p_unit_of_measure
-        WHERE code = p_code;
+    DECLARE success INT DEFAULT 0;
+    DECLARE message VARCHAR(255) DEFAULT '';
+
+    UPDATE material
+    SET 
+        name = p_name, 
+        description = p_description, 
+        available_quantity = p_available_quantity,
+        active = p_active,
+        unit_of_measure = p_unit_of_measure
+    WHERE code = p_code;
+
+    IF ROW_COUNT() > 0 THEN
+        SET success = 1;
+        SET message = 'Material successfully updated.';
+    ELSE
+        SET success = 0;
+        SET message = 'Code repeated in material.';
+    END IF;
+
+    SELECT success AS success, message AS message;
 END $$
 
 
@@ -140,13 +155,17 @@ end $$
 
 
 --Zona
+
+DROP PROCEDURE `UpdateZone`;
 DELIMITER $$
-Create PROCEDURE UpdateZone(
-    In p_code VARCHAR(5),
-    In p_area VARCHAR(50),
-    In p_available_capacity INT,
-    In p_total_capacity INT,
-    In p_active bit
+
+
+CREATE PROCEDURE UpdateZone(
+    IN p_code VARCHAR(5),
+    IN p_area VARCHAR(50),
+    IN p_available_capacity INT,
+    IN p_total_capacity INT,
+    IN p_active INT
 )
 Begin
 UPDATE zone

@@ -20,13 +20,17 @@
         $weight = $_POST['weight'];
 
         if (updateBox(num:$num, height:$height, width:$width, length:$length, weight:$weight)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Caja actualizado con éxito.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Box updated successfully.</span></div>";
 
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error al actualizar la caja.</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updating box.</span></div>";
         }
     }
 ?>
+<head>
+    <script src="boxForm.js"></script>
+</head>
+
 <main class="forms">
     <div class="background">
         <form class="form" action="" method="POST" autocomplete="off">
@@ -48,28 +52,28 @@
                 <div class="row-sm-3">
                     <h4>Height</h4>
                     <div class="inputs">
-                    <input type="number" name="height" value="<?php echo $box['height']; ?>" required>
+                    <input type="number" name="height" id="height" value="<?php echo $box['height']; ?>" required>
 
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4>Width</h4>
                     <div class="inputs">
-                    <input type="number" name="width" value="<?php echo $box['width']; ?>" required>
+                    <input type="number" name="width" id="width"value="<?php echo $box['width']; ?>" required>
 
                     </div>
                 </div>
                 <div class="row-md-5">
                     <h4>Length</h4>
                     <div class="inputs">
-                    <input type="number" name="length" value="<?php echo $box['length']; ?>" required>
+                    <input type="number" name="length" id="length" value="<?php echo $box['length']; ?>" required>
 
                     </div>
                 </div>
                 <div class="row-md-5">
                     <h4>Weight</h4>
                     <div class="inputs">
-                    <input type="number" name="weight" value="<?php echo $box['weight']; ?>" required>
+                    <input type="number" name="weight" id="weight"  value="<?php echo $box['weight']; ?>" required>
 
                     </div>
                 </div>
@@ -96,4 +100,4 @@
             if (successMsg) successMsg.style.display = 'none';
             if (errorMsg) errorMsg.style.display = 'none';
         }, 3000);
-    </script>
+ </script>

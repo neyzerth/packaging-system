@@ -1,5 +1,5 @@
 <?php
-    require_once("../config.php");
+    require_once("../../../config.php");
     require "protocolFun.php";
     
     if (isset($_GET['num'])) {
@@ -19,12 +19,15 @@
         $active = 1; 
 
         if (updateProtocol(num:$num, name:$name, file_name:$file_name, active:$active)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocolo actualizado con éxito.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el protocolo.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";
         }
     }
 ?>
+<head>
+    <script src="protocolForm.js"></script>
+</head>
 
 
 <main class="forms">

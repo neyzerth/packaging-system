@@ -19,34 +19,35 @@
         $password = $_POST['password'];
         $name = $_POST['name'];
         $first_surname = $_POST['first_surname'];
-        $second_surname = $_POST['second_surname'];
-        $date = $_POST['date'];
-        $neighborhood = $_POST['neighborhood'];
-        $street = $_POST['street'];
-        $postal_code = $_POST['postal_code'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
         $active = 1;
-        $user_type = $_POST['user_type'];
-        $supervisor = $_POST['supervisor'];
+        
+        //
+        $second_surname = empty($_POST['second_surname']) ? NULL : $_POST['second_surname'];
+        $date = empty($_POST['date']) ? NULL : $_POST['date'];
+        $neighborhood = empty($_POST['neighborhood']) ? NULL : $_POST['neighborhood'];
+        $street = empty($_POST['street']) ? NULL : $_POST['street'];
+        $postal_code = empty($_POST['postal_code']) ? NULL : $_POST['postal_code'];
+        $phone = empty($_POST['phone']) ? NULL : $_POST['phone'];
+        $email = empty($_POST['email']) ? NULL : $_POST['email'];
 
-        if (updateUser(num:$num, username: $username, password: $password, name: $name, first_surname: $first_surname, second_surname: $second_surname, date_of_birth: $date, neighborhood: $neighborhood, street: $street, postal_code: $postal_code, phone: $phone, email: $email, active:$active, user_type: $user_type, supervisor: $supervisor)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Producto actualizado con éxito.</span></div>";
+        $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
+        $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
+
+        if (updateUser(num:$num, username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, active:$active, userType: $user_type, supervisor: $supervisor)) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Usuario actualizado con éxito.</span></div>";
 
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar al usuario.</span></div>";
         }
     }
 ?>
-
-
-                <input type="hidden" name="num" value="<?php echo $user['num']; ?>">
-
-
+<head>
+    <script src="userForm.js"></script>
+</head>
 
 <main class="forms">
         <div class="background">
-            <form class="form" action="addUser.php" method="post" autocomplete="off">
+            <form class="form" action="" method="post" autocomplete="off">
                 
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
@@ -60,25 +61,25 @@
                     <div class="row-lg-10">
                         <h4 for="name">Name</h4>
                         <div class="inputs">
-                        <input type="text" name="name" value="<?php echo $user['name']; ?>" required>
+                        <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required>
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="first_surname">First Surname</h4>
                         <div class="inputs">
-                        <input type="text" name="first_surname" value="<?php echo $user['first_surname']; ?>" required>
+                        <input type="text" id="first_surname" name="first_surname" value="<?php echo $user['first_surname']; ?>" required>
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="second_surname">Second Surname</h4>
                         <div class="inputs">
-                        <input type="text" name="second_surname" value="<?php echo $user['second_surname']; ?>">
+                        <input type="text" id="second_surname" name="second_surname" value="<?php echo $user['second_surname']; ?>">
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="date">Date of Birth</h4>
                         <div class="inputs">
-                        <input type="date" name="date" value="<?php echo $user['date_of_birth']; ?>" required>
+                        <input type="date" id="date" name="date" value="<?php echo $user['date_of_birth']; ?>" required>
                         </div>
                     </div>
                 </div>
@@ -89,30 +90,30 @@
                     <div class="row-lg-10">
                         <h4 for="username">User</h4>
                         <div class="inputs">
-                            <input type="text" name="username" value="<?php echo $user['username']; ?>" required>
+                            <input type="text" id="username" name="username" value="<?php echo $user['username']; ?>" required>
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="email">Email</h4>
                         <div class="inputs">
-                        <input type="email" name="email" value="<?php echo $user['email']; ?>" required>
+                        <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required>
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="phone">Phone number</h4>
                         <div class="inputs">
-                        <input type="text" name="phone" value="<?php echo $user['phone']; ?>" required>
+                        <input type="text" id="phone" name="phone" value="<?php echo $user['phone']; ?>" required>
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="password">Password</h4>
                         <div class="inputs">
-                        <input type="password" name="password" value="<?php echo $user['password']; ?>" required>
+                        <input type="text" id="password" name="password" value="<?php echo $user['password']; ?>" required>
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="user_type">User type</h4>
-                            <select class="inputs" name="user_type" required>
+                            <select class="inputs" id="user_type" name="user_type" required>
                                 <?php
                                     while ($type = mysqli_fetch_assoc($userTypes)) {
                                         $selected = $user['user_type'] === $type['code'] ? 'selected' : '';
@@ -123,7 +124,7 @@
                     </div>
                     <div class="row-md-5">
                         <h4 for="supervisor">Supervisor</h4>
-                        <select class="inputs" name="supervisor" required>
+                        <select class="inputs" id="supervisor" name="supervisor" required>
                             <?php 
                                 while ($supervisor = mysqli_fetch_assoc($supervisors)) {
                                     $selected = $user['supervisor'] === $supervisor['num'] ? 'selected' : '';
@@ -140,19 +141,19 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                        <input type="number" name="postal_code" value="<?php echo $user['postal_code']; ?>" required>
+                        <input type="number" id="postal_code" name="postal_code" value="<?php echo $user['postal_code']; ?>" maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="">Neighborhood</h4>
                         <div class="inputs">
-                        <input type="text" name="neighborhood" value="<?php echo $user['neighborhood']; ?>" required>
+                        <input type="text" id="neighborhood" name="neighborhood" value="<?php echo $user['neighborhood']; ?>">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="">Street</h4>
                         <div class="inputs">
-                        <input type="text" name="street" value="<?php echo $user['street']; ?>" required>
+                        <input type="text" id="street" name="street" value="<?php echo $user['street']; ?>">
                         </div>
                     </div>
                 </div>

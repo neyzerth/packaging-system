@@ -18,6 +18,9 @@
         }
     }
 ?>
+<head>
+    <script src="boxForm.js"></script>
+</head>
 
     <main class="forms">
         <div class="background">
@@ -32,25 +35,25 @@
                     <div class="row-md-5">
                         <h4 for="height">Height (cm)</h4>
                         <div class="inputs">
-                            <input name="height" id="height" type="number" step="0.01" required>
+                            <input name="height" id="height" type="number"  required>
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="width">Width (cm)</h4>
                         <div class="inputs">
-                            <input name="width" id="width" type="number" step="0.01" required>
+                            <input name="width" id="width" type="number"  required>
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="length">Length (cm)</h4>
                         <div class="inputs">
-                            <input name="length" id="length" type="number" step="0.01" required>
+                            <input name="length" id="length" type="number"  required>
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="weight">Weight (g)</h4>
                         <div class="inputs">
-                            <input name="weight" id="weight" type="number" step="0.01" required>
+                            <input name="weight" id="weight" type="number" required>
                         </div>
                     </div>
                 </div>

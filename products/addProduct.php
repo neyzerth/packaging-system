@@ -22,11 +22,14 @@
         if($result){
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Product registered</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error adding product</span></div>";
         }
     }
 
 ?>
+<head>
+    <script src="productForm.js"></script>
+</head>
 
 <main class="forms">
     <div class="background">

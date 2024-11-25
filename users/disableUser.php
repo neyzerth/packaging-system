@@ -11,7 +11,7 @@
             echo "Error al desactivar el usuario.";
         }
 
-        header("Location: listProduct.php");
+        header("Location: listUsers.php");
         exit();
     } else {
         echo "Código de usuario no proporcionado.";

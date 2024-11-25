@@ -20,16 +20,20 @@
         $available_quantity = $_POST['available_quantity'];
         $active = 1; 
         $unit_of_measure = $_POST['unit_of_measure'];
+        
+        $result=updateMaterial(code: $code, name: $name, description: $description, available_quantity: $available_quantity, active: $active, unit_of_measure: $unit_of_measure);
 
-        if (updateMaterial(code: $code, name: $name, description: $description, available_quantity: $available_quantity, active: $active, unit_of_measure: $unit_of_measure)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Material actualizado con éxito.</span></div>";
+        if ($result['success'] == 1) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error al actualizar el material.</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
         }
     }
 ?>
+<script src="materialForm.js"></script>
     <main class="forms">
         <div class="background">
+        <a  class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
