@@ -45,11 +45,11 @@
 
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Zones</h1>
+                    <h1>Edit Zone</h1>
                 </header>
-                <h2>Zone</h2>
-                <hr>
                 <a class="btn-primary" href="disableZone.php?code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta zona?');">Disable</a>
+                <hr>
+                <h2>Zone</h2>
                 <div class="rows">
                     <div class="row-md-5">
                         <h4 for="code">Code</h4>

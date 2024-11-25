@@ -27,8 +27,9 @@
             <form class="form" action="?a=add" method="post">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Boxes</h1>
+                    <h1>Add Boxes</h1>
                 </header>
+                <hr>
                 <h2>Dates</h2>
                 <div class="rows">
                     <div class="row-md-5">

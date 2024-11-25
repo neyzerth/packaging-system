@@ -1,5 +1,4 @@
--- SQLBook: Code
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 
 drop DATABASE packaging;
 create DATABASE packaging;
@@ -141,7 +140,7 @@ CREATE TABLE product (
     height DECIMAL(10, 2),
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
-    volume  DECIMAL(10, 2),
+    /* volume  DECIMAL(10, 2), */
     weight DECIMAL(10, 2),
     active BIT DEFAULT TRUE,
     packaging_protocol INT,

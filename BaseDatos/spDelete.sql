@@ -9,9 +9,7 @@ BEGIN
     UPDATE user SET active = 0 WHERE num = p_num;
 END$$
 
-call dropUser(5)
 
-select * from user
 
 --Tipo de usuario
 
@@ -22,9 +20,7 @@ BEGIN
     UPDATE user_type SET active = 0 WHERE code = p_code;
 END$$
 
-call dropUserType('Super')
 
-SELECT * from user_type
 
 --caja
 DELIMITER $$
@@ -33,9 +29,7 @@ BEGIN
     UPDATE box SET active = 0 WHERE num = p_num;
 END$$
 
-call dropBox (5)
 
-Select * from box 
 
 --Material
 drop Procedure dropMaterial
@@ -46,9 +40,7 @@ BEGIN
     UPDATE material SET active = 0 WHERE code = p_code;
 END$$
 
-call dropMaterial('wod')
 
-Select * from material
 
 --producto
 drop Procedure dropProduct
@@ -58,9 +50,6 @@ Begin
     UPDATE product SET active = 0 WHERE code = p_code;
 End $$
 
-call dropProduct('x')
-
-select * from product
 
 --Salida
 DELIMITER $$
@@ -69,9 +58,7 @@ Begin
     UPDATE outbound SET active = 0 WHERE num = p_num;
 End$$
 
-call dropOutBound(5)
 
-select * from outbound
 
 --Zona
 drop Procedure dropZone
@@ -82,9 +69,6 @@ BEGIN
     UPDATE zone SET active = 0 WHERE code = p_code;
 END$$
 
-call dropZone('Z005')
-
-select * from zone
 
 --Protocolo
 DELIMITER $$
@@ -93,9 +77,6 @@ BEGIN
     UPDATE packaging_protocol SET active = 0 WHERE num = p_num;
 END$$
 
-call dropProtocol(5)
-
-select * from packaging_protocol
 
 
 

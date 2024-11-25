@@ -35,14 +35,11 @@
         <form class="form" action="" method="post" autocomplete="off" enctype="multipart/form-data">
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
-                <h1>Materials</h1>
+                <h1>Edit Protcol</h1>
             </header>
-            <h2>Material</h2>
-            <div class="rows">
-                <div class="row-sm-3">
-                    <a class="btn" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this protocol?');">Disable</a>
-                </div>
-            </div>
+            <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este protocolo?');">Disable</a>
+            <hr>
+            <h2>Protocol</h2>
             <div class="rows">
                 <div class="row-md-5">
                     <h4 for="name">Num</h4>
