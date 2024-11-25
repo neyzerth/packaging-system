@@ -1,4 +1,5 @@
 -- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 
 -----------------------------------
             --TRIGGERS
@@ -96,7 +97,7 @@ END $$
 
 ---Etiqueta
 
-drop Trigger before_insert_tag
+drop Trigger before_insert_tag;
 
 CREATE TRIGGER before_insert_tag
 BEFORE INSERT ON tag
@@ -122,16 +123,19 @@ BEGIN
 
     -- Calcular el checksum recorriendo cada carácter
     WHILE i <= len DO
-        SET digito = CAST(SUBSTRING(gs1_code, i, 1) AS UNSIGNED);
+        -- Verificar si el carácter es un dígito antes de convertirlo
+        IF SUBSTRING(gs1_code, i, 1) REGEXP '^[0-9]$' THEN
+            SET digito = CAST(SUBSTRING(gs1_code, i, 1) AS UNSIGNED);
 
-        IF i % 2 = 1 THEN
-            -- Sumar posición impar y multiplicar por 3
-            SET suma_impar = suma_impar + digito;
-        ELSE
-            -- Sumar posición par
-            SET suma_par = suma_par + digito;
+            IF i % 2 = 1 THEN
+                -- Sumar posición impar y multiplicar por 3
+                SET suma_impar = suma_impar + digito;
+            ELSE
+                -- Sumar posición par
+                SET suma_par = suma_par + digito;
+            END IF;
         END IF;
-        
+
         SET i = i + 1;
     END WHILE;
 
@@ -144,6 +148,8 @@ END;
 
 
 CREATE TRIGGER before_UPDATE_tag
+
+CREATE TRIGGER before_update_tag
 BEFORE UPDATE ON tag
 FOR EACH ROW
 BEGIN
@@ -161,18 +167,25 @@ BEGIN
         '(410)', NEW.destination,
         '(420)', NEW.tag_type
     );
-
+    
+    -- Longitud del código generado
     SET len = CHAR_LENGTH(gs1_code);
 
+    -- Calcular el checksum recorriendo cada carácter
     WHILE i <= len DO
-        SET digito = CAST(SUBSTRING(gs1_code, i, 1) AS UNSIGNED);
+        -- Verificar si el carácter es un dígito antes de convertirlo
+        IF SUBSTRING(gs1_code, i, 1) REGEXP '^[0-9]$' THEN
+            SET digito = CAST(SUBSTRING(gs1_code, i, 1) AS UNSIGNED);
 
-        IF i % 2 = 1 THEN
-            SET suma_impar = suma_impar + digito;
-        ELSE
-            SET suma_par = suma_par + digito;
+            IF i % 2 = 1 THEN
+                -- Sumar posición impar y multiplicar por 3
+                SET suma_impar = suma_impar + digito;
+            ELSE
+                -- Sumar posición par
+                SET suma_par = suma_par + digito;
+            END IF;
         END IF;
-        
+
         SET i = i + 1;
     END WHILE;
 
