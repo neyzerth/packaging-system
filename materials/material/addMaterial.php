@@ -4,7 +4,7 @@
         exit;
     }
     require "materialFun.php";
-    
+    session_start();
     $unit_of_measures = getUnitMeasure();
 
     if ($_SERVER['REQUEST_METHOD']=='POST') {
@@ -20,12 +20,28 @@
             description: $description, available_quantity: $available_quantity,
             unit_of_measure: $unit_of_measure
         );
-        if ($result['success'] == 1) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+        
+        if($result){
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: /");
+        exit();
     }
+
+
+    if(isset($_POST['btn_find'])){
+        $seller_name = $_POST['find_seller'];
+        $query = "SELECT * FROM seller WHERE name LIKE '%$seller_name%';";
+    }
+    
 ?>
 <script src="materialForm.js"></script>
 <main class="forms">
@@ -83,6 +99,7 @@
         </form>
     </div>
 </main>
+<<<<<<< HEAD:materials/material/addMaterial.php
 <script>
         setTimeout(() => {
             const successMsg = document.getElementById('success-msg');
@@ -90,4 +107,7 @@
             if (successMsg) successMsg.style.display = 'none';
             if (errorMsg) errorMsg.style.display = 'none';
         }, 3000);
-    </script>
+</script>
+=======
+<?php include FOOT ?>
+

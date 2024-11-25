@@ -1,5 +1,5 @@
 <?php
-    require_once("../config.php");
+    require_once("../../config.php");
     require_once("materialFun.php");
 
     if (isset($_GET['code'])) {

@@ -1,6 +1,6 @@
 <?php
     require "prodFun.php";
-
+    session_start();
     $protocols=getProtocols();
 
     if (isset($_GET['code'])) {
@@ -24,10 +24,18 @@
         $packaging_protocol = $_POST['packaging_protocol'];
 
         if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, active:$active, packaging_protocol:$packaging_protocol)){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Product updated successfully..</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating product</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <head>
@@ -113,11 +121,4 @@
         </form>
     </div>
 </main>
-<script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+<?php include FOOT ?>

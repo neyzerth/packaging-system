@@ -1,4 +1,5 @@
 -- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 
 -----------------------------------
             --TRIGGERS
@@ -96,7 +97,7 @@ END $$
 
 ---Etiqueta
 
-drop Trigger before_insert_tag
+drop Trigger before_insert_tag;
 
 CREATE TRIGGER before_insert_tag
 BEFORE INSERT ON tag
@@ -146,7 +147,7 @@ BEGIN
 END;
 
 
-CREATE TRIGGER before_insert_tag
+CREATE TRIGGER before_update_tag
 BEFORE UPDATE ON tag
 FOR EACH ROW
 BEGIN

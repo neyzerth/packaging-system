@@ -1,5 +1,5 @@
 <?php
-    require_once "../config.php";
+    require_once "../../config.php";
     function addMaterial($code, $name, $description, $available_quantity, $unit_of_measure) {
         $db = connectdb();
         try {
