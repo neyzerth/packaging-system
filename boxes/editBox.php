@@ -32,10 +32,12 @@
         <form class="form" action="" method="POST" autocomplete="off">
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
-                <h1>Boxes</h1>
+                <h1>Edit Boxes</h1>
             </header>
-            <a href="disableBox.php?num=<?php echo $box['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta caja?');">Disable</a>
-            
+
+            <a class="btn-primary" href="disableBox.php?num=<?php echo $box['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta caja?');">Disable</a>
+            <hr>
+            <h2>Dates</h2>
             <div class="rows">
                 <div class="row-sm-3">
                     <h4>Box Number</h4>
@@ -80,6 +82,7 @@
                 </div>
                 -->
             </div>
+            <hr>
             <footer class="footer">
                 <button class="btn-primary" type="submit">Update</button>
             </footer>

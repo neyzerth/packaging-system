@@ -50,12 +50,12 @@
                 
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Users</h1>
+                    <h1>Edit Users</h1>
                 </header>
 
-                <h2>Profile</h2>
+                <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
                 <hr>
-                <a  class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
+                <h2>Profile</h2>
                 <div class="rows">
                     <div class="row-lg-10">
                         <h4 for="name">Name</h4>

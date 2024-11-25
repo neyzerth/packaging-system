@@ -30,9 +30,9 @@
                 
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Users</h1>
+                    <h1>Add Users</h1>
                 </header>
-
+                <hr>
                 <h2>Profile</h2>
                 <div class="rows">
                     <div class="row-lg-10">

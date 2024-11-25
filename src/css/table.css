@@ -6,6 +6,10 @@
     justify-content: center;
 }
 
+.tables h1 {
+    text-align: center;
+}
+
 .tables .background {
     background-color: var(--background-black);
     border-radius: 2rem;
