@@ -1,12 +1,13 @@
-<?php
-$action = isset($_GET['a']) ? $_GET['a'] : null;
+<?php 
+    $action = isset($_GET['a']) ? $_GET['a'] : null;
 
-require_once "../../config.php";
-include HEAD;
+    require_once "../../config.php";
 
-crudRedirect($action,
-    "listIncidents.php", "addIncident.php", "editIncident.php"
-);
+    include HEAD;
+    
+    crudRedirect($action,
+        "listReport.php", "addReport.php", "editReport.php"
+    );
 
-include FOOT;
+    include FOOT;
 ?>

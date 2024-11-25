@@ -23,6 +23,10 @@
         exit();
     }
 ?>
+<head>
+    <script src="warehouse.js"></script>
+</head>
+
 <main class="forms">
     <div class="background">
         <form class="form" action="" method="post" autocomplete="off">

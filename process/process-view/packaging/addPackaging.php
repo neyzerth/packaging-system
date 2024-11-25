@@ -33,7 +33,7 @@
 ?>
 
 <head>
-    <script src=".js"></script>
+    <script src="packagingForm.js"></script>
 </head>
 
 <main class="forms">
