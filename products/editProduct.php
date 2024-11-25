@@ -24,12 +24,16 @@
         $packaging_protocol = $_POST['packaging_protocol'];
 
         if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, active:$active, packaging_protocol:$packaging_protocol)){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Producto actualizado con éxito.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Product updated successfully..</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating product</span></div>";
         }
     }
 ?>
+<head>
+    <script src="productForm.js"></script>
+</head>
+
 <main class="forms">
     <div class="background">
         <form class="form" action="" method="post" autocomplete="off">

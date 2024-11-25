@@ -27,7 +27,9 @@
         }
     }
 ?>
+<script src="materialForm.js"></script>
 <main class="forms">
+    
     <div class="background">
         <form class="form" action="" method="post" autocomplete="off">
             <header class="header">
