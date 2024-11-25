@@ -60,9 +60,9 @@
                         </div>
                     </div>
                     <div class="row-md-5">
-                        <h4 for="material_name">Area</h4>
+                        <h4 for="area">Area</h4>
                         <div class="inputs">
-                            <input name="area" id="material_name" type="text" required maxlength="50" value="<?php echo $zone['area']; ?>">
+                            <input name="area" id="area" type="text" required maxlength="50" value="<?php echo $zone['area']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">
