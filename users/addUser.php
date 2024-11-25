@@ -1,15 +1,16 @@
 <?php
     require "userFun.php";
+    session_start();
+
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
 
-    if ($_SERVER['REQUEST_METHOD']=='POST') {
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $name = $_POST['name'];
         $first_surname = $_POST['first_surname'];
-        
-        //
         $second_surname = empty($_POST['second_surname']) ? NULL : $_POST['second_surname'];
         $date = empty($_POST['date']) ? NULL : $_POST['date'];
         $neighborhood = empty($_POST['neighborhood']) ? NULL : $_POST['neighborhood'];
@@ -20,12 +21,28 @@
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
-        $result = addUser(username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor);
-        if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>User Registered.</span></div>";
+        $result = addUser(
+            username: $username, password: $password, name: $name,
+            firstSurname: $first_surname, secondSurname: $second_surname,
+            dateOfBirth: $date, neighborhood: $neighborhood, street: $street,
+            postalCode: $postal_code, phone: $phone, email: $email,
+            userType: $user_type, supervisor: $supervisor
+        );
+
+        if ($result) {
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+
+        header("Location: index.php");
+        exit();
     }
 ?>
 <head>
@@ -150,11 +167,3 @@
         </div>
     </main>
     <?php include FOOT ?>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>

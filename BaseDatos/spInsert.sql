@@ -302,6 +302,30 @@ BEGIN
 END$$
 
 
+DESCRIBE tag
+
+SHOW TRIGGERS LIKE 'tag';
+
+call addTag('2024-11-11','TT01','cuba')
+
+select * from tag
+
+drop Procedure addTagType
+
+Create procedure addTagType(
+    IN p_code varchar(5),
+    IN p_description varchar(50)
+)
+BEGIN
+    INSERT INTO tag_type(code,description)
+    VALUES (p_code,p_description);
+
+    Select code,description
+    from tag_type
+    where code = p_code;
+END$$
+
+
 --unidad de medida  
 drop Procedure addUnit_of_measure
 

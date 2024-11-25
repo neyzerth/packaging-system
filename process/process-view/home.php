@@ -1,6 +1,10 @@
+<?php
+$product = isset($_GET['product']) ? $_GET['product'] : "Select a product...";
+
+?>
     <div class="tables">
         <div class="background">
-            <?php $link="?a=add"; include HEADER; ?>
+            <?php include HEADER; ?>
             <div style="text-align: center">
                 <h1>PROCESS VIEW</h1>
             </div>
@@ -8,8 +12,13 @@
                 <div>
                     <h3>Packing</h3>
                     <img class="bin" src="<?php echo SVG . "products.svg" ?>">
-                    <select class="inputs">
-                    </select>
+                    <div>
+                        <a href="?a=addPackage"><p>[ADD]</p></a>
+                        <input class="inputs" value="<?php echo $product?>" readonly>
+                    </div>
+                    <div>
+                        <input class="inputs" type="number" value="0" min="0">
+                    </div>
                 </div>
                 <div>
                     <h3>Packaging</h3>

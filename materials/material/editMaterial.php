@@ -1,6 +1,6 @@
 <?php
     require "materialFun.php";
-
+    session_start();
     $unit_of_measures = getUnitMeasure();
     
     if (isset($_GET['code'])) {
@@ -20,14 +20,20 @@
         $available_quantity = $_POST['available_quantity'];
         $active = 1; 
         $unit_of_measure = $_POST['unit_of_measure'];
-        
-        $result=updateMaterial(code: $code, name: $name, description: $description, available_quantity: $available_quantity, active: $active, unit_of_measure: $unit_of_measure);
 
-        if ($result['success'] == 1) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+        if (updateMaterial(code: $code, name: $name, description: $description, available_quantity: $available_quantity, active: $active, unit_of_measure: $unit_of_measure)) {
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <script src="materialForm.js"></script>
@@ -87,11 +93,4 @@
             </form>
         </div>
     </main>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+    <?php include FOOT ?>
