@@ -1,5 +1,5 @@
 <?php
-    require_once("../../../config.php");
+    require_once("../../config.php");
     require_once("protocolFun.php");
 
     if (isset($_GET['num'])) {
