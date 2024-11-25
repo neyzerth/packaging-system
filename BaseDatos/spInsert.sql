@@ -418,3 +418,32 @@ BEGIN
     from tag_type
     where code = p_code;
 END$$
+
+
+--sp para insertar en package
+
+drop Procedure addPackage
+DELIMITER $$
+
+CREATE PROCEDURE addPackage(
+    IN p_product_quantity INT,
+    IN p_weight DECIMAL(10, 2),
+    IN p_product VARCHAR(5),
+    IN p_packaging VARCHAR(5),
+    IN p_box INT,
+    IN p_tag INT
+)
+BEGIN
+    INSERT INTO package(product_quantity, weight, product, packaging, box, tag)
+    VALUES(p_product_quantity, p_weight, p_product, p_packaging, p_box, p_tag);
+
+END$$
+
+
+select * from package
+
+CALL addPackage(10, 15.5, 'X', 'PK001', 3, 1);
+
+
+select * from report
+
