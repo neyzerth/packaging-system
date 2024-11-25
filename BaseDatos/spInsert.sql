@@ -297,6 +297,19 @@ BEGIN
     from tag where num = LAST_INSERT_ID();
 END$$
 
+Create procedure addTagType(
+    IN p_code varchar(5),
+    IN DESCRIPTION varchar(50)
+)
+BEGIN
+    INSERT INTO tag_type(code,description)
+    VALUES (p_code,p_description);
+
+    Select code,description
+    from tag_type
+    where code = p_code;
+END$$
+
 
 --unidad de medida  
 drop Procedure addUnit_of_measure
