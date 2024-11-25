@@ -1,7 +1,7 @@
 <?php
     validateUser("ALL");
 
-    session_start();
+    //session_start(); //esta comentado ya que en todas las pantallas sale un mensaje de error
 
 
 if (isset($_SESSION['message'])) {

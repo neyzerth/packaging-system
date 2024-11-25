@@ -10,10 +10,11 @@ $product = isset($_GET['product']) ? $_GET['product'] : "Select a product...";
             </div>
             <div class="process">
                 <div>
+                <a href="?a=addPackage">
                     <h3>Packing</h3>
                     <img class="bin" src="<?php echo SVG . "products.svg" ?>">
+                </a>
                     <div>
-                        <a href="?a=addPackage"><p>[ADD]</p></a>
                         <input class="inputs" value="<?php echo $product?>" readonly>
                     </div>
                     <div>
@@ -21,14 +22,18 @@ $product = isset($_GET['product']) ? $_GET['product'] : "Select a product...";
                     </div>
                 </div>
                 <div>
+                    <a href="?a=addPackaging">
                     <h3>Packaging</h3>
                     <img class="bin" src="<?php echo SVG . "boxes.svg" ?>">
+                    </a>
                     <select class="inputs">
                     </select>
                 </div>
                 <div>
+                    <a href="?a=addWarehouse">
                     <h3>Warehouse</h3>
                     <img class="bin" src="<?php echo SVG . "zone.svg" ?>">
+                    </a>
                     <select class="inputs">
                     </select>
                 </div>

@@ -1,3 +1,6 @@
+-- SQLBook: Code
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- SQLBook: Code
 ---------------------------------------
 --Insertar registro
 ---------------------------------------
@@ -183,7 +186,6 @@ END $$
 --Zone
 
 drop Procedure addZone;
-DELIMITER $$
 
 DELIMITER $$
 
@@ -194,14 +196,22 @@ CREATE PROCEDURE addZone(
     IN p_total_capacity INT
 )
 BEGIN
-    IF EXISTS (SELECT 1 FROM zone WHERE area = p_area) THEN
+    IF p_available_capacity < 0 OR p_total_capacity < 0 THEN
+        SELECT 0 AS success, 'Capacity values must be non-negative.' AS message;
+    ELSEIF EXISTS (SELECT 1 FROM zone WHERE area = p_area) THEN
         SELECT 0 AS success, 'The area name is already in use.' AS message;
     ELSE
         INSERT INTO zone (code, area, available_capacity, total_capacity)
         VALUES (p_code, p_area, p_available_capacity, p_total_capacity);
         SELECT 1 AS success, 'Zone added successfully.' AS message;
     END IF;
-END $$
+END$$
+
+DELIMITER ;
+
+
+DELIMITER ;
+
 
 DELIMITER ;
 
@@ -236,7 +246,7 @@ END $$
 
 --sp para insertar embalaje sin el campo de salida
 
-drop Procedure addPackaging
+drop Procedure addPackaging;
 DELIMITER $$
 CREATE PROCEDURE addPackaging(
     IN p_code varchar(5),
@@ -249,12 +259,22 @@ CREATE PROCEDURE addPackaging(
     IN p_tag int
 )
 BEGIN
-    INSERT INTO packaging(code,height,width,length,weight,package_quantity,zone,tag)
-    VALUES(p_code,p_height,p_width,p_length,p_weight,p_package_quantity,p_zone,p_tag);
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+    BEGIN
+        ROLLBACK;
+        SELECT 0 AS success, 'Error during insertion' AS message;
+    END;
 
-    SELECT code,volume,package_quantity,zone
-    FROM PACKAGING WHERE code = p_code;
+    START TRANSACTION;
+
+    INSERT INTO packaging(code, height, width, length, weight, package_quantity, zone, tag)
+    VALUES(p_code, p_height, p_width, p_length, p_weight, p_package_quantity, p_zone, p_tag);
+
+    COMMIT;
+    SELECT 1 AS success, 'Successful insertion' AS message;
 END$$
+DELIMITER ;
+
 
 
 
