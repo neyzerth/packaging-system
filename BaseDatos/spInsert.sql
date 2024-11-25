@@ -301,9 +301,20 @@ BEGIN
     from tag where num = LAST_INSERT_ID();
 END$$
 
+
+DESCRIBE tag
+
+SHOW TRIGGERS LIKE 'tag';
+
+call addTag('2024-11-11','TT01','cuba')
+
+select * from tag
+
+drop Procedure addTagType
+
 Create procedure addTagType(
     IN p_code varchar(5),
-    IN DESCRIPTION varchar(50)
+    IN p_description varchar(50)
 )
 BEGIN
     INSERT INTO tag_type(code,description)
