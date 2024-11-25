@@ -386,3 +386,104 @@ BEGIN
     WHERE code = NEW.packaging;
 END;
 -------------------------------------------------------------
+
+BEFORE UPDATE ON tag
+FOR EACH ROW
+BEGIN
+    DECLARE checksum INT DEFAULT 0;
+    DECLARE gs1_code VARCHAR(255);
+    DECLARE i INT DEFAULT 1;
+    DECLARE len INT;
+    DECLARE digito INT;
+    DECLARE suma_impar INT DEFAULT 0;
+    DECLARE suma_par INT DEFAULT 0;
+
+    -- Generar el código GS1-128 básico (sin checksum)
+    SET gs1_code = CONCAT(
+        '(17)', DATE_FORMAT(NEW.date, '%y%m%d'),
+        '(410)', NEW.destination,
+        '(420)', NEW.tag_type
+    );
+    
+    -- Longitud del código generado
+    SET len = CHAR_LENGTH(gs1_code);
+
+    -- Calcular el checksum recorriendo cada carácter
+    WHILE i <= len DO
+        -- Verificar si el carácter es un dígito antes de convertirlo
+        IF SUBSTRING(gs1_code, i, 1) REGEXP '^[0-9]$' THEN
+            SET digito = CAST(SUBSTRING(gs1_code, i, 1) AS UNSIGNED);
+
+            IF i % 2 = 1 THEN
+                -- Sumar posición impar y multiplicar por 3
+                SET suma_impar = suma_impar + digito;
+            ELSE
+                -- Sumar posición par
+                SET suma_par = suma_par + digito;
+            END IF;
+        END IF;
+
+        SET i = i + 1;
+    END WHILE;
+
+    -- Sumar los resultados y calcular el checksum
+    SET checksum = (10 - ((suma_impar * 3 + suma_par) % 10)) % 10;
+
+    -- Concatenar el checksum al final del código GS1-128
+    SET NEW.barcode = CONCAT(gs1_code, checksum);
+END;
+
+
+-------------------------------------------------------------
+--Trigger para productos empacados de informe
+--se calcula sumando la cantidad de productos que tiene los paquetes involucrados en el embalaje
+
+
+drop Trigger update_report_packed_products
+
+DELIMITER //
+
+CREATE TRIGGER update_report_packed_products
+AFTER INSERT ON package
+FOR EACH ROW
+BEGIN
+    DECLARE total_quantity INT;
+    DECLARE related_traceability INT;
+
+    SELECT num INTO related_traceability
+    FROM traceability
+    WHERE packaging = NEW.packaging
+    LIMIT 1;
+
+    SELECT SUM(product_quantity)
+    INTO total_quantity
+    FROM package
+    WHERE packaging = NEW.packaging;
+
+
+    UPDATE report
+    SET packed_products = total_quantity
+    WHERE traceability = related_traceability;
+END;
+//
+
+DELIMITER ;
+
+
+
+select * from report
+
+
+select * from traceability
+
+select * from package
+
+select * from packaging WHERE code ='PK001'
+
+
+select * from package WHERE packaging ='PK001'
+
+
+INSERT INTO package (product_quantity, weight, product, packaging, box, tag)
+VALUES 
+(15, 1.5, 'S10', 'PK001', NULL, NULL);
