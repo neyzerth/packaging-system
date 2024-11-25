@@ -6,12 +6,9 @@
             </div>
             <?php if(validateUser("ADMIN", "SUPER")):?>
             <ul>
-                <li class="btn">
-                    <a href="?a=add">
-                        <p> Add</p>
-                        <img class="" src="<?php echo SVG . "plus-circle.svg" ?>" >
-                    </a>
-                </li>
+                <a class="btn" href="?a=add">
+                    <p>Add</p>
+                </a>
             </ul>
             <?php endif;?>
         </header>

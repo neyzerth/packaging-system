@@ -69,34 +69,7 @@
                     </tr>
                     <?php endforeach;?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                        </th>
-                        <th>
-                            <span>Product</span>
-                        </th>
-                        <th>
-                            <span>Description</span>
-                        </th>
-                        <th>
-                            <span>Weight</span>
-                        </th>
-                        <th>
-                            <span>Height</span>
-                        </th>
-                        <th>
-                            <span>Width</span>
-                        </th>
-                        <th>
-                            <span>Length</span>
-                        </th>
-                        <th>
-                            <span>Protocol</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
+            <?php include FOOTER ?>
         </div>
     </main>

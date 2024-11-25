@@ -39,12 +39,12 @@
 <script src="materialForm.js"></script>
     <main class="forms">
         <div class="background">
-        <a  class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Materials</h1>
                 </header>
+                <a  class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
                 <hr>
                 <h2>Material</h2>
                 <div class="rows">

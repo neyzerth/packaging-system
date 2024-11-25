@@ -40,19 +40,6 @@
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Num</span>
-                        </th>
-                        <th>
-                            <span>Date</span>
-                        </th>
-                        <th>
-                            <span>Exit quantity</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
             <?php include FOOTER ?>
         </div>

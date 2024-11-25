@@ -56,5 +56,6 @@
                     <?php endforeach;?>
                 </tbody>
             </table>
+            <?php include FOOTER ?>
         </div>
     </main>

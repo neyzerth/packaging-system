@@ -30,8 +30,9 @@
         <form class="form" action="" method="post" autocomplete="off">
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
-                <h1>Unit of measures</h1>
+                <h1>Add unit of measures</h1>
             </header>
+            <hr>
             <h2>Unit of measure</h2>
             <div class="rows">
                 <div class="row-sm-3">
