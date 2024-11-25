@@ -18,16 +18,20 @@
 
     if ($validate) {
         $boxes = getBoxesByVol($minVol);
+        $tag_types = getTagTypes();
     }
     
     if($_SERVER['REQUEST_METHOD']=='POST'){
         $boxCode = $_POST['box'];
+        $tag_type = $_POST['tag_type'];
         $weight = $_POST['weight'];
         $date = $_POST['date'];
 
-        addPackage($prodCode, $quantity, $boxCode);
+        $bool = startProccess($prodCode, $quantity, $boxCode, $weight, $tag_type, $date);
         
-
+        if($bool){
+            header("Location: ?t=$prodCode");
+        }
     }
 
 ?>
@@ -84,6 +88,16 @@
                     <div class="inputs">
                         <input name="weight" id="weight" type="number" placeholder="999" required maxlength="10">
                     </div>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="date">Tag Type</h4>
+                    <select id="tag_type" name="tag_type" class="inputs">
+                    <?php foreach ($tag_types AS $tag_type):  ?>
+                        <option value="<?php echo $tag_type['code']?>">
+                            <?php echo $tag_type['description']?> 
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
                 </div>
                 <div class="row-md-5">
                     <h4 for="date">Date</h4>

@@ -3,12 +3,12 @@
 require_once __DIR__."/../../../products/prodFun.php";
 require_once __DIR__."/../../../boxes/boxFun.php";
 require_once __DIR__."/../../../protocols/tag/tagFun.php";
+//require_once __DIR__."/../../../protocols/tagType/tagTypeFun.php";
 
-function addPackage($product, $quantity, $box){
+function startProccess($product, $quantity, $box, $weight, $tag_type, $date){
     $db = connectdb();
-    $querypack = "INSERT INTO package (product_quantity, product, box) VALUES ($quantity, '$product', '$box')";
+    $querypack = "call addPackage($quantity, $weight, '$product', NULL, $box, '$tag_type', '$date')";
 
-    echo $querypack;
     $result = mysqli_query($db, $querypack);
 
     if($result){
