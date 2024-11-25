@@ -9,6 +9,7 @@
             $link="?a=add";
             include HEADER;
             ?>
+            <h1>Zones</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -39,7 +40,7 @@
                         <td><?php echo $zone['total_capacity']; ?></td>
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="?a=edit&code=<?php echo $zone['code'];?>">Edit</a>
+                            <a class="btn" href="?a=edit&code=<?php echo $zone['code'];?>">Edit</a>
                         </td>
                         <?php endif;?>
                     </tr>

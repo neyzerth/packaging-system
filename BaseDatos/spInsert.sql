@@ -47,13 +47,6 @@ BEGIN
     FROM vw_user_personal_info
     WHERE username = p_username;
 END $$
-DELIMITER ;
-
-
-CALL addUser('hola', 'hola', 'John', 'Doe', 'Smith', '1985-06-15', 'Downtown', 'Main Street 123', 
-12345, '123-456-7890', 'jdoe@example.com', 'ADMIN', NULL);
-
-select * from `user`
 
 
 
@@ -75,10 +68,6 @@ Begin
     where code = p_code;
 END$$
 
-call addUserType('a','a','a')
-
-select * from user_type
-
 --box
 DELIMITER $$
 CREATE PROCEDURE addBox(
@@ -95,44 +84,61 @@ BEGIN
     FROM box WHERE num = LAST_INSERT_ID();
 END $$
 
-CALL addBox (11.5, 12.0, 20.0, 10.0);
-
 --Material
 drop Procedure addMaterial
+
 DELIMITER $$
+
 CREATE PROCEDURE addMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(255),
-    IN p_available_quantity int,
+    IN p_available_quantity INT,
     IN p_unit VARCHAR(5)
 )
 BEGIN
     DECLARE exist_unit INT;
+    DECLARE exist_code INT;
 
     SELECT COUNT(*) INTO exist_unit
-    FROM unit_of_measure WHERE code = p_unit;
+    FROM unit_of_measure 
+    WHERE code = p_unit;
 
     IF exist_unit = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid unit of measure code';
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Invalid unit of measure code';
     END IF;
 
-    INSERT INTO material (code, name, description, available_quantity, unit_of_measure)
-    VALUES(p_code, p_name, p_description, p_available_quantity, p_unit);
 
-    SELECT code,name, description, available_quantity, unit_of_measure
-    FROM material WHERE code = p_code;
+    SELECT COUNT(*) INTO exist_code
+    FROM material 
+    WHERE code = p_code;
+
+    IF exist_code > 0 THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Material code already exists';
+    END IF;
+
+
+    INSERT INTO material (code, name, description, available_quantity, unit_of_measure)
+    VALUES (p_code, p_name, p_description, p_available_quantity, p_unit);
+
+    SELECT code, name, description, available_quantity, unit_of_measure
+    FROM material 
+    WHERE code = p_code;
 END $$
 
-call addMaterial('GDL','GOLD','N/A',77,'UOM01')
 
-SELECT * FROM material
+call addMaterial('alm','aluminium','N/A',17,'UOM01')
+
+select * from material
 
 
---Product FALTAAAAA AGREGAR VOLUMEN A LA BASE
-
+--------------------
 Delimiter $$
-Create PROCEDURE UpdateProduct(
+DELIMITER $$
+
+CREATE PROCEDURE addProduct(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(100),
@@ -141,15 +147,17 @@ Create PROCEDURE UpdateProduct(
     IN p_length DECIMAL(10,2),
     IN p_weight DECIMAL(10,2)
 )
-Begin
-    Insert into(code,name,description,height,width,length,weight)
-    values(p_code,p_name,p_description,p_heigh,p_width,p_length,p_weight)
+BEGIN
+    INSERT INTO product (code, name, description, height, width, length, weight)
+    VALUES (p_code, p_name, p_description, p_height, p_width, p_length, p_weight);
 
---agegar volumen
-    Select name,description,weight
-    from product
-    where code= p_code
+
+    SELECT name, description, weight
+    FROM product
+    WHERE code = p_code;
 END$$
+
+----------------------------------
 
 --outBound
 drop Procedure addOutbound
@@ -170,7 +178,8 @@ BEGIN
     FROM outbound
     WHERE num = LAST_INSERT_ID();
 END $$
-call addOutbound ('2023-1-1',7)
+
+
 --Zone
 
 drop Procedure addZone;
@@ -247,12 +256,7 @@ BEGIN
     FROM PACKAGING WHERE code = p_code;
 END$$
 
-call addPackaging('PK007', 10.0, 15.0, 20.0, 25, 'Z001',1)
 
-
-
-
-call addZone ('Z006','C',1,17)
 
 
 --sp para insertar informe   //Que se ocupario insetar aqui?
@@ -280,7 +284,6 @@ BEGIN
     FROM report where folio = LAST_INSERT_ID();
 END $$
 
-call addReport('2024-09-01', CURRENT_DATE, '2024-10-01', 1000, 'No major issues', 7)
 
 --sp para insertar tag
 drop Procedure addTag
@@ -298,13 +301,8 @@ BEGIN
     from tag where num = LAST_INSERT_ID();
 END$$
 
-call addTag(CURRENT_DATE, 'TT01','Tj')
 
-select * from tag_type
-
-
-
---unidad de medida  --revisar
+--unidad de medida  
 drop Procedure addUnit_of_measure
 
 DELIMITER $$
@@ -321,9 +319,6 @@ BEGIN
     WHERE code = p_code;
 END$$
 
-CALL addUnit_of_measure('UOM08', 'Prueba 4');
-
-select * from unit_of_measure
 
 
 --trazabilidad
@@ -345,7 +340,7 @@ BEGIN
     WHERE user = p_user AND traceability = p_traceability;
 END$$
 
-CALL addUserTraceability(1, 100);
+
 
 
 DELIMITER $$
@@ -365,7 +360,7 @@ BEGIN
 END$$
 
 
-select * from material_packging
+
 
 DELIMITER $$
 

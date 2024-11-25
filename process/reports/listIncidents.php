@@ -9,6 +9,7 @@
     $link="?a=add";
     include HEADER;
 ?>
+    <h1>Incidents</h1>
     <table class="table">
         <thead>
             <tr>
@@ -39,7 +40,7 @@
                 <td><?php echo $incident['traceability']?></td>
                 <?php if(validateUser("ADMIN", "SUPER")): ?>
                 <td>
-                    <a href="?a=edit&num=<?php echo $incident['num']; ?>">Edit</a>
+                    <a class="btn" href="?a=edit&num=<?php echo $incident['num']; ?>">Edit</a>
                 </td>
                 <?php endif; ?>
             </tr>

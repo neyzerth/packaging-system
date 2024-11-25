@@ -26,8 +26,9 @@
             <form class="form" action="?a=add" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Zones</h1>
+                    <h1>Add Zone</h1>
                 </header>
+                <hr>
                 <h2>Zone</h2>
                 <div class="rows">
                     <div class="row-md-5">
@@ -55,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                
+                <hr>
                 <footer class="footer">
                     <button class="btn-primary" type="submit">Confirm</button>
                 </footer>

@@ -16,8 +16,9 @@
             <form class="form" action="?a=add" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Outbonds</h1>
+                    <h1>Add Outbond</h1>
                 </header>
+                <hr>
                 <h2>Outbond</h2>
                 <div class="rows">
                     <div class="row-md-5">
@@ -32,7 +33,8 @@
                             <input name="exit_quantity" id="material_name" type="number" required maxlength="10">
                         </div>
                     </div> 
-                </div>            
+                </div>
+                <hr>            
                 <footer class="footer">
                     <button class="btn-primary" type="submit">Confirm</button>
                 </footer>

@@ -8,6 +8,7 @@
             $link="?a=add";
             include HEADER;
             ?>
+            <h1>Outbounds</h1>
             <table class="table">
                 <thead>
                     <tr>
@@ -33,7 +34,7 @@
                         <td><?php echo $out['exit_quantity']; ?></td>
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="?a=edit&num=<?php echo $out['num'];?>">Edit</a>
+                            <a class="btn" href="?a=edit&num=<?php echo $out['num'];?>">Edit</a>
                         </td>
                         <?php endif; ?>
                     </tr>
