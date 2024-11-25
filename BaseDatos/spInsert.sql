@@ -291,7 +291,8 @@ DELIMITER $$
 CREATE Procedure addTag(
     IN p_date DATE,
     IN p_tag_type varchar(5),
-    IN p_destination VARCHAR(25)
+    IN p_destination VARCHAR(25),
+    OUT tag_num INT
 )
 BEGIN
     INSERT INTO tag(date,tag_type,destination)
@@ -299,6 +300,8 @@ BEGIN
 
     SELECT num, barcode,date,tag_type,destination
     from tag where num = LAST_INSERT_ID();
+
+    set tag_num = LAST_INSERT_ID();
 END$$
 
 
@@ -431,11 +434,15 @@ CREATE PROCEDURE addPackage(
     IN p_product VARCHAR(5),
     IN p_packaging VARCHAR(5),
     IN p_box INT,
-    IN p_tag INT
+    IN p_tag_type VARCHAR(5),
+    IN p_date DATE
 )
 BEGIN
+
+    call addTag(p_date, p_tag_type, NULL, @tag_num);
+
     INSERT INTO package(product_quantity, weight, product, packaging, box, tag)
-    VALUES(p_product_quantity, p_weight, p_product, p_packaging, p_box, p_tag);
+    VALUES(p_product_quantity, p_weight, p_product, p_packaging, p_box, @tag_num);
 
 END$$
 
