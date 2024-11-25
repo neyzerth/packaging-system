@@ -1,12 +1,10 @@
 <?php
-    require_once("../config.php");
     require_once "prodFun.php";
     $products = getProducts();
 ?>
     <main class="tables">
         <div class="background">
             <?php 
-            $link = "?a=add";
             include HEADER 
             ?>
             <h1>Products</h1>
@@ -58,9 +56,14 @@
                         <td><?php echo $product['width'] ?></td>
                         <td><?php echo $product['length'] ?></td>
                         <td><?php echo $product['packaging_protocol'] ?></td>
-                        <?php if(validateUser("ADMIN", "SUPER")):?>
+                        <?php if(validateUser("ADMIN", "SUPER") && $action == 'add'):?>
                         <td>
                             <a class="btn" href="?a=edit&code=<?php echo $product['code']; ?>">Edit</a>
+                        </td>
+                        <?php endif;?>
+                        <?php if($action == 'addProduct'):?>
+                        <td>
+                            <a class="btn" href="?product=<?php echo $product['code']; ?>">Select</a>
                         </td>
                         <?php endif;?>
                     </tr>
