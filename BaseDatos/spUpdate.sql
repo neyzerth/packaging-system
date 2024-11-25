@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Active: 1728665066730@@127.0.0.1@3306@packaging
 ---------------------------------------
 --Actualizar registro
@@ -175,7 +176,6 @@ SELECT * from outbound
 DROP PROCEDURE `UpdateZone`;
 DELIMITER $$
 
-DELIMITER $$
 
 CREATE PROCEDURE UpdateZone(
     IN p_code VARCHAR(5),
@@ -188,9 +188,9 @@ BEGIN
     DECLARE success INT DEFAULT 0;
     DECLARE message VARCHAR(255) DEFAULT '';
 
-    IF NOT EXISTS (SELECT 1 FROM zone WHERE code = p_code) THEN
+    IF EXISTS (SELECT 1 FROM zone WHERE area = p_area AND code != p_code) THEN
         SET success = 0;
-        SET message = 'Zone code does not exist.';
+        SET message = 'The area name is already in use by another zone.';
     ELSE
         UPDATE zone
         SET area = p_area,
@@ -199,13 +199,8 @@ BEGIN
             active = p_active
         WHERE code = p_code;
 
-        IF ROW_COUNT() > 0 THEN
-            SET success = 1;
-            SET message = 'Zone successfully updated.';
-        ELSE
-            SET success = 0;
-            SET message = 'No changes were made.';
-        END IF;
+        SET success = 1;
+        SET message = 'Zone successfully updated.';
     END IF;
 
     SELECT success AS success, message AS message;

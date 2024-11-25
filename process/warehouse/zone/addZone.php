@@ -8,10 +8,16 @@
 
         $result = addZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity);
         
-        if ($result['success'] == 1) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+        if (empty($code) || empty($area) || $available_capacity === false || $total_capacity === false) {
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid input data</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            $result = addZone($code, $area, $available_capacity, $total_capacity);
+
+            if ($result['success'] == 1) {
+                echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+            } else {
+                echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            }
         }
     }
 ?>
@@ -27,7 +33,7 @@
                     <div class="row-md-5">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" required maxlength="5">
+                            <input name="code" id="code" type="text"  maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">

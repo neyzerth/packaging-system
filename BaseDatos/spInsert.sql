@@ -173,7 +173,9 @@ END $$
 call addOutbound ('2023-1-1',7)
 --Zone
 
-drop Procedure addZone
+drop Procedure addZone;
+DELIMITER $$
+
 DELIMITER $$
 
 CREATE PROCEDURE addZone(
@@ -183,29 +185,18 @@ CREATE PROCEDURE addZone(
     IN p_total_capacity INT
 )
 BEGIN
-    DECLARE success INT DEFAULT 0;
-    DECLARE message VARCHAR(255) DEFAULT '';
-
-    IF EXISTS (SELECT 1 FROM zone WHERE code = p_code) THEN
-        SET success = 0;
-        SET message = 'Zone code already exists.';
+    IF EXISTS (SELECT 1 FROM zone WHERE area = p_area) THEN
+        SELECT 0 AS success, 'The area name is already in use.' AS message;
     ELSE
         INSERT INTO zone (code, area, available_capacity, total_capacity)
         VALUES (p_code, p_area, p_available_capacity, p_total_capacity);
-
-        IF ROW_COUNT() > 0 THEN
-            SET success = 1;
-            SET message = 'Zone successfully added.';
-        ELSE
-            SET success = 0;
-            SET message = 'Failed to add zone.';
-        END IF;
+        SELECT 1 AS success, 'Zone added successfully.' AS message;
     END IF;
-
-    SELECT success AS success, message AS message;
 END $$
 
 DELIMITER ;
+
+
 
 --Protocol
 

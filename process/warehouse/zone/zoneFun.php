@@ -20,8 +20,10 @@
             if ($stmt === false) {
                 throw new Exception('Error in preparing the query: ' . htmlspecialchars($db->error));
             }
+    
             $stmt->bind_param("ssii", $code, $area, $available_capacity, $total_capacity);
             $stmt->execute();
+
             $result = $stmt->get_result();
             $row = $result->fetch_assoc();
     
@@ -32,10 +34,11 @@
                 'success' => $row['success'],
                 'message' => $row['message']
             ];
-        } catch (Exception $e) {
+        } catch (mysqli_sql_exception $e) {
+            $db->close();
             return [
                 'success' => 0,
-                'message' => $e->getMessage()
+                'message' => 'An unexpected error occurred: ' . $e->getMessage()
             ];
         }
     }
@@ -57,7 +60,6 @@
             if ($stmt === false) {
                 throw new Exception('Error in preparing the query: ' . htmlspecialchars($db->error));
             }
-
             $stmt->bind_param("ssiii", $code, $area, $available_capacity, $total_capacity, $active);
             $stmt->execute();
 
@@ -78,8 +80,6 @@
             ];
         }
     }
-    
-    
 
     function disableZone($code) {
         $db = connectdb();

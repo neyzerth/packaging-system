@@ -2,15 +2,19 @@
     require_once("../../../config.php");
     require "zoneFun.php";
 
-    if (isset($_GET['code'])) {
-        $code = $_GET['code'];
+    if (isset($_GET['code']) && !empty(trim($_GET['code']))) {
+        $code = htmlspecialchars(trim($_GET['code']));
         $zone = getZoneByCode($code);
-
+    
         if (!$zone) {
-            echo "Zone not found";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Zone not found</span></div>";
             exit;
-        }         
+        }
+    } else {
+        echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid or missing zone code</span></div>";
+        exit;
     }
+    
 
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $code = $_POST['code'];
@@ -20,10 +24,16 @@
         $active = 1;
         $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active);
 
-        if ($result['success'] == 1) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+        if (empty($code) || empty($area) || $available_capacity === false || $total_capacity === false) {
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid input data</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active);
+    
+            if ($result['success'] == 1) {
+                echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+            } else {
+                echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            }
         }
     }
 ?>
@@ -44,7 +54,7 @@
                     <div class="row-md-5">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" required maxlength="5" value="<?php echo $zone['code']; ?>">
+                            <input name="code" id="code" type="text" readonly maxlength="5" value="<?php echo $zone['code']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">
