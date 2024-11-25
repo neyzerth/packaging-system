@@ -14,12 +14,12 @@
                 'type' => 'success'
             ];
         } else {
-            $_SESSION['message'] = [
+                $_SESSION['message'] = [
                 'text' => 'Error',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /");
         exit();
     }
 ?>
@@ -36,7 +36,7 @@
                     <div class="row-md-5">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" required maxlength="5">
+                            <input name="code" id="code" type="text"  maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">

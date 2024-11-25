@@ -10,16 +10,17 @@
     if ($_SERVER['REQUEST_METHOD']=='POST') {
 
         $code = $_POST['code'];
-        $material_name = $_POST['material_name'];
+        $name = $_POST['material_name'];
         $description = $_POST['description'];
         $available_quantity = $_POST['available_quantity'];
         $unit_of_measure = $_POST['unit_of_measure'];
 
         $result = addMaterial(
-            code: $code, material_name: $material_name,
+            code: $code, name: $name,
             description: $description, available_quantity: $available_quantity,
             unit_of_measure: $unit_of_measure
         );
+        
         if($result){
             $_SESSION['message'] = [
                 'text' => 'Successful registration',
@@ -35,7 +36,9 @@
         exit();
     }
 ?>
+<script src="materialForm.js"></script>
 <main class="forms">
+    
     <div class="background">
         <form class="form" action="" method="post" autocomplete="off">
             <header class="header">

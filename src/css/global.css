@@ -252,7 +252,7 @@ hr {
 }
 
 .btn {
-    background-color: var(--white-dark);
+    background-color: var(--blue-dark);
     color: var(--white-medium);
     width: 100%;
     padding: 0.5rem 1rem 0.5rem 1rem;

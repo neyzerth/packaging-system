@@ -34,6 +34,9 @@
         exit();
     }
 ?>
+<head>
+    <script src="productForm.js"></script>
+</head>
 
 <main class="forms">
     <div class="background">

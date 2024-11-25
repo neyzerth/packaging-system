@@ -2,15 +2,33 @@
     require_once "../config.php";
     function addUser($username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor) {
         $db = connectdb();
-        $postalCode = nullDb($postalCode);
-        $supervisor = nullDb($supervisor);
-        $query = "call addUser(" . "'$username', $password," . "'$name', '$firstSurname', '$secondSurname', " . "'$dateOfBirth','$neighborhood','$street', $postalCode," . "'$phone','$email','$userType',$supervisor" . ");";
-        try {
-            return mysqli_query($db, $query);
-        } catch (Exception $e) {
-            return $e->getMessage();
+        
+        // Valores nulos
+        $secondSurname = empty($secondSurname) ? null : $secondSurname;
+        $dateOfBirth = empty($dateOfBirth) ? null : $dateOfBirth;
+        $neighborhood = empty($neighborhood) ? null : $neighborhood;
+        $street = empty($street) ? null : $street;
+        $postalCode = empty($postalCode) ? null : $postalCode;
+        $phone = empty($phone) ? null : $phone;
+        $email = empty($email) ? null : $email;
+        $userType = empty($userType) ? null : $userType;
+        $supervisor = empty($supervisor) ? null : $supervisor;
+    
+        $stmt = $db->prepare("CALL addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+        if ($stmt === false) {
+            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
         }
+    
+        $stmt->bind_param("ssssssssisssi", $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
+    
+        $result = $stmt->execute();
+        $stmt->close();
+        $db->close();
+    
+        return $result;
     }
+    
     function getUsers() {
         $db = connectdb();
         $query = "SELECT * FROM vw_user_personal_info;";
@@ -43,31 +61,38 @@
         return $protocol;
     }
 
-    function updateUser($num, $username, $password, $name, $first_surname, $second_surname, $date_of_birth, $neighborhood, $street, $postal_code, $phone, $email, $active, $user_type, $supervisor) {
+    function updateUser($num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $active, $userType, $supervisor) {
         $db = connectdb();
-        
-        $stmt = $db->prepare("CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        
+    
+        // Valores nulos
+        $secondSurname = empty($secondSurname) ? null : $secondSurname;
+        $dateOfBirth = empty($dateOfBirth) ? null : $dateOfBirth;
+        $neighborhood = empty($neighborhood) ? null : $neighborhood;
+        $street = empty($street) ? null : $street;
+        $postalCode = empty($postalCode) ? null : $postalCode;
+        $phone = empty($phone) ? null : $phone;
+        $email = empty($email) ? null : $email;
+        $userType = empty($userType) ? null : $userType;
+        $supervisor = empty($supervisor) ? null : $supervisor;
+    
+        $stmt = $db->prepare("CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
         if ($stmt === false) {
             die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
         }
-        
-        // Vincular los parámetros
-        $stmt->bind_param("issssssssisssi", $num, $username, $password, $name, $first_surname, $second_surname, $date_of_birth, $neighborhood, $street, $postal_code, $phone, $email, $active, $user_type, $supervisor);
-        
-        // Ejecutar el procedimiento
-        if ($stmt->execute()) {
-            $result = true; 
-        } else {
-            $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+    
+        $stmt->bind_param("issssssssissisi", $num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $active, $userType, $supervisor);
+    
+        $result = $stmt->execute();
+        if (!$result) {
+            echo "Error en la ejecución: " . htmlspecialchars($stmt->error);
         }
-        
         $stmt->close();
         $db->close();
-        
-        return $result; 
+    
+        return $result;
     }
+    
     
     function disableUser($num) {
         $db = connectdb();

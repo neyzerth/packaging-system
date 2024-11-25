@@ -4,22 +4,22 @@
 
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
+
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $name = $_POST['name'];
         $first_surname = $_POST['first_surname'];
-        $second_surname = $_POST['second_surname'];
-        $date = $_POST['date'];
-        $neighborhood = $_POST['neighborhood'];
-        $street = $_POST['street'];
-        $postal_code = $_POST['postal_code'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $user_type = $_POST['user_type'];
-        $supervisor = $_POST['supervisor'];
-
+        $second_surname = empty($_POST['second_surname']) ? NULL : $_POST['second_surname'];
+        $date = empty($_POST['date']) ? NULL : $_POST['date'];
+        $neighborhood = empty($_POST['neighborhood']) ? NULL : $_POST['neighborhood'];
+        $street = empty($_POST['street']) ? NULL : $_POST['street'];
+        $postal_code = empty($_POST['postal_code']) ? NULL : $_POST['postal_code'];
+        $phone = empty($_POST['phone']) ? NULL : $_POST['phone'];
+        $email = empty($_POST['email']) ? NULL : $_POST['email'];
+        $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
+        $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
         $result = addUser(
             username: $username, password: $password, name: $name,
@@ -45,10 +45,13 @@
         exit();
     }
 ?>
+<head>
+    <script src="userForm.js"></script>
+</head>
 
     <main class="forms">
         <div class="background">
-            <form class="form" action="addUser.php" method="post" autocomplete="off">
+            <form class="form" action="" method="post" autocomplete="off">
                 
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
@@ -72,7 +75,7 @@
                     <div class="row-sm-3">
                         <h4 for="second_surname">Second Surname</h4>
                         <div class="inputs">
-                            <input name="second_surname" id="second_surname" type="text" required>
+                            <input name="second_surname" id="second_surname" type="text">
                         </div>
                     </div>
                     <div class="row-sm-3">
@@ -101,18 +104,18 @@
                     <div class="row-lg-10">
                         <h4 for="phone">Phone number</h4>
                         <div class="inputs">
-                            <input name="phone" id="phone" type="text" required placeholder="xx-xxx-xxxx-xxx">
+                            <input name="phone" id="phone" type="text" required placeholder="555-6666-777">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="password">Password</h4>
                         <div class="inputs">
-                            <input type="password" name="password" id="password" required placeholder="***">
+                            <input type="text" name="password" id="password" required placeholder="Hi_everyone_01">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="user_type">User type</h4>
-                        <select required name="user_type" id="user_type" class="inputs" name="" id="options">
+                        <select required name="user_type" id="user_type" class="inputs" name="">
                             <?php 
                                 while ($user_type = mysqli_fetch_assoc($user_types)):   
                                     echo "<option value='{$user_type['code']}'>{$user_type['name']}</option>";
@@ -138,7 +141,7 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                            <input name="postal-code" id="postal-code" type="text" placeholder="#">
+                            <input name="postal-code" id="postal-code" type="number" placeholder="55555" maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">
@@ -150,7 +153,7 @@
                     <div class="row-lg-10">
                         <h4 for="">Street</h4>
                         <div class="inputs">
-                            <input name="street" id="street" type="text" placeholder="#">
+                            <input name="street" id="street" type="text" placeholder="">
                         </div>
                     </div>
                 </div>

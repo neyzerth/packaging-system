@@ -1,6 +1,6 @@
 <?php
     require "protocolFun.php";
-    session_start(); 
+
     if($_SERVER['REQUEST_METHOD']=='POST' && isset($_FILES['pdf'])){
         $file = $_FILES['pdf'];
         $name  = $_POST['name'];
@@ -10,23 +10,17 @@
             name: $name, file: $file
         );
 
-       
         if($result){
-            $_SESSION['message'] = [
-                'text' => 'Successful registration',
-                'type' => 'success'
-            ];
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol Registered.</span></div>";
         } else {
-            $_SESSION['message'] = [
-                'text' => 'Error',
-                'type' => 'error'
-            ];
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error adding protocol</span></div>";
         }
-        header("Location: index.php");
-        exit();
     }
 
 ?>
+<head>
+    <script src="protocolForm.js"></script>
+</head>
 
 <main class="forms">
     <div class="background">
@@ -57,4 +51,11 @@
         </form>
     </div>
 </main>
-<?php include FOOT ?>
+<script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>

@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -104,7 +104,7 @@ FROM packaging;
 CREATE VIEW vw_material_info AS
 SELECT 
     code,
-    material_name,
+    name,
     description,
     available_quantity,
     unit_of_measure
@@ -149,8 +149,6 @@ CREATE VIEW vw_traceability_info AS
 SELECT 
     num,
     product,
-    box,
-    package,
     packaging,
     state
 FROM traceability;

@@ -36,8 +36,10 @@
         exit();
     }
 ?>
+<script src="materialForm.js"></script>
     <main class="forms">
         <div class="background">
+        <a  class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">

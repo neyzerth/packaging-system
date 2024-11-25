@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -24,14 +24,6 @@ BEGIN
     END IF;
 END;
 
-select * from zone
-
-CALL sp_check_zone_capacity('Z001',155,@Resultado);
-
-select @Resultado as respuesta
-
-
-
 
 --Pudieramos cambiar el nombre a search_report
 drop PROCEDURE search_report
@@ -48,15 +40,6 @@ BEGIN
 END;
 
 
-call search_report ('2023-10-22','2023-11-22');
-
-update report
-set start_date = '2023-10-22',
-end_date = '2023-11-22'
-where folio = 5
-
-select * from report
-
 DELIMITER $$
 CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
 BEGIN
@@ -64,7 +47,7 @@ BEGIN
     SET user_exists = (
         SELECT COUNT(*) FROM user 
         WHERE username = usern 
-        AND password = passw
+        AND password = SHA1(passw)
         AND active = 1
     );
     
@@ -75,13 +58,10 @@ BEGIN
     SELECT num, username, user_type 
     FROM vw_user_info
     WHERE username = usern;
-
 END $$
 DELIMITER $$
 
 
-drop Procedure login 
-DELIMITER $$
 
 DELIMITER $$
 

@@ -5,12 +5,16 @@
     if (isset($_GET['code'])) {
         $code = $_GET['code'];
         $zone = getZoneByCode($code);
-
+    
         if (!$zone) {
-            echo "Zone not found";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Zone not found</span></div>";
             exit;
-        }         
+        }
+    } else {
+        echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid or missing zone code</span></div>";
+        exit;
     }
+    
 
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $code = $_POST['code'];
@@ -18,6 +22,7 @@
         $available_capacity = $_POST['available_capacity'];
         $total_capacity = $_POST['total_capacity'];
         $active = 1;
+        $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active);
 
         if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active)){
             $_SESSION['message'] = [
@@ -30,7 +35,7 @@
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /");
         exit();
     }
 ?>
@@ -51,7 +56,7 @@
                     <div class="row-md-5">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" required maxlength="5" value="<?php echo $zone['code']; ?>">
+                            <input name="code" id="code" type="text" readonly maxlength="5" value="<?php echo $zone['code']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">
