@@ -86,30 +86,52 @@ END $$
 
 --Material
 drop Procedure addMaterial
+
 DELIMITER $$
+
 CREATE PROCEDURE addMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
     IN p_description VARCHAR(255),
-    IN p_available_quantity int,
+    IN p_available_quantity INT,
     IN p_unit VARCHAR(5)
 )
 BEGIN
     DECLARE exist_unit INT;
+    DECLARE exist_code INT;
 
     SELECT COUNT(*) INTO exist_unit
-    FROM unit_of_measure WHERE code = p_unit;
+    FROM unit_of_measure 
+    WHERE code = p_unit;
 
     IF exist_unit = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid unit of measure code';
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Invalid unit of measure code';
     END IF;
 
-    INSERT INTO material (code, name, description, available_quantity, unit_of_measure)
-    VALUES(p_code, p_name, p_description, p_available_quantity, p_unit);
 
-    SELECT code,name, description, available_quantity, unit_of_measure
-    FROM material WHERE code = p_code;
+    SELECT COUNT(*) INTO exist_code
+    FROM material 
+    WHERE code = p_code;
+
+    IF exist_code > 0 THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Material code already exists';
+    END IF;
+
+
+    INSERT INTO material (code, name, description, available_quantity, unit_of_measure)
+    VALUES (p_code, p_name, p_description, p_available_quantity, p_unit);
+
+    SELECT code, name, description, available_quantity, unit_of_measure
+    FROM material 
+    WHERE code = p_code;
 END $$
+
+
+call addMaterial('alm','aluminium','N/A',17,'UOM01')
+
+select * from material
 
 
 --------------------
