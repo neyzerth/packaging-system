@@ -56,7 +56,7 @@
                         <td><?php echo $product['width'] ?></td>
                         <td><?php echo $product['length'] ?></td>
                         <td><?php echo $product['packaging_protocol'] ?></td>
-                        <?php if(validateUser("ADMIN", "SUPER") && $action == 'add'):?>
+                        <?php if(validateUser("ADMIN", "SUPER") && $action != 'addProduct'):?>
                         <td>
                             <a class="btn" href="?a=edit&code=<?php echo $product['code']; ?>">Edit</a>
                         </td>

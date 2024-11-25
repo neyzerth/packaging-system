@@ -46,7 +46,7 @@
                         <td><?php echo $box['height'].'cm' ?></td>
                         <td><?php echo $box['width'].'cm' ?></td>
                         <td><?php echo $box['length'].'cm' ?></td>
-                        <td><?php echo $box['volume'].'cm2' ?></td>
+                        <td><?php echo $box['volume'].'cm3' ?></td>
                         <td><?php echo $box['weight'].'g' ?></td>
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
