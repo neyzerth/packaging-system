@@ -26,6 +26,13 @@
             echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
         }
     }
+
+
+    if(isset($_POST['btn_find'])){
+        $seller_name = $_POST['find_seller'];
+        $query = "SELECT * FROM seller WHERE name LIKE '%$seller_name%';";
+    }
+    
 ?>
 <script src="materialForm.js"></script>
 <main class="forms">
@@ -90,4 +97,4 @@
             if (successMsg) successMsg.style.display = 'none';
             if (errorMsg) errorMsg.style.display = 'none';
         }, 3000);
-    </script>
+</script>

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
-   
+
     function validateCode(field) {
         const value = field.value.trim();
         const regex = /^[A-Za-z0-9]{1,5}$/; 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        
+    
         const description = document.getElementById("description");
         if (!validateDescription(description)) {
             event.preventDefault();
