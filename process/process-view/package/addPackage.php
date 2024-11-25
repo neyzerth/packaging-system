@@ -1,62 +1,94 @@
-<div?php
-    //require "packFun.php";
+<?php
+    require "packageFun.php";
 
-    //$protocols = getProtocols();
+    $products = getProducts();
+    $boxes = null;
+    
+    $quantity = null;
 
+
+    $quantity = $_GET['quantity'];
+    $prodCode = $_GET['product'];
+    $product = getProductByCode($prodCode);
+
+
+    $minVol = $product['height'] * $product['width'] * $product['length'] * $quantity;
+
+    $validate = $product != null;
+
+    if ($validate) {
+        $boxes = getBoxesByVol($minVol);
+    }
+    
     if($_SERVER['REQUEST_METHOD']=='POST'){
+        $boxCode = $_POST['box'];
+        $weight = $_POST['weight'];
+        $date = $_POST['date'];
 
+        addPackage($prodCode, $quantity, $boxCode);
         
+
     }
 
 ?>
-<head>
-    <script src="productForm.js"></script>
-</head>
 
 <main class="forms">
     <div class="background">
-        <form class="form" action="" method="post" autocomplete="off">
+        <form class="form" action="" method="get" autocomplete="off">
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Add Package</h1>
             </header>
             <hr>
             <h2>Products</h2>
+            <input type="hidden" name="a" value="addPackage">
             <div class="rows">
-                <div class="row-sm-3">
-                    <h4 for="name">Product</h4>
+                <div class="row-md-5">
+                    <h4 for="product">Product</h4>
+                    <select class="inputs" id="product" name="product">
+                    <?php foreach ($products AS $product):  ?>
+                        <option value="<?php echo $product['code']?>">
+                            <?php echo $product['name']?> 
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="quantity">Quantity</h4>
                     <div class="inputs">
-                        <input name="name" id="name" type="text" required maxlength="50">
+                        <input name="quantity" id="quantity" type="number" value = "<?php echo $quantity?>" required min="2">
                     </div>
                 </div>
-                <div class="row-sm-3">
-                    <h4 for="code">Quantity</h4>
-                    <div class="inputs">
-                        <input name="code" id="code" type="number" required min="0">
-                    </div>
-                </div>
-                <div class="row-sm-3">
-                    <a class="btn"name="validate" id="validate" >Validate</a>
+                
+                <div class="row-md-5">
+                    <button class="btn-primary">Validate</button>
                 </div>
             </div>
         </form>
-        <form class="form" action="" method="post" autocomplete="off"></form>                
+
+        <?php if($validate): ?>
+        <form class="form" action="" method="post" autocomplete="off"> 
+            <div class="rows">       
                 <div class="row-md-5">
-                    <h4 for="weight">Weight</h4>
+                    <h4 for="box">Box</h4>
+                    <select name="box" id="box" class="inputs">
+                    <?php foreach ($boxes AS $box):  ?>
+                        <option value="<?php echo $box['num']?>">
+                            <?php echo $box['height'].'cm x'.$box['width'].'cm x'.$box['width'].'cm'?> 
+                        </option>
+                    <?php endforeach; ?>
+                    </selec>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="weight">Weight (kg)</h4>
                     <div class="inputs">
                         <input name="weight" id="weight" type="number" placeholder="999" required maxlength="10">
                     </div>
                 </div>
                 <div class="row-md-5">
-                    <h4 for="packaging_protocol">Packaging Protocol</h4>
+                    <h4 for="date">Date</h4>
                     <div class="inputs">
-                        <select class="input" required name="packaging_protocol" id="packaging_protocol options">
-                            <?php 
-                                //while ($protocol = mysqli_fetch_assoc($protocols)):   
-                                //    echo "<option value='{$protocol['code']}'>{$protocol['name']}</option>";
-                                //endwhile; 
-                            ?>
-                        </select>
+                        <input class="input" type="date" name="date" id="date" required>
                     </div>
                 </div>
             </div>
@@ -65,6 +97,7 @@
                 <button class="btn-primary" type="submit">Confirm</button>
             </footer>
         </form>
+        <?php endif; ?>
     </div>
 </main>
 <script>

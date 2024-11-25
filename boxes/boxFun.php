@@ -1,5 +1,5 @@
 <?php
-    require_once "../config.php";
+    require_once __DIR__."/../config.php";
     function addBox($height, $width, $length, $weight) {
         $db = connectdb();
         $query = "call addBox(" . "$height, $width," . "$length, $weight, " . ");";
@@ -24,6 +24,12 @@
         return $protocol;
     }
 
+    function getBoxesByVol($volMin) {
+        $db = connectdb();
+        $query = "SELECT * FROM box WHERE active = 1 AND volume >= $volMin;";
+        return mysqli_query($db, $query);
+    }
+ 
     //num, height, width, length, volume, weight, active
     function updateBox($num, $height, $width, $length, $weight) {
         $db = connectdb();
