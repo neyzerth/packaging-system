@@ -7,10 +7,11 @@
         $total_capacity = $_POST['total_capacity'];
 
         $result = addZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity);
-        if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Zone Registered.</span></div>";
+        
+        if ($result['success'] == 1) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
         }
     }
 ?>

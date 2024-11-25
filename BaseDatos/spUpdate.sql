@@ -83,6 +83,8 @@ drop Procedure UpdateMaterial
 
 DELIMITER $$
 
+DELIMITER $$
+
 CREATE PROCEDURE UpdateMaterial(
     IN p_code VARCHAR(5),
     IN p_name VARCHAR(50),
@@ -92,15 +94,31 @@ CREATE PROCEDURE UpdateMaterial(
     IN p_unit_of_measure VARCHAR(5)
 )
 BEGIN
-        UPDATE material
-        SET 
-            name = p_name, 
-            description = p_description, 
-            available_quantity = p_available_quantity,
-            active = p_active,
-            unit_of_measure = p_unit_of_measure
-        WHERE code = p_code;
+    DECLARE success INT DEFAULT 0;
+    DECLARE message VARCHAR(255) DEFAULT '';
+
+    UPDATE material
+    SET 
+        name = p_name, 
+        description = p_description, 
+        available_quantity = p_available_quantity,
+        active = p_active,
+        unit_of_measure = p_unit_of_measure
+    WHERE code = p_code;
+
+    IF ROW_COUNT() > 0 THEN
+        SET success = 1;
+        SET message = 'Material successfully updated.';
+    ELSE
+        SET success = 0;
+        SET message = 'Code repeated in material.';
+    END IF;
+
+    SELECT success AS success, message AS message;
 END $$
+
+DELIMITER ;
+
 
 call UpdateMaterial('stl', 'Steel', 'High-quality ', 500, 0,'UOM01')
 
@@ -153,19 +171,46 @@ call UpdateOutBound(1,'2024-11-11', 17,1)
 SELECT * from outbound
 
 --Zona
+
+DROP PROCEDURE `UpdateZone`;
 DELIMITER $$
-Create PROCEDURE UpdateZone(
-    In p_code VARCHAR(5),
-    In p_area VARCHAR(50),
-    In p_available_capacity INT,
-    In p_total_capacity INT,
-    In p_active bit
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateZone(
+    IN p_code VARCHAR(5),
+    IN p_area VARCHAR(50),
+    IN p_available_capacity INT,
+    IN p_total_capacity INT,
+    IN p_active INT
 )
-Begin
-UPDATE zone
-    SET area = p_area, available_capacity = p_available_capacity, total_capacity = p_total_capacity,active = p_active
-    WHERE code = p_code;
-end $$
+BEGIN
+    DECLARE success INT DEFAULT 0;
+    DECLARE message VARCHAR(255) DEFAULT '';
+
+    IF NOT EXISTS (SELECT 1 FROM zone WHERE code = p_code) THEN
+        SET success = 0;
+        SET message = 'Zone code does not exist.';
+    ELSE
+        UPDATE zone
+        SET area = p_area,
+            available_capacity = p_available_capacity,
+            total_capacity = p_total_capacity,
+            active = p_active
+        WHERE code = p_code;
+
+        IF ROW_COUNT() > 0 THEN
+            SET success = 1;
+            SET message = 'Zone successfully updated.';
+        ELSE
+            SET success = 0;
+            SET message = 'No changes were made.';
+        END IF;
+    END IF;
+
+    SELECT success AS success, message AS message;
+END $$
+
 
 call UpdateZone('Z001', 'Warehouse A', 100, 100,1)
 

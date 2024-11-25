@@ -175,25 +175,38 @@ call addOutbound ('2023-1-1',7)
 
 drop Procedure addZone
 DELIMITER $$
+
 CREATE PROCEDURE addZone(
-    In p_code VARCHAR(5),
-    In p_area VARCHAR(50),
-    In p_available_capacity INT,
-    In p_total_capacity INT
+    IN p_code VARCHAR(5),
+    IN p_area VARCHAR(50),
+    IN p_available_capacity INT,
+    IN p_total_capacity INT
 )
 BEGIN
-    DECLARE exist_unit INT;
+    DECLARE success INT DEFAULT 0;
+    DECLARE message VARCHAR(255) DEFAULT '';
 
-    IF exist_unit = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Zone code';
+    IF EXISTS (SELECT 1 FROM zone WHERE code = p_code) THEN
+        SET success = 0;
+        SET message = 'Zone code already exists.';
+    ELSE
+        INSERT INTO zone (code, area, available_capacity, total_capacity)
+        VALUES (p_code, p_area, p_available_capacity, p_total_capacity);
+
+        IF ROW_COUNT() > 0 THEN
+            SET success = 1;
+            SET message = 'Zone successfully added.';
+        ELSE
+            SET success = 0;
+            SET message = 'Failed to add zone.';
+        END IF;
     END IF;
 
-    INSERT INTO zone(code,area,available_capacity,total_capacity)
-    VALUES(p_code,p_area,p_available_capacity,p_total_capacity);
-
-    SELECT code,area,available_capacity,total_capacity
-    FROM zone WHERE code = p_code;
+    SELECT success AS success, message AS message;
 END $$
+
+DELIMITER ;
+
 --Protocol
 
 CREATE PROCEDURE addIncident(

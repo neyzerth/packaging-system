@@ -56,28 +56,46 @@
 
     function updateMaterial($code, $name, $description, $available_quantity, $active, $unit_of_measure) {
         $db = connectdb();
-        
-        $stmt = $db->prepare("CALL UpdateMaterial(?, ?, ?, ?, ?, ?)");
-        
-        if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+        try {
+            $stmt = $db->prepare("CALL UpdateMaterial(?, ?, ?, ?, ?, ?)");
+            
+            if ($stmt === false) {
+                throw new Exception('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            }
+            
+            $stmt->bind_param("sssiis", $code, $name, $description, $available_quantity, $active, $unit_of_measure);
+            
+            $result = $stmt->execute();
+            
+            if ($result) {
+                $resultMessage = $stmt->get_result();
+                if ($resultMessage) {
+                    $row = $resultMessage->fetch_assoc();
+                    return [
+                        'success' => $row['success'],
+                        'message' => $row['message']
+                    ];
+                } else {
+                    return [
+                        'success' => 0,
+                        'message' => 'No se obtuvo respuesta del procedimiento.'
+                    ];
+                }
+            } else {
+                return [
+                    'success' => 0,
+                    'message' => 'Error en la ejecución del procedimiento.'
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'success' => 0,
+                'message' => $e->getMessage()
+            ];
+        } finally {
+            $stmt->close();
+            $db->close();
         }
-    
-        // Vincular los parámetros
-        $stmt->bind_param("sssiis", $code, $name, $description, $available_quantity, $active, $unit_of_measure);
-        
-        // Ejecutar el procedimiento
-        if ($stmt->execute()) {
-            $result = true; 
-        } else {
-            $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
-        }
-        
-        $stmt->close();
-        $db->close();
-        
-        return $result; 
     }
 
     function disableMaterial($code) {

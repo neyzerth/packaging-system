@@ -16,12 +16,30 @@
     function addZone($code, $area, $available_capacity, $total_capacity) {
         $db = connectdb();
         try {
-            $query = "CALL addZone ('$code', '$area', '$available_capacity', '$total_capacity')";
-            return $db->query($query);
+            $stmt = $db->prepare("CALL addZone(?, ?, ?, ?)");
+            if ($stmt === false) {
+                throw new Exception('Error in preparing the query: ' . htmlspecialchars($db->error));
+            }
+            $stmt->bind_param("ssii", $code, $area, $available_capacity, $total_capacity);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+    
+            $stmt->close();
+            $db->close();
+    
+            return [
+                'success' => $row['success'],
+                'message' => $row['message']
+            ];
         } catch (Exception $e) {
-            return $e->getMessage();
+            return [
+                'success' => 0,
+                'message' => $e->getMessage()
+            ];
         }
     }
+    
 
     function getZoneByCode($code) {
         $db = connectdb();
@@ -34,29 +52,34 @@
 
     function updateZone($code, $area, $available_capacity, $total_capacity, $active) {
         $db = connectdb();
-        
-        $stmt = $db->prepare("CALL UpdateZone(?, ?, ?, ?, ?)");
-        
-        if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
-        }
+        try {
+            $stmt = $db->prepare("CALL UpdateZone(?, ?, ?, ?, ?)");
+            if ($stmt === false) {
+                throw new Exception('Error in preparing the query: ' . htmlspecialchars($db->error));
+            }
+
+            $stmt->bind_param("ssiii", $code, $area, $available_capacity, $total_capacity, $active);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
     
-        // Vincular los parámetros
-        $stmt->bind_param("ssiii", $code, $area, $available_capacity, $total_capacity, $active);
-        
-        // Ejecutar el procedimiento
-        if ($stmt->execute()) {
-            $result = true; 
-        } else {
-            $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+            $stmt->close();
+            $db->close();
+    
+            return [
+                'success' => $row['success'],
+                'message' => $row['message']
+            ];
+        } catch (Exception $e) {
+            return [
+                'success' => 0,
+                'message' => $e->getMessage()
+            ];
         }
-        
-        $stmt->close();
-        $db->close();
-        
-        return $result; 
     }
+    
+    
 
     function disableZone($code) {
         $db = connectdb();

@@ -18,11 +18,12 @@
         $available_capacity = $_POST['available_capacity'];
         $total_capacity = $_POST['total_capacity'];
         $active = 1;
+        $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active);
 
-        if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active)){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Zone updated successfully</span></div>";
+        if ($result['success'] == 1) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating zone</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
         }
     }
 ?>
