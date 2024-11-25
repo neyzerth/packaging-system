@@ -1,7 +1,7 @@
 <?php
-    require_once("../config.php");
-    require "userFun.php";
-    $users = getUsers();
+    require_once "../../config.php";
+    require "tagFun.php";
+    $tags = getTags();
 ?>
     <main class="tables">
         <div class="background">
@@ -13,53 +13,58 @@
                 <thead>
                     <tr>
                         <th>
-                            <span>Num</span>
+                            <span>Date</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Barcode</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Date of birth</span>
+                            <span>Tag type</span>
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>User type</span>
+                            <span>Destination</span>
                             <span class="column-order"></span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($tags as $tag): ?>
                     <tr>
-                        <td><?php echo $user['num']; ?></td>
-                        <td><?php echo $user['full_name']; ?></td>
-                        <td><?php echo $user['date_of_birth']; ?></td>
-                        <td><?php echo $user['user']; ?></td>
+                        <td><?php echo $tag['date']; ?></td>
+                        <td><?php echo $tag['barcode']; ?></td>
+                        <td><?php echo $tag['tag_type']; ?></td>
+                        <td><?php echo $tag['destination']; ?></td>
                         <?php if(validateUser("ADMIN")):?>
                         <td>
-                            <a href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
+                            <a href="?a=edit&num=<?php echo $tag['num'];?>">Edit</a>
                         </td>
                         <?php endif;?>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
                 <tfoot>
-                    <tr>
+                <tr>
                         <th>
-                            <span>Num</span>
+                            <span>Date</span>
+                            <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Name</span>
+                            <span>Barcode</span>
+                            <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Date of birth</span>
+                            <span>Tag type</span>
+                            <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>User type</span>
+                            <span>Destination</span>
+                            <span class="column-order"></span>
                         </th>
                     </tr>
+                    </tbody>
                 </tfoot>
             </table>
             <?php include FOOTER ?>

@@ -385,3 +385,17 @@ END$$
 
 
 select * from material_package
+
+
+Create procedure addTagType(
+    IN p_code varchar(5),
+    IN p_description varchar(50)
+)
+BEGIN
+    INSERT INTO tag_type(code,description)
+    VALUES (p_code,p_description);
+
+    Select code,description
+    from tag_type
+    where code = p_code;
+END$$
