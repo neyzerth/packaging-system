@@ -51,21 +51,7 @@
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                        </th>
-                        <th>
-                            <span>Description</span>
-                        </th>
-                        <th>
-                            <span>Actual Quantity</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
-            
+            <?php include FOOTER ?>
+        </div>
+    </main>

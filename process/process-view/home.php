@@ -57,16 +57,6 @@ $product = isset($_GET['product']) ? $_GET['product'] : "Select a product...";
                         <td></td>
                     </tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
             <?php include FOOTER ?>
             <hr>

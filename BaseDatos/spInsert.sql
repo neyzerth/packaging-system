@@ -259,25 +259,15 @@ CREATE PROCEDURE addPackaging(
     IN p_tag int
 )
 BEGIN
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION 
-    BEGIN
-        ROLLBACK;
-        SELECT 0 AS success, 'Error during insertion' AS message;
-    END;
+    INSERT INTO packaging(code,height,width,length,weight,package_quantity,zone,tag)
+    VALUES(p_code,p_height,p_width,p_length,p_weight,p_package_quantity,p_zone,p_tag);
 
-    START TRANSACTION;
-
-    INSERT INTO packaging(code, height, width, length, weight, package_quantity, zone, tag)
-    VALUES(p_code, p_height, p_width, p_length, p_weight, p_package_quantity, p_zone, p_tag);
-
-    COMMIT;
-    SELECT 1 AS success, 'Successful insertion' AS message;
+    SELECT code,volume,package_quantity,zone
+    FROM PACKAGING WHERE code = p_code;
 END$$
 DELIMITER ;
 
-
-
-
+CALL addPackaging('NEYZE',11,11,11,11,10,'Z001',7);
 
 --sp para insertar informe   //Que se ocupario insetar aqui?
 drop Procedure addReport

@@ -10,6 +10,7 @@
         include HEADER;
         ?>
         <table class="table">
+            <h1>Tags type</h1>
             <thead>
                 <tr>
                     <th>
@@ -29,24 +30,12 @@
                     <td><?php echo $tagType['description']; ?></td>
                     <?php if(validateUser("ADMIN")):?>
                     <td>
-                        <a href="?a=edit&code=<?php echo $tagType['code'];?>">Edit</a>
+                        <a class="btn" href="?a=edit&code=<?php echo $tagType['code'];?>">Edit</a>
                     </td>
                     <?php endif;?>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>
-                        <span>Code</span>
-                        <span class="column-order"></span>
-                    </th>
-                    <th>
-                        <span>Description</span>
-                        <span class="column-order"></span>
-                    </th>
-                </tr>
-            </tfoot>
         </table>
         <?php include FOOTER ?>
     </div>

@@ -46,21 +46,7 @@
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                        </th>
-                        <th>
-                            <span>Area</span>
-                        </th>
-                        <th>
-                            <span>Available capacity</span>
-                        </th>
-                        <th>
-                            <span>Total capacity</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
-            
+            <?php include FOOTER ?>
+        </div>
+    </main>

@@ -43,18 +43,7 @@
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                        </th>
-                        <th>
-                            <span>File</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
-            <?php include FOOTER?>
+            <?php include FOOTER ?>
+        </div>
+    </main>

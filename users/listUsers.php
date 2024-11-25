@@ -46,22 +46,6 @@
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Num</span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                        </th>
-                        <th>
-                            <span>Date of birth</span>
-                        </th>
-                        <th>
-                            <span>User type</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
             <?php include FOOTER ?>
         </div>

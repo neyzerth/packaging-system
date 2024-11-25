@@ -35,5 +35,6 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <tfoot>
-            </tfoot>
+            <?php include FOOTER ?>
+        </div>
+    </main>

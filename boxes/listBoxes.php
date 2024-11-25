@@ -56,28 +56,6 @@
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                        </th>
-                        <th>
-                            <span>Height</span>
-                        </th>
-                        <th>
-                            <span>Width</span>
-                        </th>
-                        <th>
-                            <span>Length</span>
-                        </th>
-                        <th>
-                            <span>Volume</span>
-                        </th>
-                        <th>
-                            <span>Weight</span>
-                        </th>
-                    </tr>
-                </tfoot>
             </table>
             <?php include FOOTER ?>
         </div>
