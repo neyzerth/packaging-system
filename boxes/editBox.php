@@ -20,10 +20,10 @@
         $weight = $_POST['weight'];
 
         if (updateBox(num:$num, height:$height, width:$width, length:$length, weight:$weight)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Caja actualizado con éxito.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Box updated successfully.</span></div>";
 
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error al actualizar la caja.</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updating box.</span></div>";
         }
     }
 ?>
@@ -38,7 +38,7 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Boxes</h1>
             </header>
-            <a href="disableBox.php?num=<?php echo $box['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta caja?');">Disable</a>
+            <a href="disableBox.php?num=<?php echo $box['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this box?');">Disable</a>
             
             <div class="rows">
                 <div class="row-sm-3">

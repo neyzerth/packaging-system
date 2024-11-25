@@ -19,12 +19,15 @@
         $active = 1; 
 
         if (updateProtocol(num:$num, name:$name, file_name:$file_name, active:$active)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocolo actualizado con éxito.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el protocolo.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";
         }
     }
 ?>
+<head>
+    <script src="protocolForm.js"></script>
+</head>
 
 
 <main class="forms">
@@ -37,7 +40,7 @@
             <h2>Material</h2>
             <div class="rows">
                 <div class="row-sm-3">
-                    <a class="btn" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este protocolo?');">Disable</a>
+                    <a class="btn" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this protocol?');">Disable</a>
                 </div>
             </div>
             <div class="rows">

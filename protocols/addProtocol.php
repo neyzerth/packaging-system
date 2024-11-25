@@ -14,11 +14,14 @@
         if($result){
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol Registered.</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error adding protocol</span></div>";
         }
     }
 
 ?>
+<head>
+    <script src="protocolForm.js"></script>
+</head>
 
 <main class="forms">
     <div class="background">

@@ -10,20 +10,20 @@
     if ($_SERVER['REQUEST_METHOD']=='POST') {
 
         $code = $_POST['code'];
-        $material_name = $_POST['material_name'];
+        $name = $_POST['material_name'];
         $description = $_POST['description'];
         $available_quantity = $_POST['available_quantity'];
         $unit_of_measure = $_POST['unit_of_measure'];
 
         $result = addMaterial(
-            code: $code, material_name: $material_name,
+            code: $code, name: $name,
             description: $description, available_quantity: $available_quantity,
             unit_of_measure: $unit_of_measure
         );
-        if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Material Registered.</span></div>";
+        if ($result['success'] == 1) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
         }
     }
 ?>

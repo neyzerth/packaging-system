@@ -1,16 +1,32 @@
 <?php
     require_once "../config.php";
-    function addMaterial($code, $material_name, $description, $available_quantity, $unit_of_measure) {
+    function addMaterial($code, $name, $description, $available_quantity, $unit_of_measure) {
         $db = connectdb();
         try {
-            $query = "call addMaterial(" . "'$code','$material_name'," . "'$description',$available_quantity," . "'$unit_of_measure'" . ");";
-            //echo "<p>$query</p>";
-            return $db->query($query);
+            // Ejecutar el procedimiento almacenado
+            $query = "CALL addMaterial('$code', '$name', '$description', $available_quantity, '$unit_of_measure');";
+            $result = $db->query($query);
+            if ($result) {
+                $row = $result->fetch_assoc(); 
+                return [
+                    'success' => $row['success'],
+                    'message' => $row['message']
+                ];
+            } else {
+                return [
+                    'success' => 0,
+                    'message' => 'Error en la ejecución de la consulta.'
+                ];
+            }
         } catch (Exception $e) {
-            return $e->getMessage();
+            return [
+                'success' => 0,
+                'message' => $e->getMessage()
+            ];
+        } finally {
+            $db->close();
         }
-        
-    } 
+    }
 
     function getMaterial() {
         $db = connectdb();

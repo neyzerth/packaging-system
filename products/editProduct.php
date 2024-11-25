@@ -44,7 +44,7 @@
             <h2>Products</h2>
             <div class="rows">
                 <div class="row-sm-3">
-                    <a class="btn" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
+                    <a class="btn" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
                 </div>
             </div>
             <div class="rows">
