@@ -1,5 +1,5 @@
 <?php
-    require_once("../config.php");
+    require_once("../../../config.php");
     require "protocolFun.php";
     
     if (isset($_GET['num'])) {
@@ -19,12 +19,15 @@
         $active = 1; 
 
         if (updateProtocol(num:$num, name:$name, file_name:$file_name, active:$active)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocolo actualizado con éxito.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el protocolo.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";
         }
     }
 ?>
+<head>
+    <script src="protocolForm.js"></script>
+</head>
 
 
 <main class="forms">
@@ -32,14 +35,11 @@
         <form class="form" action="" method="post" autocomplete="off" enctype="multipart/form-data">
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
-                <h1>Materials</h1>
+                <h1>Edit Protcol</h1>
             </header>
-            <h2>Material</h2>
-            <div class="rows">
-                <div class="row-sm-3">
-                    <a class="btn" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este protocolo?');">Disable</a>
-                </div>
-            </div>
+            <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este protocolo?');">Disable</a>
+            <hr>
+            <h2>Protocol</h2>
             <div class="rows">
                 <div class="row-md-5">
                     <h4 for="name">Num</h4>

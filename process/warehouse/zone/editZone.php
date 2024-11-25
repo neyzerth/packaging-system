@@ -2,15 +2,19 @@
     require_once("../../../config.php");
     require "zoneFun.php";
 
-    if (isset($_GET['code'])) {
-        $code = $_GET['code'];
+    if (isset($_GET['code']) && !empty(trim($_GET['code']))) {
+        $code = htmlspecialchars(trim($_GET['code']));
         $zone = getZoneByCode($code);
-
+    
         if (!$zone) {
-            echo "Zone not found";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Zone not found</span></div>";
             exit;
-        }         
+        }
+    } else {
+        echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid or missing zone code</span></div>";
+        exit;
     }
+    
 
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $code = $_POST['code'];
@@ -18,11 +22,18 @@
         $available_capacity = $_POST['available_capacity'];
         $total_capacity = $_POST['total_capacity'];
         $active = 1;
+        $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active);
 
-        if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active)){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Zone updated successfully</span></div>";
+        if (empty($code) || empty($area) || $available_capacity === false || $total_capacity === false) {
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid input data</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating zone</span></div>";
+            $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active);
+    
+            if ($result['success'] == 1) {
+                echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+            } else {
+                echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            }
         }
     }
 ?>
@@ -34,16 +45,16 @@
 
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Zones</h1>
+                    <h1>Edit Zone</h1>
                 </header>
-                <h2>Zone</h2>
-                <hr>
                 <a class="btn-primary" href="disableZone.php?code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta zona?');">Disable</a>
+                <hr>
+                <h2>Zone</h2>
                 <div class="rows">
                     <div class="row-md-5">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" required maxlength="5" value="<?php echo $zone['code']; ?>">
+                            <input name="code" id="code" type="text" readonly maxlength="5" value="<?php echo $zone['code']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">

@@ -1,5 +1,5 @@
 <?php
-    require_once("../config.php");
+    require_once("../../../config.php");
     require "protocolFun.php";
     $protocols = getProtocols();
 ?>
@@ -9,6 +9,7 @@
             $link="?a=add";
             include HEADER 
             ?>
+            <h1>Protocols</h1>
             <table class="table">
                 <thead>
                     <tr>

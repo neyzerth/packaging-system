@@ -7,10 +7,17 @@
         $total_capacity = $_POST['total_capacity'];
 
         $result = addZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity);
-        if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Zone Registered.</span></div>";
+        
+        if (empty($code) || empty($area) || $available_capacity === false || $total_capacity === false) {
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid input data</span></div>";
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error</span></div>";
+            $result = addZone($code, $area, $available_capacity, $total_capacity);
+
+            if ($result['success'] == 1) {
+                echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
+            } else {
+                echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
+            }
         }
     }
 ?>
@@ -19,14 +26,15 @@
             <form class="form" action="?a=add" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Zones</h1>
+                    <h1>Add Zone</h1>
                 </header>
+                <hr>
                 <h2>Zone</h2>
                 <div class="rows">
                     <div class="row-md-5">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" required maxlength="5">
+                            <input name="code" id="code" type="text"  maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">
@@ -48,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                
+                <hr>
                 <footer class="footer">
                     <button class="btn-primary" type="submit">Confirm</button>
                 </footer>

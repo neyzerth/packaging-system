@@ -6,6 +6,7 @@
     <main class="tables">
         <div class="background">
         <?php include HEADER; ?>
+        <h1>Materials</h1>
             <table class="table">
                 <thead>
                     <tr>

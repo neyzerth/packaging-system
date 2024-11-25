@@ -20,8 +20,9 @@
             <form class="form" action="?a=add" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
-                    <h1>Report</h1>
+                    <h1>Add Report</h1>
                 </header>
+                <hr>
                 <h2>Incident</h2>
                 <div class="rows">
                     <div class="row-md-5">

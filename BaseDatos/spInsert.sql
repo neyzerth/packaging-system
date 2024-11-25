@@ -182,27 +182,31 @@ END $$
 
 --Zone
 
-drop Procedure addZone
+drop Procedure addZone;
 DELIMITER $$
+
+DELIMITER $$
+
 CREATE PROCEDURE addZone(
-    In p_code VARCHAR(5),
-    In p_area VARCHAR(50),
-    In p_available_capacity INT,
-    In p_total_capacity INT
+    IN p_code VARCHAR(5),
+    IN p_area VARCHAR(50),
+    IN p_available_capacity INT,
+    IN p_total_capacity INT
 )
 BEGIN
-    DECLARE exist_unit INT;
-
-    IF exist_unit = 0 THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Zone code';
+    IF EXISTS (SELECT 1 FROM zone WHERE area = p_area) THEN
+        SELECT 0 AS success, 'The area name is already in use.' AS message;
+    ELSE
+        INSERT INTO zone (code, area, available_capacity, total_capacity)
+        VALUES (p_code, p_area, p_available_capacity, p_total_capacity);
+        SELECT 1 AS success, 'Zone added successfully.' AS message;
     END IF;
-
-    INSERT INTO zone(code,area,available_capacity,total_capacity)
-    VALUES(p_code,p_area,p_available_capacity,p_total_capacity);
-
-    SELECT code,area,available_capacity,total_capacity
-    FROM zone WHERE code = p_code;
 END $$
+
+DELIMITER ;
+
+
+
 --Protocol
 
 CREATE PROCEDURE addIncident(

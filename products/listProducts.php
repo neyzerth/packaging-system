@@ -9,6 +9,7 @@
             $link = "?a=add";
             include HEADER 
             ?>
+            <h1>Products</h1>
             <table class="table">
                 <thead>
                     <tr>

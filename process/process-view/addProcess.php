@@ -55,6 +55,7 @@
                 </tfoot>
             </table>
             <?php include FOOTER ?>
+            <hr>
             <footer class="footer">
                 <button class="btn-primary" type="submit">Incident</button>
             </footer>
