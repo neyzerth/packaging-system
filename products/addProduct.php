@@ -1,6 +1,6 @@
 <?php
     require "prodFun.php";
-
+    session_start();
     $protocols = getProtocols();
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -20,12 +20,19 @@
         );
 
         if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Product registered</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error adding product</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: index.php");
+        exit();
     }
-
 ?>
 <head>
     <script src="productForm.js"></script>
@@ -104,11 +111,4 @@
         </form>
     </div>
 </main>
-<script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+<?php include FOOT ?>

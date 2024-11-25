@@ -1,7 +1,7 @@
 <?php
     require_once("../config.php");
     require "userFun.php";
-
+    session_start();
     $supervisors = getSupervisors();
     $userTypes = getUserTypes();
 
@@ -37,8 +37,12 @@
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Usuario actualizado con éxito.</span></div>";
 
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar al usuario.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
         }
+
+
+        header("Location: index.php");
+        exit();
     }
 ?>
 <head>
@@ -166,11 +170,4 @@
             </form>
         </div>
     </main>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+    <?php include FOOT ?>

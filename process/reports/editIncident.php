@@ -1,5 +1,6 @@
 <?php
     require "reportFun.php";
+    session_start();
     if(!validateUser("ADMIN", "SUPER")){
         header("Location: /process/reports");
     }
@@ -23,12 +24,20 @@
         $traceability = $_POST['traceability'];
 
         if (updateIncident(num:$num, date:$date, description:$description, traceability:$traceability)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Incidente actualizado con éxito.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
 
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el incidente.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
 
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
     <main class="forms">
@@ -83,11 +92,4 @@
             </form>
         </div>
     </main>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+    <?php include FOOT ?>

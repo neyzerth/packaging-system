@@ -1,5 +1,6 @@
 <?php
     require "zoneFun.php";
+    session_start();
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $code = $_POST['code'];
         $area = $_POST['area'];
@@ -7,18 +8,19 @@
         $total_capacity = $_POST['total_capacity'];
 
         $result = addZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity);
-        
-        if (empty($code) || empty($area) || $available_capacity === false || $total_capacity === false) {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Invalid input data</span></div>";
+        if($result){
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            $result = addZone($code, $area, $available_capacity, $total_capacity);
-
-            if ($result['success'] == 1) {
-                echo "<div class='div-msg' id='success-msg'><span class='msg'>{$result['message']}</span></div>";
-            } else {
-                echo "<div class='div-msg' id='error-msg'><span class='msg'>{$result['message']}</span></div>";
-            }
+                $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: /");
+        exit();
     }
 ?>
     <main class="forms">
@@ -63,11 +65,4 @@
             </form>
         </div>
     </main>
-    <script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+    <?php include FOOT ?>

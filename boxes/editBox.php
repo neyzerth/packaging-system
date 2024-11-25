@@ -1,7 +1,7 @@
 <?php
     require_once("../config.php");
     require "boxFun.php";
-    
+    session_start(); 
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         $box = getBoxByNumber($num);
@@ -20,11 +20,19 @@
         $weight = $_POST['weight'];
 
         if (updateBox(num:$num, height:$height, width:$width, length:$length, weight:$weight)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Box updated successfully.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
 
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updating box.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: index.php");
+        exit(); 
     }
 ?>
 <head>
@@ -77,14 +85,6 @@
 
                     </div>
                 </div>
-                <!--
-                <div class="row-sm-3">
-                    <h4></h4>
-                    <div class="inputs">
-                        
-                    </div>
-                </div>
-                -->
             </div>
             <hr>
             <footer class="footer">
