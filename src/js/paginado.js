@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
-    const rowsPerPage = 2; 
+    const rowsPerPage = 10; 
     const table = document.querySelector('table'); 
     const rows = table.querySelectorAll('tbody tr');
     const footer = document.querySelector('.footer'); 
