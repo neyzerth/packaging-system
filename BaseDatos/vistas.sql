@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -47,6 +47,14 @@ From user
 where supervisor is NULL and user_type <> 'admin';
 
 
+create view vw_userType_info as 
+Select code,
+name,
+description,
+active
+From user_type
+
+
 --VISTA DE CAJA
 CREATE VIEW vw_box_info AS
 SELECT 
@@ -55,7 +63,8 @@ SELECT
     width,
     length,
     volume,
-    weight
+    weight,
+    active
 FROM box;
 
 --VISTA ZONA
@@ -64,7 +73,8 @@ SELECT
     code,
     area,
     available_capacity,
-    total_capacity
+    total_capacity,
+    active
 FROM zone;
 
 --VISTA DE SALIDA
@@ -72,7 +82,8 @@ CREATE VIEW vw_outbound_info AS
 SELECT 
     num,
     date,
-    exit_quantity
+    exit_quantity,
+    active
 FROM outbound;
 
 --VISTA ETIQUETA
@@ -107,7 +118,8 @@ SELECT
     name,
     description,
     available_quantity,
-    unit_of_measure
+    unit_of_measure,
+    active
 FROM material;
 
 --VISTA PAQUETE
@@ -127,7 +139,8 @@ CREATE VIEW vw_packaging_protocol_info AS
 SELECT 
     num,
     name,
-    file_name
+    file_name,
+    active
 FROM packaging_protocol;
 
 
@@ -141,6 +154,7 @@ SELECT
     width,
     length,
     weight,
+    active,
     packaging_protocol
 FROM product;
 
