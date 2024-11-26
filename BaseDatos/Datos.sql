@@ -1,3 +1,4 @@
+-- SQLBook: Code
 INSERT INTO user_type (code, name, description) VALUES 
 ('ADMIN', 'administrator', "User with full access to the system"),
 ('SUPER', 'supervisor', "User who oversees other users"),

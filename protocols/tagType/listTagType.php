@@ -2,6 +2,9 @@
     require_once "../../config.php";
     require "tagTypeFun.php";
     $tagTypes = getTagTypes();
+
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $tagTypes = empty($search) ? getTagTypes() : searchTagType($search);
 ?>
 <main class="tables">
     <div class="background">

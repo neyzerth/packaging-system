@@ -35,4 +35,21 @@
         return $result;
     }
 
+    function searchReport($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+
+        $query = "SELECT * FROM report WHERE folio = $search";
+        $result = $db->query($query);
+        
+        $reports = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $reports[] = $row;
+            }
+        }
+        
+        return $reports;
+    }
 ?>

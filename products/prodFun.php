@@ -99,3 +99,23 @@ function disableProduct($code) {
     
     return $result; 
 }
+
+function searchProduct($search){
+    $db = connectdb();
+    
+    $search = $db->real_escape_string($search);
+
+    $query = "SELECT * FROM product WHERE code like '%$search%'";
+    $result = $db->query($query);
+    
+    $products = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
+    }
+    
+    return $products;
+}
+
+?>

@@ -33,10 +33,11 @@
         exit();
     }
 ?>
+<head>
+    <script src="outForm.js"></script>
+</head>
     <main class="forms">
         <div class="background">
-
-
             <form class="form" action="" method="post" autocomplete="off">
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
@@ -47,21 +48,21 @@
                 <h2>Outbound</h2>
                 <div class="rows">
                     <div class="row-sm-3">
-                        <h4 for="code">Num</h4>
+                        <h4 for="num">Num</h4>
                         <div class="inputs">
-                            <input name="num" id="code" type="number" required value="<?php echo $out['num']; ?>" readonly>
+                            <input name="num" id="num" type="number" required value="<?php echo $out['num']; ?>" readonly>
                         </div>
                     </div>
                     <div class="row-sm-3">
-                        <h4 for="material_name">Date</h4>
+                        <h4 for="date">Date</h4>
                         <div class="inputs">
-                            <input name="date" id="material_name" type="date" required  value="<?php echo $out['date']; ?>">
+                            <input name="date" id="date" type="date" required  value="<?php echo $out['date']; ?>">
                         </div>
                     </div>
                     <div class="row-sm-3">
-                        <h4 for="description">Exit quantity</h4>
+                        <h4 for="exit_quantity">Exit quantity</h4>
                         <div class="inputs">
-                            <input name="exit_quantity" id="description" type="number" placeholder="999" required maxlength="10"value="<?php echo $out['exit_quantity']; ?>">
+                            <input name="exit_quantity" id="exit_quantity" type="number" placeholder="17" required maxlength="10"value="<?php echo $out['exit_quantity']; ?>">
                         </div>
                     </div>
                 </div>

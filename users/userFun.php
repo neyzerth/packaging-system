@@ -118,4 +118,23 @@
         
         return $result; 
     }
+
+
+    function searchUser($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+
+        $query = "SELECT * FROM vw_user_personal_info WHERE num = $search";
+        $result = $db->query($query);
+        
+        $users = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $users[] = $row;
+            }
+        }
+        
+        return $users;
+    }
 ?>

@@ -20,6 +20,10 @@
         exit();
     }
 ?>
+<head>
+    <script src="outForm.js"></script>
+</head>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="?a=add" method="post" autocomplete="off">
@@ -31,15 +35,15 @@
                 <h2>Outbond</h2>
                 <div class="rows">
                     <div class="row-md-5">
-                        <h4 for="code">Date</h4>
+                        <h4 for="date">Date</h4>
                         <div class="inputs">
-                            <input name="date" id="code" type="date" required>
+                            <input name="date" id="date" type="date" required>
                         </div>
                     </div>
                     <div class="row-md-5">
-                        <h4 for="material_name">Exit quantity</h4>
+                        <h4 for="exit_quantity">Exit quantity</h4>
                         <div class="inputs">
-                            <input name="exit_quantity" id="material_name" type="number" required maxlength="10">
+                            <input name="exit_quantity" id="exit_quantity" type="number" required maxlength="10">
                         </div>
                     </div> 
                 </div>

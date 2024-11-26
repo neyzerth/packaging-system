@@ -64,5 +64,23 @@
     
         return $result;
     }
+
+    function searchTag($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+    
+        $query = "SELECT * FROM tag WHERE date LIKE '%$search%';";
+        $result = $db->query($query);
+        
+        $tags = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $tags[] = $row;
+            }
+        }
+        
+        return $tags;
+    }
     
 ?>

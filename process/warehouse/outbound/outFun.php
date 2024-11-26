@@ -82,4 +82,22 @@
         
         return $result; 
     }
+
+    function searchOut($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+
+        $query = "SELECT * FROM outbound WHERE num = $search";
+        $result = $db->query($query);
+        
+        $outs = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $outs[] = $row;
+            }
+        }
+        
+        return $outs;
+    }
 ?>

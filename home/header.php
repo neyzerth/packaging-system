@@ -1,6 +1,6 @@
         <header class="header">
             <div>
-                <form action="" method="get">
+                <form action="" method="get" autocomplete="off">
                     <input type="text" name="search" id="search" placeholder="Search: Press Enter">
                 </form>
             </div>

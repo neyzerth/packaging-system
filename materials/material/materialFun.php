@@ -108,4 +108,22 @@
         
         return $result; 
     }
+
+    function searchMaterial($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+
+        $query = "SELECT * FROM material WHERE code LIKE '%$search%'";
+        $result = $db->query($query);
+        
+        $materials = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $materials[] = $row;
+            }
+        }
+        
+        return $materials;
+    }
 ?>

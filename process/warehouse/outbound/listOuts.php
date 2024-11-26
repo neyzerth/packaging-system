@@ -1,6 +1,9 @@
 <?php
     require "outFun.php";
     $outs = getOuts();
+
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $outs = empty($search) ? getOuts() : searchOut($search);
 ?>
     <main class="tables">
         <div class="background">

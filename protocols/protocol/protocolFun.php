@@ -108,4 +108,23 @@
             
             return $result; 
         }
+
+    
+        function searchprotocol($search){
+            $db = connectdb();
+            
+            $search = $db->real_escape_string($search);
+
+            $query = "SELECT * FROM packaging_protocol WHERE num = $search";
+            $result = $db->query($query);
+            
+            $protocols = [];
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $protocols[] = $row;
+                }
+            }
+            
+            return $protocols;
+        }    
 ?>

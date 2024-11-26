@@ -86,4 +86,23 @@
             
             return $result; 
         }
+
+        function searchBox($search){
+            $db = connectdb();
+            
+            $search = $db->real_escape_string($search);
+
+            $query = "SELECT * FROM box WHERE num = $search";
+            $result = $db->query($query);
+            
+            $boxes = [];
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $boxes[] = $row;
+                }
+            }
+            
+            return $boxes;
+        }
+ 
 ?>

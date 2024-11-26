@@ -105,4 +105,22 @@
         
         return $result; 
     }
+
+    function searchZone($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+
+        $query = "SELECT * FROM zone WHERE code like '%$search%'";
+        $result = $db->query($query);
+        
+        $zones = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $zones[] = $row;
+            }
+        }
+        
+        return $zones;
+    }
 ?>

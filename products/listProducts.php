@@ -1,6 +1,9 @@
 <?php
     require_once "prodFun.php";
     $products = getProducts();
+
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $products = empty($search) ? getProducts() : searchProduct($search);
 ?>
     <main class="tables">
         <div class="background">

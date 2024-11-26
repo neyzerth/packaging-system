@@ -1,7 +1,11 @@
 <?php
     require_once("../config.php");
     require "boxFun.php";
+
     $boxes = getBoxes();
+
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    $boxes = empty($search) ? getBoxes() : searchBox($search);
 ?>
     <main class="tables">
         <div class="background">
@@ -14,7 +18,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <span>Code</span>
+                            <span>Number</span>
                             <span class="column-order"></span>
                         </th>
                         <th>

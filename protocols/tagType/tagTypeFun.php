@@ -50,4 +50,22 @@
         $db->close();
         return $result;
     }
+
+    function searchTagType($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+
+        $query = "SELECT * FROM tag_type WHERE code LIKE '%$search%'";
+        $result = $db->query($query);
+        
+        $tag_types = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $tag_types[] = $row;
+            }
+        }
+        
+        return $tag_types;
+    }
 ?>

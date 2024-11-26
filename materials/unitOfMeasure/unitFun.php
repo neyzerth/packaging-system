@@ -50,4 +50,22 @@
         $db->close();
         return $result;
     }
+
+    function searchUnit($search){
+        $db = connectdb();
+        
+        $search = $db->real_escape_string($search);
+
+        $query = "SELECT * FROM unit_of_measure WHERE code LIKE '%$search%'";
+        $result = $db->query($query);
+        
+        $units = [];
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $units[] = $row;
+            }
+        }
+        
+        return $units;
+    }
 ?>
