@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 -----------------------------------
         --STORED PROCEDURE
 -----------------------------------
@@ -93,6 +93,43 @@ CALL login('Axel', 'Leyva', @login_result);
 
 
 SELECT @login_result; 
+
+set autocommit = 0;
+select @@autocommit;
+
+DELIMITER $$
+CREATE PROCEDURE startProcess(
+    IN p_user INT,
+    IN p_product VARCHAR(5),
+    IN p_quantity INT,
+    IN p_box INT,
+    IN p_tag_type VARCHAR(5),
+    IN p_date DATE,
+    OUT trac_code INT,
+    OUT pack_code INT
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+    
+    START TRANSACTION 
+        INSERT INTO traceability(num) 
+        VALUES (null);
+        
+        SET trac_code = LAST_INSERT_ID();
+
+        INSERT INTO report (start_date, end_date, traceability);
+        VALUES (p_date, NOW(), trac_code);
+
+        INSERT INTO packaging (code) VALUES(CONCAT('PK', trac_code));
+        SET pack_code = LAST_INSERT_ID();
+
+        call addBox();
+
+    COMMIT
+END $$
 
 
 
