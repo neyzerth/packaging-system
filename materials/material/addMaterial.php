@@ -32,7 +32,11 @@
                 'type' => 'error'
             ];
         }
+<<<<<<< Updated upstream:materials/material/addMaterial.php
         header("Location: /");
+=======
+        header("Location: index.php");
+>>>>>>> Stashed changes:materials/addMaterial.php
         exit();
     }
 
@@ -99,6 +103,7 @@
         </form>
     </div>
 </main>
+<<<<<<< Updated upstream:materials/material/addMaterial.php
 <<<<<<< HEAD:materials/material/addMaterial.php
 <script>
         setTimeout(() => {
@@ -111,3 +116,6 @@
 =======
 <?php include FOOT ?>
 
+=======
+<?php include FOOT ?>
+>>>>>>> Stashed changes:materials/addMaterial.php

@@ -1,7 +1,11 @@
 <?php
     validateUser("ALL");
 
+<<<<<<< Updated upstream
     //session_start(); //esta comentado ya que en todas las pantallas sale un mensaje de error
+=======
+    session_start();
+>>>>>>> Stashed changes
 
 
 if (isset($_SESSION['message'])) {

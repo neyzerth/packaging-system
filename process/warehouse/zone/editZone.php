@@ -35,7 +35,11 @@
                 'type' => 'error'
             ];
         }
+<<<<<<< Updated upstream
         header("Location: /");
+=======
+        header("Location: index.php");
+>>>>>>> Stashed changes
         exit();
     }
 ?>

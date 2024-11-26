@@ -40,12 +40,15 @@
                         </th>
                     </tr>
                 </thead>
+<<<<<<< Updated upstream:process/process-view/home.php
                 <tbody>
                     <tr>
                         <td></td>
                         <td></td>
                     </tr>
                 </tbody>
+=======
+>>>>>>> Stashed changes:process/process-view/addProcess.php
             </table>
             <?php include FOOTER ?>
             <hr>

@@ -40,6 +40,10 @@
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             </table>
             <?php include FOOTER ?>
         </div>

@@ -14,12 +14,20 @@
                 'type' => 'success'
             ];
         } else {
+<<<<<<< Updated upstream
                 $_SESSION['message'] = [
+=======
+            $_SESSION['message'] = [
+>>>>>>> Stashed changes
                 'text' => 'Error',
                 'type' => 'error'
             ];
         }
+<<<<<<< Updated upstream
         header("Location: /");
+=======
+        header("Location: index.php");
+>>>>>>> Stashed changes
         exit();
     }
 ?>
