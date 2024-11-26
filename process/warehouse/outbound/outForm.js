@@ -36,15 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
     }
 
-    function validatePositiveInteger(field) {
+    function validatePositiveNumber(field) {
         const value = parseFloat(field.value.trim());
-        if (!Number.isInteger(value) || value <= 0) {
-            showError(`${field.name} must be a positive integer.`);
+        if (isNaN(value) || value <= 0) {
+            showError(`${field.name} must be a positive number.`);
             field.focus();
             return false;
         }
         return true;
     }
+
 
     form.addEventListener("submit", (event) => {
         const dateField = document.getElementById("date");
@@ -59,5 +60,16 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             return;
         }
+
+        const start = new Date(dateField.value);
+        const today = new Date(new Date());
+
+        if (start <= today) {
+            showError("Start Date cannot be in the past");
+            event.preventDefault();
+            return;
+        }
+
+
     });
 });

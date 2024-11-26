@@ -1,20 +1,20 @@
--- Active: 1723058837855@@127.0.0.1@3306@packaging
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
 
 --Vistas de Usuario
+DROP VIEW vw_user_info;
 CREATE VIEW vw_user_info AS
 SELECT 
     num,
     username,
     password,
-    active,
     user_type,
     supervisor
 FROM user AS u WHERE u.active = 1;
 
-drop View vw_user_personal_info
+drop View vw_user_personal_info;
 
 CREATE VIEW vw_user_personal_info AS
 SELECT 
@@ -44,18 +44,20 @@ SELECT num,
     phone,
     email
 From user
-where supervisor is NULL and user_type <> 'admin';
+where supervisor is NULL and user_type <> 'admin' and active = 1;
 
+DROP VIEW vw_supervisor;
 
 create view vw_userType_info as 
 Select code,
 name,
 description,
 active
-From user_type
+From user_type;
 
 
 --VISTA DE CAJA
+DROP VIEW vw_box_info;
 CREATE VIEW vw_box_info AS
 SELECT 
     num,
@@ -63,28 +65,27 @@ SELECT
     width,
     length,
     volume,
-    weight,
-    active
-FROM box;
+    weight
+FROM box WHERE active = 1;
 
 --VISTA ZONA
+DROP VIEW vw_zone_info;
 CREATE VIEW vw_zone_info AS
 SELECT 
     code,
     area,
     available_capacity,
-    total_capacity,
-    active
-FROM zone;
+    total_capacity
+FROM zone WHERE active = 1;
 
 --VISTA DE SALIDA
+DROP VIEW vw_outbound_info;
 CREATE VIEW vw_outbound_info AS
 SELECT 
     num,
     date,
-    exit_quantity,
-    active
-FROM outbound;
+    exit_quantity
+FROM outbound WHERE active = 1;
 
 --VISTA ETIQUETA
 CREATE VIEW vw_tag_info AS
@@ -112,15 +113,15 @@ SELECT
 FROM packaging;
 
 --VISTA MATERIAL
+DROP VIEW vw_material_info;
 CREATE VIEW vw_material_info AS
 SELECT 
     code,
     name,
     description,
     available_quantity,
-    unit_of_measure,
-    active
-FROM material;
+    unit_of_measure
+FROM material WHERE active = 1;
 
 --VISTA PAQUETE
 CREATE VIEW vw_package_info AS
@@ -135,16 +136,17 @@ SELECT
 FROM package;
 
 --VISTA PROTOCOLO EMBALAJE
+DROP VIEW vw_packaging_protocol_info;
 CREATE VIEW vw_packaging_protocol_info AS
 SELECT 
     num,
     name,
-    file_name,
-    active
-FROM packaging_protocol;
+    file_name
+FROM packaging_protocol WHERE active = 1;
 
 
 --VISTA DE PRODUCTO
+DROP VIEW vw_product_info;
 CREATE VIEW vw_product_info AS
 SELECT 
     code,
@@ -154,9 +156,8 @@ SELECT
     width,
     length,
     weight,
-    active,
     packaging_protocol
-FROM product;
+FROM product WHERE active = 1;
 
 --VISTA DE TRAZABILIDAD
 CREATE VIEW vw_traceability_info AS
