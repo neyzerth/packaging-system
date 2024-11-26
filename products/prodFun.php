@@ -100,7 +100,7 @@ function disableProduct($code) {
     return $result; 
 }
 
-function searchProduct($search){
+/*function searchProduct($search){
     $db = connectdb();
     
     $search = $db->real_escape_string($search);
@@ -116,6 +116,6 @@ function searchProduct($search){
     }
     
     return $products;
-}
+}*/
 
 ?>

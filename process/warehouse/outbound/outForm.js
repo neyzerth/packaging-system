@@ -61,15 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const start = new Date(dateField.value);
-        const today = new Date(new Date());
-
-        if (start <= today) {
-            showError("Start Date cannot be in the past");
-            event.preventDefault();
-            return;
-        }
-
-
+       
     });
 });

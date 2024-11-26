@@ -110,7 +110,7 @@
         }
 
     
-        function searchprotocol($search){
+        /*function searchprotocol($search){
             $db = connectdb();
             
             $search = $db->real_escape_string($search);
@@ -126,5 +126,5 @@
             }
             
             return $protocols;
-        }    
+        }*/
 ?>

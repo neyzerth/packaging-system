@@ -3,8 +3,8 @@
     require "materialFun.php";
     $materials = getMaterial();
 
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $materials = empty($search) ? getMaterial() : searchMaterial($search);
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$materials = empty($search) ? getMaterial() : searchMaterial($search);
 ?>
     <main class="tables">
         <div class="background">

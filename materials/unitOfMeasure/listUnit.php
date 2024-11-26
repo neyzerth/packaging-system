@@ -3,8 +3,8 @@
     require "unitFun.php";
     $units = getUnits();
 
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $units = empty($search) ? getUnits() : searchUnit($search);
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$units = empty($search) ? getUnits() : searchUnit($search);
 ?>
     <main class="tables">
         <div class="background">

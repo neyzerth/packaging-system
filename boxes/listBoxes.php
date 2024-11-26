@@ -4,14 +4,14 @@
 
     $boxes = getBoxes();
 
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $boxes = empty($search) ? getBoxes() : searchBox($search);
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$boxes = empty($search) ? getBoxes() : searchBox($search);
 ?>
     <main class="tables">
         <div class="background">
             <?php 
             $link="?a=add"; 
-            include HEADER; 
+            include HEADER;
             ?>
             <h1>Boxes</h1>
             <table class="table">
@@ -43,7 +43,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="box">
                     <?php foreach($boxes as $box): ?>
                     <tr>
                         <td><?php echo $box['num'] ?></td>

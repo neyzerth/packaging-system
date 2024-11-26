@@ -4,8 +4,8 @@
     $users = getUsers();
 
 
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $users = empty($search) ? getUsers() : searchUser($search);
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$users = empty($search) ? getUsers() : searchUser($search);
 ?>
     <main class="tables">
         <div class="background">

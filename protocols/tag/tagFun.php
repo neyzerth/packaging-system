@@ -65,7 +65,7 @@
         return $result;
     }
 
-    function searchTag($search){
+    /*function searchTag($search){
         $db = connectdb();
         
         $search = $db->real_escape_string($search);
@@ -81,6 +81,6 @@
         }
         
         return $tags;
-    }
+    }*/
     
 ?>

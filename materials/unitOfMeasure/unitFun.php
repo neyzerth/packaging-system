@@ -51,7 +51,7 @@
         return $result;
     }
 
-    function searchUnit($search){
+    /*function searchUnit($search){
         $db = connectdb();
         
         $search = $db->real_escape_string($search);
@@ -67,5 +67,5 @@
         }
         
         return $units;
-    }
+    }*/
 ?>

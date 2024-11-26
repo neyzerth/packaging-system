@@ -120,7 +120,7 @@
     }
 
 
-    function searchUser($search){
+    /*function searchUser($search){
         $db = connectdb();
         
         $search = $db->real_escape_string($search);
@@ -136,5 +136,5 @@
         }
         
         return $users;
-    }
+    }*/
 ?>

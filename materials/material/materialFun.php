@@ -109,7 +109,7 @@
         return $result; 
     }
 
-    function searchMaterial($search){
+    /*function searchMaterial($search){
         $db = connectdb();
         
         $search = $db->real_escape_string($search);
@@ -125,5 +125,5 @@
         }
         
         return $materials;
-    }
+    }*/
 ?>

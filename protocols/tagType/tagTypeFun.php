@@ -51,7 +51,7 @@
         return $result;
     }
 
-    function searchTagType($search){
+    /*function searchTagType($search){
         $db = connectdb();
         
         $search = $db->real_escape_string($search);
@@ -67,5 +67,5 @@
         }
         
         return $tag_types;
-    }
+    }*/
 ?>

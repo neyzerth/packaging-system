@@ -87,7 +87,7 @@
             return $result; 
         }
 
-        function searchBox($search){
+        /*function searchBox($search){
             $db = connectdb();
             
             $search = $db->real_escape_string($search);
@@ -103,6 +103,6 @@
             }
             
             return $boxes;
-        }
- 
+        }*/
+
 ?>

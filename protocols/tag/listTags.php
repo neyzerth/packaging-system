@@ -3,8 +3,8 @@
     require "tagFun.php";
     $tags = getTags();
 
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $tags = empty($search) ? getTags() : searchTag($search);
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$tags = empty($search) ? getTags() : searchTag($search);
 ?>
     <main class="tables">
         <div class="background">
