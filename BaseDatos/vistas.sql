@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -163,4 +163,31 @@ SELECT
     traceability
 FROM incident;
 
+DROP VIEW vw_process;
+CREATE VIEW vw_process AS
+SELECT 
+    t.num AS Traceability,
+    p.code AS Product_Code,
+    p.name AS Product,
+    (
+        SELECT product_quantity 
+        FROM package 
+        WHERE packaging = t.packaging
+        LIMIT 1
+    ) AS Product_Quantity,
+    pk.package_quantity AS Package_Quantity,
+    tgt.description AS Tag_Type,
+    tg.barcode AS Packaging_Barcode,
+    s.description AS State,
+    r.start_date AS Start_Date
+FROM traceability AS t
+INNER JOIN report AS r ON t.num = r.traceability
+INNER JOIN state AS s ON t.state = s.code
+INNER JOIN packaging AS pk ON t.packaging = pk.code
+INNER JOIN tag AS tg ON tg.num = pk.tag
+INNER JOIN tag_type AS tgt ON tgt.code = tg.tag_type 
+INNER JOIN product AS p ON t.product = p.code
+INNER JOIN zone AS z ON z.code = pk.zone;
 
+
+SELECT * FROM vw_process;
