@@ -54,7 +54,7 @@
         $stmt = $db->prepare("CALL UpdateIncident(?, ?, ?, ?)");
         
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
         }
     
         // Vincular los parámetros
@@ -65,7 +65,7 @@
             $result = true; 
         } else {
             $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+            echo "Execution error: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();

@@ -35,7 +35,7 @@
                 'type' => 'error'
             ];
         }
-        header("Location: /");
+        header("Location: /process/warehouse/zone");
         exit();
     }
 ?>
@@ -49,7 +49,7 @@
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Zone</h1>
                 </header>
-                <a class="btn-primary" href="disableZone.php?code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta zona?');">Disable</a>
+                <a class="btn-primary" href="disableZone.php?code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this zone?');">Disable</a>
                 <hr>
                 <h2>Zone</h2>
                 <div class="rows">
@@ -62,19 +62,19 @@
                     <div class="row-md-5">
                         <h4 for="area">Area</h4>
                         <div class="inputs">
-                            <input name="area" id="area" type="text" required maxlength="50" value="<?php echo $zone['area']; ?>">
+                            <input name="area" id="area" type="text" required maxlength="50"   readonly   value="<?php echo $zone['area']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="description">Available capacity</h4>
                         <div class="inputs">
-                            <input name="available_capacity" id="description" type="number" placeholder="999" required maxlength="10"value="<?php echo $zone['available_capacity']; ?>">
+                            <input name="available_capacity" id="description" type="number" placeholder="17" required maxlength="10"value="<?php echo $zone['available_capacity']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="available_quantity">Total capacity</h4>
                         <div class="inputs">
-                            <input name="total_capacity" id="available_quantity" type="number" placeholder="999" required maxlength="10"value="<?php echo $zone['total_capacity']; ?>">
+                            <input name="total_capacity" id="available_quantity" type="number" placeholder="50" required maxlength="10"value="<?php echo $zone['total_capacity']; ?>">
                         </div>
                     </div>
                 </div>

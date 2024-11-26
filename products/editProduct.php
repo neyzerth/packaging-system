@@ -61,7 +61,7 @@
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" value="<?php echo $product['code']; ?>" required maxlength="5">
+                        <input name="code" id="code" type="text" value="<?php echo $product['code']; ?>" required maxlength="5" readonly>
                     </div>
                 </div>
                 <div class="row-sm-3">

@@ -2,30 +2,16 @@
     require_once "../../config.php";
     function addMaterial($code, $name, $description, $available_quantity, $unit_of_measure) {
         $db = connectdb();
-        try {
-            // Ejecutar el procedimiento almacenado
-            $query = "CALL addMaterial('$code', '$name', '$description', $available_quantity, '$unit_of_measure');";
-            $result = $db->query($query);
-            if ($result) {
-                $row = $result->fetch_assoc(); 
-                return [
-                    'success' => $row['success'],
-                    'message' => $row['message']
-                ];
-            } else {
-                return [
-                    'success' => 0,
-                    'message' => 'Error en la ejecución de la consulta.'
-                ];
-            }
-        } catch (Exception $e) {
-            return [
-                'success' => 0,
-                'message' => $e->getMessage()
-            ];
-        } finally {
-            $db->close();
+
+        $stmt = $db->prepare("CALL addMaterial(?, ?, ?, ?, ?)");
+        if ($stmt === false) {
+            die('Error: ' . htmlspecialchars($db->error));
         }
+        $stmt->bind_param("sssis", $code, $name, $description, $available_quantity, $unit_of_measure);
+        $result = $stmt->execute();
+        $stmt->close();
+        $db->close();
+        return $result;
     }
 
     function getMaterial() {
@@ -60,7 +46,7 @@
             $stmt = $db->prepare("CALL UpdateMaterial(?, ?, ?, ?, ?, ?)");
             
             if ($stmt === false) {
-                throw new Exception('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+                throw new Exception('Query preparation error: ' . htmlspecialchars($db->error));
             }
             
             $stmt->bind_param("sssiis", $code, $name, $description, $available_quantity, $active, $unit_of_measure);
@@ -78,13 +64,13 @@
                 } else {
                     return [
                         'success' => 0,
-                        'message' => 'No se obtuvo respuesta del procedimiento.'
+                        'message' => 'No response was obtained from the procedure.'
                     ];
                 }
             } else {
                 return [
                     'success' => 0,
-                    'message' => 'Error en la ejecución del procedimiento.'
+                    'message' => 'Error in the execution of the procedure.'
                 ];
             }
         } catch (Exception $e) {
@@ -104,7 +90,7 @@
         $stmt = $db->prepare("CALL dropMaterial(?)");
         
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
         }
     
         $stmt->bind_param("s", $code);
@@ -114,7 +100,7 @@
             $result = true; 
         } else {
             $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+            echo "Execution error: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();

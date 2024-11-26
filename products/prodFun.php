@@ -59,7 +59,7 @@ function updateProduct($code, $name, $description, $height, $width, $length, $we
     $stmt = $db ->prepare("CALL UpdateProduct (?,?,?,?,?,?,?,?,?)");
 
     if($stmt === false){
-        die('Error en la preparacion de la consulta:'.htmlspecialchars($db->error));
+        die('Error in query preparation:'.htmlspecialchars($db->error));
     }
 
     //s->string , i->integer, d->double
@@ -82,7 +82,7 @@ function disableProduct($code) {
     $stmt = $db->prepare("CALL dropProduct(?)");
     
     if ($stmt === false) {
-        die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+        die('Error in query preparation:'. htmlspecialchars($db->error));
     }
 
     $stmt->bind_param("s", $code);

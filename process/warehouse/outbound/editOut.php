@@ -29,8 +29,8 @@
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
-        exit(); 
+        header("Location: /process/warehouse/outbound");
+        exit();
     }
 ?>
     <main class="forms">
@@ -42,7 +42,7 @@
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Outbound</h1>
                 </header>
-                <a class="btn-primary" href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta salida?');">Disable</a>
+                <a class="btn-primary" href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this outbound?');">Disable</a>
                 <hr>
                 <h2>Outbound</h2>
                 <div class="rows">

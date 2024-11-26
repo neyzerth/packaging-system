@@ -2,12 +2,17 @@
     require_once __DIR__."/../config.php";
     function addBox($height, $width, $length, $weight) {
         $db = connectdb();
-        $query = "call addBox(" . "$height, $width," . "$length, $weight, " . ");";
-        try {
-            return mysqli_query($db, $query);
-        } catch (Exception $e) {
-            return $e->getMessage();
+        $stmt = $db->prepare("CALL addBox (?,?,?,?)");
+        if ($stmt === false) {
+            die('Error'.htmlspecialchars($db->error));
         }
+        $stmt->bind_param("dddd", $height, $width, $length, $weight);
+
+        $result = $stmt->execute();
+        $stmt->close();
+        $db->close();
+
+        return $result;
     }
     function getBoxes() {
         $db = connectdb();
@@ -37,7 +42,7 @@
         $stmt = $db->prepare("CALL UpdateBox(?, ?, ?, ?, ?)");
         
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Error: ' . htmlspecialchars($db->error));
         }
     
         // Vincular los parámetros
@@ -48,7 +53,7 @@
             $result = true; 
         } else {
             $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+            echo "Error: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();
@@ -63,7 +68,7 @@
             $stmt = $db->prepare("CALL dropBox(?)");
             
             if ($stmt === false) {
-                die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+                die('Error: ' . htmlspecialchars($db->error));
             }
         
             $stmt->bind_param("i", $num);
@@ -73,7 +78,7 @@
                 $result = true; 
             } else {
                 $result = false;
-                echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+                echo "Error in execution: " . htmlspecialchars($stmt->error); 
             }
             
             $stmt->close();

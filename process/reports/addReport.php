@@ -1,6 +1,6 @@
 <?php
     if(!validateUser("ADMIN","SUPER")){
-        header("Location: /unitOfMeasure/");//verificar desde donde es
+        header("Location: /reports/");//verificar desde donde es
         exit;
     }
     require "reportFun.php";
@@ -25,6 +25,8 @@
         } else {
             echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Report</span></div>";
         }
+        header("Location: /process/reports/");
+        exit();
     }
 ?>
 <head>

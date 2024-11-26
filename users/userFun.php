@@ -17,7 +17,7 @@
         $stmt = $db->prepare("CALL addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
         }
     
         $stmt->bind_param("ssssssssisssi", $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
@@ -78,14 +78,14 @@
         $stmt = $db->prepare("CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
         }
     
         $stmt->bind_param("issssssssissisi", $num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $active, $userType, $supervisor);
     
         $result = $stmt->execute();
         if (!$result) {
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error);
+            echo "Execution error: " . htmlspecialchars($stmt->error);
         }
         $stmt->close();
         $db->close();
@@ -100,7 +100,7 @@
         $stmt = $db->prepare("CALL dropUser(?)");
         
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: '. htmlspecialchars($db->error));
         }
     
         $stmt->bind_param("i", $num);
@@ -110,7 +110,7 @@
             $result = true; 
         } else {
             $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+            echo "Execution error: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();

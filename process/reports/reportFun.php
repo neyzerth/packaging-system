@@ -24,7 +24,7 @@
         $db = connectdb();
         $stmt = $db->prepare("CALL addReport(?,?,?,?,?,?)");
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: '. htmlspecialchars($db->error));
         }
         $stmt->bind_param("sssisi", $start_date, $end_date, $report_date, $packed_products, $observations, $traceability);
 

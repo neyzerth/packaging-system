@@ -38,7 +38,7 @@
         $stmt = $db->prepare("CALL UpdateOutBound(?, ?, ?, ?)");
         
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
         }
     
         // Vincular los parámetros
@@ -49,7 +49,7 @@
             $result = true; 
         } else {
             $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+            echo "Execution error: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();
@@ -64,7 +64,7 @@
         $stmt = $db->prepare("CALL dropOutBound(?)");
         
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
         }
     
         $stmt->bind_param("i", $num);
@@ -74,7 +74,7 @@
             $result = true; 
         } else {
             $result = false;
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+            echo "Execution error: " . htmlspecialchars($stmt->error); 
         }
         
         $stmt->close();

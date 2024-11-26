@@ -47,7 +47,7 @@
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Report</h1>
                 </header>
-                <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
+                <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this incident?');">Disable</a>
                 <hr>
                 <h2>Report</h2>
                 <div class="rows">

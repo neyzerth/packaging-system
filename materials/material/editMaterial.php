@@ -36,7 +36,10 @@
         exit();
     }
 ?>
-<script src="materialForm.js"></script>
+<head>     
+    <script src="materialForm.js"></script>  
+</head>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="" method="post" autocomplete="off">
@@ -51,7 +54,7 @@
                     <div class="row-sm-3">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" placeholder="pla" value="<?php echo $material['code']; ?>" required maxlength="5">
+                            <input name="code" id="code" type="text" placeholder="pla" value="<?php echo $material['code']; ?>" required maxlength="5"  readonly>
                         </div>
                     </div>
                     <div class="row-sm-3">

@@ -6,14 +6,14 @@
         $num = $_GET['num'];
         
         if (disableUser($num)) {
-            echo "usuario desactivado correctamente.";
+            echo "user successfully disabled.";
         } else {
-            echo "Error al desactivar el usuario.";
+            echo "Error deactivating user.";
         }
 
         header("Location: listUsers.php");
         exit();
     } else {
-        echo "Código de usuario no proporcionado.";
+        echo "User code not provided.";
     }
 ?>

@@ -121,4 +121,4 @@
             if (successMsg) successMsg.style.display = 'none';
             if (errorMsg) errorMsg.style.display = 'none';
         }, 3000);
-    </script>
+</script>

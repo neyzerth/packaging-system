@@ -10,7 +10,10 @@ function login($username, $password)
 {
     $db = connectdb();
     $stmt = $db->prepare("SELECT num, username, user_type FROM vw_user_info WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
+    
+    //!es para que el login permita el acceso, ya que si no esta no permite el acceso
+    $hashedPassword = sha1($password);
+    $stmt->bind_param("ss", $username, $hashedPassword);
     $stmt->execute();
     $result = $stmt->get_result();
     $bool = $result->num_rows > 0;

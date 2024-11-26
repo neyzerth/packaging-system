@@ -32,7 +32,7 @@
         $stmt = $db->prepare("CALL addTag(?,?,?)");
 
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Error in preparing the query: ' . htmlspecialchars($db->error));
         }
         $stmt->bind_param("sss", $date, $tag_type, $destination);
 

@@ -23,7 +23,7 @@
         $stmt = $db->prepare("CALL addTagType(?,?)");
 
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
         }
         $stmt->bind_param("ss", $code, $description);
 
@@ -38,7 +38,7 @@
         $db = connectdb();
         $stmt = $db->prepare("CALL UpdateTagType(?,?)");
         if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            die('Query preparation error: ' . htmlspecialchars($db->error));
             }
         $stmt->bind_param("ss", $code, $description);
 

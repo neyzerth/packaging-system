@@ -15,6 +15,8 @@
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error adding protocol</span></div>";
         }
+        header("Location: /protocols/protocol");
+        exit();
     }
 
 ?>

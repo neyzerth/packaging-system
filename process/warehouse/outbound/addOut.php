@@ -16,8 +16,8 @@
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
-        exit(); 
+        header("Location: /process/warehouse/outbound");
+        exit();
     }
 ?>
     <main class="forms">

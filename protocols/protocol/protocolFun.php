@@ -64,7 +64,7 @@
             $stmt = $db->prepare("CALL UpdateProtocol(?, ?, ?, ?)");
             
             if ($stmt === false) {
-                die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+                die('Error in query preparation:' . htmlspecialchars($db->error));
             }
         
             // Vincular los parámetros
@@ -75,7 +75,7 @@
                 $result = true; 
             } else {
                 $result = false;
-                echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+                echo "Execution error: " . htmlspecialchars($stmt->error); 
             }
             
             $stmt->close();
@@ -90,7 +90,7 @@
             $stmt = $db->prepare("CALL dropProtocol(?)");
             
             if ($stmt === false) {
-                die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+                die('Error in query preparation:' . htmlspecialchars($db->error));
             }
         
             $stmt->bind_param("i", $num);
@@ -100,7 +100,7 @@
                 $result = true; 
             } else {
                 $result = false;
-                echo "Error en la ejecución: " . htmlspecialchars($stmt->error); 
+                echo "Execution error: " . htmlspecialchars($stmt->error); 
             }
             
             $stmt->close();

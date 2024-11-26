@@ -32,7 +32,7 @@
                 'type' => 'error'
             ];
         }
-        header("Location: /");
+        header("Location: /materials/material/");
         exit();
     }
 
