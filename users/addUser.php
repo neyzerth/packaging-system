@@ -4,13 +4,17 @@
 
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_POST['username'];
         $password = $_POST['password'];
         $name = $_POST['name'];
         $first_surname = $_POST['first_surname'];
+<<<<<<< Updated upstream
         $second_surname = empty($_POST['second_surname']) ? NULL : $_POST['second_surname'];
         $date = empty($_POST['date']) ? NULL : $_POST['date'];
         $neighborhood = empty($_POST['neighborhood']) ? NULL : $_POST['neighborhood'];
@@ -20,6 +24,18 @@
         $email = empty($_POST['email']) ? NULL : $_POST['email'];
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
+=======
+        $second_surname = $_POST['second_surname'];
+        $date = $_POST['date'];
+        $neighborhood = $_POST['neighborhood'];
+        $street = $_POST['street'];
+        $postal_code = $_POST['postal_code'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $user_type = $_POST['user_type'];
+        $supervisor = $_POST['supervisor'];
+
+>>>>>>> Stashed changes
 
         $result = addUser(
             username: $username, password: $password, name: $name,
@@ -45,9 +61,12 @@
         exit();
     }
 ?>
+<<<<<<< Updated upstream
 <head>
     <script src="userForm.js"></script>
 </head>
+=======
+>>>>>>> Stashed changes
 
     <main class="forms">
         <div class="background">

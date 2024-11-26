@@ -69,6 +69,7 @@
                     </tr>
                     <?php endforeach;?>
                 </tbody>
+<<<<<<< Updated upstream
                 <tfoot>
                     <tr>
                         <th>
@@ -97,6 +98,12 @@
                         </th>
                     </tr>
                 </tfoot>
+=======
+<<<<<<< Updated upstream
+=======
+                
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             </table>
         </div>
     </main>

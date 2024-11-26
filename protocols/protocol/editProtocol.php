@@ -1,7 +1,7 @@
 <?php
     require_once("../../../config.php");
     require "protocolFun.php";
-    
+    session_start();
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         $protocol = getProtocolByNumber($num);
@@ -19,10 +19,24 @@
         $active = 1; 
 
         if (updateProtocol(num:$num, name:$name, file_name:$file_name, active:$active)) {
+<<<<<<< Updated upstream:protocols/protocol/editProtocol.php
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";
+=======
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
+        } else {
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
+>>>>>>> Stashed changes:protocols/editProtocol.php
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <head>
@@ -74,11 +88,4 @@
         </form>
     </div>
 </main>
-<script>
-        setTimeout(() => {
-            const successMsg = document.getElementById('success-msg');
-            const errorMsg = document.getElementById('error-msg');
-            if (successMsg) successMsg.style.display = 'none';
-            if (errorMsg) errorMsg.style.display = 'none';
-        }, 3000);
-    </script>
+<?php include FOOT ?>

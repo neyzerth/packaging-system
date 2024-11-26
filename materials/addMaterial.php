@@ -32,7 +32,15 @@
                 'type' => 'error'
             ];
         }
+<<<<<<< Updated upstream:materials/addMaterial.php
         header("Location: index.php");
+=======
+<<<<<<< Updated upstream:materials/material/addMaterial.php
+        header("Location: /");
+=======
+        header("Location: index.php");
+>>>>>>> Stashed changes:materials/addMaterial.php
+>>>>>>> Stashed changes:materials/material/addMaterial.php
         exit();
     }
 ?>
@@ -92,4 +100,23 @@
         </form>
     </div>
 </main>
+<<<<<<< Updated upstream:materials/addMaterial.php
 <?php include FOOT ?>
+=======
+<<<<<<< Updated upstream:materials/material/addMaterial.php
+<<<<<<< HEAD:materials/material/addMaterial.php
+<script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+</script>
+=======
+<?php include FOOT ?>
+
+=======
+<?php include FOOT ?>
+>>>>>>> Stashed changes:materials/addMaterial.php
+>>>>>>> Stashed changes:materials/material/addMaterial.php

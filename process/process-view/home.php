@@ -46,12 +46,14 @@ $product = isset($_GET['product']) ? $_GET['product'] : "Select a product...";
                         </th>
                     </tr>
                 </thead>
+<<<<<<< Updated upstream:process/process-view/home.php
                 <tbody>
                     <tr>
                         <td></td>
                         <td></td>
                     </tr>
                 </tbody>
+<<<<<<< Updated upstream
                 <tfoot>
                     <tr>
                         <th>
@@ -62,6 +64,10 @@ $product = isset($_GET['product']) ? $_GET['product'] : "Select a product...";
                         </th>
                     </tr>
                 </tfoot>
+=======
+=======
+>>>>>>> Stashed changes:process/process-view/addProcess.php
+>>>>>>> Stashed changes
             </table>
             <?php include FOOTER ?>
             <hr>
