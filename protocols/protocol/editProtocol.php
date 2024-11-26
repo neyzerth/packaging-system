@@ -37,28 +37,28 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Edit Protcol</h1>
             </header>
-            <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este protocolo?');">Disable</a>
+            <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('Are you sure you want to disable this protocol?');">Disable</a>
             <hr>
             <h2>Protocol</h2>
             <div class="rows">
                 <div class="row-md-5">
-                    <h4 for="name">Num</h4>
+                    <h4 for="num">Num</h4>
                     <div class="inputs">
-                        <input name="num" id="name" type="text"  value="<?php echo $protocol['num']; ?>" readonly>
+                        <input name="num" id="num" type="text"  value="<?php echo $protocol['num']; ?>" readonly>
                     </div>
                 </div>
                 <div class="row-md-5">
                     <h4 for="name">Name of protocol</h4>
                     <div class="inputs">
-                        <input name="name" id="name" type="text"  value="<?php echo $protocol['name']; ?>">
+                        <input name="name" id="name" type="text" maxlength="50" value="<?php echo $protocol['name']; ?>">
                     </div>
                 </div>
             </div>
             <div class="rows">
                 <div class="row-md-5">
-                    <h4 for="name">Actual File</h4>
+                    <h4 for="file_name">Actual File</h4>
                     <div class="inputs">
-                        <input name="file_name" id="name" type="text"  value="<?php echo $protocol['file_name']; ?>" readonly>
+                        <input name="file_name" id="file_name" type="text"  value="<?php echo $protocol['file_name']; ?>" readonly>
                     </div>
                 </div>
                 <div class="row-md-5">

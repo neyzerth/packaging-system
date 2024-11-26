@@ -24,9 +24,9 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag added successfully</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag type updated successfully</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding tag</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updading Tag type</span></div>";
         }
     }
 ?>

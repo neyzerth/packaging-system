@@ -15,9 +15,9 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag added successfully</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag Type added successfully</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding tag</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Tag Type</span></div>";
         }
     }
 ?>

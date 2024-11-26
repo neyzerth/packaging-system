@@ -49,7 +49,7 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Edit Products</h1>
             </header>
-            <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
+            <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
             <hr>
             <h2>Products</h2>
             <div class="rows">
@@ -73,7 +73,7 @@
                 <div class="row-sm-3">
                     <h4 for="description">Description</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="fragile" value="<?php echo $product['description']; ?>" required maxlength="255">
+                        <input name="description" id="description" type="text"  value="<?php echo $product['description']; ?>" required maxlength="255">
                     </div>
                 </div>
                 <div class="row-sm-3">
@@ -97,7 +97,7 @@
                 <div class="row-md-5">
                     <h4 for="weight">Weight</h4>
                     <div class="inputs">
-                        <input name="weight" id="weight" type="number" placeholder="999" value="<?php echo $product['weight']; ?>" required maxlength="10">
+                        <input name="weight" id="weight" type="number" placeholder="999" value="<?php echo $product['weight']; ?>" required>
                     </div>
                 </div>
                 <div class="row-md-5">

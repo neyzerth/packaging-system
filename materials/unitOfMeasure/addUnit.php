@@ -38,14 +38,14 @@
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" required maxlength="5">
+                        <input name="code" id="code" type="text" placeholder="kg" required maxlength="5">
                     </div>
                 </div>
 
                 <div class="row-md-5">
                     <h4 for="destination">Description</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="Heavy" required maxlength="50">
+                        <input name="description" id="description" type="text" placeholder="Kilograms" required maxlength="50">
                     </div>
                 </div>
             </div>

@@ -25,7 +25,7 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Unit added successfully</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Unit updated successfully</span></div>";
         } else {
             echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Unit</span></div>";
         }
@@ -47,14 +47,14 @@
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" required value="<?php echo $unit['code']; ?>"  maxlength="5">
+                        <input name="code" id="code" type="text"  placeholder="kg" required value="<?php echo $unit['code']; ?>"  maxlength="5">
                     </div>
                 </div>
 
                 <div class="row-md-5">
                     <h4 for="destination">Description</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="Heavy" required value="<?php echo $unit['description']; ?>" maxlength="50">
+                        <input name="description" id="description" type="text" placeholder="Kilograms" required value="<?php echo $unit['description']; ?>" maxlength="50">
                     </div>
                 </div>
             </div>

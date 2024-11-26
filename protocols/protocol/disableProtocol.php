@@ -6,14 +6,14 @@
         $num = $_GET['num'];
         
         if (disableMaterial($num)) {
-            echo "Protocolo desactivado correctamente.";
+            echo "Protocol deactivated correctly.";
         } else {
-            echo "Error al desactivar el protocolo.";
+            echo "Error disabling protocol.";
         }
 
         header("Location: index.php");
         exit();
     } else {
-        echo "Código de protocolo no proporcionado.";
+        echo "Protocol code not provided.";
     }
 ?>

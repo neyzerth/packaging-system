@@ -60,7 +60,7 @@
                 <div class="row-md-5">
                     <h4 for="destination">Destination</h4>
                     <div class="inputs">
-                        <input name="destination" id="destination" type="text" placeholder="Cuba" required>
+                        <input name="destination" id="destination" type="text" placeholder="Cuba" required maxlength="25">
                     </div>
                 </div>
             </div>

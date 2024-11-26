@@ -6,14 +6,14 @@
         $code = $_GET['code'];
         
         if (disableProduct($code)) {
-            echo "Producto desactivado correctamente.";
+            echo "Product deactivated correctly.";
         } else {
-            echo "Error al desactivar el producto.";
+            echo "Error disabling the product.";
         }
 
         header("Location: listProduct.php");
         exit();
     } else {
-        echo "Código de producto no proporcionado.";
+        echo "Product code not provided.";
     }
 ?>

@@ -28,9 +28,9 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag edited successfully</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag updated successfully</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error editing tag</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updating tag</span></div>";
         }
     }
 ?>
@@ -77,7 +77,7 @@
                 <div class="row-md-5">
                     <h4 for="destination">Destination</h4>
                     <div class="inputs">
-                        <input name="destination" id="destination" type="text" placeholder="Cuba" value="<?php echo $tag['destination']; ?>" required>
+                        <input name="destination" id="destination" type="text" placeholder="Cuba"  maxlength="25"   value="<?php echo $tag['destination']; ?>" required>
                     </div>
                 </div>
             </div>

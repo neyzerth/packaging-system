@@ -6,14 +6,14 @@
         $code = $_GET['code'];
         
         if (disableMaterial($code)) {
-            echo "Material desactivado correctamente.";
+            echo "Material deactivated correctly.";
         } else {
-            echo "Error al desactivar el material.";
+            echo "Error disabling material.";
         }
 
         header("Location: index.php");
         exit();
     } else {
-        echo "Código de material no proporcionado.";
+        echo "Code of material not provided.";
     }
 ?>
