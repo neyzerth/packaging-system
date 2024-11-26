@@ -30,25 +30,14 @@
         $phone = empty($_POST['phone']) ? NULL : $_POST['phone'];
         $email = empty($_POST['email']) ? NULL : $_POST['email'];
 
-<<<<<<< Updated upstream
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
         if (updateUser(num:$num, username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, active:$active, userType: $user_type, supervisor: $supervisor)) {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Usuario actualizado con éxito.</span></div>";
 
-=======
-        if (updateUser(num:$num, username: $username, password: $password, name: $name, first_surname: $first_surname, second_surname: $second_surname, date_of_birth: $date, neighborhood: $neighborhood, street: $street, postal_code: $postal_code, phone: $phone, email: $email, active:$active, user_type: $user_type, supervisor: $supervisor)) {
-            $_SESSION['message'] = [
-                'text' => 'Successful registration',
-                'type' => 'success'
-            ];
->>>>>>> Stashed changes
         } else {
-            $_SESSION['message'] = [
-                'text' => 'Error',
-                'type' => 'error'
-            ];
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
         }
 
 

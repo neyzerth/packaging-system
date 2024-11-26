@@ -93,7 +93,6 @@
         </form>
     </div>
 </main>
-<<<<<<< Updated upstream
 <script>
         setTimeout(() => {
             const successMsg = document.getElementById('success-msg');
@@ -102,6 +101,3 @@
             if (errorMsg) errorMsg.style.display = 'none';
         }, 3000);
  </script>
-=======
-<?php include FOOT ?>
->>>>>>> Stashed changes

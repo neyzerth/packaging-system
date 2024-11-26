@@ -45,10 +45,7 @@
                         <?php endif;?>
                     </tr>
                     <?php endforeach; ?>
-<<<<<<< Updated upstream
                 </tbody>
-=======
->>>>>>> Stashed changes
             </table>
             <?php include FOOTER ?>
         </div>
