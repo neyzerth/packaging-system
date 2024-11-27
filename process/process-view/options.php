@@ -1,57 +1,52 @@
 <?php
-    require_once "reportFun.php";
-    $reports = getReports();
+    require_once "tracFun.php";
+    $traceabilities = getTraceabilities();
 ?>
     <main class="tables">
         <div class="background">
             <?php 
             include HEADER 
             ?>
-            <h1>Reports</h1>
+            <h1>Process</h1>
             <table class="table">
                 <thead>
                     <tr>
                         <th>
-                            <span>Folio</span>    
+                            <span>ID</span>    
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Start date</span>    
+                            <span>Date</span>    
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>End date</span>    
+                            <span>Product</span>    
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Report date</span>    
+                            <span>Packaging ID</span>    
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Packed products</span>    
+                            <span>State</span>    
                             <span class="column-order"></span>
-                        </th>
+                        </th>                        
                         <th>
-                            <span>Observations</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Traceability</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        
+                            <span>Actions</span>    
+                        </th>                        
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($reports as $report): ?>
+                    <?php foreach($traceabilities as $trac): ?>
                     <tr>
-                        <td><?php echo $report['folio'] ?></td>
-                        <td><?php echo $report['start_date'] ?></td>
-                        <td><?php echo $report['end_date'] ?></td>
-                        <td><?php echo $report['report_date'] ?></td>
-                        <td><?php echo $report['packed_products'] ?></td>
-                        <td><?php echo $report['observations'] ?></td>
-                        <td><?php echo $report['traceability'] ?></td>
+                        <td><?php echo $trac['ID'] ?></td>
+                        <td><?php echo $trac['Date'] ?></td>
+                        <td><?php echo $trac['Product'] ?></td>
+                        <td><?php echo $trac['Packaging_ID'] ?></td>
+                        <td><?php echo $trac['State'] ?></td>
+                        <td>
+                            <a class="btn" href="?t=<?php echo $trac['ID'] ?>">SELECT</a>
+                        </td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>

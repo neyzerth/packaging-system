@@ -1,22 +1,27 @@
 <?php
+session_start();
+if(empty($_SESSION['trac'])){
+    $process = startProcess();
+    $_SESSION['trac'] = $process['Traceability'];
+} 
 
+$trac = getProcessByID($_SESSION['trac']);
 ?>
     <div class="tables">
         <div class="background">
             <br>
-            <?php //include HEADER; ?>
             <div style="text-align: center">
                 <h1>PROCESS VIEW</h1>
             </div>
             <div class="process">
                 <div>
-                    <h2>STATE: </h2>
+                    <h2>STATE: <?php echo $trac['State'] ?></h2>
                 </div>
                 <div>
-                    <h2>TRACEABILITY ID: </h2>
+                    <h2>TRACEABILITY ID: <?php echo $trac['Traceability']; ?></h2>
                 </div>
                 <div>
-                    <a><h2 class="btn">NEW </h2></a>
+                    <a href="?a=select"><h3 class="btn">Select New Process</h3></a>
                 </div>
             </div>
             <div class="process">
@@ -25,41 +30,64 @@
                     <h3>Packing</h3>
                     <img class="bin process-btn" src="<?php echo SVG . "products.svg" ?>">
                 </a>
+                <p>
+                    <b>Product:</b> 
+                    <?php echo printNull($trac['Product'])?>
+                </p>
+                <p>
+                    <b>Product Quantity:</b> 
+                    <?php echo printNull($trac['Product_Quantity'])?>
+                </p>
+                <p>
+                    <b>Tag:</b> 
+                    <?php echo printNull($trac['Tag_Type'])?>
+                </p>
+                <p>
+                    <b>Protocol:</b> 
+                    <?php echo printNull($trac['Protocol'])?>
+                </p>
                 </div>
                 <div>
                     <a href="?a=addPackaging">
-                    <h3>Packaging</h3>
-                    <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
+                        <h3>Packaging</h3>
+                        <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
                     </a>
+                    <p>
+                    <b>Barcode:</b> 
+                        <?php echo printNull($trac['Packaging_Barcode'])?>
+                    </p>
+                    <p>
+                        <b>Package Quantity:</b> 
+                        <?php echo printNull($trac['Package_Quantity'])?>
+                    </p>
+                    <p>
+                        <b>Tag:</b> 
+                        <?php echo printNull($trac['Tag_Type'])?>
+                    </p>
                 </div>
                 <div>
                     <a href="?a=addWarehouse">
-                    <h3>Warehouse</h3>
-                    <img class="bin process-btn" src="<?php echo SVG . "zone.svg" ?>">
+                        <h3>Warehouse</h3>
+                        <img class="bin process-btn" src="<?php echo SVG . "zone.svg" ?>">
                     </a>
+                    <p>
+                        <b>Area:</b> 
+                        <?php echo printNull($trac['Area'])?>
+                    </p>
+                    <p>
+                        <b>Total Space:</b> 
+                        <?php echo printNull($trac['Available'])?>
+                    </p>
+                    <p>
+                        <b>Available Space:</b> 
+                        <?php echo printNull($trac['Available'])?>
+                    </p>
                 </div>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                            <span class="column-order"></span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <?php include FOOTER ?>
+            
+            <?php 
+            include 'listUsersInProcess.php';
+            ?>
             <hr>
             <footer class="footer">
                 <button class="btn-primary" type="submit">Incident</button>
