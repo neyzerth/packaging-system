@@ -282,6 +282,15 @@ hr {
     display: flex;
 }
 
+.process-btn{
+    border-radius: 30%;
+    transition: background-color 0.2s ease-in-out;
+}
+.process-btn:hover{
+    background-color: var(--blue-light);
+    transition: background-color 0.2s ease-in-out;
+}
+
 #success-msg {
     background-color: green;
     padding: 1rem;

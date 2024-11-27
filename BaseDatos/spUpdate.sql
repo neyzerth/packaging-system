@@ -190,14 +190,14 @@ end $$
 
 --Paquete
 
-
+drop procedure UpdatePackage;
 DELIMITER $$
 Create PROCEDURE UpdatePackage(
     IN p_num INT,
     IN p_product_quantity int,
     IN p_weight decimal (10,2),
     IN p_product varchar(5),
-    In p_packaging varchar(5),
+    In p_packaging INT,
     IN p_box int,
     IN p_tag int
 )
@@ -209,10 +209,11 @@ begin
 end $$
 
 
+drop procedure UpdatePackaging;
 --Embalaje 
 DELIMITER $$
 Create PROCEDURE UpdatePackaging(
-    IN p_code varchar(5),
+    IN p_code INT,
     IN p_height DECIMAL(10, 2),
     IN p_width DECIMAL(10, 2),
     IN p_length DECIMAL(10, 2),
@@ -331,7 +332,7 @@ END$$
 
 
 CREATE PROCEDURE updateMaterialPackging(
-    IN p_packaging VARCHAR(5),
+    IN p_packaging INT,
     IN p_material VARCHAR(5),
     IN p_quantity INT
 )

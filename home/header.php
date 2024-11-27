@@ -4,7 +4,7 @@
                     <input type="search" class="search" placeholder="Search: Press Ente" autocomplete="off">
                 <!-- </form> -->
             </div>
-            <?php if(validateUser("ADMIN", "SUPER")):?>
+            <?php if(validateUser("ADMIN", "SUPER") || strtok($_SERVER["REQUEST_URI"], '?') == "/process/process-view/"):?>
             <ul>
                 <a class="btn" href="?a=add">
                     <p>Add</p>
