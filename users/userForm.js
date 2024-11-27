@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fiftyYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
 
         if (isNaN(date.getTime()) || date > eighteenYearsAgo || date < fiftyYearsAgo) {
-            alert("The date of birth must be valid, between 18 and 50 years ago.");
+            alert("The date of birth must be valid, between 18 and 50 years old.");
             field.focus();
             return false;
         }
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function validatePostalCode(field) {
         if (field.value.trim() === "") return true;
-        const regex = /^\d{5}$/;
+        const regex = /^\d,5}$/;
         if (!regex.test(field.value.trim())) {
             alert("The postal code must contain exactly 5 numeric characters.");
             field.focus();
