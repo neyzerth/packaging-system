@@ -23,11 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
             return false;
         }
 
-        const selectedDate = new Date(dateValue);
+        const selectedDate = new Date(dateValue).getTime(); 
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0); 
+        const todayTime = today.getTime();
 
-        if (selectedDate < today) {
+        if (selectedDate < todayTime) {
             showError(`${field.name} cannot be in the past.`);
             field.focus();
             return false;
@@ -36,31 +37,39 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
     }
 
-    function validatePositiveNumber(field) {
-        const value = parseFloat(field.value.trim());
+    function validatePositiveNumber(input) {
+        const value = parseInt(input.value, 10);
         if (isNaN(value) || value <= 0) {
-            showError(`${field.name} must be a positive number.`);
-            field.focus();
+            alert("Por favor ingresa un número positivo.");
+            input.value = "";
             return false;
         }
         return true;
     }
+    
 
+    const quantityField = document.getElementById("exit_quantity");
+    quantityField.addEventListener("input", () => {
+        const value = parseFloat(quantityField.value);
+        if (value < 0) {
+            quantityField.value = ""; 
+            showError("Quantity cannot be negative.");
+        }
+    });
 
     form.addEventListener("submit", (event) => {
         const dateField = document.getElementById("date");
-        const quantityField = document.getElementById("exit_quantity");
 
+    
         if (!validateDate(dateField)) {
             event.preventDefault();
             return;
         }
 
-        if (!validatePositiveInteger(quantityField)) {
+        
+        if (!validatePositiveNumber(quantityField)) {
             event.preventDefault();
             return;
         }
-
-       
     });
 });

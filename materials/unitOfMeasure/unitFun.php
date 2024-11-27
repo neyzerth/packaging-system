@@ -22,7 +22,7 @@
     
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
-            return null;
+            return false;
     
         } finally {
             $db->close();
@@ -44,7 +44,7 @@
     
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
-            return null;
+            return false;
     
         } finally {
             $db->close();

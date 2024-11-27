@@ -21,7 +21,7 @@
     
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
-            return [];
+            return false;
     
         } finally {
             mysqli_close($db);

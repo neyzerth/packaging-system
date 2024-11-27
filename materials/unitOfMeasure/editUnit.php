@@ -19,15 +19,20 @@
         $code = $_POST['code'];
         $description = $_POST['description'];
 
-        //checar esto
         $result = updateUnit(
             code: $code, description:$description
         );
 
-        if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Unit updated successfully</span></div>";
+        if($result){
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Unit</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
         header("Location: /materials/unitOfMeasure/");
         exit();

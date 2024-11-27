@@ -1,6 +1,8 @@
 <?php
+
+
     if(!validateUser("ADMIN","SUPER")){
-        header("Location: /unitOfMeasure/");//verificar desde donde es
+        header("Location: /unitOfMeasure/");
         exit;
     }
     require "unitFun.php";
@@ -15,10 +17,16 @@
             code: $code, description:$description
         );
 
-        if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Unit added successfully</span></div>";
+        if($result){
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Unit</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
         header("Location: /materials/unitOfMeasure/");
         exit();

@@ -1,4 +1,5 @@
 <?php
+    require_once("../../../config.php");
     require "outFun.php";
     $outs = getOuts();
 
@@ -8,7 +9,6 @@
     <main class="tables">
         <div class="background">
             <?php 
-            $link="?a=add";
             include HEADER;
             ?>
             <h1>Outbounds</h1>

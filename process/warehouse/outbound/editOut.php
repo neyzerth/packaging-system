@@ -1,7 +1,9 @@
 <?php
     require_once("../../../config.php");
     require "outFun.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         $out = getOutboundByNum($num);
@@ -18,6 +20,27 @@
         $exit_quantity = $_POST['exit_quantity'];
         $active = 1;
 
+        $today = date('Y-m-d');
+        if ($date < $today) {
+            $_SESSION['message'] = [
+                'text' => 'Date cannot be in the past.',
+                'type' => 'error'
+            ];
+            header("Location: /process/warehouse/outbound");
+            exit();
+        
+        }
+    
+        
+        if ($exit_quantity < 0) {
+            $_SESSION['message'] = [
+                'text' => 'Exit quantity cannot be negative.',
+                'type' => 'error'
+            ];
+            header("Location: /process/warehouse/outbound");
+            exit();
+        }
+
         if($result = updateOutbound(num:$num, date:$date, exit_quantity:$exit_quantity, active:$active)) {
             $_SESSION['message'] = [
                 'text' => 'Successful registration',
@@ -29,13 +52,12 @@
                 'type' => 'error'
             ];
         }
-        header("Location: /process/warehouse/outbound");
+        header("Location: /process/warehouse/outbound/");
         exit();
     }
 ?>
-<head>
     <script src="outForm.js"></script>
-</head>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="" method="post" autocomplete="off">

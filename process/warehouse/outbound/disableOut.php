@@ -11,7 +11,7 @@
             echo "Error disabling output.";
         }
 
-        header("Location: index.php");
+        header("Location: /warehouse/outbound");
         exit();
     } else {
         echo "Outbound number not provided.";
