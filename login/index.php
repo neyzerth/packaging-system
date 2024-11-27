@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="<?php echo CSS . "global.css" ?>">
         <link rel="stylesheet" href="<?php echo CSS . "login.css" ?>">
     </head>
-<body>
+<body style="display:flex">
     <div id="msg" data-msg="<?php echo htmlspecialchars($msg); ?>"></div>
     <div class="container">
         <div class="login row">
