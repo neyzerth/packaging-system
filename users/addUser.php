@@ -41,7 +41,7 @@
     }
 ?>
 <head>
-    <!-- <script src="userForm.js"></script> -->
+    <script src="userForm.js"></script>
 </head>
 
     <main class="forms">

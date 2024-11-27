@@ -1,6 +1,6 @@
 <?php
     require_once "../config.php";
-    function addUser($username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor) {
+    function addUser ($username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor) {
         $db = connectdb();
         
         // Valores nulos
@@ -14,19 +14,25 @@
         $userType = empty($userType) ? null : $userType;
         $supervisor = empty($supervisor) ? null : $supervisor;
     
-        $stmt = $db->prepare("CALL addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        try {
+            $stmt = $db->prepare("CALL addUser (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            if ($stmt === false) {
+                throw new Exception('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            }
     
-        if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            $stmt->bind_param("ssssssssisssi", $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
+    
+            $result = $stmt->execute();
+            $stmt->close();
+            $db->close();
+    
+            return $result;
+        } catch (Exception $e) {
+            // Manejo de excepciones
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            return false; // O maneja el error de otra manera según sea necesario
         }
-    
-        $stmt->bind_param("ssssssssisssi", $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
-    
-        $result = $stmt->execute();
-        $stmt->close();
-        $db->close();
-    
-        return $result;
     }
     
     function getUsers() {
@@ -126,7 +132,7 @@
     }
     
 
-    function updateUser($num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor) {
+    function updateUser ($num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor) {
         $db = connectdb();
     
         // Valores nulos
@@ -140,22 +146,29 @@
         $userType = empty($userType) ? null : $userType;
         $supervisor = empty($supervisor) ? null : $supervisor;
     
-        $stmt = $db->prepare("CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        try {
+            $stmt = $db->prepare("CALL UpdateUser (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
-        if ($stmt === false) {
-            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            if ($stmt === false) {
+                throw new Exception('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
+            }
+    
+            $stmt->bind_param("issssssssisssi", $num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
+    
+            $result = $stmt->execute();
+            if (!$result) {
+                throw new Exception("Error en la ejecución: " . htmlspecialchars($stmt->error));
+            }
+    
+            $stmt->close();
+            $db->close();
+    
+            return $result;
+        } catch (Exception $e) {
+            // Manejo de excepciones
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            return false; // O maneja el error de otra manera según sea necesario
         }
-    
-        $stmt->bind_param("issssssssisssi", $num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
-    
-        $result = $stmt->execute();
-        if (!$result) {
-            echo "Error en la ejecución: " . htmlspecialchars($stmt->error);
-        }
-        $stmt->close();
-        $db->close();
-    
-        return $result;
     }
     
     function disableUser($num) {
