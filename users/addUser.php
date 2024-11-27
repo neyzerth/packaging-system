@@ -99,7 +99,7 @@
                     <div class="row-lg-10">
                         <h4 for="phone">Phone number</h4>
                         <div class="inputs">
-                            <input name="phone" id="phone" type="text"    maxlength="15"  required placeholder="555-666-7777">
+                            <input name="phone" id="phone" type="text"    maxlength="15"   placeholder="555-666-7777">
                         </div>
                     </div>
                     <div class="row-lg-10">
