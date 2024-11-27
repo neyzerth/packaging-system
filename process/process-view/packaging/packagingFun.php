@@ -20,7 +20,7 @@
                 $packagings[] = $row;
             }
         } catch (Exception $e) {
-            echo "Error occurred: " . $e->getMessage();
+            error_log ("Error occurred: " . $e->getMessage());
         } finally {
             mysqli_close($db);
         }
