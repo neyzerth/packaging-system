@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fiftyYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
 
         if (isNaN(date.getTime()) || date > eighteenYearsAgo || date < fiftyYearsAgo) {
-            alert("The date of birth must be valid, between 18 and 50 years olds.");
+            alert("The date of birth must be valid, between 18 and 50 years old.");
             field.focus();
             return false;
         }
