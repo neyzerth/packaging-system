@@ -28,6 +28,17 @@
         }
     }
 
+    function addPackagingInZone($zone){
+        $db = connectdb();
+        $trac = $_SESSION['trac'];
+        $user = $_SESSION['num'];
+
+        $query = "call addPackagingInZone('$zone', $trac, $user)";
+        error_log($query);
+        
+        return  mysqli_query($db, $query);
+    }
+
     function addZone($code, $area, $available_capacity, $total_capacity) {
         $db = connectdb();
         
