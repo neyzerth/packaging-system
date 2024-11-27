@@ -11,7 +11,7 @@ DELIMITER $$
 --no tiene la columna username entonces la agregue
 CREATE PROCEDURE addUser(
     IN p_username VARCHAR(30),
-    IN p_password VARCHAR(20),
+    IN p_password VARCHAR(50),
     IN p_name VARCHAR(50),
     IN p_first_surname VARCHAR(30),
     IN p_second_surname VARCHAR(30),
@@ -45,10 +45,6 @@ BEGIN
         p_email, p_user_type, p_supervisor
     );
 
-
-    SELECT num, username, full_name, user
-    FROM vw_user_personal_info
-    WHERE username = p_username;
 END $$
 
 
@@ -138,7 +134,7 @@ select * from material
 
 
 --------------------
-Delimiter $$
+DROP PROCEDURE addProduct;
 DELIMITER $$
 
 CREATE PROCEDURE addProduct(
@@ -148,17 +144,17 @@ CREATE PROCEDURE addProduct(
     IN p_height DECIMAL(10,2),
     IN p_width DECIMAL(10,2),
     IN p_length DECIMAL(10,2),
-    IN p_weight DECIMAL(10,2)
+    IN p_weight DECIMAL(10,2),
+    IN p_packaging_protocol INT
 )
 BEGIN
-    INSERT INTO product (code, name, description, height, width, length, weight)
-    VALUES (p_code, p_name, p_description, p_height, p_width, p_length, p_weight);
+    INSERT INTO product (code, name, description, height, width, length, weight, packaging_protocol)
+    VALUES (p_code, p_name, p_description, p_height, p_width, p_length, p_weight, p_packaging_protocol);
 
-
-    SELECT name, description, weight
-    FROM product
-    WHERE code = p_code;
 END$$
+
+CALL addProduct('C001', 'Product A', 'Description', 10.5, 5.2, 15.0, 1.2, 1);
+
 
 ----------------------------------
 

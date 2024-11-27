@@ -2,6 +2,9 @@
     require_once("../../../config.php");
     require "zoneFun.php";
     $zones = getZones();
+
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$zones = empty($search) ? getZones() : searchZone($search);
 ?>
     <main class="tables">
         <div class="background">

@@ -1,6 +1,6 @@
 <?php
     if(!validateUser("ADMIN","SUPER")){
-        header("Location: /tag/");//verificar desde donde es
+        header("Location: /tag/");
         exit;
     }
     require "tagFun.php";
@@ -21,6 +21,8 @@
         } else {
             echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding tag</span></div>";
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <script src="tagForm.js"></script>
@@ -44,7 +46,7 @@
                 </div>
 
                 <div class="row-md-5">
-                    <h4 for="unit_of_measure">Tag Type</h4>
+                    <h4 for="tag_type">Tag Type</h4>
                     <div class="inputs">
                         <select class="input" required name="tag_type" id="tag_type options">
                             <?php 

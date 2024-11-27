@@ -1,6 +1,5 @@
 <?php
     require "userFun.php";
-    session_start();
 
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
@@ -15,18 +14,14 @@
         $date = empty($_POST['date']) ? NULL : $_POST['date'];
         $neighborhood = empty($_POST['neighborhood']) ? NULL : $_POST['neighborhood'];
         $street = empty($_POST['street']) ? NULL : $_POST['street'];
-        $postal_code = empty($_POST['postal_code']) ? NULL : $_POST['postal_code'];
+        $postal_code = empty($_POST['postal-code']) ? NULL : $_POST['postal-code'];
         $phone = empty($_POST['phone']) ? NULL : $_POST['phone'];
         $email = empty($_POST['email']) ? NULL : $_POST['email'];
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
         $result = addUser(
-            username: $username, password: $password, name: $name,
-            firstSurname: $first_surname, secondSurname: $second_surname,
-            dateOfBirth: $date, neighborhood: $neighborhood, street: $street,
-            postalCode: $postal_code, phone: $phone, email: $email,
-            userType: $user_type, supervisor: $supervisor
+            $username, $password, $name, $first_surname, $second_surname, $date, $neighborhood, $street, $postal_code, $phone, $email, $user_type, $supervisor
         );
 
         if ($result) {
@@ -63,19 +58,19 @@
                     <div class="row-lg-10">
                         <h4 for="name">Name</h4>
                         <div class="inputs">
-                            <input name="name" id="name" type="text" required>
+                            <input name="name" id="name" type="text" maxlength="50"   required>
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="first_surname">First Surname</h4>
                         <div class="inputs">
-                            <input name="first_surname" id="first_surname" type="text" required>
+                            <input name="first_surname" id="first_surname" type="text"   maxlength="30" required>
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="second_surname">Second Surname</h4>
                         <div class="inputs">
-                            <input name="second_surname" id="second_surname" type="text">
+                            <input name="second_surname" id="second_surname" type="text" maxlength="30" >
                         </div>
                     </div>
                     <div class="row-sm-3">
@@ -92,25 +87,25 @@
                     <div class="row-lg-10">
                         <h4 for="username">User</h4>
                         <div class="inputs">
-                            <input name="username" id="username" type="text" required placeholder="@Username">
+                            <input name="username" id="username"  type="text"  maxlength="30"  required placeholder="@Username">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="email">Email</h4>
                         <div class="inputs">
-                            <input name="email" id="email" type="email" placeholder="you@example.com">
+                            <input name="email" id="email" type="email"   maxlength="30" placeholder="you@example.com">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="phone">Phone number</h4>
                         <div class="inputs">
-                            <input name="phone" id="phone" type="text" required placeholder="555-6666-777">
+                            <input name="phone" id="phone" type="text"    maxlength="15"  required placeholder="555-666-7777">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="password">Password</h4>
                         <div class="inputs">
-                            <input type="text" name="password" id="password" required placeholder="Hi_everyone_01">
+                            <input type="text" name="password" id="password"   maxlength="40" required placeholder="Hi_everyone_01">
                         </div>
                     </div>
                     <div class="row-md-5">
@@ -141,19 +136,19 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                            <input name="postal-code" id="postal-code" type="number" placeholder="55555" maxlength="5">
+                            <input name="postal-code" id="postal-code" type="number" placeholder="22254" maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="">Neighborhood</h4>
                         <div class="inputs">
-                            <input name="neighborhood" id="neighborhood" type="text" placeholder="">
+                            <input name="neighborhood" id="neighborhood" type="text" placeholder="Your neighborhood" maxlength="50">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="">Street</h4>
                         <div class="inputs">
-                            <input name="street" id="street" type="text" placeholder="">
+                            <input name="street" id="street" type="text" placeholder="Yor street" maxlength="50">
                         </div>
                     </div>
                 </div>

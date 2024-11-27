@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
 
-    // Validation functions
+    
     function validateCode(field) {
-        const value = field.value.trim();
-        if (value === "") return false;
-        const regex = /^[A-Za-z0-9]{5}$/;
-        if (value.length !== 5 || !regex.test(value)) {
-            alert("The code must be exactly 5 alphanumeric characters.");
-            field.focus();
-            return false;
+        const value = field.value.trim(); 
+        const regex = /^[A-Za-z0-9]{1,5}$/; 
+    
+        if (!regex.test(value)) {
+            alert("The code must be between 1 and 5 alphanumeric characters.");
+            field.focus(); 
+            return false; 
         }
-        return true;
+    
+        return true; 
     }
+    
 
     function validateMaterialName(field) {
         if (field.value.trim() === "") return false;

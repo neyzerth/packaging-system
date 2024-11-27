@@ -11,7 +11,7 @@
             echo "Error disabling the product.";
         }
 
-        header("Location: listProduct.php");
+        header("Location: index.php");
         exit();
     } else {
         echo "Product code not provided.";

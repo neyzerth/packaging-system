@@ -21,10 +21,19 @@ link.addEventListener('click', event => {
             ?`
             <form action="" method="post">
                 <h2>Request your code!</h2>
-                <p>We will send instructions to your email.</p>
-                <input id="email" name="email" class="form-control" type="email"  autocomplete="off" required placeholder="Enter your email">
+
+                <!--<p>We will send instructions to your email.</p>-->
+                <!-- <input id="email" name="email" class="form-control" type="email"  autocomplete="off" required placeholder="Enter your email">
                 <input id="confirm-email" name=" confirm-email" class="form-control" type="email" autocomplete="off" required placeholder="Confirm your email">
-                <button type="submit" class="btn-primary">Next step</button>
+
+                <button type="submit" class="btn-primary">Next step</button> -->
+
+                <div class="form-control" style="margin: 10% 0px 10% 5%;">
+                <h3>Direct your supervisor to request your username or password</h3>
+                <p>You will be attended to as soon as possible, thank you!</p>
+                </div>
+                
+                
             </form>
             ` : `
             <form action="" method="post">

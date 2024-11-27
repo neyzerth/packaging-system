@@ -1,101 +1,160 @@
 <?php
-require_once __DIR__ . "/../config.php";
+require_once "../config.php";
 function addProduct($code, $name, $description, $height, $width, $length, $weight, $packaging_protocol) {
-    $db = connectdb(); 
-
-    $query = "CALL addProduct(".
-        "'$code',".
-        "'$name',".
-        "'$description',".
-        "$height,".
-        "$width,".
-        "$length,".
-        "$weight,".
-        "$packaging_protocol".
-    ");";
-
-    echo "<p>$query</p>"; 
+    $db = connectdb();
 
     try {
-        return mysqli_query($db, $query);
+        $stmt = $db->prepare("CALL addProduct(?, ?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt === false) {
+            throw new Exception('Error preparing statement: ' . htmlspecialchars($db->error));
+        }
+
+        $stmt->bind_param("sssddddi", $code, $name, $description, $height, $width, $length, $weight, $packaging_protocol);
+
+        $result = $stmt->execute();
+        if ($result === false) {
+            throw new Exception('Error executing statement: ' . htmlspecialchars($stmt->error));
+        }
+
+        $stmt->close();
+        return $result;
+
     } catch (Exception $e) {
-        return $e->getMessage();
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+        return false;
+
+    } finally {
+        $db->close();
     }
 }
 
-function getProducts(){
-    $db = connectdb();
-    $query = "SELECT * FROM product WHERE active = 1;";
 
+
+function getProducts() {
+    $db = connectdb();
+    
+    try {
+        $query = "SELECT * FROM vw_product_info;";
         $result = mysqli_query($db, $query);
+
+        if ($result === false) {
+            throw new Exception('Error en la ejecución de la consulta: ' . htmlspecialchars(mysqli_error($db)));
+        }
+
         $products = [];
-        while($row = mysqli_fetch_assoc($result)){
+        while ($row = mysqli_fetch_assoc($result)) {
             $products[] = $row;
-            }
-            mysqli_close($db);
-            return $products;
+        }
+
+        return $products;
+
+    } catch (Exception $e) {
+        return [
+            'success' => 0,
+            'message' => 'Ocurrió un error al obtener los productos: ' . $e->getMessage()
+        ];
+
+    } finally {
+        mysqli_close($db);
+    }
 }
 
-function getProtocols(){
+function getProtocols() {
     $db = connectdb();
-    $query = "SELECT num, name, file_name".
-        " FROM packaging_protocol;";
 
-        //echo $query;
-    return $result = mysqli_query($db, $query);
+    try {
+        $query = "SELECT * FROM vw_packaging_protocol_info;";
+        $result = mysqli_query($db, $query);
+
+        if ($result === false) {
+            throw new Exception('Query execution error: ' . mysqli_error($db));
+        }
+
+        return $result;
+
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+
+    } finally {
+        mysqli_close($db);
+    }
 }
+
 
 function getProductByCode($code) {
-    $db = connectdb();
-    $query = "SELECT code, name, description, height, width, length, weight, packaging_protocol FROM vw_product_info WHERE code = '$code';";
-    $result = mysqli_query($db, $query);
-    $product = mysqli_fetch_assoc($result);
-    mysqli_close($db);
-    return $product;
+    try {
+        $db = connectdb();
+        $query = "SELECT * FROM vw_product_info WHERE code = '$code';";
+        $result = mysqli_query($db, $query);
+
+        if (!$result) {
+            throw new Exception('Error en la consulta: ' . mysqli_error($db));
+        }
+
+        $product = mysqli_fetch_assoc($result);
+        mysqli_close($db);
+        return $product;
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return false;
+    }
 }
 
-function updateProduct($code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol) {
-    $db = connectdb();
-    $stmt = $db ->prepare("CALL UpdateProduct (?,?,?,?,?,?,?,?,?)");
-
-    if($stmt === false){
-        die('Error en la preparacion de la consulta:'.htmlspecialchars($db->error));
+function updateProduct($code, $name, $description, $height, $width, $length, $weight, $packaging_protocol) {
+    try {
+        $db = connectdb();
+        $stmt = $db->prepare("CALL UpdateProduct (?,?,?,?,?,?,?,?)");
+        if ($stmt === false) {
+            return false;
+        }
+        $stmt->bind_param("sssddddi", $code, $name, $description, $height, $width, $length, $weight, $packaging_protocol);
+        if (!$stmt->execute()) {
+            return false;
+        }
+        $stmt->close();
+        $db->close();
+    } catch (Exception $e) {
+        return false;
     }
-
-    //s->string , i->integer, d->double
-    $stmt->bind_param("sssddddii", $code, $name, $description, $height, $width, $length, $weight, $active, $packaging_protocol);
-    if ($stmt->execute()){
-        $result = true;
-    } else {
-        $result = false;
-    }
-
-    $stmt->close();
-    $db->close();
-
-    return $result;
+    return true;
 }
 
 function disableProduct($code) {
+    try {
+        $db = connectdb();
+        $stmt = $db->prepare("CALL dropProduct(?)");
+        if ($stmt === false) {
+            return false;
+        }
+        $stmt->bind_param("s", $code);
+        if (!$stmt->execute()) {
+            return false;
+        }
+        $stmt->close();
+        $db->close();
+    } catch (Exception $e) {
+        return false;
+    }
+    return true;
+}
+
+/*function searchProduct($search){
     $db = connectdb();
     
-    $stmt = $db->prepare("CALL dropProduct(?)");
-    
-    if ($stmt === false) {
-        die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
-    }
+    $search = $db->real_escape_string($search);
 
-    $stmt->bind_param("s", $code);
+    $query = "SELECT * FROM product WHERE code like '%$search%'";
+    $result = $db->query($query);
     
-    // Ejecutar el procedimiento
-    if ($stmt->execute()) {
-        $result = true; 
-    } else {
-        $result = false; 
+    $products = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $products[] = $row;
+        }
     }
     
-    $stmt->close();
-    $db->close();
-    
-    return $result; 
-}
+    return $products;
+}*/
+
+?>

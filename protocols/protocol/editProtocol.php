@@ -16,13 +16,14 @@
         $num = $_POST['num'];
         $name = $_POST['name'];
         $file_name = $_POST['file_name'];
-        $active = 1; 
 
-        if (updateProtocol(num:$num, name:$name, file_name:$file_name, active:$active)) {
+        if (updateProtocol(num:$num, name:$name, file_name:$file_name, )) {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";
         }
+        header("Location: /protocols/protocol");
+        exit();
     }
 ?>
 <head>
@@ -37,7 +38,9 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Edit Protcol</h1>
             </header>
-            <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('Are you sure you want to disable this protocol?');">Disable</a>
+            <?php if(validateUser("ADMIN")):?>
+                <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('Are you sure you want to disable this protocol?');">Disable</a>
+            <?php endif; ?>                
             <hr>
             <h2>Protocol</h2>
             <div class="rows">

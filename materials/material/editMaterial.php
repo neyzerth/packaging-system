@@ -36,7 +36,10 @@
         exit();
     }
 ?>
-<script src="materialForm.js"></script>
+<head>     
+    <script src="materialForm.js"></script>  
+</head>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="" method="post" autocomplete="off">
@@ -44,14 +47,16 @@
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Materials</h1>
                 </header>
+                <?php if(validateUser("ADMIN")):?>
                 <a  class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
+                <?php endif; ?>
                 <hr>
                 <h2>Material</h2>
                 <div class="rows">
                     <div class="row-sm-3">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" placeholder="pla" value="<?php echo $material['code']; ?>" required maxlength="5">
+                            <input name="code" id="code" type="text" placeholder="pla" value="<?php echo $material['code']; ?>" required maxlength="5"  readonly>
                         </div>
                     </div>
                     <div class="row-sm-3">

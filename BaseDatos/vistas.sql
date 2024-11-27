@@ -1,20 +1,21 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- SQLBook: Code
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
 
 --Vistas de Usuario
+DROP VIEW vw_user_info;
 CREATE VIEW vw_user_info AS
 SELECT 
     num,
     username,
     password,
-    active,
     user_type,
     supervisor
 FROM user AS u WHERE u.active = 1;
 
-drop View vw_user_personal_info
+drop View vw_user_personal_info;
 
 CREATE VIEW vw_user_personal_info AS
 SELECT 
@@ -44,10 +45,20 @@ SELECT num,
     phone,
     email
 From user
-where supervisor is NULL and user_type <> 'admin';
+where supervisor is NULL and user_type <> 'admin' and active = 1;
+
+DROP VIEW vw_supervisor;
+
+create view vw_userType_info as 
+Select code,
+name,
+description,
+active
+From user_type;
 
 
 --VISTA DE CAJA
+DROP VIEW vw_box_info;
 CREATE VIEW vw_box_info AS
 SELECT 
     num,
@@ -56,24 +67,26 @@ SELECT
     length,
     volume,
     weight
-FROM box;
+FROM box WHERE active = 1;
 
 --VISTA ZONA
+DROP VIEW vw_zone_info;
 CREATE VIEW vw_zone_info AS
 SELECT 
     code,
     area,
     available_capacity,
     total_capacity
-FROM zone;
+FROM zone WHERE active = 1;
 
 --VISTA DE SALIDA
+DROP VIEW vw_outbound_info;
 CREATE VIEW vw_outbound_info AS
 SELECT 
     num,
     date,
     exit_quantity
-FROM outbound;
+FROM outbound WHERE active = 1;
 
 --VISTA ETIQUETA
 CREATE VIEW vw_tag_info AS
@@ -101,6 +114,7 @@ SELECT
 FROM packaging;
 
 --VISTA MATERIAL
+DROP VIEW vw_material_info;
 CREATE VIEW vw_material_info AS
 SELECT 
     code,
@@ -108,7 +122,7 @@ SELECT
     description,
     available_quantity,
     unit_of_measure
-FROM material;
+FROM material WHERE active = 1;
 
 --VISTA PAQUETE
 CREATE VIEW vw_package_info AS
@@ -123,15 +137,17 @@ SELECT
 FROM package;
 
 --VISTA PROTOCOLO EMBALAJE
+DROP VIEW vw_packaging_protocol_info;
 CREATE VIEW vw_packaging_protocol_info AS
 SELECT 
     num,
     name,
     file_name
-FROM packaging_protocol;
+FROM packaging_protocol WHERE active = 1;
 
 
 --VISTA DE PRODUCTO
+DROP VIEW vw_product_info;
 CREATE VIEW vw_product_info AS
 SELECT 
     code,
@@ -142,7 +158,7 @@ SELECT
     length,
     weight,
     packaging_protocol
-FROM product;
+FROM product WHERE active = 1;
 
 --VISTA DE TRAZABILIDAD
 CREATE VIEW vw_traceability_info AS
@@ -163,4 +179,58 @@ SELECT
     traceability
 FROM incident;
 
+--VISTA DE UNIDAD DE MEDIDA
+
+CREATE VIEW vw_unitOfMeasure_info AS
+SELECT
+    code,
+    description
+FROM unit_of_measure;
+
+--VISTA DE REPORTE
+CREATE VIEW vw_report_info AS
+SELECT
+    folio,
+    start_date,
+    end_date,
+    report_date,
+    packed_products,
+    observations,
+    traceability
+FROM report;
+
+--VISTA DE TAG TYPE
+CREATE VIEW vw_tag_type_info AS
+SELECT
+    code,
+    description
+FROM tag_type;
+
+--VISTA DE USER_TYPE
+CREATE VIEW vw_user_type_info AS
+SELECT
+    code,
+    name,
+    description
+FROM user_type;
+
+--VISTA DE USER_EDIT
+DROP VIEW vw_user_edit_info;
+CREATE VIEW vw_user_edit_info AS
+SELECT
+    num,
+    name,
+    first_surname,
+    second_surname,
+    date_of_birth,
+    username,
+    email,
+    phone,
+    password,
+    user_type,
+    supervisor,
+    postal_code,
+    neighborhood,
+    street
+FROM user;
 

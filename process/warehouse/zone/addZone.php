@@ -19,7 +19,7 @@
                 'type' => 'error'
             ];
         }
-        header("Location: /");
+        header("Location: /process/warehouse/zone");
         exit();
     }
 ?>
