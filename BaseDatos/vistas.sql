@@ -1,4 +1,4 @@
--- Active: 1728065056405@@127.0.0.1@3306@packaging_test
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -20,7 +20,7 @@ CREATE VIEW vw_user_personal_info AS
 SELECT 
     num,
     CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
-    DATE_FORMAT(date_of_birth, "%M/%d/%y") AS date_of_birth,
+    DATE_FORMAT(date_of_birth, "%m/%d/%y") AS date_of_birth,
     username,
     neighborhood,
     street,
