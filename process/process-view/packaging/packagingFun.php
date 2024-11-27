@@ -31,11 +31,19 @@
     function addPackagesQuan($quantity){
         $db = connectdb();
 
-        $packaging = getTraceabilityByID($_SESSION['trac'])['Packaging_ID'];
-        $query = "UPDATE packaging SET package_quantity = $quantity WHERE num = $packaging;";
+        $trac = $_SESSION['trac'];
+        $user = $_SESSION['num'];
+
+        $query = "call add_packaging_quantity(?, ?, ?);";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bind_param("iii", $quantity, $user, $trac);
+
+        error_log("QUERY: $query");
 
         try {
-            return $result = $db->query($query);
+            return $stmt->execute();
         } catch (\Throwable $th) {
             error_log("ERROR: ".$th->getMessage());
             return false;

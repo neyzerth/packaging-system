@@ -1,4 +1,4 @@
--- Active: 1728065056405@@127.0.0.1@3306@packaging_test
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -20,7 +20,7 @@ CREATE VIEW vw_user_personal_info AS
 SELECT 
     num,
     CONCAT(name,' ',first_surname,IFNULL(CONCAT(' ',second_surname), '')) AS full_name,
-    DATE_FORMAT(date_of_birth, "%M/%d/%y") AS date_of_birth,
+    DATE_FORMAT(date_of_birth, "%m/%d/%y") AS date_of_birth,
     username,
     neighborhood,
     street,
@@ -76,7 +76,9 @@ SELECT
     area,
     available_capacity,
     total_capacity
-FROM zone WHERE active = 1;
+FROM zone WHERE active = 1
+AND available_capacity > 0;
+
 
 --VISTA DE SALIDA
 DROP VIEW vw_outbound_info;
@@ -171,8 +173,8 @@ SELECT
 FROM traceability AS t
 LEFT JOIN product AS p ON p.code = t.product
 LEFT JOIN state AS s ON s.code = t.state
-LEFT JOIN report AS r ON r.traceability = t.num;
-
+LEFT JOIN report AS r ON r.traceability = t.num
+ORDER BY ID desc;
 --VISTA DE INCIDENCIA
 CREATE VIEW vw_incident_info AS
 SELECT 

@@ -36,6 +36,33 @@
     }
     
     function getUsers() {
+        if(validateUser("ADMIN","SUPER")): 
+            $db = connectdb();
+    
+            try {
+                $query = "SELECT * FROM vw_user_personal_info WHERE user='employee';";
+                $result = mysqli_query($db, $query);
+        
+                if ($result === false) {
+                    throw new Exception('Error retrieving users: ' . mysqli_error($db));
+                }
+        
+                $users = [];
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $users[] = $row;
+                }
+        
+                return $users;
+        
+            } catch (Exception $e) {
+                echo "<p>Error: " . $e->getMessage() . "</p>";
+                return false;
+        
+            } finally {
+                mysqli_close($db);
+            }
+
+        endif; 
         $db = connectdb();
     
         try {
