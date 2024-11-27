@@ -92,54 +92,75 @@ SET @login_result = NULL;
 CALL login('Axel', 'Leyva', @login_result);
 
 
-SELECT @login_result; 
-
-set autocommit = 0;
-select @@autocommit;
-
-DELIMITER $$
-CREATE PROCEDURE startProcess(
-    IN p_user INT,
+CREATE PROCEDURE addPackage(
+    IN p_product_quantity INT,
+    IN p_weight DECIMAL(10, 2),
     IN p_product VARCHAR(5),
-    IN p_quantity INT,
+    IN p_packaging VARCHAR(5),
     IN p_box INT,
     IN p_tag_type VARCHAR(5),
-    IN p_date DATE,
-    OUT trac_code INT,
-    OUT pack_code INT
+    IN p_date DATE
 )
 BEGIN
+    call addTag(p_date, p_tag_type, NULL, @tag_num);
+
+    INSERT INTO package(product_quantity, weight, product, packaging, box, tag)
+
+    VALUES(p_product_quantity, p_weight, p_product, p_packaging, p_box, @tag_num);
+END $$
+
+SELECT @login_result; 
+
+set autocommit = 1;
+select @@autocommit;
+
+commit;
+
+
+DROP PROCEDURE startProcess;
+DELIMITER $$
+CREATE PROCEDURE startProcess(
+    IN p_user INT
+)
+BEGIN
+
+    DECLARE trac_code INT;
+    DECLARE pack_code INT;
+    
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
+        SELECT "ERROR" AS error;
+        
         ROLLBACK;
+
     END;
-    
-    START TRANSACTION 
-        INSERT INTO traceability(num) 
-        VALUES (null);
+
+    START TRANSACTION;
+
+        INSERT INTO traceability(state) 
+        VALUES ('START');
         
         SET trac_code = LAST_INSERT_ID();
 
-        INSERT INTO report (start_date, end_date, traceability);
-        VALUES (p_date, NOW(), trac_code);
+        INSERT INTO report (start_date, traceability)
+        VALUES (NOW(), trac_code);
 
-        INSERT INTO packaging (code) VALUES(CONCAT('PK', trac_code));
+        INSERT INTO packaging (num) VALUES(NULL);
         SET pack_code = LAST_INSERT_ID();
 
-        call addBox();
+        INSERT INTO user_traceability(user, traceability)
+        VALUES (p_user, trac_code);
 
-    COMMIT
+        SELECT trac_code AS Traceability, 
+               pack_code AS Packaging;
+    
+    COMMIT;
+
 END $$
 
+DELIMITER ;
 
+call `startProcess`(5);
 
-
-
-
-
-
-
-
-
-
-
+ROLLBACK;
+SHOW WARNINGS;

@@ -1,5 +1,5 @@
 -- SQLBook: Code
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 -- SQLBook: Code
 ---------------------------------------
 --Insertar registro
@@ -213,7 +213,7 @@ DELIMITER ;
 DELIMITER ;
 
 
-DELIMITER ;
+DELIMITER $$
 
 
 
@@ -249,7 +249,6 @@ END $$
 drop Procedure addPackaging;
 DELIMITER $$
 CREATE PROCEDURE addPackaging(
-    IN p_code varchar(5),
     IN p_height DECIMAL(10, 2),
     IN p_width DECIMAL(10, 2),
     IN p_length DECIMAL(10, 2),
@@ -259,8 +258,12 @@ CREATE PROCEDURE addPackaging(
     IN p_tag int
 )
 BEGIN
-    INSERT INTO packaging(code,height,width,length,weight,package_quantity,zone,tag)
-    VALUES(p_code,p_height,p_width,p_length,p_weight,p_package_quantity,p_zone,p_tag);
+    DECLARE num_pack INT;
+
+    INSERT INTO packaging(height,width,length,weight,package_quantity,zone,tag)
+    VALUES(p_height,p_width,p_length,p_weight,p_package_quantity,p_zone,p_tag);
+
+    SET num_pack = LAST_INSERT_ID();
 
     SELECT code,volume,package_quantity,zone
     FROM PACKAGING WHERE code = p_code;
@@ -379,11 +382,11 @@ END$$
 
 
 
-
+drop procedure addMaterialPackging;
 DELIMITER $$
 
 CREATE PROCEDURE addMaterialPackging(
-    IN p_packaging VARCHAR(5),
+    IN p_packaging INT,
     IN p_material VARCHAR(5),
     IN p_quantity INT
 )
@@ -442,7 +445,7 @@ CREATE PROCEDURE addPackage(
     IN p_product_quantity INT,
     IN p_weight DECIMAL(10, 2),
     IN p_product VARCHAR(5),
-    IN p_packaging VARCHAR(5),
+    IN p_packaging INT,
     IN p_box INT,
     IN p_tag_type VARCHAR(5),
     IN p_date DATE

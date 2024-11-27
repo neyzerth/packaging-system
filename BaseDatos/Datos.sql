@@ -1,7 +1,7 @@
 INSERT INTO user_type (code, name, description) VALUES 
-('ADMIN', 'administrator', "User with full access to the system"),
-('SUPER', 'supervisor', "User who oversees other users"),
-('EMPLO', 'employee', "User with limited access to the system");
+('ADMIN', 'Administrator', "User with full access to the system"),
+('SUPER', 'Supervisor', "User who oversees other users"),
+('EMPLO', 'Employee', "User with limited access to the system");
 
 INSERT INTO user (username, password, name, first_surname, second_surname, date_of_birth, neighborhood, street, postal_code, phone, email, user_type, supervisor)
 VALUES 
@@ -27,13 +27,7 @@ VALUES
 ('Z004', 'Section D', 60, 120),
 ('Z005', 'Overflow Area', 10, 50);
 
-INSERT INTO outbound (date, exit_quantity)
-VALUES 
-('2024-10-01', 100),
-('2024-10-02', 150),
-('2024-10-03', 200),
-('2024-10-04', 50),
-('2024-10-05', 75);
+
 
 INSERT INTO tag_type (code, description)
 VALUES 
@@ -51,30 +45,39 @@ VALUES
 ('2024-10-04', '556677889', 'TT04'),
 ('2024-10-05', '998877665', 'TT05');
 
-INSERT INTO packaging (code, height, width, length,volume,weight, package_quantity, zone, outbound, tag)
+INSERT INTO outbound (date, exit_quantity)
 VALUES 
-('PK001', 10.0, 15.0, 20.0, 10,NULL,30 ,'Z001', 1, 1),
-('PK002', 12.0, 18.0, 25.0, 10,NULL,10, 'Z002', 2, 2),
-('PK003', 8.0, 10.0, 15.0, 7,NULL,20 ,'Z003', 3, 3),
-('PK004', 14.0, 16.0, 30.0, 5,NULL,40, 'Z004', 4, 4),
-('PK005', 9.0, 11.0, 22.0, 6,NULL,5, 'Z005', 5, 5);
+('2024-10-01', 100),
+('2024-10-02', 150),
+('2024-10-03', 200),
+('2024-10-04', 50),
+('2024-10-05', 75);
+
+INSERT INTO packaging (height, width, length,volume,weight, package_quantity, zone, outbound, tag)
+VALUES 
+(10.0, 15.0, 20.0, 10,NULL,30 ,'Z001', 1, 1),
+(12.0, 18.0, 25.0, 10,NULL,10, 'Z002', 2, 2),
+(8.0, 10.0, 15.0, 7,NULL,20 ,'Z003', 3, 3),
+(14.0, 16.0, 30.0, 5,NULL,40, 'Z004', 4, 4),
+(9.0, 11.0, 22.0, 6,NULL,5, 'Z005', 5, 5);
 
 
 INSERT INTO unit_of_measure (code, description)
 VALUES 
-('UOM01', 'Kilograms'),
-('UOM02', 'Liters'),
-('UOM03', 'Pieces'),
-('UOM04', 'Meters'),
-('UOM05', 'Pounds');
+('g', 'Grams'),
+('kg', 'Kilograms'),
+('lt', 'Liters'),
+('pc', 'Pieces'),
+('m', 'Meters'),
+('lb', 'Pounds');
 
 INSERT INTO material (code, name, description, available_quantity, unit_of_measure)
 VALUES 
-('stl', 'Steel', 'High-quality steel', 500, 'UOM01'),
-('pla', 'Plastic', 'Durable plastic', 200, 'UOM03'),
-('wod', 'Wood', 'Solid oak wood', 300, 'UOM03'),
-('alm', 'Aluminum', 'Lightweight aluminum', 400, 'UOM01'),
-('glas', 'Glass', 'Tempered glass', 150, 'UOM02');
+('stl', 'Steel', 'High-quality steel', 500, 'kg'),
+('pla', 'Plastic', 'Durable plastic', 200, 'pc'),
+('wod', 'Wood', 'Solid oak wood', 300, 'pc'),
+('alm', 'Aluminum', 'Lightweight aluminum', 400, 'kg'),
+('glas', 'Glass', 'Tempered glass', 150, 'lt');
 
 INSERT INTO packaging_protocol (name, file_name)
 VALUES 
@@ -94,27 +97,29 @@ VALUES
 
 INSERT INTO package (product_quantity, weight, product, packaging, box, tag)
 VALUES 
-(10, 25.5, 'S10', 'PK001', 1, 1),
-(20, 50.0, 'P30', 'PK002', 2, 2),
-(15, 35.2, 'X', 'PK003', 3, 3),
-(30, 60.7, 'S23', 'PK004', 4, 4),
-(25, 45.9, 'S24', 'PK005', 5, 5);
+(10, 25.5, 'S10', 1, 1, 1),
+(20, 50.0, 'P30', 2, 2, 2),
+(15, 35.2, 'X', 3, 3, 3),
+(30, 60.7, 'S23', 4, 4, 4),
+(25, 45.9, 'S24', 5, 5, 5);
 
 INSERT INTO state (code, description)
 VALUES 
-('ST01', 'In Transit'),
-('ST02', 'Delivered'),
-('ST03', 'In Warehouse'),
-('ST04', 'Out for Delivery'),
-('ST05', 'Returned');
+('START', 'Starting Process'),
+('RECV', 'Receiving Product'),
+('PACK', 'Packing Products'),
+('PACKG', 'Packaging Boxes'),
+('WARHS', 'In Warehouse'),
+('DELIV', 'Delivered'),
+('CANCL', 'Canceled');
 
 INSERT INTO traceability (product, packaging, state)
 VALUES 
-('S10', 'PK001', 'ST01'),
-('P30', 'PK002', 'ST02'),
-('X','PK003', 'ST03'),
-('S23', 'PK004', 'ST04'),
-('S24',  'PK005', 'ST05');
+('S10', 1, 'WARHS'),
+('P30', 2, 'WARHS'),
+('X',3, 'WARHS'),
+('S23', 4, 'WARHS'),
+('S24',  5, 'WARHS');
 
 -- Ahora ajustamos el insert en la tabla incident que hace referencia a los registros de traceability
 INSERT INTO incident (date, description, user, traceability)
@@ -137,18 +142,23 @@ VALUES
 INSERT INTO user_traceability (user, traceability)
 VALUES 
 (1, 1),
-(2, 2),
+(2, 1),
+(5, 1),
+(1, 2),
+(5, 2),
 (3, 3),
+(2, 4),
+(3, 4),
 (4, 4),
 (5, 5);
 
 INSERT INTO material_packging (material,packaging, quantity)
 VALUES 
-('pla', 'PK002', 100),
-('stl', 'PK001', 50),
-('wod', 'PK003', 75),
-('alm', 'PK004', 150),
-('glas','PK005', 60);
+('pla', 2, 100),
+('stl', 1, 50),
+('wod', 3, 75),
+('alm', 4, 150),
+('glas',5, 60);
 
 
 INSERT INTO material_package (material, package, quantity)

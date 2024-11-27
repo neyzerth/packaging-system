@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 -- Active: 1728665066730@@127.0.0.1@3306@packaging
 
 -----------------------------------
@@ -6,7 +6,7 @@
 -----------------------------------
 SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
 FROM information_schema.TRIGGERS 
-WHERE TRIGGER_SCHEMA = 'packaging';
+WHERE TRIGGER_SCHEMA = 'packaging_test';
 
 DROP TRIGGER after_insert_tag
 
@@ -210,7 +210,7 @@ BEGIN
     WHERE code = NEW.zone;
 END$$ */
 
-
+drop trigger update_zone_capacity_after_insert;
 DELIMITER $$
 
 CREATE TRIGGER update_zone_capacity_after_insert
@@ -224,7 +224,7 @@ BEGIN
     WHERE code = NEW.zone;
 
 
-    IF new_available_capacity >= 0 THEN
+    IF new_available_capacity >= 0 OR NEW.package_quantity IS NULL THEN
         UPDATE zone
         SET available_capacity = new_available_capacity
         WHERE code = NEW.zone;
@@ -233,6 +233,9 @@ BEGIN
     END IF;
 END$$
 
+SELECT available_capacity - 2
+    FROM zone
+    WHERE code = "";
 ------------------------------------------------------
 
 drop Procedure Sp_RecordPackagingExit
@@ -277,6 +280,7 @@ SELECT * FROM outbound;
 
 ----------------------------------------------------------
 --Se supone que es el sp de arriba a trigger pero aun no funciona
+drop trigger tUpdatePackagingOutbound;
 DELIMITER $$
 CREATE TRIGGER tUpdatePackagingOutbound
 AFTER INSERT ON outbound
@@ -343,7 +347,7 @@ END $$
 
 --Trigger peso embalaje
 ------------------------------------------------------------
-drop Trigger calculate_packaging_weight
+drop Trigger update_packaging_weight
 
 DELIMITER $$
 
@@ -363,10 +367,10 @@ BEGIN
 
     UPDATE packaging
     SET weight = total_weight
-    WHERE code = NEW.packaging;
+    WHERE num = NEW.packaging;
 END;
 
-
+drop trigger update_packaging_weight_update;
 CREATE TRIGGER update_packaging_weight_update
 AFTER update ON package
 FOR EACH ROW
@@ -383,7 +387,7 @@ BEGIN
 
     UPDATE packaging
     SET weight = total_weight
-    WHERE code = NEW.packaging;
+    WHERE num = NEW.packaging;
 END;
 -------------------------------------------------------------
 

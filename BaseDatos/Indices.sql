@@ -14,13 +14,3 @@ CREATE UNIQUE INDEX UQ_package_tag ON package(tag);
 
 --Tabla product campo name
 CREATE UNIQUE INDEX UQ_product_name ON product(name);
-
---Tabla traceability campo product  
-CREATE UNIQUE INDEX UQ_traceability_product ON traceability(product);
-
---Tabla incident  cammpo date
-CREATE UNIQUE INDEX UQ_incident_date ON incident(date);
-
---Tabla report campo report_date
-CREATE UNIQUE INDEX UQ_report_report_date ON report(report_date);
-
