@@ -283,6 +283,7 @@ hr {
 }
 
 .process-btn{
+    border-radius: 30%;
     transition: background-color 0.2s ease-in-out;
 }
 .process-btn:hover{
