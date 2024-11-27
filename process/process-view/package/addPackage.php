@@ -31,7 +31,7 @@
             $bool = startProccess($prodCode, $quantity, $boxCode, $tag_type,  $date);
             
             if($bool){
-                header("Location: ?t=$prodCode");
+                header("Location: /process/process-view/");
             }
         }
     }
