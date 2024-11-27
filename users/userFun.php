@@ -36,7 +36,7 @@
     }
     
     function getUsers() {
-        if(validateUser("ADMIN","SUPER")): 
+        if(validateUser("SUPER")): 
             $db = connectdb();
     
             try {
