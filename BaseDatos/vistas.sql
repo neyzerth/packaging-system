@@ -183,7 +183,30 @@ SELECT
     pp.file_name AS File_Protocol,
     pp.name AS Protocol,
     pk.package_quantity AS Package_Quantity,
-    tgt.description AS Tag_Type,
+    (
+        SELECT tag FROM package
+        WHERE packaging = t.packaging
+        LIMIT 1
+    ) AS Package_Tag,
+    (
+        SELECT description FROM tag_type
+        WHERE code = (
+            SELECT tag_type FROM tag
+            WHERE num = Package_Tag
+        )
+    ) AS Package_Type,
+    (
+        SELECT tag FROM packaging
+        WHERE num = t.packaging
+    ) AS Packaging_Tag,
+    (
+        SELECT description FROM tag_type
+        WHERE code = (
+            SELECT tag_type FROM tag
+            WHERE num = Packaging_Tag
+        )
+    ) AS Packaging_Type,
+    t.packaging AS Packaging,
     tg.barcode AS Packaging_Barcode,
     s.description AS State,
     r.start_date AS Start_Date,

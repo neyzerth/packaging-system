@@ -3,7 +3,6 @@
 
     $products = getProducts();
     
-    $quantity = null;
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
 
@@ -28,7 +27,7 @@
             $tag_type = $_POST['tag_type'];
             $date = $_POST['date'];
 
-            $bool = startProccess($prodCode, $quantity, $boxCode, $tag_type,  $date);
+            $bool = addPackage($prodCode, $quantity, $boxCode, $tag_type, $date);
             
             if($bool){
                 header("Location: /process/process-view/");

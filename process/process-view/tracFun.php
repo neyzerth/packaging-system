@@ -17,6 +17,23 @@ function getTraceabilities(){
 
     return $data;
 }
+function getTraceabilityByID($id){
+    $db = connectdb();
+
+    $query = "SELECT "
+            ."ID, Product, Packaging_ID, State, Date "
+        ."FROM vw_traceability_info WHERE ID = '$id'";
+    
+    $result = $db->query($query);
+
+    $data = [];
+
+    while($row = $result->fetch_assoc()){
+        $data = $row;
+    }
+
+    return $data;
+}
 
 function getUsersInProcess($trac_id){
     $db = connectdb();

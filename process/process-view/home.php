@@ -5,6 +5,7 @@ if(empty($_SESSION['trac'])){
     $_SESSION['trac'] = $process['Traceability'];
 } 
 
+session_start();
 $trac = getProcessByID($_SESSION['trac']);
 ?>
     <div class="tables">
@@ -40,7 +41,8 @@ $trac = getProcessByID($_SESSION['trac']);
                 </p>
                 <p>
                     <b>Tag:</b> 
-                    <?php echo printNull($trac['Tag_Type'])?>
+                    <?php echo "[".printNull($trac['Package_Tag'])."] "
+                        .printNull($trac['Package_Type'])?>
                 </p>
                 <p>
                     <b>Protocol:</b> 
@@ -61,9 +63,10 @@ $trac = getProcessByID($_SESSION['trac']);
                         <?php echo printNull($trac['Package_Quantity'])?>
                     </p>
                     <p>
-                        <b>Tag:</b> 
-                        <?php echo printNull($trac['Tag_Type'])?>
-                    </p>
+                    <b>Tag:</b> 
+                    <?php echo "[".printNull($trac['Packaging_Tag'])."] "
+                        .printNull($trac['Packaging_Type'])?>
+                </p>
                 </div>
                 <div>
                     <a href="?a=addWarehouse">
@@ -89,8 +92,8 @@ $trac = getProcessByID($_SESSION['trac']);
             include 'listUsersInProcess.php';
             ?>
             <hr>
+            <button class="btn-primary" type="submit">Incident</button>
             <footer class="footer">
-                <button class="btn-primary" type="submit">Incident</button>
             </footer>
         </div>
     </div>

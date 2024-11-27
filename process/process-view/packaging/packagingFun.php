@@ -1,5 +1,8 @@
 <?php
     require_once "../../config.php";
+    require_once __DIR__."/../../../materials/material/materialFun.php";
+    require_once __DIR__."/../../../materials/material/materialFun.php";
+    require_once __DIR__."/../tracFun.php";
 
     function getPackagings() {
         $db = connectdb();
@@ -11,6 +14,25 @@
         }
         mysqli_close($db);
         return $packagings;
+    }
+
+    function addPackagesQuan($quantity){
+        $db = connectdb();
+
+        $packaging = getTraceabilityByID($_SESSION['trac'])['Packaging_ID'];
+        $query = "UPDATE packaging SET package_quantity = $quantity WHERE num = $packaging;";
+
+        try {
+            return $result = $db->query($query);
+        } catch (\Throwable $th) {
+            error_log("ERROR: ".$th->getMessage());
+            return false;
+        }
+    }
+
+    function addMaterialToPackaging($material, $packaging, $quantity){
+        $db = connectdb();
+        $query = "call addMaterialToPackage('$material', $packaging, $quantity)";
     }
 
     function addPackaging($code, $height, $width, $length, $weight, $package_quantity, $zone, $tag) {
