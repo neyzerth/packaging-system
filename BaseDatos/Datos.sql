@@ -1,3 +1,4 @@
+-- SQLBook: Code
 INSERT INTO user_type (code, name, description) VALUES 
 ('ADMIN', 'Administrator', "User with full access to the system"),
 ('SUPER', 'Supervisor', "User who oversees other users"),
@@ -5,11 +6,19 @@ INSERT INTO user_type (code, name, description) VALUES
 
 INSERT INTO user (username, password, name, first_surname, second_surname, date_of_birth, neighborhood, street, postal_code, phone, email, user_type, supervisor)
 VALUES 
-('admin01', 'adminpass', 'John', 'Doe', 'Smith', '1980-05-14', 'Downtown', 'Main St', 12345, '555-1234', 'admin01@example.com', 'ADMIN', NULL),
-('super01', 'superpass', 'Jane', 'Doe', NULL, '1985-07-20', 'Uptown', 'Second St', 54321, '555-5678', 'super01@example.com', 'SUPER', 1),
-('emp01', 'emppass', 'Alice', 'Johnson', 'Brown', '1990-03-12', 'Westside', 'Third St', 23456, '555-9876', 'alice@example.com', 'EMPLO', 2),
-('emp02', 'emppass', 'Bob', 'Williams', NULL, '1992-11-08', 'Eastside', 'Fourth St', 65432, '555-6543', 'bob@example.com', 'EMPLO', 2),
-('emp03', 'emppass', 'Charlie', 'Martinez', 'Garcia', '1995-09-30', 'Northside', 'Fifth St', 11111, '555-4321', 'charlie@example.com', 'EMPLO', 2);
+('admin01', SHA1('adminpass'), 'John', 'Doe', 'Smith', '1980-05-14', 'Downtown', 'Main St', 12345, '555-1234', 'admin01@example.com', 'ADMIN', NULL),
+('super01', SHA1('superpass'), 'Jane', 'Doe', NULL, '1985-07-20', 'Uptown', 'Second St', 54321, '555-5678', 'super01@example.com', 'SUPER', 1),
+('emp01', SHA1('emppass'), 'Alice', 'Johnson', 'Brown', '1990-03-12', 'Westside', 'Third St', 23456, '555-9876', 'alice@example.com', 'EMPLO', 2),
+('emp02', SHA1('emppass'), 'Bob', 'Williams', NULL, '1992-11-08', 'Eastside', 'Fourth St', 65432, '555-6543', 'bob@example.com', 'EMPLO', 2),
+('emp03', SHA1('emppass'), 'Charlie', 'Martinez', 'Garcia', '1995-09-30', 'Northside', 'Fifth St', 11111, '555-4321', 'charlie@example.com', 'EMPLO', 2);
+
+INSERT INTO user (username, password, name, first_surname, second_surname, date_of_birth, neighborhood, street, postal_code, phone, email, user_type, supervisor)
+VALUES 
+('admin02', SHA1('Admin1234'), 'Juan', 'Pérez', 'González', '1980-05-14', 'Centro', 'Calle Principal', 12345, '555-1234', 'admin01@example.com', 'ADMIN', NULL),
+('super02', SHA1('Super4567'), 'María', 'López', 'Hernández', '1985-07-20', 'Uptown', 'Segunda Calle', 54321, '555-5678', 'super01@example.com', 'SUPER', NULL),
+('emp04', SHA1('Emp12345'), 'Ana', 'Martínez', 'Ramírez', '1990-03-12', 'Oeste', 'Tercera Calle', 23456, '555-9876', 'ana@example.com', 'EMPLO', 2),
+('emp05', SHA1('Emp45678'), 'Luis', 'García', 'Torres', '1992-11-08', 'Este', 'Cuarta Calle', 65432, '555-6543', 'luis@example.com', 'EMPLO', 2),
+('emp06', SHA1('Emp98765'), 'Carlos', 'Sánchez', 'Flores', '1995-09-30', 'Norte', 'Quinta Calle', 11111, '555-4321', 'carlos@example.com', 'EMPLO', 2);
 
 INSERT INTO box (height, width, length, volume, weight)
 VALUES 

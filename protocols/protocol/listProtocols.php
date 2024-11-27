@@ -1,7 +1,12 @@
 <?php
     require_once("../../config.php");
+    
     require "protocolFun.php";
     $protocols = getProtocols();
+
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$protocols = empty($search) ? getProtocols() : searchProduct($search);
+
 ?>
     <main class="tables">
         <div class="background">

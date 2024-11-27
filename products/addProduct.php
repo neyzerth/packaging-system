@@ -1,6 +1,8 @@
 <?php
     require "prodFun.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $protocols = getProtocols();
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -97,7 +99,7 @@
                         <select class="input" required name="packaging_protocol" id="packaging_protocol options">
                             <?php 
                                 while ($protocol = mysqli_fetch_assoc($protocols)):   
-                                    echo "<option value='{$protocol['code']}'>{$protocol['name']}</option>";
+                                    echo "<option value='{$protocol['num']}'>{$protocol['name']}</option>";
                                 endwhile; 
                             ?>
                         </select>

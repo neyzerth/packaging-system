@@ -1,6 +1,6 @@
 <?php
     if(!validateUser("ADMIN","SUPER")){
-        header("Location: /unitOfMeasure/");//verificar desde donde es
+        header("Location: /reports/");//verificar desde donde es
         exit;
     }
     require "reportFun.php";
@@ -20,11 +20,19 @@
             start_date:$start_date, end_date:$end_date, report_date:$report_date, packed_products:$packed_products, observations:$observations, traceability:$traceability
         );
 
-        if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Report added successfully</span></div>";
+        if($result){
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Report</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: /process/reports/");
+        exit();
     }
 ?>
 <head>

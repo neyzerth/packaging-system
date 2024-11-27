@@ -19,6 +19,8 @@
         } else {
             echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Tag Type</span></div>";
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <script src="tagTypeForm.js"></script>

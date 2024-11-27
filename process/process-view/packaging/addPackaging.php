@@ -91,7 +91,7 @@
                 </div>
             </div>
             <footer class="footer">
-                <a class="btn-primary" style="text-align: center" href="/process/process-view" >Go back</a>
+                <a class="btn-primary" style="text-align: center" href="/process/process-view/" >Go back</a>
                 <button class="btn-primary"  type="submit">Confirm</button>
             </footer>
             

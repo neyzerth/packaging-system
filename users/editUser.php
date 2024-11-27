@@ -1,13 +1,16 @@
 <?php
     require_once("../config.php");
     require "userFun.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $supervisors = getSupervisors();
     $userTypes = getUserTypes();
 
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         $user = getUserByNumber($num);
+
         if (!$user) {
             echo "User not found";
             exit;
@@ -19,7 +22,6 @@
         $password = $_POST['password'];
         $name = $_POST['name'];
         $first_surname = $_POST['first_surname'];
-        $active = 1;
         
         //
         $second_surname = empty($_POST['second_surname']) ? NULL : $_POST['second_surname'];
@@ -33,12 +35,13 @@
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
-        if (updateUser(num:$num, username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, active:$active, userType: $user_type, supervisor: $supervisor)) {
+        if (updateUser(num:$num, username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor)) {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Usuario actualizado con éxito.</span></div>";
 
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
         }
+
 
 
         header("Location: index.php");
@@ -58,26 +61,28 @@
                     <h1>Edit Users</h1>
                 </header>
 
-                <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
+                <?php if(validateUser("ADMIN")):?>
+                    <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
+                <?php endif; ?>
                 <hr>
                 <h2>Profile</h2>
                 <div class="rows">
                     <div class="row-lg-10">
                         <h4 for="name">Name</h4>
                         <div class="inputs">
-                        <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required>
+                        <input type="text" id="name" name="name"  maxlength="50"  value="<?php echo $user['name']; ?>" required>
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="first_surname">First Surname</h4>
                         <div class="inputs">
-                        <input type="text" id="first_surname" name="first_surname" value="<?php echo $user['first_surname']; ?>" required>
+                        <input type="text" id="first_surname" name="first_surname" maxlength="30" value="<?php echo $user['first_surname']; ?>" required>
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="second_surname">Second Surname</h4>
                         <div class="inputs">
-                        <input type="text" id="second_surname" name="second_surname" value="<?php echo $user['second_surname']; ?>">
+                        <input type="text" id="second_surname" name="second_surname" maxlength="30" value="<?php echo $user['second_surname']; ?>">
                         </div>
                     </div>
                     <div class="row-sm-3">
@@ -94,25 +99,25 @@
                     <div class="row-lg-10">
                         <h4 for="username">User</h4>
                         <div class="inputs">
-                            <input type="text" id="username" name="username" value="<?php echo $user['username']; ?>" required>
+                            <input type="text" id="username" name="username" maxlength="30" value="<?php echo $user['username']; ?>" required>
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="email">Email</h4>
                         <div class="inputs">
-                        <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required>
+                        <input type="email" id="email" name="email" maxlength="30" value="<?php echo $user['email']; ?>" required>
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="phone">Phone number</h4>
                         <div class="inputs">
-                        <input type="text" id="phone" name="phone" value="<?php echo $user['phone']; ?>" required>
+                        <input type="text" id="phone" name="phone" maxlength="15" value="<?php echo $user['phone']; ?>" required>
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="password">Password</h4>
                         <div class="inputs">
-                        <input type="text" id="password" name="password" value="<?php echo $user['password']; ?>" required>
+                        <input type="text" id="password" name="password" maxlength="40" value="<?php echo $user['password']; ?>" required>
                         </div>
                     </div>
                     <div class="row-md-5">
@@ -145,19 +150,19 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                        <input type="number" id="postal_code" name="postal_code" value="<?php echo $user['postal_code']; ?>" maxlength="5">
+                        <input type="number" id="postal_code" name="postal_code"  value="<?php echo $user['postal_code']; ?>" maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="">Neighborhood</h4>
                         <div class="inputs">
-                        <input type="text" id="neighborhood" name="neighborhood" value="<?php echo $user['neighborhood']; ?>">
+                        <input type="text" id="neighborhood" name="neighborhood"   maxlength="50" value="<?php echo $user['neighborhood']; ?>">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="">Street</h4>
                         <div class="inputs">
-                        <input type="text" id="street" name="street" value="<?php echo $user['street']; ?>">
+                        <input type="text" id="street" name="street"   maxlength="50"  value="<?php echo $user['street']; ?>">
                         </div>
                     </div>
                 </div>
