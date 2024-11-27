@@ -2,8 +2,8 @@
     require_once "reportFun.php";
     $reports = getReports();
 
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $reports = empty($search) ? getReports() : searchReport($search);
+    //$search = isset($_GET['search']) ? $_GET['search'] : '';
+    //$reports = empty($search) ? getReports() : searchReport($search);
 ?>
     <main class="tables">
         <div class="background">

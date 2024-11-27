@@ -5,7 +5,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM unit_of_measure WHERE code = ?";
+            $query = "SELECT * FROM vw_unitOfMeasure_info WHERE code = ?";
             $stmt = $db->prepare($query);
     
             if ($stmt === false) {
@@ -33,7 +33,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM unit_of_measure";
+            $query = "SELECT * FROM vw_unitOfMeasure_info";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {

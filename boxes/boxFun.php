@@ -50,7 +50,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM box WHERE num = ?";
+            $query = "SELECT * FROM vw_box_info WHERE num = ?";
             $stmt = $db->prepare($query);
     
             if ($stmt === false) {
@@ -78,7 +78,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM box WHERE active = 1 AND volume >= ?";
+            $query = "SELECT * FROM vw_box_info WHERE volume >= ?";
             $stmt = $db->prepare($query);
     
             if ($stmt === false) {

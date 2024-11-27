@@ -67,7 +67,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT code, name FROM user_type;";
+            $query = "SELECT * FROM vw_user_type_info;";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {
@@ -112,7 +112,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM user WHERE num = '$num';";
+            $query = "SELECT * FROM vw_user_edit_info WHERE num = '$num';";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {

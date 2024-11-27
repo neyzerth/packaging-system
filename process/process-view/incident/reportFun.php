@@ -1,50 +1,67 @@
 <?php
     require_once "../../config.php";
 
-    function addIncident($date, $description,           $traceability)  {
-        $db = connectdb();
-        $query = "CALL addIncident("."'$date',
-        '$description', '$traceability'".");";
-
-        echo "<p>$query</p>";
-        return $db->query($query);
+    function addIncident($date, $description, $traceability) {
+        try {
+            $db = connectdb();
+            $stmt = $db->prepare("CALL addIncident(?, ?, ?)");
+            $stmt->bind_param("sss", $date, $description, $traceability);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            echo "Error occurred: " . $e->getMessage();
+        }
     }
+
     function getIncident() {
-        $db = connectdb();
-        $query = "SELECT num ,date, description, traceability FROM vw_incident_info";
-        $result = mysqli_query($db, $query);
-        $incidents = [];
-        while ($row = mysqli_fetch_assoc($result)) {
+        try {
+            $db = connectdb();
+            $query = "SELECT * FROM vw_incident_info";
+            $result = mysqli_query($db, $query);
+            $incidents = [];
+            while ($row = mysqli_fetch_assoc($result)) {
                 $incidents[] = $row;
             }
-        mysqli_close($db);
-        return $incidents;
+            mysqli_close($db);
+            return $incidents;
+        } catch (Exception $e) {
+            echo "Error occurred: " . $e->getMessage();
+        }
     }
 
     function getTraceabilityIncident() {
-        $db = connectdb();
-        $query = "SELECT * FROM vw_traceability_info";
-        $result = mysqli_query($db, $query);
-        if (!$result) {
-            die('Error en la consulta: ' . mysqli_error($db));
+        try {
+            $db = connectdb();
+            $query = "SELECT * FROM vw_traceability_info";
+            $result = mysqli_query($db, $query);
+            if (!$result) {
+                throw new Exception('Query error: ' . mysqli_error($db));
+            }
+            $traceabilities = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $traceabilities[] = $row;
+            }
+            mysqli_close($db);
+            return $traceabilities;
+        } catch (Exception $e) {
+            echo "Error occurred: " . $e->getMessage();
         }
-    
-        $traceabilities = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $traceabilities[] = $row;
-        }
-    
-        mysqli_close($db);
-        return $result;
     }
     
     function getIncidentByNumber($num) {
-        $db = connectdb();
-        $query = "SELECT * FROM vw_incident_info WHERE num = '$num';";
-        $result = mysqli_query($db, $query);
-        $incident = mysqli_fetch_assoc($result);
-        mysqli_close($db);
-        return $incident;
+        try {
+            $db = connectdb();
+            $stmt = $db->prepare("SELECT * FROM vw_incident_info WHERE num = ?");
+            $stmt->bind_param("s", $num);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $incident = $result->fetch_assoc();
+            $stmt->close();
+            return $incident;
+        } catch (Exception $e) {
+            echo "Error occurred: " . $e->getMessage();
+        } finally {
+            mysqli_close($db);
+        }
     }
 
     //num, date, description, traceability

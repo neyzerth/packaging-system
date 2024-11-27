@@ -34,7 +34,7 @@ function getProducts() {
     $db = connectdb();
     
     try {
-        $query = "SELECT * FROM product WHERE active = 1;";
+        $query = "SELECT * FROM vw_product_info;";
         $result = mysqli_query($db, $query);
 
         if ($result === false) {
@@ -63,7 +63,7 @@ function getProtocols() {
     $db = connectdb();
 
     try {
-        $query = "SELECT num, name FROM packaging_protocol;";
+        $query = "SELECT * FROM vw_packaging_protocol_info;";
         $result = mysqli_query($db, $query);
 
         if ($result === false) {
@@ -85,7 +85,7 @@ function getProtocols() {
 function getProductByCode($code) {
     try {
         $db = connectdb();
-        $query = "SELECT code, name, description, height, width, length, weight, packaging_protocol FROM vw_product_info WHERE code = '$code';";
+        $query = "SELECT * FROM vw_product_info WHERE code = '$code';";
         $result = mysqli_query($db, $query);
 
         if (!$result) {

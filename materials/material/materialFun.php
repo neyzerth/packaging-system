@@ -31,7 +31,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM material WHERE active = 1;";
+            $query = "SELECT * FROM vw_material_info;";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {
@@ -58,7 +58,7 @@ function getUnitMeasure() {
     $db = connectdb();
 
     try {
-        $query = "SELECT code, description FROM unit_of_measure;";
+        $query = "SELECT * FROM vw_unitOfMeasure_info;";
         $result = mysqli_query($db, $query);
 
         if ($result === false) {
@@ -80,7 +80,7 @@ function getMaterialByCode($code) {
     $db = connectdb();
 
     try {
-        $query = "SELECT * FROM material WHERE code = '$code';";
+        $query = "SELECT * FROM vw_material_info WHERE code = '$code';";
         $result = mysqli_query($db, $query);
 
         if ($result === false) {

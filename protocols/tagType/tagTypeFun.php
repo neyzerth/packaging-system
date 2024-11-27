@@ -5,7 +5,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM tag_type WHERE code = '$code';";
+            $query = "SELECT * FROM vw_tag_type_info WHERE code = '$code';";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {
@@ -29,7 +29,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT code, description FROM tag_type";
+            $query = "SELECT * FROM vw_tag_type_info";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {

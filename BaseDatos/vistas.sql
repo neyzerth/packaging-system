@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Active: 1728665066730@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
@@ -178,4 +179,58 @@ SELECT
     traceability
 FROM incident;
 
+--VISTA DE UNIDAD DE MEDIDA
+
+CREATE VIEW vw_unitOfMeasure_info AS
+SELECT
+    code,
+    description
+FROM unit_of_measure;
+
+--VISTA DE REPORTE
+CREATE VIEW vw_report_info AS
+SELECT
+    folio,
+    start_date,
+    end_date,
+    report_date,
+    packed_products,
+    observations,
+    traceability
+FROM report;
+
+--VISTA DE TAG TYPE
+CREATE VIEW vw_tag_type_info AS
+SELECT
+    code,
+    description
+FROM tag_type;
+
+--VISTA DE USER_TYPE
+CREATE VIEW vw_user_type_info AS
+SELECT
+    code,
+    name,
+    description
+FROM user_type;
+
+--VISTA DE USER_EDIT
+DROP VIEW vw_user_edit_info;
+CREATE VIEW vw_user_edit_info AS
+SELECT
+    num,
+    name,
+    first_surname,
+    second_surname,
+    date_of_birth,
+    username,
+    email,
+    phone,
+    password,
+    user_type,
+    supervisor,
+    postal_code,
+    neighborhood,
+    street
+FROM user;
 

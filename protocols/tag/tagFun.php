@@ -5,7 +5,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM tag WHERE num = '$num';";
+            $query = "SELECT * FROM vw_tag_info WHERE num = '$num';";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {
@@ -28,7 +28,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM tag";
+            $query = "SELECT * FROM vw_tag_info";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {
@@ -54,7 +54,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT code, description FROM tag_type";
+            $query = "SELECT * FROM vw_tag_type_info";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {

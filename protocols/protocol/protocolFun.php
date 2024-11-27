@@ -29,37 +29,45 @@
     }
     
     function getProtocols() {
-        $db = connectdb();
-        $stmt = $db->prepare("SELECT * FROM packaging_protocol WHERE active = 1");
+        try {
+            $db = connectdb();
+            $stmt = $db->prepare("SELECT * FROM vw_packaging_protocol_info;");
+            
+            if ($stmt === false) {
+                return false;
+            }
         
-        if ($stmt === false) {
+            if (!$stmt->execute()) {
+                return false;
+            }
+        
+            $result = $stmt->get_result();
+            $stmt->close();
+            
+            return $result;
+        } catch (Exception $e) {
             return false;
         }
-    
-        if (!$stmt->execute()) {
-            return false;
-        }
-    
-        $result = $stmt->get_result();
-        $stmt->close();
-        
-        return $result;
     }
     function getProtocolByNumber($num) {
-        $db = connectdb();
-        $stmt = $db->prepare("SELECT * FROM packaging_protocol WHERE num = ?");
+        try {
+            $db = connectdb();
+            $stmt = $db->prepare("SELECT * FROM vw_packaging_protocol_info WHERE num = ?");
+            
+            if ($stmt === false) {
+                return false;
+            }
         
-        if ($stmt === false) {
+            $stmt->bind_param("i", $num);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $protocol = $result->fetch_assoc();
+            $stmt->close();
+            
+            return $protocol;
+        } catch (Exception $e) {
             return false;
         }
-    
-        $stmt->bind_param("i", $num);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $protocol = $result->fetch_assoc();
-        $stmt->close();
-        
-        return $protocol;
     }
 
         //num, name, file_name, active
@@ -90,7 +98,7 @@
             return $result; 
         }
 
- function disableProtocol($num) {
+function disableProtocol($num) {
     $db = connectdb();
     try {
         $stmt = $db->prepare("CALL dropProtocol(?)");
