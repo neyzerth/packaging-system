@@ -62,56 +62,16 @@
 
     function getZones() {
         $db = connectdb();
-        
-        try {
-            $query = "SELECT * FROM vw_zone_info";
-            $result = mysqli_query($db, $query);
-            
-            if (!$result) {
-                throw new Exception("Database Query Error: " . mysqli_error($db));
-            }
-    
-            $zones = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $zones[] = $row;
-            }
-    
-            return $zones;
-        } catch (Exception $e) {
-            return [
-                'success' => 0,
-                'message' => 'Error: ' . $e->getMessage()
-            ];
-        } finally {
-            mysqli_close($db);
-        }
+        $query = "SELECT * FROM zone";
+
+        return $result = mysqli_query($db, $query);
     }
 
     function getTags() {
         $db = connectdb();
-    
-        try {
-            $query = "SELECT * FROM vw_tag_info";
-            $result = mysqli_query($db, $query);
-            
-            if (!$result) {
-                throw new Exception("Database Query Error: " . mysqli_error($db));
-            }
-    
-            $tags = [];
-            while ($row = mysqli_fetch_assoc($result)) {
-                $tags[] = $row;
-            }
-    
-            return $tags;
-        } catch (Exception $e) {
-            return [
-                'success' => 0,
-                'message' => 'Error: ' . $e->getMessage()
-            ];
-        } finally {
-            mysqli_close($db);
-        }
+        $query = "SELECT * FROM tag";
+
+        return $result = mysqli_query($db, $query);
     }
 
     function getOuts() {

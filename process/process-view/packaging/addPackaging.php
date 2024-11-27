@@ -1,4 +1,4 @@
-][<?php
+]<?php
     require "packagingFun.php";
     $zones = getZones();
     $outbounds = getOuts();
@@ -109,7 +109,9 @@
                 </div>
             <hr>
             <footer class="footer">
+            <?php if(validateUser("ADMIN","SUPER","EMPLO")):?>
                 <button class="btn-primary" type="submit">Confirm</button>
+            <?php endif; ?>
             </footer>
         </form>
     </div>

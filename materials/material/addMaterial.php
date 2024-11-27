@@ -95,6 +95,7 @@
             <hr>
             <footer class="footer">
                 <button class="btn-primary" type="submit">Confirm</button>
+                <button class="btn-primary" onclick="window.history.back()">Cancelar</button>
             </footer>
         </form>
     </div>

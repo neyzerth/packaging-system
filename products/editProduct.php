@@ -50,7 +50,9 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Edit Products</h1>
             </header>
-            <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
+            <?php if(validateUser("ADMIN")):?>
+                <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
+            <?php endif; ?>
             <hr>
             <h2>Products</h2>
             <div class="rows">

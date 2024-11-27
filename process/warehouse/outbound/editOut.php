@@ -65,7 +65,9 @@
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Outbound</h1>
                 </header>
+                <?php if(validateUser("ADMIN")):?>
                 <a class="btn-primary" href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this outbound?');">Disable</a>
+                <?php endif; ?>
                 <hr>
                 <h2>Outbound</h2>
                 <div class="rows">

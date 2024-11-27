@@ -41,7 +41,7 @@
                         <td><?php echo $tag['barcode']; ?></td>
                         <td><?php echo $tag['tag_type']; ?></td>
                         <td><?php echo $tag['destination']; ?></td>
-                        <?php if(validateUser("ADMIN")):?>
+                        <?php if(validateUser("ADMIN","SUPER")):?>
                         <td>
                             <a class="btn" href="?a=edit&num=<?php echo $tag['num'];?>">Edit</a>
                         </td>

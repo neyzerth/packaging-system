@@ -2,7 +2,7 @@
     validateUser("ALL");
 
     //session_start(); //esta comentado ya que en todas las pantallas sale un mensaje de error
-
+    
 
 if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
@@ -30,3 +30,4 @@ if (isset($_SESSION['message'])) {
     </head>
 <body>
     <?php include ASIDE ?>
+    

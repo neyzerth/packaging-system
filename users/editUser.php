@@ -61,7 +61,9 @@
                     <h1>Edit Users</h1>
                 </header>
 
-                <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
+                <?php if(validateUser("ADMIN")):?>
+                    <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
+                <?php endif; ?>
                 <hr>
                 <h2>Profile</h2>
                 <div class="rows">

@@ -31,7 +31,7 @@
                 <tr>
                     <td><?php echo $tagType['code']; ?></td>
                     <td><?php echo $tagType['description']; ?></td>
-                    <?php if(validateUser("ADMIN")):?>
+                    <?php if(validateUser("ADMIN","SUPER")):?>
                     <td>
                         <a class="btn" href="?a=edit&code=<?php echo $tagType['code'];?>">Edit</a>
                     </td>

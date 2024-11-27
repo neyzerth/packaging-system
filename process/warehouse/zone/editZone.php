@@ -49,7 +49,9 @@
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Zone</h1>
                 </header>
-                <a class="btn-primary" href="disableZone.php?code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this zone?');">Disable</a>
+                <?php if(validateUser("ADMIN")):?>
+                    <a class="btn-primary" href="disableZone.php?code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this zone?');">Disable</a>
+                <?php endif; ?>
                 <hr>
                 <h2>Zone</h2>
                 <div class="rows">

@@ -42,7 +42,7 @@
                         <td><?php echo $user['full_name']; ?></td>
                         <td><?php echo $user['date_of_birth']; ?></td>
                         <td><?php echo $user['user']; ?></td>
-                        <?php if(validateUser("ADMIN")):?>
+                        <?php if(validateUser("ADMIN","SUPER")):?>
                         <td>
                             <a class="btn" href="?a=edit&num=<?php echo $user['num'];?>">Edit</a>
                         </td>

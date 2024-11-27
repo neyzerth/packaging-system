@@ -38,7 +38,9 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Edit Protcol</h1>
             </header>
-            <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('Are you sure you want to disable this protocol?');">Disable</a>
+            <?php if(validateUser("ADMIN")):?>
+                <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('Are you sure you want to disable this protocol?');">Disable</a>
+            <?php endif; ?>                
             <hr>
             <h2>Protocol</h2>
             <div class="rows">
