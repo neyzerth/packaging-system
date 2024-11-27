@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 ---------------------------------------
 --Actualizar registro
 ---------------------------------------
@@ -9,7 +9,7 @@ DELIMITER $$
 Create PROCEDURE UpdateUser(
     IN p_num int,
     IN p_username VARCHAR(30),
-    IN p_password VARCHAR(20),
+    IN p_password VARCHAR(50),
     IN p_name VARCHAR(50),
     IN p_first_surname VARCHAR(30),
     IN p_second_surname VARCHAR(30),
@@ -19,7 +19,6 @@ Create PROCEDURE UpdateUser(
     IN p_postal_code INT,
     IN p_phone VARCHAR(15),
     IN p_email VARCHAR(30),
-    In p_active bit,
     IN p_user_type VARCHAR(5),
     IN p_supervisor INT
 )
@@ -28,7 +27,7 @@ BEGIN
     SET num=p_num,username=p_username,password = sha1(p_password), name = p_name, first_surname = p_first_surname,
     second_surname = p_second_surname, date_of_birth = p_date_of_birth,
     neighborhood = p_neighborhood, street = p_street, postal_code = p_postal_code,
-    phone = p_phone, email = p_email, active = p_active, 
+    phone = p_phone, email = p_email,
     user_type= p_user_type, supervisor = p_supervisor
     WHERE num = p_num;
 END$$
@@ -113,6 +112,7 @@ END $$
 
 
 --Producto 
+DROP PROCEDURE `UpdateProduct`;
 Delimiter $$
 Create PROCEDURE UpdateProduct(
     IN p_code VARCHAR(5),
@@ -122,13 +122,12 @@ Create PROCEDURE UpdateProduct(
     IN p_width DECIMAL(10,2),
     IN p_length DECIMAL(10,2),
     IN p_weight DECIMAL(10,2),
-    In p_active bit,
     In p_packaging_protocol INT
 )
 Begin
     UPDATE product
     SET name = p_name, description = p_description, height = p_height, width = p_width,
-    length = p_length, weight = p_weight, active = p_active, packaging_protocol = p_packaging_protocol
+    length = p_length, weight = p_weight, packaging_protocol = p_packaging_protocol
     WHERE code = p_code;
 END$$
 
@@ -164,12 +163,11 @@ CREATE PROCEDURE UpdateZone(
     IN p_code VARCHAR(5),
     IN p_area VARCHAR(50),
     IN p_available_capacity INT,
-    IN p_total_capacity INT,
-    IN p_active INT
+    IN p_total_capacity INT
 )
 Begin
 UPDATE zone
-    SET area = p_area, available_capacity = p_available_capacity, total_capacity = p_total_capacity,active = p_active
+    SET area = p_area, available_capacity = p_available_capacity, total_capacity = p_total_capacity
     WHERE code = p_code;
 end $$
 
@@ -181,12 +179,11 @@ DELIMITER $$
 Create PROCEDURE UpdateProtocol(
     IN p_num INT,
     In p_name varchar(50),
-    In p_file_name varchar(255),
-    In p_active bit
+    In p_file_name varchar(255)
 )
 Begin
     UPDATE packaging_protocol
-    SET name = p_name, file_name = p_file_name, active = p_active
+    SET name = p_name, file_name = p_file_name
     WHERE num = p_num;
 end $$
 

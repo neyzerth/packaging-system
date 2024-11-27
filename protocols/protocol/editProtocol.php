@@ -16,9 +16,8 @@
         $num = $_POST['num'];
         $name = $_POST['name'];
         $file_name = $_POST['file_name'];
-        $active = 1; 
 
-        if (updateProtocol(num:$num, name:$name, file_name:$file_name, active:$active)) {
+        if (updateProtocol(num:$num, name:$name, file_name:$file_name, )) {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";

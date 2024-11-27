@@ -1,6 +1,5 @@
 <?php
     require "userFun.php";
-    session_start();
 
     $user_types = getUserTypes();
     $supervisors = getSupervisors();
@@ -15,18 +14,14 @@
         $date = empty($_POST['date']) ? NULL : $_POST['date'];
         $neighborhood = empty($_POST['neighborhood']) ? NULL : $_POST['neighborhood'];
         $street = empty($_POST['street']) ? NULL : $_POST['street'];
-        $postal_code = empty($_POST['postal_code']) ? NULL : $_POST['postal_code'];
+        $postal_code = empty($_POST['postal-code']) ? NULL : $_POST['postal-code'];
         $phone = empty($_POST['phone']) ? NULL : $_POST['phone'];
         $email = empty($_POST['email']) ? NULL : $_POST['email'];
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
         $result = addUser(
-            username: $username, password: $password, name: $name,
-            firstSurname: $first_surname, secondSurname: $second_surname,
-            dateOfBirth: $date, neighborhood: $neighborhood, street: $street,
-            postalCode: $postal_code, phone: $phone, email: $email,
-            userType: $user_type, supervisor: $supervisor
+            $username, $password, $name, $first_surname, $second_surname, $date, $neighborhood, $street, $postal_code, $phone, $email, $user_type, $supervisor
         );
 
         if ($result) {
@@ -46,7 +41,7 @@
     }
 ?>
 <head>
-    <script src="userForm.js"></script>
+    <!-- <script src="userForm.js"></script> -->
 </head>
 
     <main class="forms">
@@ -104,7 +99,7 @@
                     <div class="row-lg-10">
                         <h4 for="phone">Phone number</h4>
                         <div class="inputs">
-                            <input name="phone" id="phone" type="text"    maxlength="15"  required placeholder="555-6666-777">
+                            <input name="phone" id="phone" type="text"    maxlength="15"  required placeholder="555-666-7777">
                         </div>
                     </div>
                     <div class="row-lg-10">

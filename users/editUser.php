@@ -1,13 +1,16 @@
 <?php
     require_once("../config.php");
     require "userFun.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $supervisors = getSupervisors();
     $userTypes = getUserTypes();
 
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         $user = getUserByNumber($num);
+
         if (!$user) {
             echo "User not found";
             exit;
@@ -19,7 +22,6 @@
         $password = $_POST['password'];
         $name = $_POST['name'];
         $first_surname = $_POST['first_surname'];
-        $active = 1;
         
         //
         $second_surname = empty($_POST['second_surname']) ? NULL : $_POST['second_surname'];
@@ -33,12 +35,13 @@
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
-        if (updateUser(num:$num, username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, active:$active, userType: $user_type, supervisor: $supervisor)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>User updated successfully.</span></div>";
+        if (updateUser(num:$num, username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor)) {
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Usuario actualizado con éxito.</span></div>";
 
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating User.</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
         }
+
 
 
         header("Location: index.php");

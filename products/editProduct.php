@@ -1,6 +1,8 @@
 <?php
     require "prodFun.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $protocols=getProtocols();
 
     if (isset($_GET['code'])) {
@@ -20,10 +22,9 @@
         $width = $_POST['width'];
         $length = $_POST['length'];
         $weight = $_POST['weight'];
-        $active = 1; 
         $packaging_protocol = $_POST['packaging_protocol'];
 
-        if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, active:$active, packaging_protocol:$packaging_protocol)){
+        if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, packaging_protocol:$packaging_protocol)){
             $_SESSION['message'] = [
                 'text' => 'Successful registration',
                 'type' => 'success'
@@ -53,9 +54,7 @@
             <hr>
             <h2>Products</h2>
             <div class="rows">
-                <div class="row-sm-3">
-                    <a class="btn" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
-                </div>
+
             </div>
             <div class="rows">
                 <div class="row-sm-3">

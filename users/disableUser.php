@@ -11,7 +11,7 @@
             echo "Error deactivating user.";
         }
 
-        header("Location: listUsers.php");
+        header("Location: index.php");
         exit();
     } else {
         echo "User code not provided.";

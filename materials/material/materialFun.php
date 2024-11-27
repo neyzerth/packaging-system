@@ -2,43 +2,102 @@
     require_once "../../config.php";
     function addMaterial($code, $name, $description, $available_quantity, $unit_of_measure) {
         $db = connectdb();
-
-        $stmt = $db->prepare("CALL addMaterial(?, ?, ?, ?, ?)");
-        if ($stmt === false) {
-            die('Error: ' . htmlspecialchars($db->error));
+    
+        try {
+            $stmt = $db->prepare("CALL addMaterial(?, ?, ?, ?, ?)");
+            if ($stmt === false) {
+                throw new Exception('Error preparing statement: ' . htmlspecialchars($db->error));
+            }
+    
+            $stmt->bind_param("sssis", $code, $name, $description, $available_quantity, $unit_of_measure);
+            $result = $stmt->execute();
+            
+            if ($result === false) {
+                throw new Exception('Error executing statement: ' . htmlspecialchars($stmt->error));
+            }
+    
+            $stmt->close();
+            return $result;
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            return false;
+        } finally {
+            $db->close();
         }
-        $stmt->bind_param("sssis", $code, $name, $description, $available_quantity, $unit_of_measure);
-        $result = $stmt->execute();
-        $stmt->close();
-        $db->close();
-        return $result;
     }
 
     function getMaterial() {
         $db = connectdb();
-        $query = "SELECT * FROM material WHERE active = 1;";
-        $result = mysqli_query($db, $query);
-        $materials = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $materials[] = $row;
+    
+        try {
+            $query = "SELECT * FROM material WHERE active = 1;";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Query execution error: ' . htmlspecialchars(mysqli_error($db)));
+            }
+    
+            $materials = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $materials[] = $row;
+            }
+    
+            return $materials;
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return null;
+    
+        } finally {
+            mysqli_close($db);
         }
-        mysqli_close($db);
-        return $materials;
-    }
-    function getUnitMeasure() {
-        $db = connectdb();
-        $query = "SELECT code, description FROM unit_of_measure;";
-        return mysqli_query($db, $query);
     }
 
-    function getMaterialByCode($code) {
-        $db = connectdb();
+function getUnitMeasure() {
+    $db = connectdb();
+
+    try {
+        $query = "SELECT code, description FROM unit_of_measure;";
+        $result = mysqli_query($db, $query);
+
+        if ($result === false) {
+            throw new Exception('Query execution error: ' . htmlspecialchars(mysqli_error($db)));
+        }
+
+        return $result;
+
+    } catch (Exception $e) {
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+        return null;
+
+    } finally {
+        $db->close();
+    }
+}
+
+function getMaterialByCode($code) {
+    $db = connectdb();
+
+    try {
         $query = "SELECT * FROM material WHERE code = '$code';";
         $result = mysqli_query($db, $query);
+
+        if ($result === false) {
+            throw new Exception('Query execution error: ' . htmlspecialchars(mysqli_error($db)));
+        }
+
         $material = mysqli_fetch_assoc($result);
-        mysqli_close($db);
         return $material;
+
+    } catch (Exception $e) {
+        echo 'Caught exception: ', $e->getMessage(), "\n";
+        return null;
+
+    } finally {
+        mysqli_close($db);
     }
+}
 
     function updateMaterial($code, $name, $description, $available_quantity, $active, $unit_of_measure) {
         $db = connectdb();
@@ -86,27 +145,29 @@
 
     function disableMaterial($code) {
         $db = connectdb();
-        
-        $stmt = $db->prepare("CALL dropMaterial(?)");
-        
-        if ($stmt === false) {
-            die('Query preparation error: ' . htmlspecialchars($db->error));
-        }
     
-        $stmt->bind_param("s", $code);
-        
-        // Ejecutar el procedimiento
-        if ($stmt->execute()) {
-            $result = true; 
-        } else {
-            $result = false;
-            echo "Execution error: " . htmlspecialchars($stmt->error); 
+        try {
+            $stmt = $db->prepare("CALL dropMaterial(?)");
+            if ($stmt === false) {
+                throw new Exception('Query preparation error: ' . htmlspecialchars($db->error));
+            }
+    
+            $stmt->bind_param("s", $code);
+
+            if (!$stmt->execute()) {
+                throw new Exception('Execution error: ' . htmlspecialchars($stmt->error));
+            }
+    
+            $stmt->close();
+            return true;
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false; // Return false or handle the error as needed
+    
+        } finally {
+            $db->close();
         }
-        
-        $stmt->close();
-        $db->close();
-        
-        return $result; 
     }
 
     /*function searchMaterial($search){

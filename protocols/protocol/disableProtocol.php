@@ -5,7 +5,7 @@
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         
-        if (disableMaterial($num)) {
+        if (disableProtocol($num)) {
             echo "Protocol deactivated correctly.";
         } else {
             echo "Error disabling protocol.";

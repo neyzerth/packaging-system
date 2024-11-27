@@ -17,7 +17,7 @@
         $stmt = $db->prepare("CALL addUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
         if ($stmt === false) {
-            die('Query preparation error: ' . htmlspecialchars($db->error));
+            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
         }
     
         $stmt->bind_param("ssssssssisssi", $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
@@ -31,37 +31,102 @@
     
     function getUsers() {
         $db = connectdb();
-        $query = "SELECT * FROM vw_user_personal_info;";
-        $result = mysqli_query($db, $query);
-        $users = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $users[] = $row;
+    
+        try {
+            $query = "SELECT * FROM vw_user_personal_info;";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Error retrieving users: ' . mysqli_error($db));
+            }
+    
+            $users = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $users[] = $row;
+            }
+    
+            return $users;
+    
+        } catch (Exception $e) {
+            echo "<p>Error: " . $e->getMessage() . "</p>";
+            return false;
+    
+        } finally {
+            mysqli_close($db);
         }
-        mysqli_close($db);
-        return $users;
     }
+    
 
     function getUserTypes() {
         $db = connectdb();
-        $query = "SELECT code, name FROM user_type;";
-        return mysqli_query($db, $query);
+    
+        try {
+            $query = "SELECT code, name FROM user_type;";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Error retrieving user types: ' . mysqli_error($db));
+            }
+    
+            return $result;
+    
+        } catch (Exception $e) {
+            echo "<p>Error: " . $e->getMessage() . "</p>";
+            return false;
+    
+        } finally {
+            mysqli_close($db);
+        }
     }
+    
     function getSupervisors() {
         $db = connectdb();
-        $query = "SELECT num, full_name FROM vw_supervisor;";
-        return mysqli_query($db, $query);
+    
+        try {
+            $query = "SELECT num, full_name FROM vw_supervisor;";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Error retrieving supervisors: ' . mysqli_error($db));
+            }
+    
+            return $result;
+    
+        } catch (Exception $e) {
+            echo "<p>Error: " . $e->getMessage() . "</p>";
+            return false;
+    
+        } finally {
+            mysqli_close($db);
+        }
     }
+    
 
     function getUserByNumber($num) {
         $db = connectdb();
-        $query = "SELECT * FROM user WHERE num = '$num';";
-        $result = mysqli_query($db, $query);
-        $protocol = mysqli_fetch_assoc($result);
-        mysqli_close($db);
-        return $protocol;
+    
+        try {
+            $query = "SELECT * FROM user WHERE num = '$num';";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Error retrieving user: ' . mysqli_error($db));
+            }
+    
+            $user = mysqli_fetch_assoc($result);
+            return $user;
+    
+        } catch (Exception $e) {
+            echo "<p>Error: " . $e->getMessage() . "</p>";
+            return false;
+    
+        } finally {
+            mysqli_close($db);
+        }
     }
+    
 
-    function updateUser($num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $active, $userType, $supervisor) {
+    function updateUser($num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor) {
         $db = connectdb();
     
         // Valores nulos
@@ -75,17 +140,17 @@
         $userType = empty($userType) ? null : $userType;
         $supervisor = empty($supervisor) ? null : $supervisor;
     
-        $stmt = $db->prepare("CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("CALL UpdateUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     
         if ($stmt === false) {
-            die('Query preparation error: ' . htmlspecialchars($db->error));
+            die('Error en la preparación de la consulta: ' . htmlspecialchars($db->error));
         }
     
-        $stmt->bind_param("issssssssissisi", $num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $active, $userType, $supervisor);
+        $stmt->bind_param("issssssssisssi", $num, $username, $password, $name, $firstSurname, $secondSurname, $dateOfBirth, $neighborhood, $street, $postalCode, $phone, $email, $userType, $supervisor);
     
         $result = $stmt->execute();
         if (!$result) {
-            echo "Execution error: " . htmlspecialchars($stmt->error);
+            echo "Error en la ejecución: " . htmlspecialchars($stmt->error);
         }
         $stmt->close();
         $db->close();
@@ -93,31 +158,39 @@
         return $result;
     }
     
-    
     function disableUser($num) {
         $db = connectdb();
         
-        $stmt = $db->prepare("CALL dropUser(?)");
-        
-        if ($stmt === false) {
-            die('Query preparation error: '. htmlspecialchars($db->error));
-        }
+        try {
+            $stmt = $db->prepare("CALL dropUser(?)");
     
-        $stmt->bind_param("i", $num);
+            if ($stmt === false) {
+                throw new Exception('Query preparation error: ' . htmlspecialchars($db->error));
+            }
+    
+            $stmt->bind_param("i", $num);
+    
+            if (!$stmt->execute()) {
+                throw new Exception('Execution error: ' . htmlspecialchars($stmt->error));
+            }
+    
+            return true;
+            
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         
-        // Ejecutar el procedimiento
-        if ($stmt->execute()) {
-            $result = true; 
-        } else {
-            $result = false;
-            echo "Execution error: " . htmlspecialchars($stmt->error); 
+        } finally {
+            if (isset($stmt) && $stmt instanceof mysqli_stmt) {
+                $stmt->close();
+            }
+            if (isset($db) && $db instanceof mysqli) {
+                $db->close();
+            }
         }
-        
-        $stmt->close();
-        $db->close();
-        
-        return $result; 
     }
+    
+    
 
 
     /*function searchUser($search){

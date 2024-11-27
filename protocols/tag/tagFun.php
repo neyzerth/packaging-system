@@ -1,68 +1,146 @@
 <?php
     require_once "../../config.php";
 
-    //funcion para tag_type
-
     function getTagByNumber($num) {
         $db = connectdb();
-        $query = "SELECT * FROM tag WHERE num = $num";
-        $result = mysqli_query($db, $query);
-        $tag = mysqli_fetch_assoc($result);
-        mysqli_close($db);
-        return $tag;
+    
+        try {
+            $query = "SELECT * FROM tag WHERE num = '$num';";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Query execution error: ' . htmlspecialchars(mysqli_error($db)));
+            }
+    
+            $tag = mysqli_fetch_assoc($result);
+            return $tag;
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false;
+    
+        } finally {
+            mysqli_close($db);
+        }
     }
 
     function getTags() {
         $db = connectdb();
-        $query = "SELECT * FROM tag";
-
-        return $result = mysqli_query($db, $query);
-    }
-
-    function getTagTypes(){
-        $db = connectdb();
-        $query = "SELECT * FROM tag_type";
-
-        return $result = mysqli_query($db, $query);
-    }
-
-    function addTag($date, $tag_type, $destination){
-        $db = connectdb();
-
-        $stmt = $db->prepare("CALL addTag(?,?,?)");
-
-        if ($stmt === false) {
-            die('Error in preparing the query: ' . htmlspecialchars($db->error));
-        }
-        $stmt->bind_param("sss", $date, $tag_type, $destination);
-
-        $result = $stmt->execute();
-        $stmt->close();
-        $db->close();
     
-        return $result;
+        try {
+            $query = "SELECT * FROM tag";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Query execution error: ' . htmlspecialchars(mysqli_error($db)));
+            }
+    
+            $tags = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $tags[] = $row;
+            }
+            return $tags;
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false;
+    
+        } finally {
+            mysqli_close($db);
+        }
     }
+
+    function getTagTypes() {
+        $db = connectdb();
+    
+        try {
+            $query = "SELECT code, description FROM tag_type";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Error retrieving tag types: ' . mysqli_error($db));
+            }
+    
+            return $result;
+    
+        } catch (Exception $e) {
+            echo "<p>Error: " . $e->getMessage() . "</p>";
+            return false;
+        } finally {
+            mysqli_close($db);
+        }
+    }
+    
+
+    function addTag($date, $tag_type, $destination) {
+        $db = connectdb();
+    
+        try {
+            $stmt = $db->prepare("CALL addTag(?, ?, ?, @tag_num)");
+            if ($stmt === false) {
+                throw new Exception('Error preparing statement: ' . $db->error);
+            }
+
+            $stmt->bind_param("sss", $date, $tag_type, $destination);
+
+            if (!$stmt->execute()) {
+                throw new Exception('Error executing statement: ' . $stmt->error);
+            }
+    
+            $stmt->close();
+
+            $result = $db->query("SELECT @tag_num AS tag_num");
+            if ($result === false) {
+                throw new Exception('Error retrieving output parameter: ' . $db->error);
+            }
+    
+            $row = $result->fetch_assoc();
+            return [
+                'success' => 1,
+                'tag_num' => $row['tag_num']
+            ];
+    
+        } catch (Exception $e) {
+            return [
+                'success' => 0,
+                'message' => $e->getMessage()
+            ];
+    
+        } finally {
+            $db->close();
+        }
+    }
+    
 
     function updateTag($num, $date, $tag_type, $destination) {
         $db = connectdb();
     
-        $stmt = $db->prepare("CALL UpdateTag(?,?,?,?)");
-        if ($stmt === false) {
-            die('Error in preparing the query: ' . htmlspecialchars($db->error));
+        try {
+            $stmt = $db->prepare("CALL UpdateTag(?,?,?,?)");
+            if ($stmt === false) {
+                throw new Exception('Error in preparing the query: ' . htmlspecialchars($db->error));
+            }
+    
+            $stmt->bind_param("isss", $num, $date, $tag_type, $destination);
+    
+            $result = $stmt->execute();
+    
+            if (!$result) {
+                throw new Exception('Execution error: ' . htmlspecialchars($stmt->error));
+            }
+    
+            return $result;
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false;
+    
+        } finally {
+            if (isset($stmt)) {
+                $stmt->close();
+            }
+            mysqli_close($db);
         }
-    
-        $stmt->bind_param("isss", $num, $date, $tag_type, $destination);
-    
-        $result = $stmt->execute();
-    
-        if (!$result) {
-            echo "Execution error: " . htmlspecialchars($stmt->error);
-        }
-    
-        $stmt->close();
-        $db->close();
-    
-        return $result;
     }
 
     /*function searchTag($search){

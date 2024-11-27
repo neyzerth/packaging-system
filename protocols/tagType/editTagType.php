@@ -28,6 +28,8 @@
         } else {
             echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updading Tag type</span></div>";
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <script src="tagTypeForm.js"></script>

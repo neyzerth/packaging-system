@@ -22,9 +22,9 @@
         $available_capacity = $_POST['available_capacity'];
         $total_capacity = $_POST['total_capacity'];
         $active = 1;
-        $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active);
+        $result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity);
 
-        if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity, active: $active)){
+        if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity)){
             $_SESSION['message'] = [
                 'text' => 'Successful registration',
                 'type' => 'success'
