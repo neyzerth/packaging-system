@@ -121,6 +121,8 @@
                     <div class="row-md-5">
                         <h4 for="supervisor">Supervisor</h4>
                         <select class="inputs" name="supervisor" id="supervisor">
+                            <option value="NULL">...</option>
+
                             <?php 
                                 while ($supervisor = mysqli_fetch_assoc($supervisors)):   
                                     echo "<option value='{$supervisor['num']}'>{$supervisor['full_name']}</option>";

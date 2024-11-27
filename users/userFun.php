@@ -30,7 +30,7 @@
             return $result;
         } catch (Exception $e) {
             // Manejo de excepciones
-            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+            error_log('Excepción capturada: '. $e->getMessage());
             return false; // O maneja el error de otra manera según sea necesario
         }
     }
