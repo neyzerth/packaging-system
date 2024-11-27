@@ -76,7 +76,9 @@ SELECT
     area,
     available_capacity,
     total_capacity
-FROM zone WHERE active = 1;
+FROM zone WHERE active = 1
+AND available_capacity > 0;
+
 
 --VISTA DE SALIDA
 DROP VIEW vw_outbound_info;
@@ -171,8 +173,8 @@ SELECT
 FROM traceability AS t
 LEFT JOIN product AS p ON p.code = t.product
 LEFT JOIN state AS s ON s.code = t.state
-LEFT JOIN report AS r ON r.traceability = t.num;
-
+LEFT JOIN report AS r ON r.traceability = t.num
+ORDER BY ID desc;
 --VISTA DE INCIDENCIA
 CREATE VIEW vw_incident_info AS
 SELECT 

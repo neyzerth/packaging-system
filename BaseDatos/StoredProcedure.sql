@@ -41,7 +41,7 @@ BEGIN
     AND end_date = p_end_date ;
 END;
 
-
+drop procedure validateUser;
 DELIMITER $$
 CREATE PROCEDURE validateUser(IN usern VARCHAR(30), IN passw VARCHAR(50))
 BEGIN
@@ -309,3 +309,65 @@ select * from user_traceability;
 
 SELECT COUNT(*) FROM user_traceability
         WHERE traceability = 3 AND user = 2
+
+drop procedure add_packaging_quantity;
+DELIMITER $$
+
+CREATE PROCEDURE add_packaging_quantity(
+    IN quantity INT,
+    IN user INT,
+    IN trac_code INT
+)
+BEGIN
+
+    UPDATE packaging 
+    SET package_quantity = quantity 
+    WHERE num = (
+        SELECT packaging from traceability
+        WHERE num = trac_code
+    );
+
+    call addUserInProcess(user, trac_code);
+
+    call change_state(trac_code, "PACKG");
+
+END $$
+
+create procedure chage_state(
+    IN trac_code INT,
+    IN new_state VARCHAR(5)
+)
+BEGIN
+    UPDATE traceability
+    SET state = new_state
+    WHERE num = trac_code;
+END $$
+
+call add_packaging_quantity(12,17);
+SELECT * FROM packaging;
+UPDATE packaging 
+SET package_quantity = 17 
+WHERE num = 12;
+
+SELECT packaging from traceability
+        WHERE num = 12
+
+
+DELIMITER $$
+CREATE PROCEDURE addPackagingInZone(
+    IN new_zone VARCHAR(5),
+    IN trac_code INT,
+    IN user INT
+)
+BEGIN
+    call addUserInProcess(user, trac_code);
+
+    UPDATE packaging
+    SET zone = new_zone
+    WHERE num = (
+        SELECT packaging FROM traceability
+        WHERE num = trac_code
+    );
+
+    call chage_state(trac_code, "WARHS");
+END $$
