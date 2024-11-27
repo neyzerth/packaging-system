@@ -35,7 +35,7 @@
                         <td><?php echo $out['num']; ?></td>
                         <td><?php echo $out['date']; ?></td>
                         <td><?php echo $out['exit_quantity']; ?></td>
-                        <?php if(validateUser("ADMIN", "SUPER")):?>
+                        <?php if(validateUser("ADMIN", "SUPER","EMPLO")):?>
                         <td>
                             <a class="btn" href="?a=edit&num=<?php echo $out['num'];?>">Edit</a>
                         </td>

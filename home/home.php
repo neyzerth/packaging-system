@@ -34,7 +34,7 @@
                     <h2>Protocols</h2>
                 </a>
             </li>
-            <?php if(validateUser("ADMIN")): ?>
+            <?php if(validateUser("ADMIN","SUPER")): ?>
             <li>
                 <a class="nav-link" href="<?php echo URL . "users/" ?>">
                     <img class="bi" src="<?php echo SVG . "users.svg" ?>">
