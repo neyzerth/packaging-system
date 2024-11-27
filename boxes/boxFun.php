@@ -28,7 +28,7 @@
         $db = connectdb();
     
         try {
-            $query = "SELECT * FROM box WHERE active = 1;";
+            $query = "SELECT * FROM vw_box_info;";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {

@@ -5,7 +5,7 @@
         $db = connectdb();
         
         try {
-            $query = "SELECT * FROM outbound WHERE active = 1";
+            $query = "SELECT * FROM vw_outbound_info;";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {
