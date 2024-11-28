@@ -68,13 +68,13 @@
                         </div>
                     </div>
                     <div class="row-md-5">
-                        <h4 for="description">Available capacity</h4>
+                        <h4 for="description">Available capacity (packages)</h4>
                         <div class="inputs">
                             <input name="available_capacity" id="description" type="number" placeholder="17" required maxlength="10"value="<?php echo $zone['available_capacity']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">
-                        <h4 for="available_quantity">Total capacity</h4>
+                        <h4 for="available_quantity">Total capacity (packages)</h4>
                         <div class="inputs">
                             <input name="total_capacity" id="available_quantity" type="number" placeholder="50" required maxlength="10"value="<?php echo $zone['total_capacity']; ?>">
                         </div>
