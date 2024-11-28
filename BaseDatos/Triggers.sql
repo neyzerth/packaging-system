@@ -1,4 +1,4 @@
--- Active: 1728065056405@@127.0.0.1@3306@packaging_test
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 -- Active: 1728665066730@@127.0.0.1@3306@packaging
 
 -----------------------------------
@@ -6,7 +6,7 @@
 -----------------------------------
 SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
 FROM information_schema.TRIGGERS 
-WHERE TRIGGER_SCHEMA = 'packaging_test';
+WHERE TRIGGER_SCHEMA = 'packaging';
 
 DROP TRIGGER after_insert_tag
 
@@ -491,3 +491,7 @@ select * from package WHERE packaging ='PK001'
 INSERT INTO package (product_quantity, weight, product, packaging, box, tag)
 VALUES 
 (15, 1.5, 'S10', 'PK001', NULL, NULL);
+
+
+
+drop TRIGGER  trg_UpdatePackagingOutbound

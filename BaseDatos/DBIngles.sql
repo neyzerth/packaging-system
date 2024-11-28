@@ -1,5 +1,5 @@
 -- SQLBook: Code
--- Active: 1728065056405@@127.0.0.1@3306@packaging_test
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 
 drop DATABASE packaging;
 create DATABASE packaging;
@@ -12,10 +12,6 @@ CREATE TABLE user_type (
     description VARCHAR(50) NOT NULL,
     active BIT DEFAULT TRUE
 );
-
-ALTER TABLE user
-MODIFY password VARCHAR(40);
-
 
 -- TABLE USER
 CREATE TABLE user (
@@ -116,8 +112,6 @@ CREATE TABLE material (
     CONSTRAINT fk_unit_of_measure FOREIGN KEY (unit_of_measure) REFERENCES unit_of_measure(code)
 );
 
-ALTER TABLE material
-change  material_name name VARCHAR(50) NOT NULL;;
 
 -- TABLE PACKAGING PROTOCOL
 CREATE TABLE packaging_protocol (
@@ -126,11 +120,6 @@ CREATE TABLE packaging_protocol (
     file_name VARCHAR(255),
     active BIT DEFAULT TRUE
 );
-
-
-alter table packaging_protocol
-MODIFY COLUMN  file_name VARCHAR(255)
-
 
 
 -- TABLE PRODUCT
@@ -202,9 +191,6 @@ CREATE TABLE report (
     traceability INT,
     CONSTRAINT fk_traceability_report FOREIGN KEY (traceability) REFERENCES traceability(num)
 );
-
-ALTER TABLE report MODIFY start_date DATE NULL;
-ALTER TABLE report MODIFY end_date DATE NULL;
 
 
 -- MANY-TO-MANY TABLES

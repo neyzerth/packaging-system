@@ -1,3 +1,4 @@
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 -- SQLBook: Code
 INSERT INTO user_type (code, name, description) VALUES 
 ('ADMIN', 'Administrator', "User with full access to the system"),
@@ -7,10 +8,10 @@ INSERT INTO user_type (code, name, description) VALUES
 INSERT INTO user (username, password, name, first_surname, second_surname, date_of_birth, neighborhood, street, postal_code, phone, email, user_type, supervisor)
 VALUES 
 ('admin01', SHA1('adminpass'), 'John', 'Doe', 'Smith', '1980-05-14', 'Downtown', 'Main St', 12345, '555-1234', 'admin01@example.com', 'ADMIN', NULL),
-('super01', SHA1('superpass'), 'Jane', 'Doe', NULL, '1985-07-20', 'Uptown', 'Second St', 54321, '555-5678', 'super01@example.com', 'SUPER', 1),
-('emp01', SHA1('emppass'), 'Alice', 'Johnson', 'Brown', '1990-03-12', 'Westside', 'Third St', 23456, '555-9876', 'alice@example.com', 'EMPLO', 2),
-('emp02', SHA1('emppass'), 'Bob', 'Williams', NULL, '1992-11-08', 'Eastside', 'Fourth St', 65432, '555-6543', 'bob@example.com', 'EMPLO', 2),
-('emp03', SHA1('emppass'), 'Charlie', 'Martinez', 'Garcia', '1995-09-30', 'Northside', 'Fifth St', 11111, '555-4321', 'charlie@example.com', 'EMPLO', 2);
+('super01', SHA1('superpass'), 'Jane', 'Doe', NULL, '1985-07-20', 'Uptown', 'Second St', 54321, '555-5678', 'super01@example.com', 'SUPER', NULL),
+('emp01', SHA1('emppass'), 'Alice', 'Johnson', 'Brown', '1990-03-12', 'Westside', 'Third St', 23456, '555-9876', 'alice@example.com', 'EMPLO', NUll),
+('emp02', SHA1('emppass'), 'Bob', 'Williams', NULL, '1992-11-08', 'Eastside', 'Fourth St', 65432, '555-6543', 'bob@example.com', 'EMPLO', Null),
+('emp03', SHA1('emppass'), 'Charlie', 'Martinez', 'Garcia', '1995-09-30', 'Northside', 'Fifth St', 11111, '555-4321', 'charlie@example.com', 'EMPLO', Null);
 
 INSERT INTO user (username, password, name, first_surname, second_surname, date_of_birth, neighborhood, street, postal_code, phone, email, user_type, supervisor)
 VALUES 
@@ -43,7 +44,7 @@ VALUES
 ('std', 'Standard'),
 ('frg', 'Fragile'),
 ('hvy', 'Heavy'),
-('urg', 'Urgent'),
+('urg', 'Urgent')
 
 
 INSERT INTO tag (date, barcode, tag_type,destination)
@@ -54,13 +55,14 @@ VALUES
 ('2024-10-04', '556677889', 'hvy','Sinaloa'),
 ('2024-10-05', Null, 'urg',NULL);
 
-INSERT INTO outbound (date, exit_quantity)
+INSERT INTO outbound (date, exit_quantity,active)
 VALUES 
-('2024-10-01', 100),
-('2024-10-02', 120),
-('2024-10-03', 20),
-('2024-10-04', 50),
-('2024-10-05', 75);
+('2024-10-01', 100,1),
+('2024-10-02', 120,0),
+('2024-10-03', 20,1),
+('2024-10-04', 50,1),
+('2024-10-05', 75,0);
+
 
 INSERT INTO packaging (height, width, length,volume,weight, package_quantity, zone, outbound, tag)
 VALUES 
@@ -92,7 +94,7 @@ VALUES
 ('Protocol_Standard', 'protocol_st.pdf'),
 ('Protocol_Fragile', 'protocol_fr.pdf'),
 ('Protocol_Heavy', 'protocol_h.pdf'),
-('Protocol_Urgent', 'protocol_urg.pdf'),
+('Protocol_Urgent', 'protocol_urg.pdf')
 
 
 INSERT INTO product (code, name, description, height, width, length, weight, packaging_protocol)
@@ -132,11 +134,9 @@ VALUES
 -- Ahora ajustamos el insert en la tabla incident que hace referencia a los registros de traceability
 INSERT INTO incident (date, description, user, traceability)
 VALUES 
-('2024-10-05', 'Package damaged during transport', 3, 1),
-('2024-10-06', 'Late delivery', 4, 2),
-('2024-10-07', 'Wrong item delivered', 5, 3),
-('2024-10-08', 'Missing items in package', 2, 4),
-('2024-10-09', 'Package lost in transit', 1, 5);
+('2024-10-05', 'Package damaged during packaging', 3, 1),
+('2024-10-06', 'Wrong material for this packaging', 4, 2),
+('2024-10-08', 'Missing items in package', 2, 4)
 
 -- Ajustamos también el insert en la tabla report que depende de traceability
 INSERT INTO report (start_date, end_date, report_date, packed_products, observations, traceability)
@@ -144,8 +144,7 @@ VALUES
 ('2024-09-01', '2024-09-30', '2024-10-01', 100, 'All packages were properly sealed and taged.', 1),
 ('2024-09-01', '2024-09-30', '2024-10-02', 120, 'Delays occurred due to insufficient materials in stock.', 2),
 ('2024-09-01', '2024-09-30', '2024-10-03', 110, 'Several packages required repacking due to damaged boxes.', 3),
-('2024-09-01', '2024-09-30', '2024-10-04', 150, 'Exceptional packaging performance; quality checks passed.', 4),
-('2024-09-01', '2024-09-30', '2024-10-05', 115, 'Lost packages identified during the transit process.', 5);
+('2024-09-01', '2024-09-30', '2024-10-04', 150, 'Exceptional packaging performance; quality checks passed.', 4)
 
 
 INSERT INTO user_traceability (user, traceability)
@@ -166,8 +165,6 @@ VALUES
 ('pla', 2, 100),
 ('stl', 1, 50),
 ('wod', 3, 75)
-
-
 
 INSERT INTO material_package (material, package, quantity)
 VALUES 
