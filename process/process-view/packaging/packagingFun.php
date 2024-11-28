@@ -1,7 +1,6 @@
 <?php
     require_once "../../config.php";
     require_once __DIR__."/../../../materials/material/materialFun.php";
-    require_once __DIR__."/../../../materials/material/materialFun.php";
     require_once __DIR__."/../tracFun.php";
 
     function getPackagings() {
@@ -28,6 +27,58 @@
         return $packagings;
     }
 
+    function getAvailableMaterial($packaging) {
+        $db = connectdb();
+    
+        try {
+            $query = "call availableMaterial($packaging)";
+            $result = mysqli_query($db, $query);
+    
+            if ($result === false) {
+                throw new Exception('Query execution error: ' . htmlspecialchars(mysqli_error($db)));
+            }
+    
+            $frozono = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $frozono[] = $row;
+            }
+    
+            return $frozono;
+    
+        } catch (Exception $e) {
+            error_log('Caught exception: '.$e->getMessage());
+            return null;
+    
+        } finally {
+            mysqli_close($db);
+        }
+    }
+
+
+    function startPackaging($destination){
+        $db = connectdb();
+
+        $trac = $_SESSION['trac'];
+        $user = $_SESSION['num'];
+
+        $query = "call startPackaging(?, ?, ?);";
+
+        $stmt = $db->prepare($query);
+
+        $stmt->bind_param("sii", $destination, $trac, $user);
+
+        error_log("QUERY: $query");
+        error_log("PARAMS: $destination, $user, $trac");
+
+        try {
+            $result = $stmt->execute();
+            $_SESSION['Destination'] = $destination;
+            return $result;
+        } catch (\Throwable $th) {
+            error_log("ERROR: ".$th->getMessage());
+            return false;
+        }
+    }
     function addPackagesQuan($quantity){
         $db = connectdb();
 
@@ -41,6 +92,7 @@
         $stmt->bind_param("iii", $quantity, $user, $trac);
 
         error_log("QUERY: $query");
+        error_log("PARAMS: $quantity, $user, $trac");
 
         try {
             return $stmt->execute();
@@ -52,9 +104,30 @@
 
     function addMaterialToPackaging($material, $packaging, $quantity){
         $db = connectdb();
-        $query = "call addMaterialToPackage('$material', $packaging, $quantity)";
+        $query = "call addMaterialToPackaging('$material', $packaging, $quantity)";
+
+        error_log("QUERY: $query");
+        return mysqli_query($db, $query);
     }
 
+    function getMaterialsInPackaging(){
+        $db = connectdb();
+
+
+        $packaging = getTraceabilityByID($_SESSION['trac'])['ID'];
+
+        $query="SELECT * FROM vw_material_process WHERE Packaging = $packaging;";
+        error_log("QUERY: $query");
+        $result = $db->query($query);
+
+        $rows = []; 
+        
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row; 
+        }
+    
+        return $rows; 
+    }
     function addPackaging($code, $height, $width, $length, $weight, $package_quantity, $zone, $tag) {
         $db = connectdb();
         try {

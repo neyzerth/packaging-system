@@ -312,6 +312,49 @@ SELECT COUNT(*) FROM user_traceability
 drop procedure add_packaging_quantity;
 DELIMITER $$
 
+CREATE PROCEDURE change_state(
+    IN trac_code INT,
+    IN new_state VARCHAR(5)
+)
+BEGIN 
+    UPDATE traceability
+    SET state = new_state
+    WHERE num = trac_code;
+END$$
+DROP PROCEDURE `startPackaging`;
+CREATE PROCEDURE startPackaging(
+    IN Destination VARCHAR(25),
+    IN trac_code INT,
+    IN user INT
+)
+BEGIN 
+    DECLARE tag_type VARCHAR(5);
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
+
+    START TRANSACTION;
+
+        SET tag_type = (
+            SELECT Package_Type FROM vw_process
+            WHERE Traceability = trac_code
+        );
+
+        call addTag(CURRENT_DATE, tag_type, Destination, @tag);
+
+        UPDATE packaging 
+        SET tag = @tag 
+        WHERE num = (
+            SELECT packaging 
+            FROM traceability
+            WHERE num = trac_code
+        );
+
+    COMMIT;
+END $$
+
 CREATE PROCEDURE add_packaging_quantity(
     IN quantity INT,
     IN user INT,
@@ -352,6 +395,7 @@ SELECT packaging from traceability
         WHERE num = 12
 
 
+drop procedure addPackagingInZone;
 DELIMITER $$
 CREATE PROCEDURE addPackagingInZone(
     IN new_zone VARCHAR(5),
@@ -368,5 +412,37 @@ BEGIN
         WHERE num = trac_code
     );
 
-    call chage_state(trac_code, "WARHS");
+    call change_state(trac_code, "WARHS");
 END $$
+
+drop procedure availableMaterial;
+create procedure availableMaterial(IN packaging INT)
+BEGIN
+    SELECT mi.code AS Code,
+        mi.name AS Name,
+        mi.unit_of_measure AS Unit
+    FROM vw_material_info as mi
+    WHERE Code NOT IN (
+        SELECT mp.Code
+        FROM vw_material_process AS mp
+        WHERE mp.Packaging = packaging
+    );
+END
+
+call availableMaterial(@prueba);
+
+set @prueba = 2;
+
+SELECT mi.code AS Code,
+        mi.name AS Name,
+        mi.unit_of_measure AS Unit
+    FROM vw_material_info as mi
+    WHERE mi.code NOT IN (
+        SELECT mp.Code
+        FROM vw_material_process AS mp
+        WHERE mp.Packaging = @prueba
+    );
+
+    SELECT mp.Code
+        FROM vw_material_process AS mp
+        WHERE mp.Packaging = @prueba

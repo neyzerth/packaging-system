@@ -306,3 +306,15 @@ SELECT ut.traceability AS Traceability_ID,
 FROM user_traceability AS ut
 INNER JOIN vw_user_personal_info AS u 
 ON u.num = ut.user;
+
+drop view vw_material_process;
+CREATE VIEW vw_material_process AS
+SELECT m.code AS Code, 
+    m.name AS Material, 
+    mp.quantity AS Quantity,
+    m.unit_of_measure AS Unit,
+    mp.packaging AS Packaging 
+FROM material_packging AS mp
+INNER JOIN material AS m 
+ON m.code = mp.material
+
