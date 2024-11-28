@@ -14,3 +14,5 @@ CREATE UNIQUE INDEX UQ_package_tag ON package(tag);
 
 --Tabla product campo name
 CREATE UNIQUE INDEX UQ_product_name ON product(name);
+
+CREATE UNIQUE INDEX UQ_username ON user(username);
