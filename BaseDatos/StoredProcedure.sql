@@ -64,13 +64,12 @@ END $$
 DELIMITER $$
 
 
-
+drop procedure login;
 DELIMITER $$
 
 CREATE PROCEDURE login(
     IN p_user VARCHAR(30),
-    IN p_password VARCHAR(40), 
-    OUT p_result BIT           
+    IN p_password VARCHAR(40)
 )
 BEGIN
     DECLARE user_exists INT; 
@@ -79,9 +78,9 @@ BEGIN
     SET user_exists = (SELECT COUNT(*) FROM user WHERE username = p_user AND password = SHA1(p_password));
     
     IF user_exists > 0 THEN
-        SET p_result = 1; 
-    ELSE
-        SET p_result = 0; 
+        SELECT num, username, user_type 
+        FROM user WHERE username = p_user 
+        AND password = SHA1(p_password);
     END IF;
 END $$
 
