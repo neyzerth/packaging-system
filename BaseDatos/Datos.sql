@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 -- SQLBook: Code
 INSERT INTO user_type (code, name, description) VALUES 
 ('ADMIN', 'Administrator', "User with full access to the system"),
@@ -47,13 +47,21 @@ VALUES
 ('urg', 'Urgent')
 
 
-INSERT INTO tag (date, barcode, tag_type,destination)
+INSERT INTO tag (date, tag_type,destination)
 VALUES 
-('2024-10-01', NULL, 'std','Tecate'),
-('2024-10-02', '987654321', 'frg','Cancun'),
-('2024-10-03', '112233445', 'TT03','Guadalajara'),
-('2024-10-04', '556677889', 'hvy','Sinaloa'),
+('2024-10-01', 'std','Tecate'),
+('2024-10-02', 'frg','Cancun'),
+('2024-10-03', 'frg','Guadalajara'),
+('2024-10-04',= 'hvy','Sinaloa'),
 ('2024-10-05', Null, 'urg',NULL);
+
+INSERT INTO packaging (height, width, length, weight, package_quantity, zone, outbound, tag)
+VALUES 
+(10.0, 15.0, 20.0, 10, 30 ,'Z001', 1, 1),
+(12.0, 18.0, 25.0, 10, 10, 'Z002', 2, 2),
+(8.0, 10.0, 15.0, 7, 20 ,'Z003', 3, 3),
+(14.0, 16.0, 30.0, 5, 40, 'Z004', 4, 4),
+(9.0, 11.0, 22.0, 6, 5, 'Z005', 5, 5);
 
 INSERT INTO outbound (date, exit_quantity,active)
 VALUES 
@@ -63,14 +71,6 @@ VALUES
 ('2024-10-04', 50,1),
 ('2024-10-05', 75,0);
 
-
-INSERT INTO packaging (height, width, length,volume,weight, package_quantity, zone, outbound, tag)
-VALUES 
-(10.0, 15.0, 20.0, 10,NULL,30 ,'Z001', 1, 1),
-(12.0, 18.0, 25.0, 10,NULL,10, 'Z002', 2, 2),
-(8.0, 10.0, 15.0, 7,NULL,20 ,'Z003', 3, 3),
-(14.0, 16.0, 30.0, 5,NULL,40, 'Z004', 4, 4),
-(9.0, 11.0, 22.0, 6,NULL,5, 'Z005', 5, 5);
 
 
 INSERT INTO unit_of_measure (code, description)
@@ -103,7 +103,7 @@ VALUES
 ('P30', 'Huawei P30', 'Medium-quality product', 14.91, 7.14, 0.76, 165, 2),
 ('X', 'iPhone X', 'Budget product', 14.36, 7.09, 0.77, 174, 3),
 ('S23', 'Samsung S23', 'Standard product', 14.63, 7.09, 0.76, 168, 4),
-('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232, 5);
+('S24', 'Samsung S24', 'Ultra product', 16.23, 7.9, 0.86, 232, 4);
 
 INSERT INTO package (product_quantity, weight, product, packaging, box, tag)
 VALUES 

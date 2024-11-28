@@ -1,4 +1,4 @@
--- Active: 1723058837855@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 -- Active: 1728665066730@@127.0.0.1@3306@packaging
 
 -----------------------------------
@@ -114,7 +114,7 @@ BEGIN
     -- Generar el código GS1-128 básico (sin checksum)
     SET gs1_code = CONCAT(
         '(17)', DATE_FORMAT(NEW.date, '%y%m%d'),
-        '(410)', NEW.destination,
+        '(410)', IFNULL(NEW.destination,''),
         '(420)', NEW.tag_type
     );
     
@@ -146,7 +146,7 @@ BEGIN
     SET NEW.barcode = CONCAT(gs1_code, checksum);
 END;
 
-
+drop trigger before_update_tag;
 CREATE TRIGGER before_update_tag
 BEFORE UPDATE ON tag
 FOR EACH ROW
@@ -162,7 +162,7 @@ BEGIN
     -- Generar el código GS1-128 básico (sin checksum)
     SET gs1_code = CONCAT(
         '(17)', DATE_FORMAT(NEW.date, '%y%m%d'),
-        '(410)', NEW.destination,
+        '(410)', IFNULL(NEW.destination,''),
         '(420)', NEW.tag_type
     );
     
@@ -241,31 +241,31 @@ SELECT available_capacity - 2
 drop Procedure Sp_RecordPackagingExit
 
 DELIMITER $$
-CREATE PROCEDURE Sp_RecordPackagingExit (
-    IN p_packaging_code VARCHAR(5), 
-    IN p_exit_quantity INT          
-)
-BEGIN
-    DECLARE available_quantity INT;
+-- CREATE PROCEDURE Sp_RecordPackagingExit (
+--     IN p_packaging_code VARCHAR(5), 
+--     IN p_exit_quantity INT          
+-- )
+-- BEGIN
+--     DECLARE available_quantity INT;
 
-    SELECT package_quantity INTO available_quantity
-    FROM packaging
-    WHERE code = p_packaging_code;
+--     SELECT package_quantity INTO available_quantity
+--     FROM packaging
+--     WHERE code = p_packaging_code;
 
 
-    IF available_quantity IS NULL THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Packaging not found.';
-    ELSEIF available_quantity < p_exit_quantity THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventory.';
-    ELSE
-        UPDATE packaging
-        SET package_quantity = package_quantity - p_exit_quantity
-        WHERE code = p_packaging_code;
+--     IF available_quantity IS NULL THEN
+--         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Packaging not found.';
+--     ELSEIF available_quantity < p_exit_quantity THEN
+--         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventory.';
+--     ELSE
+--         UPDATE packaging
+--         SET package_quantity = package_quantity - p_exit_quantity
+--         WHERE code = p_packaging_code;
 
-        INSERT INTO outbound (date, exit_quantity)
-        VALUES (CURRENT_DATE, p_exit_quantity);
-    END IF;
-END $$
+--         INSERT INTO outbound (date, exit_quantity)
+--         VALUES (CURRENT_DATE, p_exit_quantity);
+--     END IF;
+-- END $$
 DELIMITER ;
 
 -- Al llamarlo dice packaging not found pero funciona 
@@ -279,31 +279,31 @@ SELECT * FROM outbound;
 
 
 ----------------------------------------------------------
---Se supone que es el sp de arriba a trigger pero aun no funciona
+
 drop trigger tUpdatePackagingOutbound;
 DELIMITER $$
-CREATE TRIGGER tUpdatePackagingOutbound
-AFTER INSERT ON outbound
-FOR EACH ROW
-BEGIN
-    DECLARE available_quantity INT;
+-- CREATE TRIGGER tUpdatePackagingOutbound
+-- AFTER INSERT ON outbound
+-- FOR EACH ROW
+-- BEGIN
+--     DECLARE available_quantity INT;
 
 
-    SELECT package_quantity INTO available_quantity
-    FROM packaging
-    WHERE outbound = NEW.num;
+--     SELECT package_quantity INTO available_quantity
+--     FROM packaging
+--     WHERE outbound = NEW.num;
 
 
-    IF available_quantity IS NULL THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Packaging not found.';
-    ELSEIF available_quantity < NEW.exit_quantity THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventory.';
-    ELSE
-        UPDATE packaging
-        SET package_quantity = package_quantity - NEW.exit_quantity
-        WHERE outbound = NEW.num;
-    END IF;
-END $$
+--     IF available_quantity IS NULL THEN
+--         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Packaging not found.';
+--     ELSEIF available_quantity < NEW.exit_quantity THEN
+--         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient quantity in inventory.';
+--     ELSE
+--         UPDATE packaging
+--         SET package_quantity = package_quantity - NEW.exit_quantity
+--         WHERE outbound = NEW.num;
+--     END IF;
+-- END $$
 
 
 
