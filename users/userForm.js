@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function validatePostalCode(field) {
         if (field.value.trim() === "") return true;
-        const regex = /^\d,5}$/;
+        const regex = /^\d{5}$/;
         if (!regex.test(field.value.trim())) {
             alert("The postal code must contain exactly 5 numeric characters.");
             field.focus();

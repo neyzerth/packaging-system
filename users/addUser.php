@@ -18,7 +18,7 @@
         $phone = empty($_POST['phone']) ? NULL : $_POST['phone'];
         $email = empty($_POST['email']) ? NULL : $_POST['email'];
         $user_type = empty($_POST['user_type']) ? NULL : $_POST['user_type'];
-        $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
+        $supervisor = $_POST['supervisor']== "NULL" ? NULL : $_POST['supervisor'];
 
         $result = addUser(
             $username, $password, $name, $first_surname, $second_surname, $date, $neighborhood, $street, $postal_code, $phone, $email, $user_type, $supervisor
@@ -138,7 +138,7 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                            <input name="postal-code" id="postal-code" type="number" placeholder="22254" maxlength="5">
+                            <input name="postal-code" id="postal-code" type="number" placeholder="22254" min="5">
                         </div>
                     </div>
                     <div class="row-md-5">
