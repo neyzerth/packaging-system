@@ -30,35 +30,35 @@ VALUES
 
 INSERT INTO zone (code, area, available_capacity, total_capacity)
 VALUES 
-('Z001', 'Warehouse A', 50, 100),
-('Z002', 'Warehouse B', 75, 150),
-('Z003', 'Section C', 30, 80),
-('Z004', 'Section D', 60, 120),
-('Z005', 'Overflow Area', 10, 50);
+('Z001', 'Apple', 50, 100),
+('Z002', 'Oppo', 75, 150),
+('Z003', 'Xiomi', 30, 80),
+('Z004', 'Huawei', 60, 120),
+('Z005', 'Samsug', 10, 50);
 
 
 
 INSERT INTO tag_type (code, description)
 VALUES 
-('TT01', 'Standard'),
-('TT02', 'Fragile'),
-('TT03', 'Heavy'),
-('TT04', 'Urgent'),
-('TT05', 'Perishable');
+('std', 'Standard'),
+('frg', 'Fragile'),
+('hvy', 'Heavy'),
+('urg', 'Urgent'),
 
-INSERT INTO tag (date, barcode, tag_type)
+
+INSERT INTO tag (date, barcode, tag_type,destination)
 VALUES 
-('2024-10-01', '123456789', 'TT01'),
-('2024-10-02', '987654321', 'TT02'),
-('2024-10-03', '112233445', 'TT03'),
-('2024-10-04', '556677889', 'TT04'),
-('2024-10-05', '998877665', 'TT05');
+('2024-10-01', NULL, 'std','Tecate'),
+('2024-10-02', '987654321', 'frg','Cancun'),
+('2024-10-03', '112233445', 'TT03','Guadalajara'),
+('2024-10-04', '556677889', 'hvy','Sinaloa'),
+('2024-10-05', Null, 'urg',NULL);
 
 INSERT INTO outbound (date, exit_quantity)
 VALUES 
 ('2024-10-01', 100),
-('2024-10-02', 150),
-('2024-10-03', 200),
+('2024-10-02', 120),
+('2024-10-03', 20),
 ('2024-10-04', 50),
 ('2024-10-05', 75);
 
@@ -84,9 +84,8 @@ INSERT INTO material (code, name, description, available_quantity, unit_of_measu
 VALUES 
 ('stl', 'Steel', 'High-quality steel', 500, 'kg'),
 ('pla', 'Plastic', 'Durable plastic', 200, 'pc'),
-('wod', 'Wood', 'Solid oak wood', 300, 'pc'),
-('alm', 'Aluminum', 'Lightweight aluminum', 400, 'kg'),
-('glas', 'Glass', 'Tempered glass', 150, 'lt');
+('wod', 'Wood', 'Solid oak wood', 300, 'pc')
+
 
 INSERT INTO packaging_protocol (name, file_name)
 VALUES 
@@ -94,7 +93,7 @@ VALUES
 ('Protocol_Fragile', 'protocol_fr.pdf'),
 ('Protocol_Heavy', 'protocol_h.pdf'),
 ('Protocol_Urgent', 'protocol_urg.pdf'),
-('Protocol_Perishable', 'protocol_per.pdf');
+
 
 INSERT INTO product (code, name, description, height, width, length, weight, packaging_protocol)
 VALUES 
@@ -142,11 +141,12 @@ VALUES
 -- Ajustamos también el insert en la tabla report que depende de traceability
 INSERT INTO report (start_date, end_date, report_date, packed_products, observations, traceability)
 VALUES 
-('2024-09-01', '2024-09-30', '2024-10-01', 1000, 'No major issues', 1),
-('2024-09-01', '2024-09-30', '2024-10-02', 1200, 'Delayed deliveries', 2),
-('2024-09-01', '2024-09-30', '2024-10-03', 1100, 'Damaged products', 3),
-('2024-09-01', '2024-09-30', '2024-10-04', 1050, 'Excellent performance', 4),
-('2024-09-01', '2024-09-30', '2024-10-05', 1150, 'Lost packages', 5);
+('2024-09-01', '2024-09-30', '2024-10-01', 100, 'All packages were properly sealed and taged.', 1),
+('2024-09-01', '2024-09-30', '2024-10-02', 120, 'Delays occurred due to insufficient materials in stock.', 2),
+('2024-09-01', '2024-09-30', '2024-10-03', 110, 'Several packages required repacking due to damaged boxes.', 3),
+('2024-09-01', '2024-09-30', '2024-10-04', 150, 'Exceptional packaging performance; quality checks passed.', 4),
+('2024-09-01', '2024-09-30', '2024-10-05', 115, 'Lost packages identified during the transit process.', 5);
+
 
 INSERT INTO user_traceability (user, traceability)
 VALUES 
@@ -165,16 +165,14 @@ INSERT INTO material_packging (material,packaging, quantity)
 VALUES 
 ('pla', 2, 100),
 ('stl', 1, 50),
-('wod', 3, 75),
-('alm', 4, 150),
-('glas',5, 60);
+('wod', 3, 75)
+
 
 
 INSERT INTO material_package (material, package, quantity)
 VALUES 
 ('stl',1, 30),
 ('pla',2, 40),
-('wod',3, 50),
-('alm',4, 60)
+('wod',3, 50)
 
 
