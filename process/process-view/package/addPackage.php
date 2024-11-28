@@ -12,7 +12,6 @@
 
         $validate = $prodCode != null && $quantity > 0;
     
-        error_log($quantity."   ". $prodCode."" .$destination);
         if($validate){
 
             $readonly = "readonly";

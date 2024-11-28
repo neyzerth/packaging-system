@@ -321,6 +321,8 @@ BEGIN
     SET state = new_state
     WHERE num = trac_code;
 END$$
+
+
 DROP PROCEDURE `startPackaging`;
 CREATE PROCEDURE startPackaging(
     IN Destination VARCHAR(25),
@@ -332,17 +334,24 @@ BEGIN
 
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
+        SELECT "ERROR" AS error;
         ROLLBACK;
     END;
 
     START TRANSACTION;
 
         SET tag_type = (
-            SELECT Package_Type FROM vw_process
-            WHERE Traceability = trac_code
+            SELECT code FROM tag_type
+            WHERE description = (
+                SELECT Package_Type FROM vw_process
+                WHERE Traceability = trac_code
+            )
         );
 
+
         call addTag(CURRENT_DATE, tag_type, Destination, @tag);
+
+        select @tag, tag_type, destination, CURRENT_DATE;
 
         UPDATE packaging 
         SET tag = @tag 
@@ -354,6 +363,11 @@ BEGIN
 
     COMMIT;
 END $$
+SELECT code FROM tag_type
+            WHERE description = (
+                SELECT Package_Type FROM vw_process
+                WHERE Traceability = 2
+            );
 
 CREATE PROCEDURE add_packaging_quantity(
     IN quantity INT,

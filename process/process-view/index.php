@@ -21,6 +21,7 @@ switch($action){
 
     case 'add': 
         unset($_SESSION['trac']);
+        unset($_SESSION['destination']);
         $_SESSION['trac'] = startProcess()['Traceability'];
         header("Location: /process/process-view/");
         exit();

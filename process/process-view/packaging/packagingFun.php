@@ -106,7 +106,7 @@
         $db = connectdb();
         $query = "call addMaterialToPackaging('$material', $packaging, $quantity)";
 
-        error_log("QUERY: $query");
+        error_log("QUERY Material: $query");
         return mysqli_query($db, $query);
     }
 

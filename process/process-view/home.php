@@ -27,10 +27,14 @@ $trac = getProcessByID($_SESSION['trac']);
             </div>
             <div class="process">
                 <div class="">
+                <?php if($trac['State'] == "START" || $trac['State'] == "PACK"):?>
                 <a href="?a=addPackage">
+                <?php endif; ?>
                     <h3>Packing</h3>
                     <img class="bin process-btn" src="<?php echo SVG . "products.svg" ?>">
+                <?php if($trac['State'] == "START" || $trac['State'] == "PACK"):?>
                 </a>
+                <?php endif; ?>
                 <p>
                     <b>Product:</b> 
                     <?php echo printNull($trac['Product'])?>
@@ -50,10 +54,14 @@ $trac = getProcessByID($_SESSION['trac']);
                 </p>
                 </div>
                 <div>
+                    <?php if($trac['State'] == "PACK" || $trac['State'] == "PACKG"):?>
                     <a href="?a=addPackaging">
+                    <?php endif; ?>
                         <h3>Packaging</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
+                    <?php if($trac['State'] == "PACK" || $trac['State'] == "PACKG"):?>
                     </a>
+                    <?php endif; ?>
                     <p>
                     <b>Barcode:</b> 
                         <?php echo printNull($trac['Packaging_Barcode'])?>
@@ -69,10 +77,14 @@ $trac = getProcessByID($_SESSION['trac']);
                 </p>
                 </div>
                 <div>
+                    <?php if($trac['State'] == "PACKG" || $trac['State'] == "WARHS"):?>
                     <a href="?a=addWarehouse">
+                    <?php endif; ?>
                         <h3>Warehouse</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "zone.svg" ?>">
+                    <?php if($trac['State'] == "PACKG" || $trac['State'] == "WARHS"):?>
                     </a>
+                    <?php endif; ?>
                     <p>
                         <b>Area:</b> 
                         <?php echo printNull($trac['Area'])?>
