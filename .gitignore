@@ -6,3 +6,4 @@ prueba*
 /.vscode
 *.sql
 *.json
+uploads/*
