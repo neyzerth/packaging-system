@@ -25,14 +25,15 @@ $trac = getProcessByID($_SESSION['trac']);
                     <a href="?a=select"><h3 class="btn">Select New Process</h3></a>
                 </div>
             </div>
+
             <div class="process">
                 <div class="">
-                <?php if($trac['State'] == "START" || $trac['State'] == "PACK"):?>
+                <?php if($trac['State'] == "Starting Process"):?>
                 <a href="?a=addPackage">
                 <?php endif; ?>
                     <h3>Packing</h3>
                     <img class="bin process-btn" src="<?php echo SVG . "products.svg" ?>">
-                <?php if($trac['State'] == "START" || $trac['State'] == "PACK"):?>
+                <?php if($trac['State'] == "Starting Process"):?>
                 </a>
                 <?php endif; ?>
                 <p>
@@ -52,14 +53,15 @@ $trac = getProcessByID($_SESSION['trac']);
                     <b>Protocol:</b> 
                     <?php echo printNull($trac['Protocol'])?>
                 </p>
-                </div>
+            </div>
+
                 <div>
-                    <?php if($trac['State'] == "PACK" || $trac['State'] == "PACKG"):?>
+                    <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packaging Boxes"):?>
                     <a href="?a=addPackaging">
                     <?php endif; ?>
                         <h3>Packaging</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
-                    <?php if($trac['State'] == "PACK" || $trac['State'] == "PACKG"):?>
+                    <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packaging Boxes"):?>
                     </a>
                     <?php endif; ?>
                     <p>
@@ -74,15 +76,16 @@ $trac = getProcessByID($_SESSION['trac']);
                     <b>Tag:</b> 
                     <?php echo "[".printNull($trac['Packaging_Tag'])."] "
                         .printNull($trac['Packaging_Type'])?>
-                </p>
+                    </p>
                 </div>
+
                 <div>
-                    <?php if($trac['State'] == "PACKG" || $trac['State'] == "WARHS"):?>
+                    <?php if($trac['State'] == "Packaging Boxes" || $trac['State'] == "In Warehouse"):?>
                     <a href="?a=addWarehouse">
                     <?php endif; ?>
                         <h3>Warehouse</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "zone.svg" ?>">
-                    <?php if($trac['State'] == "PACKG" || $trac['State'] == "WARHS"):?>
+                    <?php if($trac['State'] == "Packaging Boxes" || $trac['State'] == "In Warehouse"):?>
                     </a>
                     <?php endif; ?>
                     <p>
