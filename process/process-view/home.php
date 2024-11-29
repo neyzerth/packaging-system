@@ -28,7 +28,7 @@ $trac = getProcessByID($_SESSION['trac']);
 
             <div class="process">
                 <div class="">
-                <?php if($trac['State'] == "Starting Process"):?>
+                <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packing Products" ):?>
                 <a href="?a=addPackage">
                 <?php endif; ?>
                     <h3>Packing</h3>
@@ -56,7 +56,7 @@ $trac = getProcessByID($_SESSION['trac']);
             </div>
 
                 <div>
-                    <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packaging Boxes"):?>
+                    <?php if($trac['State'] == "Packing Products" || $trac['State'] == "Packaging Boxes"):?>
                     <a href="?a=addPackaging">
                     <?php endif; ?>
                         <h3>Packaging</h3>
