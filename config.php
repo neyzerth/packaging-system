@@ -54,13 +54,16 @@ function nullDb($param)
     return $param == '' ? "NULL" : $param;
 }
 
-function crudRedirect($action, $listFile, $addFile, $editFile){
+function crudRedirect($action, $listFile, $addFile, $editFile, $deleteFile = ""){
     switch($action){
         
         case 'add': include $addFile;
             break;
         
         case 'edit': include $editFile;
+            break;
+        
+        case 'del': include $deleteFile;
             break;
         
         default: include $listFile;

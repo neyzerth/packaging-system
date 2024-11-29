@@ -10,19 +10,26 @@
     
             if (move_uploaded_file($tempDest, $destination)) {
                 $db = connectdb(); 
-                $stmt = $db->prepare("CALL addPackagingProtocol(?, ?)");
+                $query = "CALL addPackagingProtocol(?, ?)";
+                error_log("QUERY ADD PROTOCOL: $query | $name | $file_name");
+                $stmt = $db->prepare($query);
                 if ($stmt === false) {
+                    error_log("Error preparing statement");
                     return false;
                 }
+                error_log("Prepare query successfully");
                 $stmt->bind_param("ss", $name, $file_name);
                 if (!$stmt->execute()) {
+                    error_log("Error executing statement");
                     return false;
                 }
+                error_log("Execute query successfully");
                 $stmt->close();
             } else {
                 return false;
             }
         } catch (Exception $e) {
+            error_log("FATAL ERROR: ".$e->getMessage());
             return false;
         }
         return true;
@@ -71,31 +78,68 @@
     }
 
         //num, name, file_name, active
-        function updateProtocol($num, $name, $file_name) {
+        function updateProtocol($num, $name, $file_name, $file) {
+            $nullFile = empty($file['name']);
+
+            if(!$nullFile && !addPdf($file)){
+                return false;
+            }
             $db = connectdb();
             try {
-                $stmt = $db->prepare("CALL UpdateProtocol(?, ?, ?)");
+                $file_name = $nullFile ? $file_name : $file['name'];
                 
+                $query = "CALL UpdateProtocol(?, ?, ?)";
+                error_log("QUERY: $query [$num | $name | $file_name]");
+
+                $stmt = $db->prepare($query);
+                
+                error_log("Query prepared succesfully");
                 if ($stmt === false) {
-                    throw new Exception('Error in query preparation: ' . htmlspecialchars($db->error));
+                    error_log('Error in query preparation: ' . htmlspecialchars($db->error));
                 }
         
                 $stmt->bind_param("iss", $num, $name, $file_name);
+                error_log("Params prepared succesfully");
                 
                 if (!$stmt->execute()) {
-                    throw new Exception("Execution error: " . htmlspecialchars($stmt->error));
+                    error_log("Execution error: " . htmlspecialchars($stmt->error));
                 }
+                
                 
                 $result = true; 
             } catch (Exception $e) {
                 $result = false;
                 echo $e->getMessage();
             } finally {
-                $stmt->close();
-                $db->close();
+                error_log("updated succesfully");
+
             }
             
             return $result; 
+        }
+
+        function addPdf($file){
+            try{
+
+                error_log("File Have information? ".isset($file));
+                error_log(print_r($file));
+                $file_name = $file['name'];
+                $destination = PDFDIR . "/$file_name";
+                $tempDest = $file['tmp_name'];
+
+                error_log("Moving file [$file_name] to destination: $destination");
+                
+                if(move_uploaded_file($tempDest, $destination)){
+                    error_log("PDF uploaded succesfully");
+                    return true;
+                } else {
+                    error_log("Error uploading PDF");
+                    return false;
+                }
+            } catch(Exception $e){
+                error_log("Error adding pdf: ".$e->getMessage());
+                return false;
+            }
         }
 
 function disableProtocol($num) {

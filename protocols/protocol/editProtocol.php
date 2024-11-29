@@ -15,9 +15,15 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $num = $_POST['num'];
         $name = $_POST['name'];
-        $file_name = $_POST['file_name'];
+        $file = $_FILES['pdf'];
+        
+        error_log("Filename: ".$_FILES['pdf']['name']);
 
-        if (updateProtocol(num:$num, name:$name, file_name:$file_name, )) {
+        error_log("POST PDF: $name  ".$_FILES['pdf']['name']);
+        $file_name = !empty($_FILES['pdf']['name']) ? $_FILES['pdf']['name'] : $_POST['old_file_name'];
+        
+        error_log("new file name: $file_name | old: ".$_POST['old_file_name']);
+        if (updateProtocol(num:$num, name:$name, file_name:$file_name, file: $file)) {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";
@@ -39,7 +45,7 @@
                 <h1>Edit Protcol</h1>
             </header>
             <?php if(validateUser("ADMIN")):?>
-                <a class="btn-primary" href="disableProtocol.php?num=<?php echo $protocol['num']; ?>" onclick="return confirm('Are you sure you want to disable this protocol?');">Disable</a>
+                <a class="btn-primary" href="?a=del&num=<?php echo $protocol['num']; ?>" onclick="return confirm('Are you sure you want to disable this protocol?');">Disable</a>
             <?php endif; ?>                
             <hr>
             <h2>Protocol</h2>
@@ -59,9 +65,9 @@
             </div>
             <div class="rows">
                 <div class="row-md-5">
-                    <h4 for="file_name">Actual File</h4>
+                    <h4 for="old_file_name">Actual File</h4>
                     <div class="inputs">
-                        <input name="file_name" id="file_name" type="text"  value="<?php echo $protocol['file_name']; ?>" readonly>
+                        <input name="old_file_name" id="old_file_name" type="text"  value="<?php echo $protocol['file_name']; ?>" readonly>
                     </div>
                 </div>
                 <div class="row-md-5">

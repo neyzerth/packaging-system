@@ -6,14 +6,14 @@
         $num = $_GET['num'];
         
         if (disableProtocol($num)) {
-            echo "Protocol deactivated correctly.";
+            error_log("Protocol deactivated correctly.");
         } else {
-            echo "Error disabling protocol.";
+            error_log("Error disabling protocol.");
         }
-
-        header("Location: index.php");
-        exit();
     } else {
-        echo "Protocol code not provided.";
+        error_log("Protocol code not provided.");
     }
+
+    header("Location: /protocols/protocol/");
+    exit();
 ?>
