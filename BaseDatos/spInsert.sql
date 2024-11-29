@@ -448,3 +448,12 @@ CALL addPackage(10, 15.5, 'X', 'PK001', 3, 1);
 
 select * from report
 
+CREATE PROCEDURE addPackagingProtocol(
+    IN prot_name VARCHAR(100),
+    IN prot_file_name VARCHAR(255)
+)
+BEGIN
+    INSERT INTO packaging_protocol(name, file_name)
+    VALUES(prot_name, prot_file_name);
+END $$
+
