@@ -104,7 +104,7 @@ $trac = getProcessByID($_SESSION['trac']);
             include 'listUsersInProcess.php';
             ?>
             <hr>
-            <button class="btn-primary" type="submit">Incident</button>
+            <a href="?a=incident"><button class="btn-primary" type="submit">Incident</button></a>
             <footer class="footer">
             </footer>
         </div>

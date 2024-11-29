@@ -42,7 +42,7 @@
                     <div class="row-md-5">
                         <h4>Trazability</h4>
                         <div class="inputs">
-                            <input type="text" required placeholder="">
+                            <input type="text" value="<?php echo $_SESSION['trac']?>" required readonly>
                         </div>
                     </div>
                     <div class="row-lg-12">

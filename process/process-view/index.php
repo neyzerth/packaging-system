@@ -37,6 +37,9 @@ switch($action){
 
     case 'select': $page = 'options.php';
     break;
+
+    case 'incident': $page = 'incident/addIncident.php';
+    break;
     
     default: 
         $page = empty($_SESSION['trac']) ? 'options.php' : 'home.php';
