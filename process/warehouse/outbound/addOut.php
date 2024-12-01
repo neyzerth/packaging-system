@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date = $_POST['date'];
-    $selected_packaging = $_POST['packaging'] ?? []; // Embalajes seleccionados
+    $selected_packaging = $_POST['packaging'] ?? [];
 
     $today = date('Y-m-d');
     if ($date < $today) {
@@ -27,20 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: /process/warehouse/outbound");
         exit();
     }
+    $outbound_id = insertOutbound($date, $selected_packaging);
 
-    // Insertar en la tabla `outbound`
-    $db = connectdb();
-    $query = "INSERT INTO outbound (date, exit_quantity) VALUES (?, ?)";
-    $stmt = $db->prepare($query);
-    $exit_quantity = count($selected_packaging);
-    $stmt->bind_param('si', $date, $exit_quantity);
-
-    if ($stmt->execute()) {
-        $outbound_id = $stmt->insert_id; // Obtener el ID del registro creado en `outbound`
-
-        // Actualizar los embalajes seleccionados con el ID de `outbound`
-        updatePackagingStatus($selected_packaging, $outbound_id);
-
+    if ($outbound_id) {
         $_SESSION['message'] = [
             'text' => 'Successful registration',
             'type' => 'success'
@@ -52,8 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ];
     }
 
-    $stmt->close();
-    $db->close();
     header("Location: /process/warehouse/outbound");
     exit();
 }
@@ -120,17 +107,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         
                         const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
                         
-                        // Si todos los checkboxes están seleccionados, deseleccionar todos
                         if (allChecked) {
                             checkboxes.forEach(checkbox => {
                                 checkbox.checked = false;
                             });
-                            this.textContent = 'Select All';  // Cambiar el texto del botón
+                            this.textContent = 'Select All';
                         } else {
                             checkboxes.forEach(checkbox => {
                                 checkbox.checked = true;
                             });
-                            this.textContent = 'Deselect All';  // Cambiar el texto del botón
+                            this.textContent = 'Deselect All';
                         }
                     });
                 });

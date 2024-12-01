@@ -28,16 +28,48 @@
         }
     }
 
+    function getOutboundDateByNum($num) {
+        $db = connectdb();
+        
+        try {
+            $query = "SELECT date FROM vw_outbound_info WHERE num = ?";
+            $stmt = mysqli_prepare($db, $query);
+            
+            if ($stmt === false) {
+                throw new Exception('Query preparation error: ' . htmlspecialchars(mysqli_error($db)));
+            }
+    
+            mysqli_stmt_bind_param($stmt, 'i', $num);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+    
+            if ($result === false) {
+                throw new Exception('Query execution error: ' . htmlspecialchars(mysqli_error($db)));
+            }
+    
+            $outboundInfo = mysqli_fetch_assoc($result);
+    
+            if ($outboundInfo) {
+                return $outboundInfo['date'];
+            } else {
+                return false;
+            }
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false;
+        } finally {
+            mysqli_close($db);
+        }
+    }
+    
+    
     function getOutboundByNum($num) {
         $db = connectdb();
     
         try {
             echo "num: " . htmlspecialchars($num) . "<br>";
-    
-            // Cambia la consulta a la tabla 'packaging' donde se busca por 'outbound'
-            $query = "SELECT num, package_quantity, zone 
-                      FROM packaging 
-                      WHERE outbound = '$num';";
+            $query = "SELECT num, package_quantity, zone FROM packaging WHERE outbound = '$num';";
             $result = mysqli_query($db, $query);
     
             if ($result === false) {
@@ -70,7 +102,6 @@
         $db = connectdb();
     
         try {
-            // 1. Actualizar la fecha del outbound
             $stmt = $db->prepare("UPDATE outbound SET date = ? WHERE num = ?");
             if ($stmt === false) {
                 throw new Exception('Query preparation error: ' . htmlspecialchars($db->error));
@@ -80,10 +111,7 @@
             if (!$stmt->execute()) {
                 throw new Exception('Execution error: ' . htmlspecialchars($stmt->error)); 
             }
-    
-            // 2. Remover el `outbound` de los embalajes que ya no están seleccionados
             if (!empty($packaging)) {
-                // Primero, remueve el outbound de los embalajes que no están seleccionados
                 $placeholders = implode(',', array_fill(0, count($packaging), '?'));
                 $update_query = "UPDATE packaging SET outbound = NULL WHERE outbound = ? AND num NOT IN ($placeholders)";
                 $update_stmt = $db->prepare($update_query);
@@ -206,6 +234,34 @@
         }
     }
 
+    function insertOutbound($date, $selected_packaging) {
+        $db = connectdb();
+    
+        try {
+            $query = "INSERT INTO outbound (date, exit_quantity) VALUES (?, ?)";
+            $stmt = $db->prepare($query);
+            $exit_quantity = count($selected_packaging);
+            $stmt->bind_param('si', $date, $exit_quantity);
+    
+            if (!$stmt->execute()) {
+                throw new Exception('Error during outbound registration: ' . htmlspecialchars($stmt->error));
+            }
+    
+            $outbound_id = $stmt->insert_id;
+    
+            updatePackagingStatus($selected_packaging, $outbound_id);
+    
+            return $outbound_id;
+    
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            return false;
+        } finally {
+            $stmt->close();
+            $db->close();
+        }
+    }
+    
     function updatePackagingStatus($packaging_ids, $outbound_id) {
         $db = connectdb();
         $ids = implode(",", array_map('intval', $packaging_ids));
@@ -219,9 +275,26 @@
 
     function getPackagingByZoneAndOutbound($zone, $outbound_num) {
         $db = connectdb();
-        $query = "SELECT p.num, p.package_quantity
-                  FROM packaging p
-                  WHERE p.zone = ? AND p.outbound = ?";
+        $query = "SELECT num, package_quantity, outbound FROM packaging  WHERE zone = ?";
+        
+        $stmt = $db->prepare($query);
+        $stmt->bind_param('s', $zone);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $packaging = [];
+        while ($row = $result->fetch_assoc()) {
+            $packaging[] = $row;
+        }
+    
+        $stmt->close();
+        $db->close();
+        return $packaging;
+    }
+    
+    function getEditablePackagingByZoneAndOutbound($zone, $outbound_num) {
+        $db = connectdb();
+        $query = "SELECT num, package_quantity, outbound FROM packaging  WHERE zone = ? AND (outbound = ? OR outbound IS NULL)";
         
         $stmt = $db->prepare($query);
         $stmt->bind_param('si', $zone, $outbound_num);
@@ -237,4 +310,5 @@
         $db->close();
         return $packaging;
     }
+    
 ?>

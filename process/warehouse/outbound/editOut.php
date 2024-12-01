@@ -7,6 +7,7 @@
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         $out = getOutboundByNum($num);
+        $dateOutbound = getOutboundDateByNum($num);
     
         if (!$out) {
             echo "Out not found";
@@ -20,7 +21,7 @@
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $num = $_POST['num'];
         $date = $_POST['date'];
-        $selected_packaging = $_POST['packaging'] ?? []; // Embalajes seleccionados
+        $selected_packaging = $_POST['packaging'] ?? [];
         $active = 1;
 
         $today = date('Y-m-d');
@@ -72,27 +73,24 @@
                 <div class="row-sm-3">
                     <h4 for="date">Date</h4>
                     <div class="inputs">
-                        <input name="date" id="date" type="date" required value="<?php echo $date; ?>">
+                        <input name="date" id="date" type="date" required value="<?php echo $dateOutbound; ?>">
                     </div>
                 </div>
             </div>
 
             <div class="rows">
-                <h4>Select Packaging by Zone</h4>
+                <h4>Edit Packaging by Zone</h4>
                 <?php
                 $zones = getZones();
                 if (!empty($zones)) {
-foreach ($zones as $zone) {
+                    foreach ($zones as $zone) {
                         echo "<div class='zone'>";
                         echo "<h5>Zone: " . htmlspecialchars($zone) . " <button type='button' class='select-all' data-zone='" . htmlspecialchars($zone) . "'>Select All</button></h5>";
-                    
-                        // Obtener embalajes para la zona y el outbound
-                        $packaging = getPackagingByZoneAndOutbound($zone, $num); // Cambiado a la función correcta
-                    
+                        $packaging = getEditablePackagingByZoneAndOutbound($zone, $num);
                         if (!empty($packaging)) {
                             echo "<div class='packaging-list' id='zone-" . htmlspecialchars($zone) . "'>";
                             foreach ($packaging as $pkg) {
-                                $isSelected = in_array($pkg['num'], $selected_packaging) ? 'checked' : '';
+                                $isSelected = $pkg['outbound'] == $num ? 'checked' : '';
                                 echo "<label>
                                         <input type='checkbox' name='packaging[]' value='" . htmlspecialchars($pkg['num']) . "' class='zone-" . htmlspecialchars($zone) . "' $isSelected>
                                         Packaging Quantity: " . htmlspecialchars($pkg['package_quantity']) . "
@@ -109,6 +107,29 @@ foreach ($zones as $zone) {
                 }
                 ?>
             </div>
+
+            <script>
+                document.querySelectorAll('.select-all').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const zone = this.getAttribute('data-zone');
+                        const checkboxes = document.querySelectorAll('.zone-' + zone);
+                        
+                        const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                        
+                        if (allChecked) {
+                            checkboxes.forEach(checkbox => {
+                                checkbox.checked = false;
+                            });
+                            this.textContent = 'Select All';
+                        } else {
+                            checkboxes.forEach(checkbox => {
+                                checkbox.checked = true;
+                            });
+                            this.textContent = 'Deselect All';
+                        }
+                    });
+                });
+            </script>
 
             <hr>
             <footer class="footer">
