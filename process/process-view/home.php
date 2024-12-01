@@ -7,6 +7,8 @@ if(empty($_SESSION['trac'])){
 
 session_start();
 $trac = getProcessByID($_SESSION['trac']);
+
+$validate=getCodeFromTraceabilityByProcess($trac['Traceability']);
 ?>
     <div class="tables">
         <div class="background">
@@ -28,12 +30,12 @@ $trac = getProcessByID($_SESSION['trac']);
 
             <div class="process">
                 <div class="">
-                <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packing Products" ):?>
+                <?php if($validate == "START"):?>
                 <a href="?a=addPackage">
                 <?php endif; ?>
                     <h3>Packing</h3>
                     <img class="bin process-btn" src="<?php echo SVG . "products.svg" ?>">
-                <?php if($trac['State'] == "Starting Process"):?>
+                <?php if($validate == "START"):?>
                 </a>
                 <?php endif; ?>
                 <p>
@@ -56,12 +58,12 @@ $trac = getProcessByID($_SESSION['trac']);
             </div>
 
                 <div>
-                    <?php if($trac['State'] == "Packing Products" || $trac['State'] == "Packaging Boxes"):?>
+                    <?php if($validate == "START" || $validate == "PACKG"):?>
                     <a href="?a=addPackaging">
                     <?php endif; ?>
                         <h3>Packaging</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
-                    <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packaging Boxes"):?>
+                        <?php if($validate == "START" || $validate == "PACKG"):?>
                     </a>
                     <?php endif; ?>
                     <p>
@@ -80,12 +82,12 @@ $trac = getProcessByID($_SESSION['trac']);
                 </div>
 
                 <div>
-                    <?php if($trac['State'] == "Packaging Boxes" || $trac['State'] == "In Warehouse"):?>
+                    <?php if($validate == "PACKG" || $validate == "WARHS"):?>
                     <a href="?a=addWarehouse">
                     <?php endif; ?>
                         <h3>Warehouse</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "zone.svg" ?>">
-                    <?php if($trac['State'] == "Packaging Boxes" || $trac['State'] == "In Warehouse"):?>
+                    <?php if($validate == "PACKG" || $validate == "WARHS"):?>
                     </a>
                     <?php endif; ?>
                     <p>
