@@ -48,7 +48,7 @@
                     <h1>Edit Materials</h1>
                 </header>
                 <?php if(validateUser("ADMIN")):?>
-                <a  class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
+                <a  class="btn-primary" href="?a=del&code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
                 <?php endif; ?>
                 <hr>
                 <h2>Material</h2>

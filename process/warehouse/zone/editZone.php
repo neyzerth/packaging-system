@@ -50,7 +50,7 @@
                     <h1>Edit Zone</h1>
                 </header>
                 <?php if(validateUser("ADMIN")):?>
-                    <a class="btn-primary" href="disableZone.php?code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this zone?');">Disable</a>
+                    <a class="btn-primary" href="?a=del&code=<?php echo $zone['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this zone?');">Disable</a>
                 <?php endif; ?>
                 <hr>
                 <h2>Zone</h2>

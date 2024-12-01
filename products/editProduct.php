@@ -51,7 +51,7 @@
                 <h1>Edit Products</h1>
             </header>
             <?php if(validateUser("ADMIN")):?>
-                <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
+                <a class="btn-primary" href="?a=del&code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
             <?php endif; ?>
             <hr>
             <h2>Products</h2>

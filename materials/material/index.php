@@ -13,7 +13,7 @@ if(!validateUser("ADMIN", "SUPER")){
 include HEAD;
 
 crudRedirect(getAction(), "listMaterial.php", 
-    "addMaterial.php", "editMaterial.php"
+    "addMaterial.php", "editMaterial.php", "disableMaterial.php"
 );
 
 include FOOT;

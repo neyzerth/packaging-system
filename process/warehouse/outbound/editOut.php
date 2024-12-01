@@ -66,7 +66,7 @@
                     <h1>Edit Outbound</h1>
                 </header>
                 <?php if(validateUser("ADMIN","SUPER","EMPLO")):?>
-                <a class="btn-primary" href="disableOut.php?num=<?php echo $out['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this outbound?');">Disable</a>
+                <a class="btn-primary" href="?a=del&num=<?php echo $out['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this outbound?');">Disable</a>
                 <?php endif; ?>
                 <hr>
                 <h2>Outbound</h2>

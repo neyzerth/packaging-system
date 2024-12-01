@@ -48,7 +48,7 @@
             </header>
             
             <?php if(validateUser("ADMIN")):?>
-                <a class="btn-primary" href="disableBox.php?num=<?php echo $box['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this box?');">Disable</a>
+                <a class="btn-primary" href="?a=del&num=<?php echo $box['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this box?');">Disable</a>
             <?php endif; ?>
             <hr>
             <h2>Dates</h2>
