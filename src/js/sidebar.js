@@ -1,5 +1,5 @@
-document.querySelectorAll('.links > *').forEach(link => {
-    if (link.pathname === location.pathname) {
+document.querySelectorAll('.nav-bar a').forEach(link => {
+    if (link.pathname === location.pathname && !link.classList.contains('logout')) {
         link.classList.add('active');
     }
 });

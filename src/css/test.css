@@ -1,100 +1,126 @@
+:root {
+    --very-dark-blue: #000814;
+    --dark-blue: #001d3d;
+    --light-blue: #003566;
+    --dark-yellow: #ffc300;
+    --light-yellow: #ffd60a;
+    --pure-white: #ffffff;/*Constrastar fuertemente con tonos oscuros*/
+    --warm-white: #FFF8E7;/*Armonizar con el amarillo brillante*/
+    --cool-white: #F0F8FF;/*Complementar con los tonos azulados oscuros*/
+    --light-gray: #F5F5F5;/*Constrastar suavemente con tonos oscuros*/
+    --silvery-white: #FAFAFA;/*Neutro*/
+}
+
+* {
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
 html, body {
     height: 100%;
 }
 
 body {
+    background-color: var(--dark-blue);
     margin: 0;
 }
 
-.container {
-    background-color:  var(--background-black);
-    box-shadow: 0.3rem 0 0.938rem rgba(0, 0, 0, 0.15);
-    height: 100%;
-    position: fixed;
-}
-
-.links {
+.nav-bar {
+    background-color: var(--very-dark-blue);
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: fixed;
 }
 
-.links > * {
-    width: 5rem;
-    min-width: 0;
-    min-height: 0;
+.nav-bar a {
+    width: 3rem;
+    min-width: 45px;
     padding-top: 0.5rem;
     padding-inline: 0.75rem;
     padding-bottom: 0.5rem;
-    text-decoration: none;
-    display: block;
-    position: relative;
+    display: flex;
 }
 
-a > * {
+.nav-bar a:hover {
+    background-color: var(--light-blue);
+}
+
+.nav-bar img {
     width: 100%;
     height: 100%;
 }
 
-a:hover {
-    background-color: var(--background-dark);
-}
-
 .logout {
-    background-color: var(--blue-light);
+    border-top: 1px solid var(--cool-white);
     margin-top: auto;
 }
 
 .logout:hover {
-    background-color: var(--blue-dark);
-    opacity: 0.8;
+    cursor: pointer;
 }
 
-.container a[tooltip]::after{
-    content: attr(tooltip);
-    background-color: var(--background-black);
-    color: var(--blue-light);
-    padding: 0.375rem;
-    top: 0.65rem;
-    left: 120%;
+.nav-bar a[tooltip]::after{
+    background-color: var(--cool-white);
+    color: var(--dark-blue);
+    font-weight: bold;
+    padding: 0.2rem;
+    left: 80px;
     opacity: 0;
-    white-space: nowrap;
     position: absolute;
     visibility: hidden;
     pointer-events: none;
     transition: opacity 0.5s ease, visibility 0.05s ease;
+    content: attr(tooltip);
 }
 
-.container a[tooltip]:hover::after {
+.nav-bar a[tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
 }
 
 .active {
-    background-color: var(--blue-dark);
+    background-color: var(--light-blue);
+    border-left: 1px solid var(--cool-white);
+    width: 4.47rem !important;
+    box-sizing: border-box;
 }
 
-.active:hover {
-    background-color: var(--blue-dark);
-}
-
-
-@media (max-width: 768px) {
-    .container {
+@media (max-width: 768px) OR (max-height: 359px) {
+    .nav-bar {
         width: 100%;
-        height: auto;
-    }
-
-    .links {
         height: auto;
         flex-direction: row;
     }
 
-    .links > * {
-        width: 100%;
+    .nav-bar a {
+        width: 100% !important;
+        min-width: 35px;
         height: 2rem;
         padding-top: 0.5rem;
         padding-inline: .25rem;
         padding-bottom: 0.5rem;
+    }
+
+    .nav-bar a[tooltip]:hover::after {
+        visibility: hidden;
+    }
+
+    .logout {
+        border-top: none;
+        border-left: 1px solid var(--cool-white);
+        margin-top: auto;
+    }
+
+    .active {
+        border-top: 1px solid var(--cool-white);
+        border-left: none;
+        height: 2.97rem !important;
+    }
+}
+
+@media (max-height: 359px) {
+    .nav-bar {
+        position: absolute;
     }
 }

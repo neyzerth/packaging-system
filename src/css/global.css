@@ -17,6 +17,19 @@
     --blue-dark: #4A72B2;
 }
 
+:root {
+    --bg-very-dark: #000814;
+    --bg-dark: #001d3d;
+    --bg-light: #003566;
+    --btn-dark: #ffc300;
+    --btn-light: #ffd60a;
+    --txt-pure-white: #ffffff;/*Constrastar fuertemente con tonos oscuros*/
+    --txt-warm-white: #FFF8E7;/*Armonizar con el amarillo brillante*/
+    --txt-cool-white: #F0F8FF;/*Complementar con los tonos azulados oscuros*/
+    --txt-light-gray: #F5F5F5;/*Constrastar suavemente con tonos oscuros*/
+    --txt-silvery-white: #FAFAFA;/*Neutro*/
+}
+
 * {
     color: var(--white-medium);
     margin: 0;
@@ -24,7 +37,6 @@
     font-family: sans-serif;
     text-decoration: none;
     list-style: none;
-    box-sizing: border-box
 }
 
 html, body {
