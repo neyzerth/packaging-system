@@ -78,25 +78,25 @@
                     </div>
                 </div>
                 <div class="row-sm-3">
-                    <h4 for="height">Height</h4>
+                    <h4 for="height">Height (cm)</h4>
                     <div class="inputs">
                         <input name="height" id="height" type="number" value="<?php echo $product['height']; ?>" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
-                    <h4 for="width">Width</h4>
+                    <h4 for="width">Width (cm)</h4>
                     <div class="inputs">
                         <input name="width" id="width" type="number" value="<?php echo $product['width']; ?>" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
-                    <h4 for="length">Length</h4>
+                    <h4 for="length">Length (cm)</h4>
                     <div class="inputs">
                         <input name="length" id="length" type="number" value="<?php echo $product['length']; ?>" required >
                     </div>
                 </div>
                 <div class="row-md-5">
-                    <h4 for="weight">Weight</h4>
+                    <h4 for="weight">Weight (g)</h4>
                     <div class="inputs">
                         <input name="weight" id="weight" type="number" placeholder="999" value="<?php echo $product['weight']; ?>" required>
                     </div>

@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="row-md-5">
-                    <h4 for="exit_quantity">Exit quantity</h4>
+                    <h4 for="exit_quantity">Exit quantity (packaging)</h4>
                     <div class="inputs">
                         <input name="exit_quantity" id="exit_quantity" type="number" required maxlength="10">
                     </div>

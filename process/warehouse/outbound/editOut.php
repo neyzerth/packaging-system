@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="row-sm-3">
-                        <h4 for="exit_quantity">Exit quantity</h4>
+                        <h4 for="exit_quantity">Exit quantity (packaging)</h4>
                         <div class="inputs">
                             <input name="exit_quantity" id="exit_quantity" type="number" placeholder="17" required maxlength="10"value="<?php echo $out['exit_quantity']; ?>">
                         </div>

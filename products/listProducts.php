@@ -54,10 +54,10 @@
                         <td><?php echo $product['code'] ?></td>
                         <td><?php echo $product['name'] ?></td>
                         <td><?php echo $product['description'] ?></td>
-                        <td><?php echo $product['weight'] ?></td>
-                        <td><?php echo $product['height'] ?></td>
-                        <td><?php echo $product['width'] ?></td>
-                        <td><?php echo $product['length'] ?></td>
+                        <td><?php echo $product['weight'].' g'?></td>
+                        <td><?php echo $product['height'].' cm'?></td>
+                        <td><?php echo $product['width'].' cm'?></td>
+                        <td><?php echo $product['length'].' cm'?></td>
                         <td><?php echo $product['packaging_protocol'] ?></td>
                         <?php if(validateUser("ADMIN", "SUPER") && $action != 'addProduct'):?>
                         <td>

@@ -39,8 +39,8 @@
                     <tr>
                         <td><?php echo $zone['code']; ?></td>
                         <td><?php echo $zone['area']; ?></td>
-                        <td><?php echo $zone['available_capacity']; ?></td>
-                        <td><?php echo $zone['total_capacity']; ?></td>
+                        <td><?php echo $zone['available_capacity'].' (packaging)'; ?></td>
+                        <td><?php echo $zone['total_capacity'].' (packaging)'; ?></td>
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
                             <a class="btn" href="?a=edit&code=<?php echo $zone['code'];?>">Edit</a>
