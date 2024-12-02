@@ -5,7 +5,7 @@
     include HEAD;
     
     crudRedirect($action,
-        "listUsers.php", "addUser.php", "editUser.php"
+        "listUsers.php", "addUser.php", "editUser.php", "disableUser.php"
     );
 
     include FOOT;

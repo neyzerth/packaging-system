@@ -47,11 +47,11 @@
                     <?php foreach($boxes as $box): ?>
                     <tr>
                         <td><?php echo $box['num'] ?></td>
-                        <td><?php echo $box['height'].'cm' ?></td>
-                        <td><?php echo $box['width'].'cm' ?></td>
-                        <td><?php echo $box['length'].'cm' ?></td>
-                        <td><?php echo $box['volume'].'cm3' ?></td>
-                        <td><?php echo $box['weight'].'g' ?></td>
+                        <td><?php echo $box['height'].' cm' ?></td>
+                        <td><?php echo $box['width'].' cm' ?></td>
+                        <td><?php echo $box['length'].' cm' ?></td>
+                        <td><?php echo $box['volume'].' cm3' ?></td>
+                        <td><?php echo $box['weight'].' g' ?></td>
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
                             <a class="btn" href="?a=edit&num=<?php echo $box['num'];?>">Edit</a>

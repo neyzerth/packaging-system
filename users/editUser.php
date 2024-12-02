@@ -62,7 +62,7 @@
                 </header>
 
                 <?php if(validateUser("ADMIN")):?>
-                    <a class="btn-primary" href="disableUser.php?num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
+                    <a class="btn-primary" href="?a=del&num=<?php echo $user['num']; ?>" onclick="return confirm('Are you sure you want to disable this user?');">Disable</a>
                 <?php endif; ?>
                 <hr>
                 <h2>Profile</h2>

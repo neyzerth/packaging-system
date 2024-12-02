@@ -4,35 +4,43 @@
     function addPackagingProtocol($name, $file) {
         try {
             $file_name = $file['name'];
-            $name = $name == "" ? pathinfo($file['name'], PATHINFO_FILENAME) : $name;
+            $name = empty($name) ? pathinfo($file_name, PATHINFO_FILENAME) : $name;
             $destination = PDFDIR . "/$file_name";
             $tempDest = $file['tmp_name'];
     
-            if (move_uploaded_file($tempDest, $destination)) {
-                $db = connectdb(); 
-                $query = "CALL addPackagingProtocol(?, ?)";
-                error_log("QUERY ADD PROTOCOL: $query | $name | $file_name");
-                $stmt = $db->prepare($query);
-                if ($stmt === false) {
-                    error_log("Error preparing statement");
-                    return false;
-                }
-                error_log("Prepare query successfully");
-                $stmt->bind_param("ss", $name, $file_name);
-                if (!$stmt->execute()) {
-                    error_log("Error executing statement");
-                    return false;
-                }
-                error_log("Execute query successfully");
-                $stmt->close();
-            } else {
+            if (!move_uploaded_file($tempDest, $destination)) {
+                error_log("Error: File could not be moved to $destination.");
                 return false;
             }
+    
+            $db = connectdb();
+            if (!$db) {
+                error_log("Database connection failed.");
+                return false;
+            }
+    
+            $query = "CALL addPackagingProtocol(?, ?)";
+            error_log("QUERY ADD PROTOCOL: $query | $name | $file_name");
+    
+            $stmt = $db->prepare($query);
+            if ($stmt === false) {
+                error_log("Error preparing statement: " . htmlspecialchars($db->error));
+                return false;
+            }
+    
+            $stmt->bind_param("ss", $name, $file_name);
+            if (!$stmt->execute()) {
+                error_log("Error executing statement: " . htmlspecialchars($stmt->error));
+                return false;
+            }
+    
+            $stmt->close();
+            $db->close();
+            return true;
         } catch (Exception $e) {
-            error_log("FATAL ERROR: ".$e->getMessage());
+            error_log("FATAL ERROR: " . $e->getMessage());
             return false;
         }
-        return true;
     }
     
     function getProtocols() {
@@ -118,26 +126,27 @@
             return $result; 
         }
 
-        function addPdf($file){
-            try{
-
-                error_log("File Have information? ".isset($file));
-                error_log(print_r($file));
+        function addPdf($file) {
+            try {
+                if (empty($file) || empty($file['name'])) {
+                    error_log("No file provided.");
+                    return false;
+                }
+        
                 $file_name = $file['name'];
                 $destination = PDFDIR . "/$file_name";
                 $tempDest = $file['tmp_name'];
-
+        
                 error_log("Moving file [$file_name] to destination: $destination");
-                
-                if(move_uploaded_file($tempDest, $destination)){
-                    error_log("PDF uploaded succesfully");
-                    return true;
-                } else {
-                    error_log("Error uploading PDF");
+                if (!move_uploaded_file($tempDest, $destination)) {
+                    error_log("Error: File upload failed.");
                     return false;
                 }
-            } catch(Exception $e){
-                error_log("Error adding pdf: ".$e->getMessage());
+        
+                error_log("PDF uploaded successfully.");
+                return true;
+            } catch (Exception $e) {
+                error_log("Error adding PDF: " . $e->getMessage());
                 return false;
             }
         }
@@ -187,4 +196,11 @@ function disableProtocol($num) {
             
             return $protocols;
         }*/
+
+    function checkProtocolFile($fileName) {
+        $filePath = PDFDIR . "/" . $fileName;
+    
+        return file_exists($filePath);
+    }
+
 ?>

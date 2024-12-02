@@ -6,7 +6,7 @@
     include HEAD;
     
     crudRedirect($action,
-        "listProducts.php", "addProduct.php", "editProduct.php"
+        "listProducts.php", "addProduct.php", "editProduct.php", "disableProduct.php"
     );
 
     include FOOT;

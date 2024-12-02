@@ -1,14 +1,14 @@
 <?php
 require "outFun.php";
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date = $_POST['date'];
-    $exit_quantity = $_POST['exit_quantity'];
+    $selected_packaging = $_POST['packaging'] ?? [];
 
-    
     $today = date('Y-m-d');
     if ($date < $today) {
         $_SESSION['message'] = [
@@ -17,34 +17,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ];
         header("Location: /process/warehouse/outbound");
         exit();
-
     }
 
-    
-    if ($exit_quantity < 0) {
+    if (empty($selected_packaging)) {
         $_SESSION['message'] = [
-            'text' => 'Exit quantity cannot be negative.',
+            'text' => 'No packaging selected.',
             'type' => 'error'
         ];
         header("Location: /process/warehouse/outbound");
         exit();
     }
+    $outbound_id = insertOutbound($date, $selected_packaging);
 
-    
-    if ($result = addOut(date: $date, exit_quantity: $exit_quantity)) {
+    if ($outbound_id) {
         $_SESSION['message'] = [
             'text' => 'Successful registration',
             'type' => 'success'
         ];
     } else {
         $_SESSION['message'] = [
-            'text' => 'Error',
+            'text' => 'Error during registration',
             'type' => 'error'
         ];
     }
 
+    header("Location: /process/warehouse/outbound");
+    exit();
 }
+
 ?>
+
 <!-- <script src="outForm.js"></script> -->
 
 <main class="forms">
@@ -52,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form class="form" action="" method="post" autocomplete="off">
             <header class="header">
                 <img src="<?php echo SVG . "icon.svg" ?>">
-                <h1>Add Outbond</h1>
+                <h1>Add Outbound</h1>
             </header>
             <hr>
-            <h2>Outbond</h2>
+            <h2>Outbound</h2>
             <div class="rows">
                 <div class="row-md-5">
                     <h4 for="date">Date</h4>
@@ -63,18 +65,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input name="date" id="date" type="date" required min="<?= date('Y-m-d') ?>">
                     </div>
                 </div>
-                <div class="row-md-5">
-                    <h4 for="exit_quantity">Exit quantity</h4>
-                    <div class="inputs">
-                        <input name="exit_quantity" id="exit_quantity" type="number" required maxlength="10">
-                    </div>
-                </div> 
             </div>
-            <hr>            
+
+            <div class="rows">
+                <h4>Select Packaging by Zone</h4>
+                <?php
+                $zones = getZones();
+                if (!empty($zones)) {
+                    foreach ($zones as $zone) {
+                        echo "<div class='zone'>";
+                        echo "<h5>Zone: " . htmlspecialchars($zone) . " <button type='button' class='select-all' data-zone='" . htmlspecialchars($zone) . "'>Select All</button></h5>";
+                        
+                        $packaging = packagingByZone($zone);
+                        if (!empty($packaging)) {
+                            echo "<div class='packaging-list' id='zone-" . htmlspecialchars($zone) . "'>";
+                            foreach ($packaging as $pkg) {
+                                echo "<label>
+                                    <input type='checkbox' name='packaging[]' value='" . htmlspecialchars($pkg['num']) . "' class='zone-" . htmlspecialchars($zone) . "'>
+                                    (".htmlspecialchars($pkg['num']).") Packaging Quantity: " . htmlspecialchars($pkg['package_quantity']) . "
+                                </label><br>";
+                            }
+                            echo "</div>";
+                        } else {
+                            echo "<p>No packaging available in this zone.</p>";
+                        }
+
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>No zones available.</p>";
+                }
+                ?>
+            </div>
+
+
+            <script>
+                document.querySelectorAll('.select-all').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const zone = this.getAttribute('data-zone');
+                        const checkboxes = document.querySelectorAll('.zone-' + zone);
+                        
+                        const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+                        
+                        if (allChecked) {
+                            checkboxes.forEach(checkbox => {
+                                checkbox.checked = false;
+                            });
+                            this.textContent = 'Select All';
+                        } else {
+                            checkboxes.forEach(checkbox => {
+                                checkbox.checked = true;
+                            });
+                            this.textContent = 'Deselect All';
+                        }
+                    });
+                });
+            </script>
+
+            <hr>
             <footer class="footer">
                 <button class="btn-primary" type="submit">Confirm</button>
             </footer>
         </form>
     </div>
 </main>
-<?php include FOOT ?>

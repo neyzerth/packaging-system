@@ -43,7 +43,16 @@
                                 <a class="btn" href="?a=edit&num=<?php echo $protocol['num'];?>">Edit</a>
                             <?php endif; ?>
                             
-                            <a class="btn" href="<?php echo URL."uploads/".$protocol['file_name']?>">View</a>
+                            <a class="btn" 
+                            href="<?php echo URL . 'uploads/' . $protocol['file_name']; ?>"
+                            onclick="<?php if (!checkProtocolFile($protocol['file_name'])): ?>
+                                            alert('The protocol is not available online. Please request instructions from the nearest supervisor.');
+                                            return false;
+                                        <?php endif; ?>">
+                            View
+                            </a>
+
+
                         </td>
                     </tr>
                     <?php endforeach; ?>
