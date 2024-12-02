@@ -111,6 +111,7 @@
             if (!$stmt->execute()) {
                 throw new Exception('Execution error: ' . htmlspecialchars($stmt->error)); 
             }
+
             if (!empty($packaging)) {
                 $placeholders = implode(',', array_fill(0, count($packaging), '?'));
                 $update_query = "UPDATE packaging SET outbound = NULL WHERE outbound = ? AND num NOT IN ($placeholders)";
@@ -127,8 +128,7 @@
                 if (!$update_stmt->execute()) {
                     throw new Exception('Update execution error: ' . htmlspecialchars($update_stmt->error));
                 }
-    
-                // 3. Asignar el outbound a los nuevos embalajes seleccionados
+
                 foreach ($packaging as $pkg_num) {
                     $update_query = "UPDATE packaging SET outbound = ? WHERE num = ?";
                     $update_stmt = $db->prepare($update_query);
@@ -141,6 +141,53 @@
                         throw new Exception('Update execution error: ' . htmlspecialchars($update_stmt->error));
                     }
                 }
+            } else {
+                $update_query = "UPDATE packaging SET outbound = NULL WHERE outbound = ?";
+                $update_stmt = $db->prepare($update_query);
+                if ($update_stmt === false) {
+                    throw new Exception('Update preparation error: ' . htmlspecialchars($db->error));
+                }
+    
+                $update_stmt->bind_param("i", $num);
+                if (!$update_stmt->execute()) {
+                    throw new Exception('Update execution error: ' . htmlspecialchars($update_stmt->error));
+                }
+            }
+
+            $count_query = "SELECT COUNT(*) AS total FROM packaging WHERE outbound = ?";
+            $count_stmt = $db->prepare($count_query);
+            if ($count_stmt === false) {
+                throw new Exception('Count query preparation error: ' . htmlspecialchars($db->error));
+            }
+    
+            $count_stmt->bind_param("i", $num);
+            $count_stmt->execute();
+            $result = $count_stmt->get_result();
+            $row = $result->fetch_assoc();
+            $new_exit_quantity = $row['total'];
+    
+            $update_outbound_query = "UPDATE outbound SET exit_quantity = ? WHERE num = ?";
+            $update_outbound_stmt = $db->prepare($update_outbound_query);
+            if ($update_outbound_stmt === false) {
+                throw new Exception('Outbound update preparation error: ' . htmlspecialchars($db->error));
+            }
+    
+            $update_outbound_stmt->bind_param("ii", $new_exit_quantity, $num);
+            if (!$update_outbound_stmt->execute()) {
+                throw new Exception('Outbound update execution error: ' . htmlspecialchars($update_outbound_stmt->error));
+            }
+
+            if ($new_exit_quantity == 0) {
+                $delete_query = "DELETE FROM outbound WHERE num = ?";
+                $delete_stmt = $db->prepare($delete_query);
+                if ($delete_stmt === false) {
+                    throw new Exception('Delete query preparation error: ' . htmlspecialchars($db->error));
+                }
+    
+                $delete_stmt->bind_param("i", $num);
+                if (!$delete_stmt->execute()) {
+                    throw new Exception('Delete execution error: ' . htmlspecialchars($delete_stmt->error));
+                }
             }
     
             return true;
@@ -148,10 +195,13 @@
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
             return false;
-    
         } finally {
-            $stmt->close();
-            mysqli_close($db);
+            if (isset($stmt)) $stmt->close();
+            if (isset($update_stmt)) $update_stmt->close();
+            if (isset($count_stmt)) $count_stmt->close();
+            if (isset($update_outbound_stmt)) $update_outbound_stmt->close();
+            if (isset($delete_stmt)) $delete_stmt->close();
+            $db->close();
         }
     }
 
