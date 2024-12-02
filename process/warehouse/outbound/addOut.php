@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             foreach ($packaging as $pkg) {
                                 echo "<label>
                                     <input type='checkbox' name='packaging[]' value='" . htmlspecialchars($pkg['num']) . "' class='zone-" . htmlspecialchars($zone) . "'>
-                                    Packaging Quantity: " . htmlspecialchars($pkg['package_quantity']) . "
+                                    (".htmlspecialchars($pkg['num']).") Packaging Quantity: " . htmlspecialchars($pkg['package_quantity']) . "
                                 </label><br>";
                             }
                             echo "</div>";

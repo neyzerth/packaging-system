@@ -6,7 +6,7 @@
     include HEAD;
     
     crudRedirect($action,
-    "listOuts.php", "addOut.php", "editOut.php", "disableOut.php"
+    "listOuts.php", "addOut.php", "editOut.php"
 );
 
     include FOOT;
