@@ -1,5 +1,5 @@
 -- SQLBook: Code
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 -- SQLBook: Code
 ---------------------------------------
 --Insertar registro
@@ -11,7 +11,7 @@ DELIMITER $$
 --no tiene la columna username entonces la agregue
 CREATE PROCEDURE addUser(
     IN p_username VARCHAR(30),
-    IN p_password VARCHAR(20),
+    IN p_password VARCHAR(50),
     IN p_name VARCHAR(50),
     IN p_first_surname VARCHAR(30),
     IN p_second_surname VARCHAR(30),
@@ -45,10 +45,6 @@ BEGIN
         p_email, p_user_type, p_supervisor
     );
 
-
-    SELECT num, username, full_name, user
-    FROM vw_user_personal_info
-    WHERE username = p_username;
 END $$
 
 
@@ -138,7 +134,7 @@ select * from material
 
 
 --------------------
-Delimiter $$
+DROP PROCEDURE addProduct;
 DELIMITER $$
 
 CREATE PROCEDURE addProduct(
@@ -148,17 +144,17 @@ CREATE PROCEDURE addProduct(
     IN p_height DECIMAL(10,2),
     IN p_width DECIMAL(10,2),
     IN p_length DECIMAL(10,2),
-    IN p_weight DECIMAL(10,2)
+    IN p_weight DECIMAL(10,2),
+    IN p_packaging_protocol INT
 )
 BEGIN
-    INSERT INTO product (code, name, description, height, width, length, weight)
-    VALUES (p_code, p_name, p_description, p_height, p_width, p_length, p_weight);
+    INSERT INTO product (code, name, description, height, width, length, weight, packaging_protocol)
+    VALUES (p_code, p_name, p_description, p_height, p_width, p_length, p_weight, p_packaging_protocol);
 
-
-    SELECT name, description, weight
-    FROM product
-    WHERE code = p_code;
 END$$
+
+CALL addProduct('C001', 'Product A', 'Description', 10.5, 5.2, 15.0, 1.2, 1);
+
 
 ----------------------------------
 
@@ -213,7 +209,7 @@ DELIMITER ;
 DELIMITER ;
 
 
-DELIMITER ;
+DELIMITER $$
 
 
 
@@ -249,7 +245,6 @@ END $$
 drop Procedure addPackaging;
 DELIMITER $$
 CREATE PROCEDURE addPackaging(
-    IN p_code varchar(5),
     IN p_height DECIMAL(10, 2),
     IN p_width DECIMAL(10, 2),
     IN p_length DECIMAL(10, 2),
@@ -259,8 +254,12 @@ CREATE PROCEDURE addPackaging(
     IN p_tag int
 )
 BEGIN
-    INSERT INTO packaging(code,height,width,length,weight,package_quantity,zone,tag)
-    VALUES(p_code,p_height,p_width,p_length,p_weight,p_package_quantity,p_zone,p_tag);
+    DECLARE num_pack INT;
+
+    INSERT INTO packaging(height,width,length,weight,package_quantity,zone,tag)
+    VALUES(p_height,p_width,p_length,p_weight,p_package_quantity,p_zone,p_tag);
+
+    SET num_pack = LAST_INSERT_ID();
 
     SELECT code,volume,package_quantity,zone
     FROM PACKAGING WHERE code = p_code;
@@ -379,11 +378,11 @@ END$$
 
 
 
-
+drop procedure addMaterialPackging;
 DELIMITER $$
 
 CREATE PROCEDURE addMaterialPackging(
-    IN p_packaging VARCHAR(5),
+    IN p_packaging INT,
     IN p_material VARCHAR(5),
     IN p_quantity INT
 )
@@ -418,21 +417,6 @@ END$$
 
 select * from material_package
 
-
-Create procedure addTagType(
-    IN p_code varchar(5),
-    IN p_description varchar(50)
-)
-BEGIN
-    INSERT INTO tag_type(code,description)
-    VALUES (p_code,p_description);
-
-    Select code,description
-    from tag_type
-    where code = p_code;
-END$$
-
-
 --sp para insertar en package
 
 drop Procedure addPackage
@@ -442,7 +426,7 @@ CREATE PROCEDURE addPackage(
     IN p_product_quantity INT,
     IN p_weight DECIMAL(10, 2),
     IN p_product VARCHAR(5),
-    IN p_packaging VARCHAR(5),
+    IN p_packaging INT,
     IN p_box INT,
     IN p_tag_type VARCHAR(5),
     IN p_date DATE
@@ -463,4 +447,13 @@ CALL addPackage(10, 15.5, 'X', 'PK001', 3, 1);
 
 
 select * from report
+
+CREATE PROCEDURE addPackagingProtocol(
+    IN prot_name VARCHAR(100),
+    IN prot_file_name VARCHAR(255)
+)
+BEGIN
+    INSERT INTO packaging_protocol(name, file_name)
+    VALUES(prot_name, prot_file_name);
+END $$
 

@@ -46,8 +46,10 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Edit Boxes</h1>
             </header>
-
-            <a class="btn-primary" href="disableBox.php?num=<?php echo $box['num']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar esta caja?');">Disable</a>
+            
+            <?php if(validateUser("ADMIN")):?>
+                <a class="btn-primary" href="disableBox.php?num=<?php echo $box['num']; ?>" onclick="return confirm('¿Are you sure you want to disable this box?');">Disable</a>
+            <?php endif; ?>
             <hr>
             <h2>Dates</h2>
             <div class="rows">
@@ -100,4 +102,4 @@
             if (successMsg) successMsg.style.display = 'none';
             if (errorMsg) errorMsg.style.display = 'none';
         }, 3000);
- </script>
+</script>

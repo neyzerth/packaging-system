@@ -9,9 +9,12 @@ require_once __DIR__ . "/../config.php";
 function login($username, $password)
 {
     $db = connectdb();
-    $stmt = $db->prepare("SELECT num, username, user_type FROM vw_user_info WHERE username = ? AND password = ?");
+    $stmt = $db->prepare("call login(?,?)");
+    
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
+
+
     $result = $stmt->get_result();
     $bool = $result->num_rows > 0;
     if ($bool) {

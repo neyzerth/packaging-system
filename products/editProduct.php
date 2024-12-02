@@ -1,6 +1,8 @@
 <?php
     require "prodFun.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $protocols=getProtocols();
 
     if (isset($_GET['code'])) {
@@ -20,10 +22,9 @@
         $width = $_POST['width'];
         $length = $_POST['length'];
         $weight = $_POST['weight'];
-        $active = 1; 
         $packaging_protocol = $_POST['packaging_protocol'];
 
-        if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, active:$active, packaging_protocol:$packaging_protocol)){
+        if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, packaging_protocol:$packaging_protocol)){
             $_SESSION['message'] = [
                 'text' => 'Successful registration',
                 'type' => 'success'
@@ -49,19 +50,19 @@
                 <img src="<?php  echo SVG . "icon.svg" ?>">
                 <h1>Edit Products</h1>
             </header>
-            <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Estás seguro de que deseas desactivar este producto?');">Disable</a>
+            <?php if(validateUser("ADMIN")):?>
+                <a class="btn-primary" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
+            <?php endif; ?>
             <hr>
             <h2>Products</h2>
             <div class="rows">
-                <div class="row-sm-3">
-                    <a class="btn" href="disableProduct.php?code=<?php echo $product['code']; ?>" onclick="return confirm('¿Are you sure you want to disable this product?');">Disable</a>
-                </div>
+
             </div>
             <div class="rows">
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" value="<?php echo $product['code']; ?>" required maxlength="5">
+                        <input name="code" id="code" type="text" value="<?php echo $product['code']; ?>" required maxlength="5" readonly>
                     </div>
                 </div>
                 <div class="row-sm-3">
@@ -73,7 +74,7 @@
                 <div class="row-sm-3">
                     <h4 for="description">Description</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="fragile" value="<?php echo $product['description']; ?>" required maxlength="255">
+                        <input name="description" id="description" type="text"  value="<?php echo $product['description']; ?>" required maxlength="255">
                     </div>
                 </div>
                 <div class="row-sm-3">
@@ -97,7 +98,7 @@
                 <div class="row-md-5">
                     <h4 for="weight">Weight</h4>
                     <div class="inputs">
-                        <input name="weight" id="weight" type="number" placeholder="999" value="<?php echo $product['weight']; ?>" required maxlength="10">
+                        <input name="weight" id="weight" type="number" placeholder="999" value="<?php echo $product['weight']; ?>" required>
                     </div>
                 </div>
                 <div class="row-md-5">

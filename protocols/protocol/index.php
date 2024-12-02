@@ -4,8 +4,10 @@
     require_once "../../config.php";
     include HEAD;
 
+    error_log("ACTION: $action");
     crudRedirect($action, 
-        "listProtocols.php", "addProtocol.php", "editProtocol.php"
+        "listProtocols.php", "addProtocol.php", 
+        "editProtocol.php","disableProtocol.php"
     );
     include FOOT;
 ?>

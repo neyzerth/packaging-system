@@ -6,14 +6,14 @@
         $num = $_GET['num'];
         
         if (disableOutbound($num)) {
-            echo "Salida desactivada correctamente.";
+            echo "Outbound disabled successfully.";
         } else {
-            echo "Error al desactivar la salida.";
+            echo "Error disabling output.";
         }
 
-        header("Location: index.php");
+        header("Location: /warehouse/outbound");
         exit();
     } else {
-        echo "Numero de salida no proporcionado.";
+        echo "Outbound number not provided.";
     }
 ?>

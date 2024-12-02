@@ -32,7 +32,7 @@
                 'type' => 'error'
             ];
         }
-        header("Location: /");
+        header("Location: /materials/material/");
         exit();
     }
 
@@ -58,25 +58,25 @@
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" required maxlength="5">
+                        <input name="code" id="code" type="text" placeholder="pla"  required maxlength="5">
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4 for="material_name">Name of material</h4>
                     <div class="inputs">
-                        <input name="material_name" id="material_name" type="text" required maxlength="50">
+                        <input name="material_name" id="material_name" type="text" placeholder="Plastic" maxlength="50">
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4 for="description">Description</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="fragile" required maxlength="255">
+                        <input name="description" id="description" type="text" placeholder="Durable plastic" required maxlength="255">
                     </div>
                 </div>
                 <div class="row-md-5">
                     <h4 for="available_quantity">Quantity</h4>
                     <div class="inputs">
-                        <input name="available_quantity" id="available_quantity" type="number" placeholder="999" required maxlength="10">
+                        <input name="available_quantity" id="available_quantity" type="number" placeholder="17" required>
                     </div>
                 </div>
                 <div class="row-md-5">
@@ -95,6 +95,7 @@
             <hr>
             <footer class="footer">
                 <button class="btn-primary" type="submit">Confirm</button>
+                <button class="btn-primary" onclick="window.history.back()">Cancelar</button>
             </footer>
         </form>
     </div>
@@ -110,4 +111,6 @@
 </script>
 =======
 <?php include FOOT ?>
+
+
 

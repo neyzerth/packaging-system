@@ -6,7 +6,7 @@
         $code = $_GET['code'];
         
         if (disableZone($code)) {
-            echo "Zona desactivada correctamente.";
+            echo "Zone deactivated successfully.";
         } else {
             echo "Error al desactivar la zona.";
         }

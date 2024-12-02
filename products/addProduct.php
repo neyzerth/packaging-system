@@ -1,6 +1,8 @@
 <?php
     require "prodFun.php";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     $protocols = getProtocols();
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -63,7 +65,7 @@
                 <div class="row-sm-3">
                     <h4 for="description">Description</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="fragile" required maxlength="255">
+                        <input name="description" id="description" type="text"  required maxlength="255">
                     </div>
                 </div>
                 <div class="row-sm-3">
@@ -88,7 +90,7 @@
                 <div class="row-md-5">
                     <h4 for="weight">Weight</h4>
                     <div class="inputs">
-                        <input name="weight" id="weight" type="number" placeholder="999" required maxlength="10">
+                        <input name="weight" id="weight" type="number" placeholder="12.5" required>
                     </div>
                 </div>
                 <div class="row-md-5">
@@ -97,7 +99,7 @@
                         <select class="input" required name="packaging_protocol" id="packaging_protocol options">
                             <?php 
                                 while ($protocol = mysqli_fetch_assoc($protocols)):   
-                                    echo "<option value='{$protocol['code']}'>{$protocol['name']}</option>";
+                                    echo "<option value='{$protocol['num']}'>{$protocol['name']}</option>";
                                 endwhile; 
                             ?>
                         </select>

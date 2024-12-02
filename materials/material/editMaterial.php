@@ -36,7 +36,10 @@
         exit();
     }
 ?>
-<script src="materialForm.js"></script>
+<head>     
+    <script src="materialForm.js"></script>  
+</head>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="" method="post" autocomplete="off">
@@ -44,32 +47,34 @@
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Materials</h1>
                 </header>
+                <?php if(validateUser("ADMIN")):?>
                 <a  class="btn-primary" href="disableMaterial.php?code=<?php echo $material['code']; ?>" onclick="return confirm('Are you sure you want to disable this material?');">Disable</a>
+                <?php endif; ?>
                 <hr>
                 <h2>Material</h2>
                 <div class="rows">
                     <div class="row-sm-3">
                         <h4 for="code">Code</h4>
                         <div class="inputs">
-                            <input name="code" id="code" type="text" value="<?php echo $material['code']; ?>" required maxlength="5">
+                            <input name="code" id="code" type="text" placeholder="pla" value="<?php echo $material['code']; ?>" required maxlength="5"  readonly>
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="material_name">Name of material</h4>
                         <div class="inputs">
-                            <input name="material_name" id="material_name" type="text" value="<?php echo $material['name']; ?>" required maxlength="50">
+                            <input name="material_name" id="material_name" type="text" placeholder="Plastic" value="<?php echo $material['name']; ?>" required maxlength="50">
                         </div>
                     </div>
                     <div class="row-sm-3">
                         <h4 for="description">Description</h4>
                         <div class="inputs">
-                            <input name="description" id="description" type="text" placeholder="fragile" value="<?php echo $material['description']; ?>" required maxlength="255">
+                            <input name="description" id="description" type="text" placeholder="Durable plastic" value="<?php echo $material['description']; ?>" required maxlength="255">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="available_quantity">Available Quantity</h4>
                         <div class="inputs">
-                            <input name="available_quantity" id="available_quantity" type="number" placeholder="999" value="<?php echo $material['available_quantity']; ?>" required maxlength="10">
+                            <input name="available_quantity" id="available_quantity" type="number" placeholder="999" value="<?php echo $material['available_quantity']; ?>" required>
                         </div>
                     </div>
                     <div class="row-md-5">

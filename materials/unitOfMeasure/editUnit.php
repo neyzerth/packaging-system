@@ -19,16 +19,23 @@
         $code = $_POST['code'];
         $description = $_POST['description'];
 
-        //checar esto
         $result = updateUnit(
             code: $code, description:$description
         );
 
-        if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Unit added successfully</span></div>";
+        if($result){
+            $_SESSION['message'] = [
+                'text' => 'Successful registration',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Unit</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error',
+                'type' => 'error'
+            ];
         }
+        header("Location: /materials/unitOfMeasure/");
+        exit();
     }
 ?>
 <script src="unitForm.js"></script>
@@ -47,14 +54,14 @@
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" required value="<?php echo $unit['code']; ?>"  maxlength="5">
+                        <input name="code" id="code" type="text"  placeholder="kg" required value="<?php echo $unit['code']; ?>"  maxlength="5" readonly>
                     </div>
                 </div>
 
                 <div class="row-md-5">
                     <h4 for="destination">Description</h4>
                     <div class="inputs">
-                        <input name="description" id="description" type="text" placeholder="Heavy" required value="<?php echo $unit['description']; ?>" maxlength="50">
+                        <input name="description" id="description" type="text" placeholder="Kilograms" required value="<?php echo $unit['description']; ?>" maxlength="50">
                     </div>
                 </div>
             </div>

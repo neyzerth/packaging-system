@@ -28,10 +28,12 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag edited successfully</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag updated successfully</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error editing tag</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updating tag</span></div>";
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <script src="tagForm.js"></script>
@@ -66,7 +68,7 @@
                         <select class="input" required name="tag_type" id="tag_type">
                             <?php 
                                 while ($tag_type = mysqli_fetch_assoc($tag_types)):
-                                    $selected = $currentTagType === $tag_type['code'] ? 'selected' : '';
+                                    $selected = $tag['tag_type'] === $tag_type['code'] ? 'selected' : '';
                                     echo "<option value='{$tag_type['code']}' $selected>{$tag_type['description']}</option>";
                                 endwhile; 
                             ?>
@@ -77,7 +79,7 @@
                 <div class="row-md-5">
                     <h4 for="destination">Destination</h4>
                     <div class="inputs">
-                        <input name="destination" id="destination" type="text" placeholder="Cuba" value="<?php echo $tag['destination']; ?>" required>
+                        <input name="destination" id="destination" type="text" placeholder="Cuba"  maxlength="25"   value="<?php echo $tag['destination']; ?>" required>
                     </div>
                 </div>
             </div>

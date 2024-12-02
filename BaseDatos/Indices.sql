@@ -1,7 +1,11 @@
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 show  index from user
 
 --En la tabla tag campo barcode
 CREATE UNIQUE INDEX UQ_tag_barcode ON tag(barcode);
+
+DROP INDEX UQ_tag_barcode on tag;
+
 
 --Tabla packaging en campo tag
 CREATE UNIQUE INDEX UQ_packaging_tag ON packaging(tag);
@@ -15,12 +19,4 @@ CREATE UNIQUE INDEX UQ_package_tag ON package(tag);
 --Tabla product campo name
 CREATE UNIQUE INDEX UQ_product_name ON product(name);
 
---Tabla traceability campo product  
-CREATE UNIQUE INDEX UQ_traceability_product ON traceability(product);
-
---Tabla incident  cammpo date
-CREATE UNIQUE INDEX UQ_incident_date ON incident(date);
-
---Tabla report campo report_date
-CREATE UNIQUE INDEX UQ_report_report_date ON report(report_date);
-
+CREATE UNIQUE INDEX UQ_username ON user(username);

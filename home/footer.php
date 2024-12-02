@@ -1,4 +1,5 @@
         <footer class="footer">
+        <script src="<?php echo JS . "paginado.js" ?>"></script>
             <ul>
                 <li>
                     <a href="">

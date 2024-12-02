@@ -24,10 +24,12 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag added successfully</span></div>";
+            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag type updated successfully</span></div>";
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding tag</span></div>";
+            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updading Tag type</span></div>";
         }
+        header("Location: index.php");
+        exit();
     }
 ?>
 <script src="tagTypeForm.js"></script>
@@ -46,7 +48,7 @@
                 <div class="row-sm-3">
                     <h4 for="code">Code</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" required value="<?php echo $tag_type['code']; ?>"  maxlength="5">
+                        <input name="code" id="code" type="text" required value="<?php echo $tag_type['code']; ?>"  maxlength="5" readonly>
                     </div>
                 </div>
 

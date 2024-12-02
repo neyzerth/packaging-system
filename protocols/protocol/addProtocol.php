@@ -15,6 +15,8 @@
         } else {
             echo "<div class='div-msg' id='success-msg'><span class='msg'>Error adding protocol</span></div>";
         }
+        header("Location: /protocols/protocol");
+        exit();
     }
 
 ?>
@@ -27,15 +29,15 @@
         <form class="form" action="" method="post" autocomplete="off" enctype="multipart/form-data">
             <header class="header">
                 <img src="<?php  echo SVG . "icon.svg" ?>">
-                <h1>Add Materials</h1>
+                <h1>Add Protocols</h1>
             </header>
             <hr>
-            <h2>Material</h2>
+            <h2>Protocol</h2>
             <div class="rows">
                 <div class="row-md-5">
                     <h4 for="name">Name of protocol</h4>
                     <div class="inputs">
-                        <input name="name" id="name" type="text">
+                        <input name="name" id="name" type="text" maxlength="50">
                     </div>
                 </div>
                 <div class="row-md-5">

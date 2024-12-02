@@ -1,5 +1,5 @@
 -- SQLBook: Code
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1723058837855@@127.0.0.1@3306@packaging
 
 drop DATABASE packaging;
 create DATABASE packaging;
@@ -12,10 +12,6 @@ CREATE TABLE user_type (
     description VARCHAR(50) NOT NULL,
     active BIT DEFAULT TRUE
 );
-
-ALTER TABLE user
-MODIFY password VARCHAR(40);
-
 
 -- TABLE USER
 CREATE TABLE user (
@@ -84,7 +80,7 @@ CREATE TABLE tag (
 
 -- TABLE PACKAGING
 CREATE TABLE packaging (
-    code VARCHAR(5)  PRIMARY KEY,
+    num INT PRIMARY KEY AUTO_INCREMENT,
     height DECIMAL(10, 2),
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
@@ -116,21 +112,14 @@ CREATE TABLE material (
     CONSTRAINT fk_unit_of_measure FOREIGN KEY (unit_of_measure) REFERENCES unit_of_measure(code)
 );
 
-ALTER TABLE material
-change  material_name name VARCHAR(50) NOT NULL;;
 
 -- TABLE PACKAGING PROTOCOL
 CREATE TABLE packaging_protocol (
     num INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),
+    name VARCHAR(100),
     file_name VARCHAR(255),
     active BIT DEFAULT TRUE
 );
-
-
-alter table packaging_protocol
-MODIFY COLUMN  file_name VARCHAR(255)
-
 
 
 -- TABLE PRODUCT
@@ -141,7 +130,7 @@ CREATE TABLE product (
     height DECIMAL(10, 2),
     width DECIMAL(10, 2),
     length DECIMAL(10, 2),
-    /* volume  DECIMAL(10, 2), */
+    volume  DECIMAL(10, 2),
     weight DECIMAL(10, 2),
     active BIT DEFAULT TRUE,
     packaging_protocol INT,
@@ -154,11 +143,11 @@ CREATE TABLE package (
     product_quantity INT,
     weight DECIMAL(10, 2),
     product VARCHAR (5),
-    packaging VARCHAR(5),
+    packaging INT,
     box INT,
     tag int,
     CONSTRAINT fk_product_package FOREIGN KEY (product) REFERENCES product(code),
-    CONSTRAINT fk_packaging_package FOREIGN KEY (packaging) REFERENCES packaging(code),
+    CONSTRAINT fk_packaging_package FOREIGN KEY (packaging) REFERENCES packaging(num),
     CONSTRAINT fk_box_package FOREIGN KEY (box) REFERENCES box(num),
     CONSTRAINT fk_tag_package FOREIGN KEY (tag) REFERENCES tag(num)
 );
@@ -173,10 +162,10 @@ CREATE TABLE state (
 CREATE TABLE traceability (
     num INT AUTO_INCREMENT PRIMARY KEY,
     product VARCHAR(5),
-    packaging VARCHAR(5),
+    packaging INT,
     state VARCHAR(5),
     CONSTRAINT fk_product_traceability FOREIGN KEY (product) REFERENCES product(code),
-    CONSTRAINT fk_packaging_traceability FOREIGN KEY (packaging) REFERENCES packaging(code),
+    CONSTRAINT fk_packaging_traceability FOREIGN KEY (packaging) REFERENCES packaging(num),
     CONSTRAINT fk_state_traceability FOREIGN KEY (state) REFERENCES state(code)
 );
 
@@ -194,14 +183,15 @@ CREATE TABLE incident (
 -- TABLE REPORT
 CREATE TABLE report (
     folio INT AUTO_INCREMENT PRIMARY KEY,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
+    start_date DATE NULL,
+    end_date DATE NULL,
     report_date DATE,
     packed_products INT,
     observations TEXT,
     traceability INT,
     CONSTRAINT fk_traceability_report FOREIGN KEY (traceability) REFERENCES traceability(num)
 );
+
 
 -- MANY-TO-MANY TABLES
 CREATE TABLE user_traceability (
@@ -214,11 +204,11 @@ CREATE TABLE user_traceability (
 
 -- PACKAGING-MATERIAL
 CREATE TABLE material_packging (
-    packaging VARCHAR(5),
+    packaging INT,
     material VARCHAR (5),
     quantity INT,
     PRIMARY KEY (material,packaging),
-    CONSTRAINT fk_packaging_material FOREIGN KEY (packaging) REFERENCES packaging(code),
+    CONSTRAINT fk_packaging_material FOREIGN KEY (packaging) REFERENCES packaging(num),
     CONSTRAINT fk_material_packaging FOREIGN KEY (material) REFERENCES material(code)
 );
 

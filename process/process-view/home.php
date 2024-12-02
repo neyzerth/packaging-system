@@ -1,56 +1,114 @@
 <?php
+session_start();
+if(empty($_SESSION['trac'])){
+    $process = startProcess();
+    $_SESSION['trac'] = $process['Traceability'];
+} 
 
+session_start();
+$trac = getProcessByID($_SESSION['trac']);
 ?>
     <div class="tables">
         <div class="background">
-            <?php //include HEADER; ?>
+            <br>
             <div style="text-align: center">
                 <h1>PROCESS VIEW</h1>
             </div>
             <div class="process">
                 <div>
-                <a href="?a=addPackage">
-                    <h3>Packing</h3>
-                    <img class="bin" src="<?php echo SVG . "products.svg" ?>">
-                </a>
+                    <h2>STATE: <?php echo $trac['State'] ?></h2>
                 </div>
                 <div>
-                    <a href="?a=addPackaging">
-                    <h3>Packaging</h3>
-                    <img class="bin" src="<?php echo SVG . "boxes.svg" ?>">
-                    </a>
+                    <h2>TRACEABILITY ID: <?php echo $trac['Traceability']; ?></h2>
                 </div>
                 <div>
-                    <a href="?a=addWarehouse">
-                    <h3>Warehouse</h3>
-                    <img class="bin" src="<?php echo SVG . "zone.svg" ?>">
-                    </a>
+                    <a href="?a=select"><h3 class="btn">Select New Process</h3></a>
                 </div>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                            <span class="column-order"></span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <?php include FOOTER ?>
+
+            <div class="process">
+                <div class="">
+                <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packing Products" ):?>
+                <a href="?a=addPackage">
+                <?php endif; ?>
+                    <h3>Packing</h3>
+                    <img class="bin process-btn" src="<?php echo SVG . "products.svg" ?>">
+                <?php if($trac['State'] == "Starting Process"):?>
+                </a>
+                <?php endif; ?>
+                <p>
+                    <b>Product:</b> 
+                    <?php echo printNull($trac['Product'])?>
+                </p>
+                <p>
+                    <b>Product Quantity:</b> 
+                    <?php echo printNull($trac['Product_Quantity'])?>
+                </p>
+                <p>
+                    <b>Tag:</b> 
+                    <?php echo "[".printNull($trac['Package_Tag'])."] "
+                        .printNull($trac['Package_Type'])?>
+                </p>
+                <p>
+                    <b>Protocol:</b> 
+                    <?php echo printNull($trac['Protocol'])?>
+                </p>
+            </div>
+
+                <div>
+                    <?php if($trac['State'] == "Packing Products" || $trac['State'] == "Packaging Boxes"):?>
+                    <a href="?a=addPackaging">
+                    <?php endif; ?>
+                        <h3>Packaging</h3>
+                        <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
+                    <?php if($trac['State'] == "Starting Process" || $trac['State'] == "Packaging Boxes"):?>
+                    </a>
+                    <?php endif; ?>
+                    <p>
+                    <b>Barcode:</b> 
+                        <?php echo printNull($trac['Packaging_Barcode'])?>
+                    </p>
+                    <p>
+                        <b>Package Quantity:</b> 
+                        <?php echo printNull($trac['Package_Quantity'])?>
+                    </p>
+                    <p>
+                    <b>Tag:</b> 
+                    <?php echo "[".printNull($trac['Packaging_Tag'])."] "
+                        .printNull($trac['Packaging_Type'])?>
+                    </p>
+                </div>
+
+                <div>
+                    <?php if($trac['State'] == "Packaging Boxes" || $trac['State'] == "In Warehouse"):?>
+                    <a href="?a=addWarehouse">
+                    <?php endif; ?>
+                        <h3>Warehouse</h3>
+                        <img class="bin process-btn" src="<?php echo SVG . "zone.svg" ?>">
+                    <?php if($trac['State'] == "Packaging Boxes" || $trac['State'] == "In Warehouse"):?>
+                    </a>
+                    <?php endif; ?>
+                    <p>
+                        <b>Area:</b> 
+                        <?php echo printNull($trac['Area'])?>
+                    </p>
+                    <p>
+                        <b>Total Space:</b> 
+                        <?php echo printNull($trac['Available'])?>
+                    </p>
+                    <p>
+                        <b>Available Space:</b> 
+                        <?php echo printNull($trac['Available'])?>
+                    </p>
+                </div>
+            </div>
+            
+            <?php 
+            include 'listUsersInProcess.php';
+            ?>
             <hr>
+            <a href="?a=incident"><button class="btn-primary" type="submit">Incident</button></a>
             <footer class="footer">
-                <button class="btn-primary" type="submit">Incident</button>
             </footer>
         </div>
     </div>

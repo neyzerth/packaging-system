@@ -5,15 +5,15 @@
     if (isset($_GET['num'])) {
         $num = $_GET['num'];
         
-        if (disableMaterial($num)) {
-            echo "Protocolo desactivado correctamente.";
+        if (disableProtocol($num)) {
+            error_log("Protocol deactivated correctly.");
         } else {
-            echo "Error al desactivar el protocolo.";
+            error_log("Error disabling protocol.");
         }
-
-        header("Location: index.php");
-        exit();
     } else {
-        echo "Código de protocolo no proporcionado.";
+        error_log("Protocol code not provided.");
     }
+
+    header("Location: /protocols/protocol/");
+    exit();
 ?>

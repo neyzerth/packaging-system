@@ -1,40 +1,38 @@
-][<?php
+<?php
     require "packagingFun.php";
-    $zones = getZones();
-    $outbounds = getOuts();
-    $tags = getTags();
 
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-        $code = $_POST['code'];
-        $height = $_POST['height'];
-        $width = $_POST['width'];
-        $length = $_POST['length'];
-        $weight = $_POST['weight'];
-        $package_quantity = $_POST['package_quantity'];
-        $zone = $_POST['zone'];
-        $tag = $_POST['tag'];
+    $process = getProcessByID($_SESSION['trac']);
+    $quantity = $process['Package_Quantity'];
+    $destination = $_SESSION['Destination'];
+    $packaging = $process['Packaging'];
+    error_log($quantity);
 
-        $result = addPackaging(code:$code, height:$height, width:$width, length:$length, weight:$weight, package_quantity:$package_quantity, zone:$zone, tag:$tag);
+    $materialsUsed = getMaterialsInPackaging();
 
-        if($result){
-            $_SESSION['message'] = [
-                'text' => 'Successful registration',
-                'type' => 'success'
-            ];
-        } else {
-                $_SESSION['message'] = [
-                'text' => 'Error',
-                'type' => 'error'
-            ];
+    if($_SERVER['REQUEST_METHOD']=='POST' || !empty($destination)){
+
+        $quantity = empty($_POST['quantity']) ? $quantity : $_POST['quantity'];
+        $destination = empty($_POST['destination']) ? $destination : $_POST['destination'];
+
+        startPackaging($destination);
+
+        $materials = getAvailableMaterial($packaging);
+
+        $validate = true;
+    
+    
+        if($_POST['validate'] == "true"){
+            
+            $material = $_POST['material'];
+            $matQuant = $_POST['mat_quantity'];
+            addPackagesQuan($quantity);
+            $bool = addMaterialToPackaging($material, $packaging, $matQuant);
+            
+            
         }
-        header("Location: /process/process-view");
-        exit();
     }
-?>
 
-<head>
-    <script src="packagingForm.js"></script>
-</head>
+?>
 
 <main class="forms">
     <div class="background">
@@ -44,74 +42,87 @@
                 <h1>Add Packaging</h1>
             </header>
             <hr>
-            <h2>Packaging</h2>
+            <h2>Packages</h2>
+            <input type="hidden" name="a" value="addPackaging">
             <div class="rows">
-                <div class="row-sm-3">
-                    <h4 for="code">Code</h4>
+                <div class="row-md-5">
+                    <h4 for="product">Destination</h4>
                     <div class="inputs">
-                        <input name="code" id="code" type="text" required maxlength="5">
-                    </div>
-                <div class="row-sm-3">
-                    <h4 for="height">Height</h4>
-                    <div class="inputs">
-                        <input name="height" id="height" type="number" required >
-                    </div>
-                </div>
-                <div class="row-sm-3">
-                    <h4 for="width">Width</h4>
-                    <div class="inputs">
-                        <input name="width" id="width" type="number" required >
-                    </div>
-                </div>
-                <div class="row-sm-3">
-                    <h4 for="length">Length</h4>
-                    <div class="inputs">
-                        <input name="length" id="length" type="number" required >
+                        <input value="<?php echo $destination?>" type="text" name="destination" id="destination" max="25" required>
                     </div>
                 </div>
                 
+                <?php //if(!$validate):?>
                 <div class="row-md-5">
-                    <h4 for="weight">Weight</h4>
-                    <div class="inputs">
-                        <input name="weight" id="weight" type="number" placeholder="999" required>
+                    <div>
+                        <button class="btn-primary" type="submit" >Confirm</button>
                     </div>
                 </div>
-                <div class="row-md-5">
-                    <h4 for="package_quantity">Package quantity</h4>
-                    <div class="inputs">
-                        <input name="package_quantity" id="package_quantity" type="number" placeholder="999" required >
-                    </div>
-                </div>
-                <!-- apartir de aqui serian los select -->
-                <div class="row-md-5">
-                <h4 for="outbound">Zone</h4>
-                    <div class="inputs">
-                        <select class="input" required name="zone" id="zone">
-                        <?php 
-                            while ($zone = mysqli_fetch_assoc($zones)):   
-                                echo "<option value='{$zone['code']}'>{$zone['area']}</option>";
-                            endwhile; 
-                        ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="row-md-5">
-                    <h4 for="outbound">Tag</h4>
-                    <div class="inputs">
-                        <select class="input" required name="tag" id="tag options">
-                            <?php 
-                                while ($tag = mysqli_fetch_assoc($tags)):   
-                                    echo "<option value='{$tag['num']}'>{$tag['barcode']}</option>";
-                                endwhile; 
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            <hr>
-            <footer class="footer">
-                <button class="btn-primary" type="submit">Confirm</button>
-            </footer>
+                <?php //endif;?>
+            </div>
         </form>
+
+        <?php if($validate): ?>
+        <form class="form" action="" method="post" autocomplete="off"> 
+            <input type="" name="validate" id="validate" value="true" hidden>
+            <hr>
+            <h2>Destination</h2>
+            <input type="hidden" name="a" value="addPackaging">
+            <div class="rows">
+                <div class="row-md-5">
+                    <h4 for="product">Packages quantity</h4>
+                    <div class="inputs">
+                        <input value="<?php echo getProcessByID($_SESSION['trac'])['Package_Quantity']?>" type="number" name="quantity" id="quantity" min="2" required <?php echo $readonly?>>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h2>Material Used</h2>
+            <div class="rows">       
+                <div class="row-md-5">
+                    <h4 for="material">Material</h4>
+                    <select name="material" id="material" class="inputs">
+                    <?php foreach ($materials AS $material):  ?>
+                        <option value="<?php echo $material['Code']?>">
+                            <?php echo $material['Name']." (".$material['Unit'].")"?>
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="row-md-5">
+                    <h4 for="mat_quantity">Quantity</h4>
+                    <div class="inputs">
+                        <input type="number" class="input" name="mat_quantity" id="mat_quantity" value="<?php echo $matQuantity?>" min="1" required> 
+                    </div>
+                </div>
+                <?php foreach($materialsUsed AS $material): ?>
+                <div class="row-md-5">
+                    <div class="inputs">
+                        <input class="input" value="<?php echo "[".$material['Code']."] ".$material['Material']?>" readonly>
+                    </div>
+                </div>
+                <div class="row-md-5">
+                    <div class="inputs">
+                        <input class="input" value="<?php echo $material['Quantity']." ".$material['Unit'] ?>" readonly>
+                    </div>
+                </div>
+                <?php endforeach;?>
+
+            </div>
+            <footer class="footer">
+                <a class="danger btn-primary danger" style="text-align: center" href="/process/process-view/" >Go back</a>
+                <button class="btn-primary"  type="submit">Confirm</button>
+            </footer>
+            
+        </form>
+        <?php endif; ?>
     </div>
 </main>
-<?php include FOOT ?>
+<script>
+        setTimeout(() => {
+            const successMsg = document.getElementById('success-msg');
+            const errorMsg = document.getElementById('error-msg');
+            if (successMsg) successMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }, 3000);
+    </script>
