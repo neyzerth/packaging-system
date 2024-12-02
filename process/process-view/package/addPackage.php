@@ -95,7 +95,7 @@
                             <?php echo '['.$box['num'].'] '.$box['height'].'cm x'.$box['width'].'cm x'.$box['width'].'cm'?> 
                         </option>
                     <?php endforeach; ?>
-                    </selec>
+                    </select>
                 </div>
                 <div class="row-md-5">
                     <h4 for="date">Tag Type</h4>
