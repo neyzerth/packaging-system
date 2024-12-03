@@ -1,4 +1,4 @@
--- Active: 1728065056405@@127.0.0.1@3306@packaging_test
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 -- SQLBook: Code
 INSERT INTO user_type (code, name, description) VALUES 
 ('ADMIN', 'Administrator', "User with full access to the system"),
@@ -52,16 +52,7 @@ VALUES
 ('2024-10-01', 'std','Tecate'),
 ('2024-10-02', 'frg','Cancun'),
 ('2024-10-03', 'frg','Guadalajara'),
-('2024-10-04',= 'hvy','Sinaloa'),
-('2024-10-05', Null, 'urg',NULL);
-
-INSERT INTO packaging (height, width, length, weight, package_quantity, zone, outbound, tag)
-VALUES 
-(10.0, 15.0, 20.0, 10, 30 ,'Z001', 1, 1),
-(12.0, 18.0, 25.0, 10, 10, 'Z002', 2, 2),
-(8.0, 10.0, 15.0, 7, 20 ,'Z003', 3, 3),
-(14.0, 16.0, 30.0, 5, 40, 'Z004', 4, 4),
-(9.0, 11.0, 22.0, 6, 5, 'Z005', 5, 5);
+('2024-10-04', 'hvy','Sinaloa')
 
 INSERT INTO outbound (date, exit_quantity,active)
 VALUES 
@@ -70,6 +61,16 @@ VALUES
 ('2024-10-03', 20,1),
 ('2024-10-04', 50,1),
 ('2024-10-05', 75,0);
+
+
+INSERT INTO packaging (height, width, length, weight, package_quantity, zone, outbound, tag)
+VALUES 
+(10.0, 15.0, 20.0, 10, 30 ,'Z001', 1, 1),
+(12.0, 18.0, 25.0, 10, 10, 'Z002', 2, 2),
+(8.0, 10.0, 15.0, 7, 20 ,'Z003', 3, 3),
+(14.0, 16.0, 30.0, 5, 40, 'Z004', 4, 4),
+(9.0, 11.0, 22.0, 6, 5, 'Z005', 5, 4);
+
 
 
 
@@ -111,7 +112,7 @@ VALUES
 (20, 50.0, 'P30', 2, 2, 2),
 (15, 35.2, 'X', 3, 3, 3),
 (30, 60.7, 'S23', 4, 4, 4),
-(25, 45.9, 'S24', 5, 5, 5);
+(25, 45.9, 'S24', 5, 5, 4);
 
 INSERT INTO state (code, description)
 VALUES 
