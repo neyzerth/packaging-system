@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 -- SQLBook: Code
 INSERT INTO user_type (code, name, description) VALUES 
 ('ADMIN', 'Administrator', "User with full access to the system"),
@@ -65,11 +65,11 @@ VALUES
 
 INSERT INTO packaging (height, width, length, weight, package_quantity, zone, outbound, tag)
 VALUES 
-(10.0, 15.0, 20.0, 10, 30 ,'Z001', 1, 1),
-(12.0, 18.0, 25.0, 10, 10, 'Z002', 2, 2),
-(8.0, 10.0, 15.0, 7, 20 ,'Z003', 3, 3),
-(14.0, 16.0, 30.0, 5, 40, 'Z004', 4, 4),
-(9.0, 11.0, 22.0, 6, 5, 'Z005', 5, 4);
+(10.0, 15.0, 20.0, 10, 30 ,'Z001', NULL, NULL),
+(12.0, 18.0, 25.0, 10, 10, 'Z002', NULL, NULL),
+(8.0, 10.0, 15.0, 7, 20 ,'Z003', NULL, NULL),
+(14.0, 16.0, 30.0, 5, 40, 'Z004', NULL, NULL),
+(9.0, 11.0, 22.0, 6, 5, 'Z005', NULL, NULL);
 
 
 
@@ -108,11 +108,11 @@ VALUES
 
 INSERT INTO package (product_quantity, weight, product, packaging, box, tag)
 VALUES 
-(10, 25.5, 'S10', 1, 1, 1),
-(20, 50.0, 'P30', 2, 2, 2),
-(15, 35.2, 'X', 3, 3, 3),
-(30, 60.7, 'S23', 4, 4, 4),
-(25, 45.9, 'S24', 5, 5, 4);
+(10, 25.5, 'S10', 1, 1, NULL),
+(20, 50.0, 'P30', 2, 2, NULL),
+(15, 35.2, 'X', 3, 3, NULL),
+(30, 60.7, 'S23', 4, 4, NULL),
+(25, 45.9, 'S24', 5, 5, NULL);
 
 INSERT INTO state (code, description)
 VALUES 
