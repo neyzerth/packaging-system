@@ -109,7 +109,7 @@ function getCodeFromTraceabilityByProcess($tr) {
 
     $validStates = [
         'START' => 'Starting Process',
-        'PACKG' => 'Packaging Boxes',
+        'PACKG' => 'Packing Products',
         'WARHS' => 'In Warehouse'
     ];
 
