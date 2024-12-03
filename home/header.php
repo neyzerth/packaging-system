@@ -1,7 +1,7 @@
         <header class="header">
             <div class="search-container">
             <!-- <form action="" autocomplete="off"> -->
-                    <input type="search" class="search" placeholder="Search: Press Ente" autocomplete="off">
+                    <input type="search" class="search" placeholder="" autocomplete="off">
                 <!-- </form> -->
             </div>
             <?php if(validateUser("ADMIN", "SUPER") || strtok($_SERVER["REQUEST_URI"], '?') == "/process/process-view/"):?>

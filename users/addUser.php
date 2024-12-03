@@ -105,7 +105,7 @@
                     <div class="row-lg-10">
                         <h4 for="password">Password</h4>
                         <div class="inputs">
-                            <input type="text" name="password" id="password"   maxlength="40" required placeholder="Hi_everyone_01">
+                            <input type="text" name="password" id="password"   maxlength="40" required placeholder="Utt-017">
                         </div>
                     </div>
                     <div class="row-md-5">

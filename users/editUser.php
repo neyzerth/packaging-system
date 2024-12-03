@@ -105,13 +105,13 @@
                     <div class="row-lg-10">
                         <h4 for="email">Email</h4>
                         <div class="inputs">
-                        <input type="email" id="email" name="email" maxlength="30" value="<?php echo $user['email']; ?>" required>
+                        <input type="email" id="email" name="email" maxlength="30" value="<?php echo $user['email']; ?>">
                         </div>
                     </div>
                     <div class="row-lg-10">
                         <h4 for="phone">Phone number</h4>
                         <div class="inputs">
-                        <input type="text" id="phone" name="phone" maxlength="15" value="<?php echo $user['phone']; ?>" required>
+                        <input type="text" id="phone" name="phone" maxlength="15" value="<?php echo $user['phone']; ?>" >
                         </div>
                     </div>
                     <div class="row-lg-10">
