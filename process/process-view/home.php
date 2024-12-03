@@ -27,27 +27,23 @@
                     </a>
                 </div>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            <span>Code</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                            <span class="column-order"></span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <?php include FOOTER ?>
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php include FOOTER ?>
+            </div>
             <hr>
             <footer class="footer">
                 <button class="btn-primary" type="submit">Incident</button>

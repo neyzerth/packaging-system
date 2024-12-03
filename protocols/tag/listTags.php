@@ -3,32 +3,19 @@
     require "tagFun.php";
     $tags = getTags();
 ?>
-    <main class="tables">
-        <div class="background">
+<body style="display: flex; flex-direction: column;">
+        <div class="table">
             <?php 
             $link="?a=add";
             include HEADER;
             ?>
-            <table class="table">
-                <h1>Tags</h1>
+            <table>
                 <thead>
                     <tr>
-                        <th>
-                            <span>Date</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Barcode</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Tag type</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Destination</span>
-                            <span class="column-order"></span>
-                        </th>
+                        <th>Date</th>
+                        <th>Barcode</th>
+                        <th>Tag type</th>
+                        <th>Destination</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +27,7 @@
                         <td><?php echo $tag['destination']; ?></td>
                         <?php if(validateUser("ADMIN")):?>
                         <td>
-                            <a class="btn" href="?a=edit&num=<?php echo $tag['num'];?>">Edit</a>
+                            <a class="btn1" href="?a=edit&num=<?php echo $tag['num'];?>">Edit</a>
                         </td>
                         <?php endif;?>
                     </tr>
@@ -49,4 +36,3 @@
             </table>
             <?php include FOOTER ?>
         </div>
-    </main>

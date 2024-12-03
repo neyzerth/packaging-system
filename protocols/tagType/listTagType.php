@@ -3,24 +3,17 @@
     require "tagTypeFun.php";
     $tagTypes = getTagTypes();
 ?>
-<main class="tables">
-    <div class="background">
+<body style="display: flex; flex-direction: column;">
+    <div class="table">
         <?php 
         $link="?a=add";
         include HEADER;
         ?>
-        <table class="table">
-            <h1>Tags type</h1>
+        <table>
             <thead>
                 <tr>
-                    <th>
-                        <span>Code</span>
-                        <span class="column-order"></span>
-                    </th>
-                    <th>
-                        <span>Description</span>
-                        <span class="column-order"></span>
-                    </th>
+                    <th>Code</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +23,7 @@
                     <td><?php echo $tagType['description']; ?></td>
                     <?php if(validateUser("ADMIN")):?>
                     <td>
-                        <a class="btn" href="?a=edit&code=<?php echo $tagType['code'];?>">Edit</a>
+                        <a class="btn1" href="?a=edit&code=<?php echo $tagType['code'];?>">Edit</a>
                     </td>
                     <?php endif;?>
                 </tr>
@@ -39,4 +32,3 @@
         </table>
         <?php include FOOTER ?>
     </div>
-</main>

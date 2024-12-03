@@ -3,28 +3,18 @@
     require "protocolFun.php";
     $protocols = getProtocols();
 ?>
-    <main class="tables">
-        <div class="background">
+<body style="display: flex; flex-direction: column;">
+        <div class="table">
             <?php 
             $link="?a=add";
             include HEADER 
             ?>
-            <h1>Protocols</h1>
-            <table class="table">
+            <table>
                 <thead>
                     <tr>
-                        <th>
-                            <span>Code</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>File</span>
-                            <span class="column-order"></span>
-                        </th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>File</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,10 +25,10 @@
                         <td><?php echo  $protocol['file_name'];?></td>
                         <td>
                             <?php if(validateUser("ADMIN", "SUPER")): ?>
-                                <a class="btn" href="?a=edit&num=<?php echo $protocol['num'];?>">Edit</a>
+                                <a class="a" href="?a=edit&num=<?php echo $protocol['num'];?>">Edit</a>
                             <?php endif; ?>
                             
-                            <a class="btn" href="<?php echo URL."uploads/".$protocol['file_name']?>">View</a>
+                            <a  class="btn1" href="<?php echo URL."uploads/".$protocol['file_name']?>">View</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -46,4 +36,4 @@
             </table>
             <?php include FOOTER ?>
         </div>
-    </main>
+    </div>

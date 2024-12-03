@@ -1,14 +1,9 @@
-        <header class="header">
-            <div>
-                <form action="" method="get">
-                    <input type="text" name="search" id="search" placeholder="Search: Press Enter">
-                </form>
-            </div>
+        <div class="top">
+            <form method="get">
+                <input type="text" name="search" id="search" placeholder="Search">
+            </form>
+            <span>USERS</span>
             <?php if(validateUser("ADMIN", "SUPER")):?>
-            <ul>
-                <a class="btn" href="?a=add">
-                    <p>Add</p>
-                </a>
-            </ul>
+                <a class="btn1" href="?a=add">Add</a>
             <?php endif;?>
-        </header>
+        </div>

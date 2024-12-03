@@ -3,36 +3,18 @@
     require "materialFun.php";
     $materials = getMaterial();
 ?>
-    <main class="tables">
-        <div class="background">
+<body style="display: flex; flex-direction: column;">
+    <div class="table">
         <?php include HEADER; ?>
-        <h1>Materials</h1>
-            <table class="table">
+            <table>
                 <thead>
                     <tr>
-                        <th>
-                            <span>Code</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Name</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Description</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Actual Quantity</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Unit Measure</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Actions</span>
-                        </th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Actual Quantity</th>
+                        <th>Unit Measure</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +27,7 @@
                         <td><?php echo $material['unit_of_measure']; ?></td>
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="?a=edit&code=<?php echo $material['code']; ?>" class="btn">Edit</a>
+                            <a class="btn1" href="?a=edit&code=<?php echo $material['code']; ?>" class="btn">Edit</a>
                         </td>
                         <?php endif;?>
                     </tr>
@@ -54,4 +36,4 @@
             </table>
             <?php include FOOTER ?>
         </div>
-    </main>
+    </div>

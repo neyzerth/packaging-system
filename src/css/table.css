@@ -1,77 +1,94 @@
-.tables {
-    padding: 1rem;
-    margin-left: 72px;
+.table {
+    background-color: var(--blue2);
+    border-radius: 2rem;
+    min-width: min-content;
+    margin: 32px;
+    margin-left: 104px;
+}
+
+.table div {
     display: flex;
-    flex-direction: column;
+    padding: 1rem;
+}
+
+.table .top {
+    justify-content: space-between;
+}
+
+.table .bottom {
     justify-content: center;
 }
 
-.tables h1 {
+.table .bottom a {
+    display: flex;
+    justify-content: space-around;
+}
+.table .bottom span {
+    margin-inline: 1rem;
+}
+
+.table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table .btn1 {
+    background-color: var(--gold);
+    color: var(--blue2);
+    padding-inline: 2rem;
+    font-weight: bold;
+    border-radius: 1rem;
+}
+
+.table .btn1:hover {
+    opacity: 0.8;
+}
+
+.table input {
+    background-color: var(--blue3);
+    border-radius: 2rem;
+    border: none;
     text-align: center;
 }
 
-.tables .background {
-    background-color: var(--blue2);
-    border-radius: 2rem;
+.table input:focus {
+    outline: 2px solid var(--gold);
 }
 
-.table {
-    border-collapse: collapse;
-    width: 100%;
+.table span {
+    font-weight: bold;
 }
 
-thead tr th {
-    padding: 1rem;
-    padding-right: 2rem;
+.table a, th, td, span, input, input::placeholder {
+    font-size: clamp(0.5rem, 5vw, 1rem); 
+}
+
+.table tbody {
+    border-top: 1px solid var(--gold);
     border-bottom: 1px solid var(--gold);
-    text-align: left;
-    position: relative;
-}
-
-thead tr th:hover {
-    outline: 1px solid var(--gold);
-}
-
-tbody tr td {
-    border-top: 1px solid var(--blue3);
-    padding-inline: 1rem;
 }
 
 tbody tr:nth-child(even) {
     background-color: var(--blue3);
 }
 
-tbody tr:nth-child(even):hover {
+.table tbody tr:hover {
     background-color: var(--blue4);
 }
 
-tbody tr:nth-child(odd):hover {
-    background-color: var(--blue4);
-}
-
-tfoot tr th {
+.table th {
     padding: 1rem;
-    padding-right: 2rem;
-    border-top: 1px solid var(--gold);
-    text-align: left;
 }
 
-.column-order {
-    font-size: 0.5rem;
-    position: absolute;
-    right: 1rem;
-}
-
-.column-order::before {
-    content: "▲";
-    display: block;
-}
-
-.column-order::after {
-    content: "▼";
-    display: block;
-}
-
-td {
+.table td {
+    padding-inline: 1rem;
     padding: 0.5rem;
+    text-align: center;
+}
+
+@media (max-width: 768px) OR (max-height: 359px) {
+    .table {
+        margin-top: 80px;
+        margin-left: auto;
+    }
 }

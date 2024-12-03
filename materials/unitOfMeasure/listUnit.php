@@ -3,21 +3,14 @@
     require "unitFun.php";
     $units = getUnits();
 ?>
-    <main class="tables">
-        <div class="background">
+<body style="display: flex; flex-direction: column;">
+    <div class="table">
         <?php include HEADER; ?>
-        <h1>Unit of measure</h1>
-            <table class="table">
+            <table>
                 <thead>
                     <tr>
-                        <th>
-                            <span>Code</span>
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Description</span>
-                            <span class="column-order"></span>
-                        </th>
+                        <th>Code</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +21,7 @@
 
                         <?php if(validateUser("ADMIN", "SUPER")):?>
                         <td>
-                            <a href="?a=edit&code=<?php echo $unit['code']; ?>" class="btn">Edit</a>
+                            <a class="btn1 href="?a=edit&code=<?php echo $unit['code']; ?>" class="btn">Edit</a>
                         </td>
                         <?php endif;?>
                     </tr>
@@ -37,4 +30,4 @@
             </table>
             <?php include FOOTER ?>
         </div>
-    </main>
+    </div>
