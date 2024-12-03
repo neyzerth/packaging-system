@@ -89,6 +89,6 @@ tbody tr:nth-child(even) {
 @media (max-width: 768px) OR (max-height: 359px) {
     .table {
         margin-top: 80px;
-        margin-left: auto;
+        margin-inline: 0;
     }
 }
