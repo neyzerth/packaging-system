@@ -14,7 +14,7 @@ body {
 }
 
 .nav-bar {
-    background-color: var(--very-dark-blue);
+    background-color: var(--blue2);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ body {
 }
 
 .nav-bar a:hover {
-    background-color: var(--light-blue);
+    background-color: var(--blue3);
 }
 
 .nav-bar img {
@@ -40,7 +40,7 @@ body {
 }
 
 .logout {
-    border-top: 1px solid var(--cool-white);
+    border-top: 1px solid var(--gold);
     margin-top: auto;
 }
 
@@ -49,8 +49,8 @@ body {
 }
 
 .nav-bar a[tooltip]::after{
-    background-color: var(--cool-white);
-    color: var(--dark-blue);
+    background-color: var(--blue4);
+    color: var(--white);
     font-weight: bold;
     padding: 0.2rem;
     left: 80px;
@@ -68,8 +68,8 @@ body {
 }
 
 .active {
-    background-color: var(--light-blue);
-    border-left: 1px solid var(--cool-white);
+    background-color: var(--blue3);
+    border-left: 1px solid var(--gold);
     width: 4.47rem !important;
     box-sizing: border-box;
 }
@@ -96,12 +96,12 @@ body {
 
     .logout {
         border-top: none;
-        border-left: 1px solid var(--cool-white);
+        border-left: 1px solid var(--gold);
         margin-top: auto;
     }
 
     .active {
-        border-top: 1px solid var(--cool-white);
+        border-top: 1px solid var(--gold);
         border-left: none;
         height: 2.97rem !important;
     }

@@ -1,5 +1,5 @@
 .sidebar {
-    background-color: var(--background-black);
+    background-color: var(--blue2);
     box-shadow: 0.3rem 0 0.938rem rgba(0, 0, 0, 0.15);
     height: 100%;
     display: flex;

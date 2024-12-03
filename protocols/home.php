@@ -1,22 +1,17 @@
-<main class="home">
-        <ul class="navegation">
-            <li>
-                <a class="nav-link" href="<?php echo URL . "protocols/protocol/" ?>">
-                    <img class="bi" src="<?php echo SVG . "file.svg" ?>">
-                    <h2>Protocol</h2>
-                </a>
-            </li>
-            <li>
-                <a class="nav-link" href="<?php echo URL . "protocols/tag/" ?>">
-                    <img class="bi" src="<?php echo SVG . "gear.svg" ?>">
-                    <h2>Tag</h2>
-                </a>
-            </li>
-            <li>
-                <a class="nav-link" href="<?php echo URL . "protocols/tagType/" ?>">
-                    <img class="bi" src="<?php echo SVG . "safe.svg" ?>">
-                    <h2>Tag Type</h2>
-                </a>
-            </li>
-        </ul>
-    </main>
+    <body style="display: flex;">
+    <div class="home">
+        <div>
+            <a href="<?php echo URL . "protocols/protocol/" ?>">
+                <img src="<?php echo SVG . "file.svg" ?>">
+                <h1>Protocol</h1>
+            </a>
+            <a href="<?php echo URL . "protocols/tag/" ?>">
+                <img src="<?php echo SVG . "gear.svg" ?>">
+                <h1>Tag</h1>
+            </a>
+            <a href="<?php echo URL . "protocols/tagType/" ?>">
+                <img src="<?php echo SVG . "safe.svg" ?>">
+                <h1>Tag Type</h1>
+            </a>
+        </div>
+    </div>
