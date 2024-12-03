@@ -2,7 +2,7 @@
 
 require_once __DIR__."/../../../products/prodFun.php";
 require_once __DIR__."/../../../boxes/boxFun.php";
-require_once __DIR__."/../../../protocols/tag/tagFun.php";
+require_once __DIR__."/tagFun.php";
 require_once __DIR__."/../tracFun.php";
 //require_once __DIR__."/../../../protocols/tagType/tagTypeFun.php";
 
