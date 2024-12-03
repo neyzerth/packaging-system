@@ -63,7 +63,7 @@ $validate=getCodeFromTraceabilityByProcess($trac['Traceability']);
                     <?php endif; ?>
                         <h3>Packaging</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
-                        <?php if($validate == "START" || $validate == "PACKG"):?>
+                    <?php if($validate == "START" || $validate == "PACKG"):?>
                     </a>
                     <?php endif; ?>
                     <p>
