@@ -1,16 +1,19 @@
-<body style="display: flex;">
-    <div class="home">
-        <div>
-            <a href="<?php echo URL . "boxes/" ?>">
-                <img src="<?php echo SVG . "boxes.svg" ?>">
-                <h1>Boxes</h1>
-            </a>
-            <?php if(validateUser("ADMIN", "SUPER")): ?>
-                <a href="<?php echo URL . "materials/" ?>">
-                    <img src="<?php echo SVG . "materials.svg" ?>">
-                    <h1>Materials</h1>
+    <main class="home">
+        <ul class="navegation">
+            <li>
+                <a class="nav-link" href="<?php echo URL . "boxes/" ?>">
+                    <img class="bi" src="<?php echo SVG . "boxes.svg" ?>">
+                    <h2>Boxes</h2>
                 </a>
-            <?php endif; ?> 
+            </li>
+            <?php if(validateUser("ADMIN", "SUPER")): ?>
+            <li>
+                <a class="nav-link" href="<?php echo URL . "materials/" ?>">
+                    <img class="bi" src="<?php echo SVG . "materials.svg" ?>">
+                    <h2>Materials</h2>
+                </a>
+            </li>
+            <?php endif; ?>
             <li>
                 <a class="nav-link" href="<?php echo URL . "process/" ?>">
                     <img class="bi" src="<?php echo SVG . "process.svg" ?>">
@@ -37,6 +40,7 @@
                     <img class="bi" src="<?php echo SVG . "users.svg" ?>">
                     <h2>Users</h2>
                 </a>
+            </li>
             <?php endif; ?>
-        </div>
-    </div>
+        </ul>
+    </main>

@@ -27,7 +27,6 @@ if (isset($_SESSION['message'])) {
         <link rel="stylesheet" href="<?php echo CSS . "table.css" ?>">
         <link rel="stylesheet" href="<?php echo CSS . "footer.css" ?>">
         <link rel="stylesheet" href="<?php echo CSS . "processView.css" ?>">
-        <link rel="stylesheet" href="<?php echo CSS . "test.css" ?>">
     </head>
 <body>
     <?php include ASIDE ?>
