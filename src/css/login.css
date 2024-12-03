@@ -1,5 +1,5 @@
 .login {
-    background-color: var(--background-gray);
+    background-color: var(--blue2);
     box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.3);
     border-radius: 2rem;
 }
@@ -16,21 +16,21 @@
 }
 
 .div-link .bi {
-    background-color: var(--background-dark);
+    background-color: var(--blue3);
     border-radius: 50%;
     margin: 1rem;
     padding: 1rem;
-    transition: background-color 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .div-link:hover .bi {
-    background-color: var(--blue-dark);
+    opacity: 0.8;
 }
 
 /********************************************************************************************/
 
 .form-control {
-    background-color: var(--background-dark);
+    background-color: var(--blue3);
     width: 90%;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -40,28 +40,29 @@
 }
 
 .form-control:focus {
-    outline: 2px solid var(--blue-dark);
+    outline: 2px solid var(--gold);
 }
 
 .form-control::placeholder {
-    color: var(--white-dark);
+    color: var(--white);
 }
 
 /********************************************************************************************/
 
 .btn-primary {
-    background-color: var(--blue-dark);
+    background-color: var(--gold);
+    color: var(--blue2);
     font-weight: bold;
     width: 90%;
     padding: 1rem;
     border: none;
     border-radius: 2rem;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .btn-primary:hover {
-    background-color: var(--blue-light);
+    opacity: 0.8;
 }
 
 /********************************************************************************************/
