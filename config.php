@@ -19,6 +19,9 @@ define("JS",  "/src/js/");
 define("SVG", "/src/svg/");
 define("IMG", "/src/img/");
 
+define("FPDF", ROOT . "/src/fpdf/");
+define("REPORT", ROOT . "process/pdfReports/");
+
 include 'dbconfig.php';
 
 require_once __DIR__."/login/logFun.php";

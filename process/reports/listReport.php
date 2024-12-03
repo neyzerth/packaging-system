@@ -31,15 +31,7 @@
                             <span class="column-order"></span>
                         </th>
                         <th>
-                            <span>Packed products</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Observations</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Traceability</span>    
+                            <span>See</span>    
                             <span class="column-order"></span>
                         </th>
                         
@@ -52,9 +44,18 @@
                         <td><?php echo $report['start_date'] ?></td>
                         <td><?php echo $report['end_date'] ?></td>
                         <td><?php echo $report['report_date'] ?></td>
-                        <td><?php echo $report['packed_products'] ?></td>
-                        <td><?php echo $report['observations'] ?></td>
-                        <td><?php echo $report['traceability'] ?></td>
+                        <td>
+                        <a class="btn" 
+                        href="<?php echo REPORT . "report_".$report['folio'].".pdf"; ?>"
+                        onclick="
+                            <?php if (!checkProtocolFile("report_" . $report['folio'] . ".pdf")): ?>
+                                alert('The report is not available online. Please request instructions from the nearest supervisor.');
+                                return false;
+                            <?php endif; ?>
+                        ">
+                            View
+                        </a>
+                        </td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
