@@ -15,18 +15,18 @@
 }
 
 .tables .header div input {
-    background-color: var(--background-dark);
+    background-color: var(--blue3);
     border-radius: 2rem;
     border: none;
     text-align: center;
 }
 
 .tables .header div input:focus {
-    outline: 2px solid var(--blue-dark);
+    outline: 2px solid var(--white);
 }
 
 .form-control::placeholder {
-    color: var(--white-dark);
+    color: var(--white);
 }
 
 .tables .header ul {

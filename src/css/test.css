@@ -1,15 +1,4 @@
-:root {
-    --very-dark-blue: #000814;
-    --dark-blue: #001d3d;
-    --light-blue: #003566;
-    --dark-yellow: #ffc300;
-    --light-yellow: #ffd60a;
-    --pure-white: #ffffff;/*Constrastar fuertemente con tonos oscuros*/
-    --warm-white: #FFF8E7;/*Armonizar con el amarillo brillante*/
-    --cool-white: #F0F8FF;/*Complementar con los tonos azulados oscuros*/
-    --light-gray: #F5F5F5;/*Constrastar suavemente con tonos oscuros*/
-    --silvery-white: #FAFAFA;/*Neutro*/
-}
+
 
 * {
     font-family: sans-serif;
@@ -21,7 +10,6 @@ html, body {
 }
 
 body {
-    background-color: var(--dark-blue);
     margin: 0;
 }
 
