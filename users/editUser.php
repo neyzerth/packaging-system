@@ -150,7 +150,7 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                        <input type="number" id="postal_code" name="postal_code"  value="<?php echo $user['postal_code']; ?>" maxlength="5">
+                        <input type="text" id="postal_code" name="postal_code"  value="<?php echo $user['postal_code']; ?>" maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">

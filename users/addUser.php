@@ -138,7 +138,7 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                            <input name="postal-code" id="postal-code" type="number" placeholder="22254" min="5">
+                            <input name="postal-code" id="postal-code" type="text" placeholder="22254" maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">
