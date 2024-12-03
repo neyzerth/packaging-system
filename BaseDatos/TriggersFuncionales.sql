@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 
 SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
 FROM information_schema.TRIGGERS 
@@ -342,3 +342,21 @@ BEGIN
     SET NEW.barcode = CONCAT(gs1_code, checksum);
 END;
 
+
+--ELIMINAR LOS TRIGGERS
+USE packaging;
+
+DROP TRIGGER IF EXISTS calculate_box_volume_insert;
+DROP TRIGGER IF EXISTS calculate_box_volume_update;
+DROP TRIGGER IF EXISTS calculate_packaging_volume_insert;
+DROP TRIGGER IF EXISTS calculate_packaging_volume_update;
+DROP TRIGGER IF EXISTS material_packging_insert;
+DROP TRIGGER IF EXISTS material_package_insert;
+DROP TRIGGER IF EXISTS update_zone_capacity_after_insert;
+DROP TRIGGER IF EXISTS before_insert_package;
+DROP TRIGGER IF EXISTS before_update_package;
+DROP TRIGGER IF EXISTS update_packaging_weight;
+DROP TRIGGER IF EXISTS update_packaging_weight_update;
+DROP TRIGGER IF EXISTS update_report_packed_products;
+DROP TRIGGER IF EXISTS before_insert_tag;
+DROP TRIGGER IF EXISTS before_update_tag;
