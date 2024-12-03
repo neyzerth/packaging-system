@@ -11,7 +11,7 @@
 }
 
 .tables .background {
-    background-color: var(--blue2);
+    background-color: var(--background-black);
     border-radius: 2rem;
 }
 
@@ -23,36 +23,40 @@
 thead tr th {
     padding: 1rem;
     padding-right: 2rem;
-    border-bottom: 1px solid var(--gold);
+    border-bottom: 1px solid var(--background-light);
     text-align: left;
     position: relative;
 }
 
 thead tr th:hover {
-    outline: 1px solid var(--gold);
+    outline: 1px solid var(--background-light);
 }
 
 tbody tr td {
-    border-top: 1px solid var(--blue3);
+    border-top: 1px solid var(--background-medium);
     padding-inline: 1rem;
 }
 
 tbody tr:nth-child(even) {
-    background-color: var(--blue3);
+    background-color: var(--background-dark);
 }
 
 tbody tr:nth-child(even):hover {
-    background-color: var(--blue4);
+    background-color: var(--background-gray);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--background-deep-gray);
 }
 
 tbody tr:nth-child(odd):hover {
-    background-color: var(--blue4);
+    background-color: var(--background-gray);
 }
 
 tfoot tr th {
     padding: 1rem;
     padding-right: 2rem;
-    border-top: 1px solid var(--gold);
+    border-top: 1px solid var(--background-dark);
     text-align: left;
 }
 

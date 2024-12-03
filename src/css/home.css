@@ -48,10 +48,11 @@ body {
     color: var(--white);
     border-radius: 2rem;
     padding: 1rem;
-    min-width: 128px;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
+}
+
+.home .nav-link {
+    color: var(--white-medium);
+    display: contents;
     text-align: center;
 }
 
@@ -66,14 +67,7 @@ body {
 
 .home h1 {
     margin: 0;
-    font-size: clamp(1rem, 5vh, 2rem); 
-}
-
-@media (min-width: 769px) {
-    .home a {
-        width: 100%;
-        margin: 1rem;
-    }
+    font-size: clamp(1rem, 5vh, 3rem); 
 }
 
 @media (max-width: 768px) OR (max-height: 359px) {
