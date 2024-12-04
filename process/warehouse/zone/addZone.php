@@ -41,11 +41,11 @@
                             <input name="code" id="code" type="text"  maxlength="5">
                         </div>
                     </div>
-                </div>
-                <div class="row-md-5">
-                    <h4 for="area">Area</h4>
-                    <div class="inputs">
-                        <input name="area" id="area" type="text" maxlength="50" required>
+                    <div class="row-md-5">
+                        <h4 for="area">Area</h4>
+                        <div class="inputs">
+                            <input name="area" id="area" type="text" required maxlength="50">
+                        </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="description">Available capacity (packaging)</h4>
@@ -60,12 +60,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <footer class="footer">
-                <button class="btn-primary" type="submit">Confirm</button>
-            </footer>
-        </form>
-    </div>
-</main>
-<?php include FOOT ?>
+                <hr>
+                <footer class="footer">
+                    <button class="btn-primary" type="submit">Confirm</button>
+                </footer>
+            </form>
+        </div>
+    </main>
+    <?php include FOOT ?>

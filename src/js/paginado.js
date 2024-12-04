@@ -3,35 +3,35 @@ const SVG = "/src/svg/";
 
 document.addEventListener('DOMContentLoaded', function () {
     const rowsPerPage = 10; 
-    const table = document.querySelector('table');
-    const rows = Array.from(table.querySelectorAll('tbody tr'));
-    const footer = document.querySelector('.footer');
-    const searchInput = document.querySelector('.search');
+    const table = document.querySelector('table'); 
+    const rows = table.querySelectorAll('tbody tr');
+    const footer = document.querySelector('.footer'); 
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
 
-    let filteredRows = rows; 
     let currentPage = 1;
 
     function renderTable() {
-    
+        
         rows.forEach((row) => {
             row.style.display = 'none';
         });
 
-    
+       
         const start = (currentPage - 1) * rowsPerPage;
         const end = start + rowsPerPage;
 
-        filteredRows.slice(start, end).forEach((row) => {
-            row.style.display = '';
+       
+        rows.forEach((row, index) => {
+            if (index >= start && index < end) {
+                row.style.display = '';
+            }
         });
 
-        
+      
         updateFooter();
     }
 
     function updateFooter() {
-        const totalPages = Math.ceil(filteredRows.length / rowsPerPage); 
-
         footer.innerHTML = `
             <ul>
                 <li>
@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (nextButton) {
             nextButton.addEventListener('click', (e) => {
                 e.preventDefault();
-                const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
                 if (currentPage < totalPages) {
                     currentPage++;
                     renderTable();
@@ -79,26 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    searchInput.addEventListener('input', () => {
-        const filterText = searchInput.value.toLowerCase();
-
-        if (filterText === '') {
-            filteredRows = rows;
-        } else {
-            filteredRows = rows.filter((row) => {
-                const cells = Array.from(row.getElementsByTagName('td'));
-                return cells.some((cell) =>
-                    cell.textContent.toLowerCase().includes(filterText)
-                );
-            });
-        }
-
-    
-        currentPage = 1;
-        renderTable();
-    });
-
-    
     if (rows.length > 0) {
         renderTable();
     } else {
