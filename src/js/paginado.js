@@ -105,6 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (rows.length > 0) {
         renderTable();
     } else {
-        footer.innerHTML = '<p>No data available</p>';
+        //footer.innerHTML = '<p>No data available</p>';
     }
 });
