@@ -95,35 +95,5 @@ function printNull($data){
     return $data ?? '--';
 }
 
-function getCodeFromTraceabilityByProcess($tr) {
-    $db = connectdb();
-
-    $stmt = $db->prepare("
-        SELECT State
-        FROM vw_process 
-        WHERE Traceability = ?
-    ");
-    $stmt->bind_param("i", $tr);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $validStates = [
-        'START' => 'Starting Process',
-        'PACKG' => 'Packing Products',
-        'WARHS' => 'In Warehouse'
-    ];
-
-    if ($row = $result->fetch_assoc()) {
-        $stateDescription = $row['State'];
-        
-        foreach ($validStates as $code => $description) {
-            if ($description === $stateDescription) {
-                return $code;
-            }
-        }
-    }
-
-    return null;
-}
 
 ?>
