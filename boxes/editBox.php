@@ -62,28 +62,28 @@
                 <div class="row-sm-3">
                     <h4>Height (cm)</h4>
                     <div class="inputs">
-                    <input type="number" name="height" id="height" value="<?php echo $box['height']; ?>" required>
+                    <input type="number" name="height" id="height" value="<?php echo $box['height']; ?>" min="0" step="0.001" required>
 
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4>Width (cm)</h4>
                     <div class="inputs">
-                    <input type="number" name="width" id="width"value="<?php echo $box['width']; ?>" required>
+                    <input type="number" name="width" id="width"value="<?php echo $box['width']; ?>" min="0" step="0.001" required>
 
                     </div>
                 </div>
                 <div class="row-md-5">
                     <h4>Length (cm)</h4>
                     <div class="inputs">
-                    <input type="number" name="length" id="length" value="<?php echo $box['length']; ?>" required>
+                    <input type="number" name="length" id="length" value="<?php echo $box['length']; ?>" min="0" step="0.001" required>
 
                     </div>
                 </div>
                 <div class="row-md-5">
                     <h4>Weight (g)</h4>
                     <div class="inputs">
-                    <input type="number" name="weight" id="weight"  value="<?php echo $box['weight']; ?>" required>
+                    <input type="number" name="weight" id="weight"  value="<?php echo $box['weight']; ?>" min="0" step="0.001" required>
 
                     </div>
                 </div>
