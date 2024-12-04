@@ -23,20 +23,23 @@
         exit();
     }
 ?>
-<main class="forms">
-    <div class="background">
-        <form class="form" action="?a=add" method="post" autocomplete="off">
-            <header class="header">
-                <img src="<?php echo SVG . 'icon.svg'; ?>">
-                <h1>Add Zone</h1>
-            </header>
-            <hr>
-            <h2>Zone</h2>
-            <div class="rows">
-                <div class="row-md-5">
-                    <h4 for="code">Code</h4>
-                    <div class="inputs">
-                        <input name="code" id="code" type="text" maxlength="5" required>
+<script src="zoneForm.js"></script>
+
+    <main class="forms">
+        <div class="background">
+            <form class="form" action="?a=add" method="post" autocomplete="off">
+                <header class="header">
+                    <img src="<?php  echo SVG . "icon.svg" ?>">
+                    <h1>Add Zone</h1>
+                </header>
+                <hr>
+                <h2>Zone</h2>
+                <div class="rows">
+                    <div class="row-md-5">
+                        <h4 for="code">Code</h4>
+                        <div class="inputs">
+                            <input name="code" id="code" type="text"  maxlength="5">
+                        </div>
                     </div>
                 </div>
                 <div class="row-md-5">
@@ -44,17 +47,17 @@
                     <div class="inputs">
                         <input name="area" id="area" type="text" maxlength="50" required>
                     </div>
-                </div>
-                <div class="row-md-5">
-                    <h4 for="available_capacity">Available capacity (packaging)</h4>
-                    <div class="inputs">
-                        <input name="available_capacity" id="available_capacity" type="number" placeholder="999" required>
+                    <div class="row-md-5">
+                        <h4 for="description">Available capacity (packaging)</h4>
+                        <div class="inputs">
+                            <input name="available_capacity" id="available_quantity" type="number" placeholder="999" required maxlength="10">
+                        </div>
                     </div>
-                </div>
-                <div class="row-md-5">
-                    <h4 for="total_capacity">Total capacity (packaging)</h4>
-                    <div class="inputs">
-                        <input name="total_capacity" id="total_capacity" type="number" placeholder="999" required>
+                    <div class="row-md-5">
+                        <h4 for="available_quantity">Total capacity (packaging)</h4>
+                        <div class="inputs">
+                            <input name="total_capacity" id="total_capacity" type="number" placeholder="999" required maxlength="10">
+                        </div>
                     </div>
                 </div>
             </div>

@@ -39,12 +39,10 @@
         exit();
     }
 ?>
+<script src="zoneForm.js"></script>
     <main class="forms">
         <div class="background">
-
-
             <form class="form" action="" method="post" autocomplete="off">
-
                 <header class="header">
                     <img src="<?php  echo SVG . "icon.svg" ?>">
                     <h1>Edit Zone</h1>
@@ -70,13 +68,13 @@
                     <div class="row-md-5">
                         <h4 for="description">Available capacity (packaging)</h4>
                         <div class="inputs">
-                            <input name="available_capacity" id="description" type="number" placeholder="17" required maxlength="10"value="<?php echo $zone['available_capacity']; ?>">
+                            <input name="available_capacity" id="available_quantity" type="number" placeholder="17" required maxlength="10"value="<?php echo $zone['available_capacity']; ?>">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="available_quantity">Total capacity (packaging)</h4>
                         <div class="inputs">
-                            <input name="total_capacity" id="available_quantity" type="number" placeholder="50" required maxlength="10"value="<?php echo $zone['total_capacity']; ?>">
+                            <input name="total_capacity" id="total_capacity" type="number" placeholder="50" required maxlength="10"value="<?php echo $zone['total_capacity']; ?>">
                         </div>
                     </div>
                 </div>

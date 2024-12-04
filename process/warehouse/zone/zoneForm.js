@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
 
-    // Validar si un valor es un número válido y mayor o igual a 0
-    function validateCapacity(field) {
+    function validateCode(field) {
         const value = field.value.trim();
         if (value === "" || isNaN(value) || value < 0) {
             alert("The capacity must be a valid number and cannot be less than 0.");
@@ -17,32 +16,67 @@ document.addEventListener("DOMContentLoaded", () => {
         const availableValue = parseFloat(available.value.trim());
         const totalValue = parseFloat(total.value.trim());
 
-        if (availableValue > totalValue) {
-            alert("The available capacity cannot exceed the total capacity.");
-            available.focus();
+    function validateCapacity(field) {
+        const value = field.value.trim();
+        if (value === "" || isNaN(value) || value < 0) {
+            alert("The capacity must be a valid number and cannot be negative.");
+            field.focus();
             return false;
         }
         return true;
     }
 
-    form.addEventListener("submit", (event) => {
-        const availableCapacity = document.getElementById("available_capacity");
-        const totalCapacity = document.getElementById("total_capacity");
+    function validateCapacities(availableField, totalField) {
+        const availableValue = parseFloat(availableField.value.trim());
+        const totalValue = parseFloat(totalField.value.trim());
 
-        // Validar capacidad disponible
+        if (availableValue > totalValue) {
+            alert("Available capacity cannot be greater than total capacity.");
+            availableField.focus();
+            return false;
+        }
+
+        if (totalValue < 10) {
+            alert("Total capacity cannot be less than 10 packages.");
+            totalField.focus();
+            return false;
+        }
+
+        if (availableValue < 0 || totalValue < 0) {
+            alert("Available and total capacities cannot be negative.");
+            availableField.focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    form.addEventListener("submit", (event) => {
+        const code = document.getElementById("code");
+        if (!validateCode(code)) {
+            event.preventDefault();
+            return;
+        }
+
+        const area = document.getElementById("area");
+        if (!validateArea(area)) {
+            event.preventDefault();
+            return;
+        }
+
+        const availableCapacity = document.getElementById("available_quantity");
         if (!validateCapacity(availableCapacity)) {
             event.preventDefault();
             return;
         }
 
-        // Validar capacidad total
+        const totalCapacity = document.getElementById("total_capacity");
         if (!validateCapacity(totalCapacity)) {
             event.preventDefault();
             return;
         }
 
-        // Validar relación entre capacidad disponible y total
-        if (!validateCapacityRelation(availableCapacity, totalCapacity)) {
+        if (!validateCapacities(availableCapacity, totalCapacity)) {
             event.preventDefault();
             return;
         }
