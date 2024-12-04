@@ -6,8 +6,9 @@
     require "reportFun.php";
 
     $traceabilities = getTraceabilities();
+    $folio = getFolio();
 
-    if ($_SERVER['REQUEST_METHOD']=='POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $start_date = $_POST['start_date'];
         $end_date = $_POST['end_date'];
@@ -15,25 +16,35 @@
         $packed_products = $_POST['packed_products'];
         $observations = $_POST['observations'];
         $traceability = $_POST['traceability'];
-
+    
         $result = addReport(
-            start_date:$start_date, end_date:$end_date, report_date:$report_date, packed_products:$packed_products, observations:$observations, traceability:$traceability
+            start_date: $start_date, 
+            end_date: $end_date, 
+            report_date: $report_date, 
+            packed_products: $packed_products, 
+            observations: $observations, 
+            traceability: $traceability
         );
-
-        if($result){
+    
+        if ($folio) {
+            
+            // Generar PDF
+            $pdfFile = generateReportPDF($folio, $start_date, $end_date, $report_date, $packed_products, $observations, $traceability);
+    
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Report successfully registered: PDF generated',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error generating PDF',
                 'type' => 'error'
             ];
         }
         header("Location: /process/reports/");
         exit();
     }
+    
 ?>
 <head>
     <script src="reportForm.js"></script>
@@ -82,17 +93,16 @@
                 <div class="row-md-5">
                     <h4 for="observations">Observations</h4>
                     <div class="inputs">
-                        <input name="observations" id="observations" type="text" placeholder="Your observations" required maxlength="50">
+                        <textarea name="observations" id="observations" placeholder="Your observations" required rows="5" cols="40"></textarea>
                     </div>
                 </div>
-
                 <div class="row-md-5">
                     <h4 for="traceability">Traceability packaging</h4>
                     <div class="inputs">
                         <select class="input" required name="traceability" id="traceability options">
                             <?php 
                                 while ($traceability = mysqli_fetch_assoc($traceabilities)):   
-                                    echo "<option value='{$traceability['num']}'>{$traceability['packaging']}</option>";
+                                    echo "<option value='{$traceability['ID']}'>{$traceability['Packaging_ID']}</option>";
                                 endwhile; 
                             ?>
                         </select>

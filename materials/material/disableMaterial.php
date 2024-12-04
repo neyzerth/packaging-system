@@ -6,14 +6,23 @@
         $code = $_GET['code'];
         
         if (disableMaterial($code)) {
-            echo "Material deactivated correctly.";
+            $_SESSION['message'] = [
+                'text' => 'Material successfully disabled',
+                'type' => 'success'
+            ];
         } else {
-            echo "Error disabling material.";
+            $_SESSION['message'] = [
+                'text' => 'Error deactivating material',
+                'type' => 'error'
+            ];
         }
 
-        header("Location: index.php");
+        header("Location: /materials/material/");
         exit();
     } else {
-        echo "Code of material not provided.";
+        $_SESSION['message'] = [
+            'text' => 'Material code not provided',
+            'type' => 'error'
+        ];
     }
 ?>

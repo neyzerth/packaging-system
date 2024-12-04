@@ -23,12 +23,12 @@
         
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Material successfully added',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error adding material',
                 'type' => 'error'
             ];
         }
@@ -100,7 +100,6 @@
         </form>
     </div>
 </main>
-<<<<<<< HEAD:materials/material/addMaterial.php
 <script>
         setTimeout(() => {
             const successMsg = document.getElementById('success-msg');
@@ -109,7 +108,6 @@
             if (errorMsg) errorMsg.style.display = 'none';
         }, 3000);
 </script>
-=======
 <?php include FOOT ?>
 
 

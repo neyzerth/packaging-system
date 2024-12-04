@@ -5,58 +5,49 @@
     //$search = isset($_GET['search']) ? $_GET['search'] : '';
     //$reports = empty($search) ? getReports() : searchReport($search);
 ?>
+<script>
+    async function fetchTableData(viewName) {
+        try {
+            const response = await fetch(`fetchData.php?view=${viewName}`);
+            const data = await response.json();
+
+            // Actualizar encabezados
+            const headers = Object.keys(data[0] || {});
+            const tableHeaders = document.getElementById('table-headers');
+            tableHeaders.innerHTML = headers.map(header => `<th>${header}</th>`).join('');
+
+            const tableRows = document.getElementById('table-rows');
+            tableRows.innerHTML = data.map(row => `
+                <tr>${headers.map(header => `<td>${row[header]}</td>`).join('')}</tr>
+            `).join('');
+        } catch (error) {
+            console.error('Error fetching table data:', error);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => fetchTableData('top_packaged_products'));
+</script>
+
     <main class="tables">
         <div class="background">
             <?php 
             include HEADER 
             ?>
             <h1>Reports</h1>
+            <div>
+                <label for="view-select">Select View:</label>
+                <select id="view-select" onchange="fetchTableData(this.value)">
+                    <option value="top_packaged_products">Products Most Packaged</option>
+                    <option value="packaging_no_rotation">Packaging No Rotation</option>
+                    <option value="top_employees">Top Employees</option>
+                </select>
+            </div>
             <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            <span>Folio</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Start date</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>End date</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Report date</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Packed products</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Observations</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        <th>
-                            <span>Traceability</span>    
-                            <span class="column-order"></span>
-                        </th>
-                        
-                    </tr>
+                <thead id="table-headers">
+
                 </thead>
-                <tbody>
-                    <?php foreach($reports as $report): ?>
-                    <tr>
-                        <td><?php echo $report['folio'] ?></td>
-                        <td><?php echo $report['start_date'] ?></td>
-                        <td><?php echo $report['end_date'] ?></td>
-                        <td><?php echo $report['report_date'] ?></td>
-                        <td><?php echo $report['packed_products'] ?></td>
-                        <td><?php echo $report['observations'] ?></td>
-                        <td><?php echo $report['traceability'] ?></td>
-                    </tr>
-                    <?php endforeach;?>
+                <tbody id="table-rows">
+
                 </tbody>
             </table>
             <?php include FOOTER ?>

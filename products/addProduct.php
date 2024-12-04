@@ -23,16 +23,16 @@
 
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Product successfully registered',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error registering product',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /products/");
         exit();
     }
 ?>
@@ -71,26 +71,26 @@
                 <div class="row-sm-3">
                     <h4 for="height">Height (cm)</h4>
                     <div class="inputs">
-                        <input name="height" id="height" type="number" required >
+                        <input name="height" id="height" type="number"  min="0" step="0.001" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4 for="width">Width (cm)</h4>
                     <div class="inputs">
-                        <input name="width" id="width" type="number" required >
+                        <input name="width" id="width" type="number"  min="0" step="0.001" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4 for="length">Length (cm)</h4>
                     <div class="inputs">
-                        <input name="length" id="length" type="number" required >
+                        <input name="length" id="length" type="number" min="0" step="0.001" required >
                     </div>
                 </div>
                 
                 <div class="row-md-5">
                     <h4 for="weight">Weight  (g)</h4>
                     <div class="inputs">
-                        <input name="weight" id="weight" type="number" placeholder="12.5" required>
+                        <input name="weight" id="weight" type="number"  min="0" step="0.001" placeholder="12.5" required>
                     </div>
                 </div>
                 <div class="row-md-5">

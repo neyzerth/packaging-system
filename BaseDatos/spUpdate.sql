@@ -1,4 +1,4 @@
--- Active: 1728065056405@@127.0.0.1@3306@packaging_test
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 ---------------------------------------
 --Actualizar registro
 ---------------------------------------
@@ -75,7 +75,6 @@ drop Procedure UpdateMaterial
 
 DELIMITER $$
 
-DELIMITER $$
 
 CREATE PROCEDURE UpdateMaterial(
     IN p_code VARCHAR(5),

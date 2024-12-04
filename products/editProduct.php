@@ -26,16 +26,16 @@
 
         if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, packaging_protocol:$packaging_protocol)){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Updated product information',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error updating product information',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /products/");
         exit();
     }
 ?>
@@ -80,25 +80,25 @@
                 <div class="row-sm-3">
                     <h4 for="height">Height (cm)</h4>
                     <div class="inputs">
-                        <input name="height" id="height" type="number" value="<?php echo $product['height']; ?>" required >
+                        <input name="height" id="height" type="number" value="<?php echo $product['height']; ?>"  min="0" step="0.001" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4 for="width">Width (cm)</h4>
                     <div class="inputs">
-                        <input name="width" id="width" type="number" value="<?php echo $product['width']; ?>" required >
+                        <input name="width" id="width" type="number" value="<?php echo $product['width']; ?>" min="0" step="0.001" required >
                     </div>
                 </div>
                 <div class="row-sm-3">
                     <h4 for="length">Length (cm)</h4>
                     <div class="inputs">
-                        <input name="length" id="length" type="number" value="<?php echo $product['length']; ?>" required >
+                        <input name="length" id="length" type="number" value="<?php echo $product['length']; ?>" min="0" step="0.001" required >
                     </div>
                 </div>
                 <div class="row-md-5">
                     <h4 for="weight">Weight (g)</h4>
                     <div class="inputs">
-                        <input name="weight" id="weight" type="number" placeholder="999" value="<?php echo $product['weight']; ?>" required>
+                        <input name="weight" id="weight" type="number" placeholder="999" value="<?php echo $product['weight']; ?>" min="0" step="0.001" required>
                     </div>
                 </div>
                 <div class="row-md-5">
@@ -108,7 +108,7 @@
                             <?php 
                             while ($protocol = mysqli_fetch_assoc($protocols)):  
                                 $selected = $product['packaging_protocol'] === $protocol['num'] ? 'selected' : '';
-                                echo "<option value='{$protocol['num']}' $selected>{$protocol['file_name']}</option>";
+                                echo "<option value='{$protocol['num']}' $selected>{$protocol['name']}</option>";
                             endwhile; 
                             ?>
                         </select>

@@ -24,11 +24,17 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag type updated successfully</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Updated tag type information',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error updading Tag type</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error updating tag information',
+                'type' => 'error'
+            ];
         }
-        header("Location: index.php");
+        header("Location: /protocols/tagType/");
         exit();
     }
 ?>

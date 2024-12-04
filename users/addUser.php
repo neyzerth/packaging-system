@@ -26,17 +26,17 @@
 
         if ($result) {
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Successful registration user',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error adding user',
                 'type' => 'error'
             ];
         }
 
-        header("Location: index.php");
+        header("Location: /users/");
         exit();
     }
 ?>
@@ -105,7 +105,7 @@
                     <div class="row-lg-10">
                         <h4 for="password">Password</h4>
                         <div class="inputs">
-                            <input type="text" name="password" id="password"   maxlength="40" required placeholder="Hi_everyone_01">
+                            <input type="text" name="password" id="password"   maxlength="40" required placeholder="Utt-017">
                         </div>
                     </div>
                     <div class="row-md-5">
@@ -138,7 +138,7 @@
                     <div class="row-md-5">
                         <h4 for="">Postal code</h4>
                         <div class="inputs">
-                            <input name="postal-code" id="postal-code" type="number" placeholder="22254" min="5">
+                            <input name="postal-code" id="postal-code" type="text" placeholder="22254" maxlength="5">
                         </div>
                     </div>
                     <div class="row-md-5">

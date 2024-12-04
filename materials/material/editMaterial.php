@@ -23,16 +23,16 @@
 
         if (updateMaterial(code: $code, name: $name, description: $description, available_quantity: $available_quantity, active: $active, unit_of_measure: $unit_of_measure)) {
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Updated material information',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error updating material information',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /materials/material/");
         exit();
     }
 ?>

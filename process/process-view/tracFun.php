@@ -95,5 +95,4 @@ function printNull($data){
     return $data ?? '--';
 }
 
-
 ?>

@@ -6,12 +6,21 @@
         $num = $_GET['num'];
         
         if (disableProtocol($num)) {
-            error_log("Protocol deactivated correctly.");
+            $_SESSION['message'] = [
+                'text' => 'Protocol successfully disabled',
+                'type' => 'success'
+            ];
         } else {
-            error_log("Error disabling protocol.");
+            $_SESSION['message'] = [
+                'text' => 'Error deactivating protocol',
+                'type' => 'error'
+            ];
         }
     } else {
-        error_log("Protocol code not provided.");
+        $_SESSION['message'] = [
+            'text' => 'Protocol code not provided',
+            'type' => 'error'
+        ];
     }
 
     header("Location: /protocols/protocol/");

@@ -10,19 +10,21 @@
         $result = addZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity);
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Zone added successfully',
                 'type' => 'success'
             ];
         } else {
                 $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error adding zone',
                 'type' => 'error'
             ];
         }
-        header("Location: /process/warehouse/zone");
+        header("Location: /process/warehouse/zone/");
         exit();
     }
 ?>
+<script src="zoneForm.js"></script>
+
     <main class="forms">
         <div class="background">
             <form class="form" action="?a=add" method="post" autocomplete="off">
@@ -48,13 +50,13 @@
                     <div class="row-md-5">
                         <h4 for="description">Available capacity (packaging)</h4>
                         <div class="inputs">
-                            <input name="available_capacity" id="description" type="number" placeholder="999" required maxlength="10">
+                            <input name="available_capacity" id="available_quantity" type="number" placeholder="999" required maxlength="10">
                         </div>
                     </div>
                     <div class="row-md-5">
                         <h4 for="available_quantity">Total capacity (packaging)</h4>
                         <div class="inputs">
-                            <input name="total_capacity" id="available_quantity" type="number" placeholder="999" required maxlength="10">
+                            <input name="total_capacity" id="total_capacity" type="number" placeholder="999" required maxlength="10">
                         </div>
                     </div>
                 </div>
