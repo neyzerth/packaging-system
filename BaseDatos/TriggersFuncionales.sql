@@ -1,4 +1,4 @@
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 
 SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
 FROM information_schema.TRIGGERS 
@@ -108,6 +108,30 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
     END IF;
 END$$
+
+
+
+--------------------------------------------------------
+CREATE TRIGGER update_zone_capacity_before_update
+before update ON packaging
+FOR EACH ROW
+BEGIN
+    DECLARE new_available_capacity INT;
+
+    SELECT available_capacity - NEW.package_quantity INTO new_available_capacity
+    FROM zone
+    WHERE code = NEW.zone;
+
+
+    IF new_available_capacity >= 0 OR NEW.package_quantity IS NULL THEN
+        UPDATE zone
+        SET available_capacity = new_available_capacity
+        WHERE code = NEW.zone;
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
+    END IF;
+END$$
+---------------------------------------------------------
 
 select * from zone
 
