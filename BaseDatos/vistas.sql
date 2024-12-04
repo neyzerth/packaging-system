@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728665066730@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -338,7 +338,7 @@ select * from traceability where state = 'warhs'
 
 
 
---2. Productos más embalados por mes
+--2. Productos más embalados por mes MES, PRODUCT, TOTAL
 drop VIEW  top_packaged_products
 
 CREATE VIEW top_packaged_products AS
@@ -402,3 +402,4 @@ ORDER BY
 
 select * from top_employees
 
+SELECT * FROM top_packaged_products;
