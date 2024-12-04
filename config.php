@@ -1,8 +1,6 @@
 <?php
 define("URL", "http://{$_SERVER['HTTP_HOST']}/");
 define("ROOT", "{$_SERVER['DOCUMENT_ROOT']}/");
-define("PDFDIR", ROOT . "uploads/");
-
 
 define("STYLE", "/styles/");
 

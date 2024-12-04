@@ -5,9 +5,9 @@
     $quantity = $process['Package_Quantity'];
     $destination = $_SESSION['Destination'];
     $packaging = $process['Packaging'];
-    error_log($quantity);
 
     $materialsUsed = getMaterialsInPackaging();
+    //error_log(print_r($materialsUsed));
 
     if($_SERVER['REQUEST_METHOD']=='POST' || !empty($destination)){
 
@@ -28,6 +28,8 @@
             addPackagesQuan($quantity);
             $bool = addMaterialToPackaging($material, $packaging, $matQuant);
             
+            header("Location: /process/process-view/?a=addPackaging");
+            exit();
             
         }
     }
@@ -92,7 +94,7 @@
                 <div class="row-md-5">
                     <h4 for="mat_quantity">Quantity</h4>
                     <div class="inputs">
-                        <input type="number" class="input" name="mat_quantity" id="mat_quantity" value="<?php echo $matQuantity?>" min="1" required> 
+                        <input type="number" class="input" name="mat_quantity" id="mat_quantity" min="1" required> 
                     </div>
                 </div>
                 <?php foreach($materialsUsed AS $material): ?>

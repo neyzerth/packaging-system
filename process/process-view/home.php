@@ -8,7 +8,12 @@ if(empty($_SESSION['trac'])){
 session_start();
 $trac = getProcessByID($_SESSION['trac']);
 
-$validate=getCodeFromTraceabilityByProcess($trac['Traceability']);
+$state=$trac["State_Code"];
+
+error_log("STATE CODE: $state | ID TRAC: {$trac['Traceability']}");
+if($state == "START" || $state == "PACK"):
+    error_log("CAN PACKING");
+endif;
 ?>
     <div class="tables">
         <div class="background">
@@ -30,12 +35,12 @@ $validate=getCodeFromTraceabilityByProcess($trac['Traceability']);
 
             <div class="process">
                 <div class="">
-                <?php if($validate == "START"):?>
+                <?php if($state == "START" || $state == "PACK"):?>
                 <a href="?a=addPackage">
                 <?php endif; ?>
                     <h3>Packing</h3>
                     <img class="bin process-btn" src="<?php echo SVG . "products.svg" ?>">
-                <?php if($validate == "START"):?>
+                <?php if($state == "START" || $state == "PACK"):?>
                 </a>
                 <?php endif; ?>
                 <p>
@@ -58,12 +63,15 @@ $validate=getCodeFromTraceabilityByProcess($trac['Traceability']);
             </div>
 
                 <div>
-                    <?php if($validate == "START" || $validate == "PACK"):?>
+                    <?php if($state == "PACK" || $state == "PACKG"):?>
                     <a href="?a=addPackaging">
                     <?php endif; ?>
+                    <div>
+
                         <h3>Packaging</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
-                    <?php if($validate == "START" || $validate == "PACK"):?>
+                    </div>
+                    <?php if($state == "PACK" || $state == "PACKG"):?>
                     </a>
                     <?php endif; ?>
                     <p>
@@ -82,12 +90,12 @@ $validate=getCodeFromTraceabilityByProcess($trac['Traceability']);
                 </div>
 
                 <div>
-                    <?php if($validate == "PACKG" || $validate == "WARHS"):?>
+                    <?php if($state == "PACKG" || $state == "WARHS"):?>
                     <a href="?a=addWarehouse">
                     <?php endif; ?>
                         <h3>Warehouse</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "zone.svg" ?>">
-                    <?php if($validate == "PACKG" || $validate == "WARHS"):?>
+                    <?php if($state == "PACKG" || $state == "WARHS"):?>
                     </a>
                     <?php endif; ?>
                     <p>
@@ -96,7 +104,7 @@ $validate=getCodeFromTraceabilityByProcess($trac['Traceability']);
                     </p>
                     <p>
                         <b>Total Space:</b> 
-                        <?php echo printNull($trac['Available'])?>
+                        <?php echo printNull($trac['Capacity'])?>
                     </p>
                     <p>
                         <b>Available Space:</b> 

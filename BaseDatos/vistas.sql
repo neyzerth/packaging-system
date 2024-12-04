@@ -240,6 +240,30 @@ SELECT
     street
 FROM user;
 
+
+
+SELECT * FROM vw_process;
+
+
+CREATE VIEW vw_users_in_process AS
+SELECT ut.traceability AS Traceability_ID,
+    ut.user AS User_ID,
+    u.full_name AS User_Name
+FROM user_traceability AS ut
+INNER JOIN vw_user_personal_info AS u 
+ON u.num = ut.user;
+
+drop view vw_material_process;
+CREATE VIEW vw_material_process AS
+SELECT m.code AS Code, 
+    m.name AS Material, 
+    mp.quantity AS Quantity,
+    m.unit_of_measure AS Unit,
+    mp.packaging AS Packaging 
+FROM material_packging AS mp
+INNER JOIN material AS m 
+ON m.code = mp.material
+
 DROP VIEW vw_process;
 
 CREATE VIEW vw_process AS
@@ -281,6 +305,7 @@ SELECT
     ) AS Packaging_Type,
     t.packaging AS Packaging,
     tg.barcode AS Packaging_Barcode,
+    t.state AS State_Code,
     s.description AS State,
     r.start_date AS Start_Date,
     z.area AS Area,
@@ -403,3 +428,4 @@ ORDER BY
 select * from top_employees
 
 SELECT * FROM top_packaged_products;
+
