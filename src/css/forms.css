@@ -4,7 +4,7 @@
 }
 
 .forms .background {
-    background-color: var(--blue2);
+    background-color: var(--background-black);
     border-radius: 2rem;
 }
 
@@ -44,13 +44,12 @@
     width: 100%;
 }
 
-.form .inputs>* {
-    background-color: var(--blue3);
-    opacity: .6;
+.form .inputs>*, .inputs {
+    background-color: var(--background-dark);
     font-size: 1rem;
     padding: .375rem .75rem;
     border: none;
-    outline: 1px solid var(--gold);
+    outline: 1px solid var(--text-dark);
 }
 
 /********************************************************************************************/
@@ -68,7 +67,8 @@
 }
 
 .btn-primary {
-    background-color: var(--gold);
+    background-color: var(--blue-dark);
+    color: var(--white-medium);
     width: 100%;
     padding: 1rem;
     border-radius: 2rem;
