@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
 
+    //Its Work
     function validateCode(field) {
         const value = field.value.trim();
         if (value === "") return false;
