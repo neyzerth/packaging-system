@@ -6,14 +6,23 @@
         $code = $_GET['code'];
         
         if (disableZone($code)) {
-            echo "Zone deactivated successfully.";
+            $_SESSION['message'] = [
+                'text' => 'Zone successfully disabled',
+                'type' => 'success'
+            ];
         } else {
-            echo "Error al desactivar la zona.";
+            $_SESSION['message'] = [
+                'text' => 'Error deactivating zone',
+                'type' => 'error'
+            ];
         }
 
-        header("Location: index.php");
+        header("Location: /process/warehouse/zone/");
         exit();
     } else {
-        echo "Código de zona no proporcionado.";
+        $_SESSION['message'] = [
+            'text' => 'Zone code not provided',
+            'type' => 'error'
+        ];
     }
 ?>

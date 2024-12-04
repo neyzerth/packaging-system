@@ -30,7 +30,7 @@
                 'text' => 'Date cannot be in the past.',
                 'type' => 'error'
             ];
-            header("Location: /process/warehouse/outbound");
+            header("Location: /process/warehouse/outbound/");
             exit();
         }
     
@@ -38,16 +38,17 @@
             updatePackagingStatus($selected_packaging, $num);
         
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Updated outbound information',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error updating outbound information',
                 'type' => 'error'
             ];
         }
-        header("Location: /process/warehouse/outbound");
+        header("Location: /process/warehouse/outbound/");
+        exit();
     }
 ?>
 

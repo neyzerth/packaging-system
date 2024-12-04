@@ -36,15 +36,17 @@
         $supervisor = empty($_POST['supervisor']) ? NULL : $_POST['supervisor'];
 
         if (updateUser(num:$num, username: $username, password: $password, name: $name, firstSurname: $first_surname, secondSurname: $second_surname, dateOfBirth: $date, neighborhood: $neighborhood, street: $street, postalCode: $postal_code, phone: $phone, email: $email, userType: $user_type, supervisor: $supervisor)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Usuario actualizado con éxito.</span></div>";
-
+            $_SESSION['message'] = [
+                'text' => 'Updated user information',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error al actualizar el producto.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error updating user information',
+                'type' => 'error'
+            ];
         }
-
-
-
-        header("Location: index.php");
+        header("Location: /users/");
         exit();
     }
 ?>

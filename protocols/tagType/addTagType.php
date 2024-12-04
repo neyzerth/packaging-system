@@ -15,11 +15,17 @@
         );
 
         if ($result) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Tag Type added successfully</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Tag type added successfully',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='error-msg'><span class='msg'>Error adding Tag Type</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error adding new tag type',
+                'type' => 'error'
+            ];
         }
-        header("Location: index.php");
+        header("Location: /protocols/tagType/");
         exit();
     }
 ?>

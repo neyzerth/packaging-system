@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'text' => 'Date cannot be in the past.',
             'type' => 'error'
         ];
-        header("Location: /process/warehouse/outbound");
+        header("Location: /process/warehouse/outbound/");
         exit();
     }
 
@@ -24,24 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'text' => 'No packaging selected.',
             'type' => 'error'
         ];
-        header("Location: /process/warehouse/outbound");
+        header("Location: /process/warehouse/outbound/");
         exit();
     }
     $outbound_id = insertOutbound($date, $selected_packaging);
 
     if ($outbound_id) {
         $_SESSION['message'] = [
-            'text' => 'Successful registration',
+            'text' => 'Successfully logged outbound',
             'type' => 'success'
         ];
     } else {
         $_SESSION['message'] = [
-            'text' => 'Error during registration',
+            'text' => 'Error during outbound registration',
             'type' => 'error'
         ];
     }
 
-    header("Location: /process/warehouse/outbound");
+    header("Location: /process/warehouse/outbound/");
     exit();
 }
 

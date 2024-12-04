@@ -32,12 +32,12 @@
             $pdfFile = generateReportPDF($folio, $start_date, $end_date, $report_date, $packed_products, $observations, $traceability);
     
             $_SESSION['message'] = [
-                'text' => 'Successful registration. PDF generated',
+                'text' => 'Report successfully registered: PDF generated',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error generating PDF',
                 'type' => 'error'
             ];
         }

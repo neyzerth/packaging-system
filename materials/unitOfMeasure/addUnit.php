@@ -12,19 +12,18 @@
         $code = $_POST['code'];
         $description = $_POST['description'];
 
-        //checar esto
         $result = addUnit(
             code: $code, description:$description
         );
 
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Unit added successfully',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error adding measure',
                 'type' => 'error'
             ];
         }

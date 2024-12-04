@@ -26,17 +26,17 @@
 
         if ($result) {
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Successful registration user',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error adding user',
                 'type' => 'error'
             ];
         }
 
-        header("Location: index.php");
+        header("Location: /users/");
         exit();
     }
 ?>

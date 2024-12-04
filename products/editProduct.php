@@ -26,16 +26,16 @@
 
         if(updateProduct(code:$code, name:$name, description:$description, height:$height, width:$width, length:$length, weight:$weight, packaging_protocol:$packaging_protocol)){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Updated product information',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error updating product information',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /products/");
         exit();
     }
 ?>

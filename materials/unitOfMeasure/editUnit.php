@@ -25,12 +25,12 @@
 
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Unit information successfully updated',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error updating measurement information',
                 'type' => 'error'
             ];
         }

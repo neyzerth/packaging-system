@@ -11,9 +11,15 @@
         );
 
         if($result){
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol Registered.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Protocol added successfully',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error adding protocol</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error adding new protocol',
+                'type' => 'error'
+            ];
         }
         header("Location: /protocols/protocol");
         exit();

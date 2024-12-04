@@ -26,16 +26,16 @@
 
         if($result = updateZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity)){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Updated zone information',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error updating zone information',
                 'type' => 'error'
             ];
         }
-        header("Location: /process/warehouse/zone");
+        header("Location: /process/warehouse/zone/");
         exit();
     }
 ?>

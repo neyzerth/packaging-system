@@ -23,16 +23,16 @@
 
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Product successfully registered',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error registering product',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /products/");
         exit();
     }
 ?>

@@ -6,14 +6,23 @@
         $code = $_GET['code'];
         
         if (disableProduct($code)) {
-            echo "Product deactivated correctly.";
+            $_SESSION['message'] = [
+                'text' => 'Product successfully disabled',
+                'type' => 'success'
+            ];
         } else {
-            echo "Error disabling the product.";
+            $_SESSION['message'] = [
+                'text' => 'Error deactivating product',
+                'type' => 'error'
+            ];
         }
 
-        header("Location: index.php");
+        header("Location: /product/");
         exit();
     } else {
-        echo "Product code not provided.";
+        $_SESSION['message'] = [
+            'text' => 'Product code not provided',
+            'type' => 'error'
+        ];
     }
 ?>

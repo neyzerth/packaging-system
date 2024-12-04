@@ -21,17 +21,17 @@
 
         if (updateBox(num:$num, height:$height, width:$width, length:$length, weight:$weight)) {
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Updated box information',
                 'type' => 'success'
             ];
 
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error updating box information',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /boxes/");
         exit(); 
     }
 ?>

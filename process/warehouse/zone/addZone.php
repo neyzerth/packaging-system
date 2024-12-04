@@ -10,16 +10,16 @@
         $result = addZone(code: $code, area: $area, available_capacity: $available_capacity, total_capacity: $total_capacity);
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Zone added successfully',
                 'type' => 'success'
             ];
         } else {
                 $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error adding zone',
                 'type' => 'error'
             ];
         }
-        header("Location: /process/warehouse/zone");
+        header("Location: /process/warehouse/zone/");
         exit();
     }
 ?>

@@ -13,16 +13,16 @@
 
         if($result){
             $_SESSION['message'] = [
-                'text' => 'Successful registration',
+                'text' => 'Box added successfully',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error',
+                'text' => 'Error adding box',
                 'type' => 'error'
             ];
         }
-        header("Location: index.php");
+        header("Location: /boxes/");
         exit(); 
     }
 ?>
