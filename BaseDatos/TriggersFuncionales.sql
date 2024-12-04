@@ -1,4 +1,4 @@
--- Active: 1730432982636@@127.0.0.1@3306@packaging
+-- Active: 1728065056405@@127.0.0.1@3306@packaging_test
 
 SELECT TRIGGER_NAME, EVENT_MANIPULATION, EVENT_OBJECT_TABLE, ACTION_STATEMENT, ACTION_TIMING 
 FROM information_schema.TRIGGERS 
@@ -112,6 +112,7 @@ END$$
 
 
 --------------------------------------------------------
+drop trigger update_zone_capacity_before_update;
 CREATE TRIGGER update_zone_capacity_before_update
 before update ON packaging
 FOR EACH ROW
@@ -127,6 +128,10 @@ BEGIN
         UPDATE zone
         SET available_capacity = new_available_capacity
         WHERE code = NEW.zone;
+
+        UPDATE zone
+        SET available_capacity = available_capacity + OLD.package_quantity
+        WHERE code = OLD.zone;
     ELSE
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
     END IF;
@@ -366,8 +371,23 @@ BEGIN
     SET NEW.barcode = CONCAT(gs1_code, checksum);
 END;
 
+---------------------------------------------------
+CREATE TRIGGER update_capacity_after_outbound
+AFTER INSERT ON packaging
+FOR EACH ROW
+BEGIN
+
+    IF NEW.outbound IS NOT NULL THEN
+        UPDATE zone
+        SET available_capacity = available_capacity + NEW.package_quantity
+        WHERE code = NEW.zone;
+    END IF;
+END $$
 
 --ELIMINAR LOS TRIGGERS
+
+
+
 USE packaging;
 
 DROP TRIGGER IF EXISTS calculate_box_volume_insert;
