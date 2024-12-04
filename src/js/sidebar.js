@@ -27,3 +27,18 @@ setTimeout(() => {
     if (errorMsg) errorMsg.style.display = 'none';
     if (disp) disp.style.display = 'none';
 }, 3000);
+
+
+//Funcion para el focus
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".form");
+    if (form) {
+        const inputs = form.querySelectorAll("input, select, textarea");
+        for (const input of inputs) {
+            if (!input.readOnly && !input.disabled) {
+                input.focus();
+                break;
+            }
+        }
+    }
+});
