@@ -74,15 +74,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (!empty($zones)) {
                     foreach ($zones as $zone) {
                         echo "<div class='zone'>";
-                        echo "<h5>Zone: " . htmlspecialchars($zone) . " <button type='button' class='select-all' data-zone='" . htmlspecialchars($zone) . "'>Select All</button></h5>";
+                        echo "<h5>Zone: " . htmlspecialchars($zone) . " <button type='button' class='select-all btn' data-zone='" . htmlspecialchars($zone) . "'>Select All</button></h5>";
                         
+                        echo "<br>";
                         $packaging = packagingByZone($zone);
                         if (!empty($packaging)) {
                             echo "<div class='packaging-list' id='zone-" . htmlspecialchars($zone) . "'>";
                             foreach ($packaging as $pkg) {
                                 echo "<label>
                                     <input type='checkbox' name='packaging[]' value='" . htmlspecialchars($pkg['num']) . "' class='zone-" . htmlspecialchars($zone) . "'>
-                                    (".htmlspecialchars($pkg['num']).") Packaging Quantity: " . htmlspecialchars($pkg['package_quantity']) . "
+                                    ID [".htmlspecialchars($pkg['num'])."] Quantity: " . htmlspecialchars($pkg['package_quantity']) . "
                                 </label><br>";
                             }
                             echo "</div>";

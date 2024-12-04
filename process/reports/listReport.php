@@ -34,13 +34,13 @@
             include HEADER 
             ?>
             <h1>Reports</h1>
-            <div>
-                <label for="view-select">Select View:</label>
-                <select id="view-select" onchange="fetchTableData(this.value)">
-                    <option value="top_packaged_products">Products Most Packaged</option>
-                    <option value="packaging_no_rotation">Packaging No Rotation</option>
-                    <option value="top_employees">Top Employees</option>
-                    <option value="vw_report_info">Reports</option>
+            <div class="form ">
+                <h4 for="view-select">Select View:</h4>
+                <select  class="fix" id="view-select" onchange="fetchTableData(this.value)">
+                    <option class="fix"  value="top_packaged_products">Products Most Packaged</option>
+                    <option class="fix" value="packaging_no_rotation">Packaging No Rotation</option>
+                    <option class="fix" value="top_employees">Top Employees</option>
+                    <option class="fix" value="vw_report_info">Reports</option>
                 </select>
             </div>
             <table class="table">
