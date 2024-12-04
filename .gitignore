@@ -4,7 +4,6 @@ dbconfig.php
 prueba.php
 prueba*
 /.vscode
-*.sql
 *.json
 uploads/*
 proccess_view

@@ -6,14 +6,23 @@
         $num = $_GET['num'];
         
         if (disableUser($num)) {
-            echo "user successfully disabled.";
+            $_SESSION['message'] = [
+                'text' => 'User successfully disabled',
+                'type' => 'success'
+            ];
         } else {
-            echo "Error deactivating user.";
+            $_SESSION['message'] = [
+                'text' => 'Error deactivating user',
+                'type' => 'error'
+            ];
         }
-
-        header("Location: index.php");
+        //mandarlo entre carpetas ya que si lo hacemos por archivos no se imprime el mensaje
+        header("Location: /users/");
         exit();
     } else {
-        echo "User code not provided.";
+        $_SESSION['message'] = [
+            'text' => 'User code not provided',
+            'type' => 'error'
+        ];
     }
 ?>

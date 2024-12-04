@@ -295,6 +295,10 @@ hr {
     background-color: #A10;
 }
 
+.fix {
+    color: #000;
+}
+
 #success-msg {
     background-color: green;
     padding: 1rem;

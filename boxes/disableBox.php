@@ -6,14 +6,23 @@
         $num = $_GET['num'];
         
         if (disableBox($num)) {
-            echo "Protocolo desactivado correctamente.";
+            $_SESSION['message'] = [
+                'text' => 'Box successfully disabled',
+                'type' => 'success'
+            ];
         } else {
-            echo "Error al desactivar el protocolo.";
+            $_SESSION['message'] = [
+                'text' => 'Error deactivating box',
+                'type' => 'error'
+            ];
         }
 
         header("Location: index.php");
         exit();
     } else {
-        echo "Código de protocolo no proporcionado.";
+        $_SESSION['message'] = [
+            'text' => 'Box code not provided',
+            'type' => 'error'
+        ];
     }
 ?>

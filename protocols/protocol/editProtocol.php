@@ -24,9 +24,15 @@
         
         error_log("new file name: $file_name | old: ".$_POST['old_file_name']);
         if (updateProtocol(num:$num, name:$name, file_name:$file_name, file: $file)) {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Protocol successfully updated.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Updated protocol information',
+                'type' => 'success'
+            ];
         } else {
-            echo "<div class='div-msg' id='success-msg'><span class='msg'>Error updating protocol.</span></div>";
+            $_SESSION['message'] = [
+                'text' => 'Error updating protocol information',
+                'type' => 'error'
+            ];
         }
         header("Location: /protocols/protocol");
         exit();

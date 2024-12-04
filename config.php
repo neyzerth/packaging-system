@@ -1,8 +1,6 @@
 <?php
 define("URL", "http://{$_SERVER['HTTP_HOST']}/");
 define("ROOT", "{$_SERVER['DOCUMENT_ROOT']}/");
-define("PDFDIR", ROOT . "uploads/");
-
 
 define("STYLE", "/styles/");
 
@@ -18,6 +16,9 @@ define("CSS",  "/src/css/");
 define("JS",  "/src/js/");
 define("SVG", "/src/svg/");
 define("IMG", "/src/img/");
+
+define("FPDF", ROOT . "/src/fpdf/");
+define("REPORT", ROOT . "process/pdfReports/");
 
 include 'dbconfig.php';
 
