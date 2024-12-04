@@ -66,9 +66,12 @@ endif;
                     <?php if($state == "PACK" || $state == "PACKG"):?>
                     <a href="?a=addPackaging">
                     <?php endif; ?>
+                    <div>
+
                         <h3>Packaging</h3>
                         <img class="bin process-btn" src="<?php echo SVG . "boxes.svg" ?>">
-                        <?php if($state == "PACK" || $state == "PACKG"):?>
+                    </div>
+                    <?php if($state == "PACK" || $state == "PACKG"):?>
                     </a>
                     <?php endif; ?>
                     <p>
@@ -101,7 +104,7 @@ endif;
                     </p>
                     <p>
                         <b>Total Space:</b> 
-                        <?php echo printNull($trac['Available'])?>
+                        <?php echo printNull($trac['Capacity'])?>
                     </p>
                     <p>
                         <b>Available Space:</b> 
