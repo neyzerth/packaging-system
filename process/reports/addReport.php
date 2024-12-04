@@ -29,15 +29,15 @@
         if ($folio) {
             
             // Generar PDF
-            $pdfFile = generateReportPDF($folio, $start_date, $end_date, $report_date, $packed_products, $observations, $traceability);
+            //$pdfFile = generateReportPDF($folio, $start_date, $end_date, $report_date, $packed_products, $observations, $traceability);
     
             $_SESSION['message'] = [
-                'text' => 'Report successfully registered: PDF generated',
+                'text' => 'Report successfully registered',
                 'type' => 'success'
             ];
         } else {
             $_SESSION['message'] = [
-                'text' => 'Error generating PDF',
+                'text' => 'Error adding report',
                 'type' => 'error'
             ];
         }
