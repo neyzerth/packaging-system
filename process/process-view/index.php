@@ -8,6 +8,7 @@ require_once 'tracFun.php';
 session_start();
 if(isset($_GET['t'])){
     unset($_SESSION['trac']);
+    unset($_SESSION['Destination']);
     $_SESSION['trac'] = $_GET['t'];
     error_log("Prueba action: ".$_GET['t']." | ".$_SESSION['trac']);
     header("Location: /process/process-view/");
@@ -21,7 +22,7 @@ switch($action){
 
     case 'add': 
         unset($_SESSION['trac']);
-        unset($_SESSION['destination']);
+        unset($_SESSION['Destination']);
         $_SESSION['trac'] = startProcess()['Traceability'];
         header("Location: /process/process-view/");
         exit();
