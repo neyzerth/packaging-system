@@ -17,7 +17,7 @@
             ];
         }
 
-        header("Location: /product/");
+        header("Location: /products");
         exit();
     } else {
         $_SESSION['message'] = [
