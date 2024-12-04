@@ -93,10 +93,9 @@
                 <div class="row-md-5">
                     <h4 for="observations">Observations</h4>
                     <div class="inputs">
-                        <input name="observations" id="observations" type="text" placeholder="Your observations" required>
+                        <textarea name="observations" id="observations" placeholder="Your observations" required rows="5" cols="40"></textarea>
                     </div>
                 </div>
-
                 <div class="row-md-5">
                     <h4 for="traceability">Traceability packaging</h4>
                     <div class="inputs">
