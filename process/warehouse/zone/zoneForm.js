@@ -1,31 +1,7 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
 
-    // Validation functions
-    function validateCode(field) {
-        const value = field.value.trim();
-        if (value === "") return false;
-        const regex = /^[A-Za-z0-9]{5}$/;
-        if (value.length !== 5 || !regex.test(value)) {
-            alert("The code must be exactly 5 alphanumeric characters.");
-            field.focus();
-            return false;
-        }
-        return true;
-    }
-
-    function validateArea(field) {
-        const value = field.value.trim();
-        if (value === "") return false;
-        if (value.length > 50) {
-            alert("The area must not exceed 50 characters.");
-            field.focus();
-            return false;
-        }
-        return true;
-    }
-
+    // Validar si un valor es un número válido y mayor o igual a 0
     function validateCapacity(field) {
         const value = field.value.trim();
         if (value === "" || isNaN(value) || value < 0) {
@@ -36,31 +12,37 @@ document.addEventListener("DOMContentLoaded", () => {
         return true;
     }
 
+    // Validar que la capacidad disponible no exceda la capacidad total
+    function validateCapacityRelation(available, total) {
+        const availableValue = parseFloat(available.value.trim());
+        const totalValue = parseFloat(total.value.trim());
+
+        if (availableValue > totalValue) {
+            alert("The available capacity cannot exceed the total capacity.");
+            available.focus();
+            return false;
+        }
+        return true;
+    }
+
     form.addEventListener("submit", (event) => {
-        // Validate code
-        const code = document.getElementById("code");
-        if (!validateCode(code)) {
-            event.preventDefault();
-            return;
-        }
+        const availableCapacity = document.getElementById("available_capacity");
+        const totalCapacity = document.getElementById("total_capacity");
 
-        // Validate area
-        const area = document.getElementById("area");
-        if (!validateArea(area)) {
-            event.preventDefault();
-            return;
-        }
-
-        // Validate available capacity
-        const availableCapacity = document.getElementById("description");
+        // Validar capacidad disponible
         if (!validateCapacity(availableCapacity)) {
             event.preventDefault();
             return;
         }
 
-        // Validate total capacity
-        const totalCapacity = document.getElementById("available_quantity");
+        // Validar capacidad total
         if (!validateCapacity(totalCapacity)) {
+            event.preventDefault();
+            return;
+        }
+
+        // Validar relación entre capacidad disponible y total
+        if (!validateCapacityRelation(availableCapacity, totalCapacity)) {
             event.preventDefault();
             return;
         }
