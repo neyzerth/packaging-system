@@ -108,7 +108,7 @@
                             <?php 
                             while ($protocol = mysqli_fetch_assoc($protocols)):  
                                 $selected = $product['packaging_protocol'] === $protocol['num'] ? 'selected' : '';
-                                echo "<option value='{$protocol['num']}' $selected>{$protocol['file_name']}</option>";
+                                echo "<option value='{$protocol['num']}' $selected>{$protocol['name']}</option>";
                             endwhile; 
                             ?>
                         </select>
