@@ -2,36 +2,37 @@
 const SVG = "/src/svg/";
 
 document.addEventListener('DOMContentLoaded', function () {
-    const rowsPerPage = 10; 
-    const table = document.querySelector('table'); 
-    const rows = table.querySelectorAll('tbody tr');
-    const footer = document.querySelector('.footer'); 
-    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    const rowsPerPage = 9; // Cantidad de filas por página
+    const table = document.querySelector('table');
+    const rows = Array.from(table.querySelectorAll('tbody tr')); // Todas las filas originales
+    const footer = document.querySelector('.footer');
+    const searchInput = document.querySelector('.search');
 
+    let filteredRows = rows; // Inicialmente todas las filas están visibles
     let currentPage = 1;
 
     function renderTable() {
-        
+        // Ocultar todas las filas
         rows.forEach((row) => {
             row.style.display = 'none';
         });
 
-       
+        // Calcular el rango de filas visibles
         const start = (currentPage - 1) * rowsPerPage;
         const end = start + rowsPerPage;
 
-       
-        rows.forEach((row, index) => {
-            if (index >= start && index < end) {
-                row.style.display = '';
-            }
+        // Mostrar las filas del rango correspondiente
+        filteredRows.slice(start, end).forEach((row) => {
+            row.style.display = '';
         });
 
-      
+        // Actualizar el pie de paginación
         updateFooter();
     }
 
     function updateFooter() {
+        const totalPages = Math.ceil(filteredRows.length / rowsPerPage); // Total de páginas según las filas filtradas
+
         footer.innerHTML = `
             <ul>
                 <li>
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (nextButton) {
             nextButton.addEventListener('click', (e) => {
                 e.preventDefault();
+                const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
                 if (currentPage < totalPages) {
                     currentPage++;
                     renderTable();
@@ -78,6 +80,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    searchInput.addEventListener('input', () => {
+        const filterText = searchInput.value.toLowerCase();
+
+        if (filterText.trim() === '') {
+            // Restaurar filas originales al limpiar el buscador
+            filteredRows = rows;
+        } else {
+            // Filtrar las filas según el texto de búsqueda
+            filteredRows = rows.filter((row) => {
+                const cells = Array.from(row.getElementsByTagName('td'));
+                return cells.some((cell) =>
+                    cell.textContent.toLowerCase().includes(filterText)
+                );
+            });
+        }
+
+        // Reiniciar a la primera página y volver a renderizar
+        currentPage = 1;
+        renderTable();
+    });
+
+    // Renderizar la tabla inicialmente
     if (rows.length > 0) {
         renderTable();
     } else {
