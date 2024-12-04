@@ -37,6 +37,7 @@
             <div>
                 <label for="view-select">Select View:</label>
                 <select id="view-select" onchange="fetchTableData(this.value)">
+                    <option value="vw_report_info">Reports</option>
                     <option value="top_packaged_products">Products Most Packaged</option>
                     <option value="packaging_no_rotation">Packaging No Rotation</option>
                     <option value="top_employees">Top Employees</option>

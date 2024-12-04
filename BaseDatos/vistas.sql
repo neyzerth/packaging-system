@@ -1,4 +1,4 @@
--- Active: 1728665066730@@127.0.0.1@3306@packaging
+-- Active: 1730432982636@@127.0.0.1@3306@packaging
 --Apartado para la creacion de vistas 
 --FALATARIA AGREGARLE ALIAS A LOS CAMPOS QUE LO REQUIERAN
 --En los que tienen _ deberia de quitarselo y agregar un espacio hblando del alias?
@@ -193,17 +193,7 @@ SELECT
     description
 FROM unit_of_measure;
 
---VISTA DE REPORTE
-CREATE VIEW vw_report_info AS
-SELECT
-    folio,
-    start_date,
-    end_date,
-    report_date,
-    packed_products,
-    observations,
-    traceability
-FROM report;
+
 
 --VISTA DE TAG TYPE
 CREATE VIEW vw_tag_type_info AS
@@ -344,14 +334,30 @@ INNER JOIN material AS m
 ON m.code = mp.material
 
 
+
+--VISTA DE REPORTE
+drop View vw_report_info
+
+CREATE VIEW vw_report_info AS
+SELECT
+    folio,
+    start_date as 'Start date',
+    end_date  as 'End date',
+    report_date as'Report Date',
+    packed_products as 'Packed products',
+    observations,
+    traceability
+FROM report;
+
+
 --1. Reporte de embalajes hechos y enviados por mes
 
-drop View packaging_sent_report
+drop View packaging_sent
 
 CREATE VIEW packaging_sent AS
 SELECT 
     DATE_FORMAT(o.date, '%Y-%m') AS month,
-    COUNT(p.num) AS total_packaging_sent
+    COUNT(p.num) AS 'Total packaging'
 FROM packaging p
 JOIN outbound o ON p.outbound = o.num
 WHERE o.date IS NOT NULL
@@ -369,8 +375,8 @@ drop VIEW  top_packaged_products
 CREATE VIEW top_packaged_products AS
 SELECT 
     DATE_FORMAT(t.date, '%Y-%m') AS month,
-    pr.name AS product_name,
-    SUM(pa.product_quantity * pk.package_quantity) AS total_quantity
+    pr.name AS 'Product name',
+    SUM(pa.product_quantity * pk.package_quantity) AS 'Total quantity'
 FROM  package pa
 JOIN product pr ON pa.product = pr.code
 JOIN packaging pk ON pa.packaging = pk.num
@@ -378,7 +384,7 @@ JOIN tag t ON pa.tag = t.num
 GROUP BY 
     DATE_FORMAT(t.date, '%Y-%m'), pr.name
 ORDER BY 
-    month, total_quantity DESC;
+    month, 'Total quantity' DESC;
 
 
 
@@ -390,11 +396,11 @@ drop VIEW packaging_no_rotation
 
 CREATE VIEW packaging_no_rotation AS
 SELECT 
-    p.num AS packaging_id,
+    p.num AS packaging,
     p.volume,
     p.weight,
     z.area AS zone,
-    DATEDIFF(CURDATE(), t.date) AS days_in_warehouse
+    DATEDIFF(CURDATE(), t.date) AS 'Days in warehouse'
 FROM 
     packaging p
 LEFT JOIN 
@@ -405,25 +411,27 @@ JOIN zone z ON p.zone = z.code
 WHERE 
     tr.state = 'warhs'
 ORDER BY 
-    days_in_warehouse DESC;
+   'Days in warehouse' DESC;
 
 select * from traceability  
 
 select * from packaging_no_rotation
 
 --4. Empleados más chambeadores
+drop View top_employees
+
 CREATE VIEW top_employees AS
 SELECT 
-    u.num AS user_id,
-    u.name AS user_name,
-    u.first_surname,
-    COUNT(ut.traceability) AS processes_involved
+    u.num AS user,
+    u.name AS name,
+    u.first_surname as Surname,
+    COUNT(ut.traceability) AS  'Processes involved'
 FROM user_traceability ut
 JOIN user u ON ut.user = u.num
 GROUP BY 
     u.num, u.name, u.first_surname
 ORDER BY 
-    processes_involved DESC;
+    'Processes involved' DESC;
 
 select * from top_employees
 
