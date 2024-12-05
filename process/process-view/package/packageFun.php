@@ -6,24 +6,35 @@ require_once __DIR__."/tagFun.php";
 require_once __DIR__."/../tracFun.php";
 //require_once __DIR__."/../../../protocols/tagType/tagTypeFun.php";
 
-function addPackage($product, $quantity, $box, $tag_type, $date){
+function addPackage($product, $quantity, $box, $tag_type, $date) {
     $db = connectdb();
-
     $trac_code = $_SESSION['trac'];
     $user = $_SESSION['num'];
 
-    $querypack = "call packing_process($quantity, '$product', $box, '$tag_type', '$date', $trac_code, $user)";
-
-    error_log("Query: $querypack");
     try {
-        return mysqli_query($db, $querypack);
+        $stmt = $db->prepare("CALL packing_process(?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt === false) {
+            throw new Exception('Error en la preparación de la sentencia: ' . htmlspecialchars($db->error));
+        }
+
+        $stmt->bind_param("isissii", $quantity, $product, $box, $tag_type, $date, $trac_code, $user);
+
+        $result = $stmt->execute();
+        if ($result === false) {
+            throw new Exception('Error al ejecutar la sentencia: ' . htmlspecialchars($stmt->error));
+        }
+
+        $stmt->close();
     } catch (Exception $e) {
-        error_log("Error adding a package: ".$e->getMessage());
-        error_log($querypack);
+        error_log("Error adding a package: " . $e->getMessage());
         return false;
+    } finally {
+        $db->close();
     }
 
+    return $result;
 }
+
 
 function loadInfo(){
     $db = connectdb();

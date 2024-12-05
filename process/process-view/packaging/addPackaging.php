@@ -28,9 +28,19 @@
             addPackagesQuan($quantity);
             $bool = addMaterialToPackaging($material, $packaging, $matQuant);
             
+            if($bool){
+                $_SESSION['message'] = [
+                    'type' => 'success',
+                    'message' => 'Material added successfully'
+                ];
+            } else {
+                $_SESSION['message'] = [
+                    'type' => 'error',
+                    'message' => 'Material not added'
+                    ];
+            }
             header("Location: /process/process-view/?a=addPackaging");
             exit();
-            
         }
     }
 

@@ -5,12 +5,21 @@
     if ($_SERVER['REQUEST_METHOD']=='POST') {
         $zone = $_POST['zone'];
 
-        if(addPackagingInZone($zone)){
-            header("Location: /process/process-view/");
-            exit();
+        $result = addPackagingInZone($zone);
+
+        if($result){
+            $_SESSION['message'] = [
+                'text' => 'Packaging added to area',
+                'type' => 'success'
+            ];
         } else {
-            error_log("Error al agregar la zona");
+            $_SESSION['message'] = [
+                'text' => 'Error assigning area',
+                'type' => 'error'
+            ];
         }
+        header("Location: /process/process-view/");
+        exit();
     }
 ?>
 <head>

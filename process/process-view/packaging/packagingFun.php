@@ -102,13 +102,32 @@
         }
     }
 
-    function addMaterialToPackaging($material, $packaging, $quantity){
+    function addMaterialToPackaging($material, $packaging, $quantity) {
         $db = connectdb();
-        $query = "call addMaterialToPackaging('$material', $packaging, $quantity)";
-
-        error_log("QUERY Material: $query");
-        return mysqli_query($db, $query);
-    }
+    
+        try {
+            $stmt = $db->prepare("CALL addMaterialToPackaging(?, ?, ?)");
+            if ($stmt === false) {
+                throw new Exception('Error en la preparación de la sentencia: ' . htmlspecialchars($db->error));
+            }
+    
+            $stmt->bind_param("sii", $material, $packaging, $quantity);
+    
+            $result = $stmt->execute();
+            if ($result === false) {
+                throw new Exception('Error al ejecutar la sentencia: ' . htmlspecialchars($stmt->error));
+            }
+    
+            $stmt->close();
+        } catch (Exception $e) {
+            error_log("Error adding material to packaging: " . $e->getMessage());
+            return false;
+        } finally {
+            $db->close();
+        }
+    
+        return $result;
+    }    
 
     function getMaterialsInPackaging(){
         $db = connectdb();

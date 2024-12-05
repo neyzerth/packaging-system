@@ -28,15 +28,32 @@
         }
     }
 
-    function addPackagingInZone($zone){
+    function addPackagingInZone($zone) {
         $db = connectdb();
         $trac = $_SESSION['trac'];
         $user = $_SESSION['num'];
-
-        $query = "call addPackagingInZone('$zone', $trac, $user)";
-        error_log($query);
-        
-        return  mysqli_query($db, $query);
+    
+        try {
+            $stmt = $db->prepare("CALL addPackagingInZone(?, ?, ?)");
+            if ($stmt === false) {
+                throw new Exception('Error en la preparación de la sentencia: ' . htmlspecialchars($db->error));
+            }
+            
+            $stmt->bind_param("sii", $zone, $trac, $user);
+    
+            $result = $stmt->execute();
+            if ($result === false) {
+                throw new Exception('Error al ejecutar la sentencia: ' . htmlspecialchars($stmt->error));
+            }
+    
+            $stmt->close();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        } finally {
+            $db->close();
+        }
+        return $result;
     }
 
     function addZone($code, $area, $available_capacity, $total_capacity) {

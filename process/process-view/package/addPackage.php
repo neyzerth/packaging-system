@@ -30,8 +30,18 @@
             $bool = addPackage($prodCode, $quantity, $boxCode, $tag_type, $date);
             
             if($bool){
-                header("Location: /process/process-view/");
+                $_SESSION['message'] = [
+                    'text' => 'Package added successfully',
+                    'type' => 'success'
+                ];
+            } else {
+                $_SESSION['message'] = [
+                    'text' => 'Error adding package',
+                    'type' => 'error'
+                ];
             }
+            header("Location: /process/process-view/");
+            exit();
         }
     }
 
