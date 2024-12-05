@@ -30,13 +30,13 @@
             
             if($bool){
                 $_SESSION['message'] = [
-                    'type' => 'success',
-                    'message' => 'Material added successfully'
+                    'text' => 'Material added successfully',
+                    'type' => 'success'
                 ];
             } else {
                 $_SESSION['message'] = [
-                    'type' => 'error',
-                    'message' => 'Material not added'
+                    'text' => 'Material not added',
+                    'type' => 'error'
                     ];
             }
             header("Location: /process/process-view/?a=addPackaging");
