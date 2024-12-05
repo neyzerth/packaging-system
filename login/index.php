@@ -49,6 +49,8 @@
             </div>
         </div>
     </div>
+    <?php 
+    ?>
     <script src="<?php echo JS . "login.js" ?>"></script>
 </body>
 </html>

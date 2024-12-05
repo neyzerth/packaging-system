@@ -48,7 +48,6 @@ function validateUser(string ...$validUsers){
 
     validateSession();
     
-    error_log("Validating...".$_SESSION['user_type']);
 
     if($validUsers == "ALL"){
         return true;

@@ -89,6 +89,7 @@ INSERT INTO material_package (material, package, quantity)
 VALUES ('wod', 4, 25);
 
 --Trigger espacio de almacenamiento
+drop procedure update_zone_capacity_after_insert;
 CREATE TRIGGER update_zone_capacity_after_insert
 AFTER INSERT ON packaging
 FOR EACH ROW
@@ -105,7 +106,9 @@ BEGIN
         SET available_capacity = new_available_capacity
         WHERE code = NEW.zone;
     ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
+        IF NEW.zone IS NOT NULL THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
+        END IF;
     END IF;
 END$$
 
@@ -133,7 +136,9 @@ BEGIN
         SET available_capacity = available_capacity + OLD.package_quantity
         WHERE code = OLD.zone;
     ELSE
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
+        IF NEW.zone IS NOT NULL THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'There is not enough capacity available in the area';
+        END IF;
     END IF;
 END$$
 ---------------------------------------------------------

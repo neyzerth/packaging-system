@@ -2,6 +2,7 @@
     require_once "reportFun.php";
     $reports = getReports();
 
+    error_log("$reports");
     //$search = isset($_GET['search']) ? $_GET['search'] : '';
     //$reports = empty($search) ? getReports() : searchReport($search);
 ?>
