@@ -4,7 +4,7 @@
                     <input type="search" class="search" placeholder="" autocomplete="off">
                 <!-- </form> -->
             </div>
-            <?php if(validateUser("ADMIN", "SUPER") || strtok($_SERVER["REQUEST_URI"], '?') == "/process/process-view/"):?>
+            <?php if(validateUser("ADMIN", "SUPER") || strtok($_SERVER["REQUEST_URI"], '?') == "/process/process-view/" | strtok($_SERVER["REQUEST_URI"], '?') == "/process/warehouse/outbound/"):?>
             <ul>
                 <a class="btn" href="?a=add">
                     <p>Add</p>
